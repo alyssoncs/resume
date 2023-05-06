@@ -21,4 +21,7 @@ plugins {
 }
 
 rootProject.name = "resume"
-include("app", "list", "utilities")
+include(":app")
+include(":list")
+include(":utilities")
+include(":domain:entities")
