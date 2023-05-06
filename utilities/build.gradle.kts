@@ -9,5 +9,5 @@ plugins {
 }
 
 dependencies {
-    api(project(":list"))
+    api(projects.list)
 }

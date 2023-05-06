@@ -8,6 +8,8 @@
  * This project uses @Incubating APIs which are subject to change.
  */
 
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
+
 pluginManagement {
     // Include 'plugins build' to define convention plugins.
     includeBuild("build-logic")
