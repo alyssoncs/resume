@@ -27,7 +27,6 @@ plugins {
 rootProject.name = "resume"
 include(":app")
 include(":list")
-include(":utilities")
 include(":domain:entities")
 include(":domain:infra")
 include(":drivers:latex-sober")

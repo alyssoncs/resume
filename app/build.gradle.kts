@@ -9,7 +9,6 @@ plugins {
 }
 
 dependencies {
-    implementation(projects.utilities)
     implementation(projects.drivers.latexSober)
 }
 
