@@ -7,8 +7,3 @@
 plugins {
     id("alysson.cirilo.resume.kotlin-library-conventions")
 }
-
-dependencies {
-
-    testImplementation("com.google.truth:truth:1.1.3")
-}

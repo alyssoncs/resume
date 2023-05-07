@@ -5,4 +5,12 @@
  * This project uses @Incubating APIs which are subject to change.
  */
 
+dependencyResolutionManagement {
+    versionCatalogs {
+        create("libs") {
+            from(files("../gradle/libs.versions.toml"))
+        }
+    }
+}
+
 rootProject.name = "build-logic"

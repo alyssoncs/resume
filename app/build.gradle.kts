@@ -9,8 +9,6 @@ plugins {
 }
 
 dependencies {
-    implementation("org.apache.commons:commons-text")
-
     implementation(projects.utilities)
     implementation(projects.drivers.latexSober)
 }
