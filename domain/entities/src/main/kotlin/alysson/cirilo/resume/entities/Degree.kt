@@ -1,6 +1,6 @@
 package alysson.cirilo.resume.entities
 
-data class Education(
+data class Degree(
     val institution: LinkedInformation,
     val location: String,
     val degree: String,

@@ -13,6 +13,10 @@ enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 pluginManagement {
     // Include 'plugins build' to define convention plugins.
     includeBuild("build-logic")
+
+    repositories {
+        gradlePluginPortal()
+    }
 }
 
 plugins {
