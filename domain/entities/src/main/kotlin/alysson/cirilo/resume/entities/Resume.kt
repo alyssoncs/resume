@@ -8,6 +8,14 @@ data class Resume(
     val projectsAndPublications: List<ProjectOrPublication>,
     val education: List<Degree>,
 ) {
+    val reversedChronologically: Resume by lazy {
+        this.copy(
+            jobExperiences = this.jobExperiences.reversed().map { jobExperience ->
+                jobExperience.copy(roles = jobExperience.roles.reversed())
+            }
+        )
+    }
+
     init {
         require(name.isNotBlank()) { "Resume name cannot be blank" }
         require(headline.isNotEmpty()) { "Resume headline cannot be empty" }

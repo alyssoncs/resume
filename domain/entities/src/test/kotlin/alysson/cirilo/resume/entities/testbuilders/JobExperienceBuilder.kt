@@ -6,6 +6,7 @@ import java.net.URL
 
 class JobExperienceBuilder {
     private var roleBuilders: List<RoleBuilder> = listOf(RoleBuilder())
+    private var company: String = "Cool Company"
 
     fun with(roleBuilders: List<RoleBuilder>) = builderMethod {
         this.roleBuilders = roleBuilders
@@ -19,10 +20,14 @@ class JobExperienceBuilder {
         this.roleBuilders += roleBuilder
     }
 
+    fun on(company: String) = builderMethod {
+        this.company = company
+    }
+
     fun build(): JobExperience{
         return JobExperience(
             company = LinkedInformation(
-                displayName = "Cool Company",
+                displayName = company,
                 url = URL("https://www.coolcompany.com")
             ),
             location = "Remote",

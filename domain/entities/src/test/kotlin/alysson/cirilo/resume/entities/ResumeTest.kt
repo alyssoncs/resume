@@ -127,6 +127,45 @@ class ResumeTest {
         ).inOrder()
     }
 
+    @Test
+    fun `job experiences can be reversed`() {
+        val chronologicalExperiences = listOf(
+            aJobExperience().on("Meta"),
+            aJobExperience().on("iFood"),
+            aJobExperience().on("Microsoft"),
+        )
+
+        val reversedResume = aResume()
+            .with(chronologicalExperiences).build().reversedChronologically
+
+        assertThat(reversedResume.jobExperiences.map { it.company.displayName })
+            .containsExactly("Microsoft", "iFood", "Meta")
+            .inOrder()
+    }
+
+    @Test
+    fun `roles can be reversed`() {
+        val chronologicalExperiences = listOf(
+            aJobExperience().with(
+                listOf(
+                    aRole().`as`("SWE 1"),
+                    aRole().`as`("SWE 2"),
+                )
+            ),
+            aJobExperience().with(
+                aRole().`as`("SWE 3")
+            )
+        )
+
+        val reversedResume = aResume()
+            .with(chronologicalExperiences).build().reversedChronologically
+
+        val titles = reversedResume.jobExperiences.flatMap { it.roles }.map { it.title }
+        assertThat(titles)
+            .containsExactly("SWE 3", "SWE 2", "SWE 1")
+            .inOrder()
+    }
+
     private fun ResumeBuilder.with(aBulletPoint: BulletPointBuilder) =
         this.with(aJobExperience().with(aRole().with(aBulletPoint)))
 }
