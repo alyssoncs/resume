@@ -124,7 +124,7 @@ class ResumeTest {
             ProfessionalSkill("jetpack compose"),
             ProfessionalSkill("retrofit"),
             ProfessionalSkill("android"),
-        )
+        ).inOrder()
     }
 
     private fun ResumeBuilder.with(aBulletPoint: BulletPointBuilder) =
