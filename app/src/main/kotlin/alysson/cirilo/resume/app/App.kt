@@ -3,12 +3,11 @@
  */
 package alysson.cirilo.resume.app
 
-import alysson.cirilo.resume.utilities.StringUtils
-
-import org.apache.commons.text.WordUtils
+import alysson.cirilo.resume.drivers.LatexSoberResumeDriver
 
 fun main() {
-    val tokens = StringUtils.split(MessageUtils.getMessage())
-    val result = StringUtils.join(tokens)
-    println(WordUtils.capitalize(result))
+    val resume = makeResume()
+    val toString = LatexSoberResumeDriver().convert(resume)
+    println(toString)
 }
+
