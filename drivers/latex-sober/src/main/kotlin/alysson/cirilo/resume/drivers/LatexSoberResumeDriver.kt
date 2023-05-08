@@ -39,7 +39,6 @@ class LatexSoberResumeDriver : ResumeDriver {
             ]{geometry}
             \usepackage{fontawesome}
 
-
             % page formatting
             \pagestyle{fancy}
             \fancyhf{} % clear all header and footer fields
@@ -63,8 +62,7 @@ class LatexSoberResumeDriver : ResumeDriver {
             \setlist[2]{topsep=-3pt, itemsep=-2.5pt, before*=\small}
             \renewcommand{\labelitemii}{\footnotesize${'$'}\circ${'$'}}
 
-            %-------------------------
-            % Custom commands
+            % custom commands
 
             \newcommand{\iconhref}[2]{\href{#1}{#2~\textsuperscript{\tiny{\faExternalLink}}}}
 
@@ -93,65 +91,63 @@ class LatexSoberResumeDriver : ResumeDriver {
                 \small{\textbf{\iconhref{#1}{#2}}{:~#3}}
             }
 
-
             \begin{document}
+                % constants
+                \newcommand{\name}{${theResume.name}}
+                \newcommand{\mytitle}{{\huge\textbf{\name}}}
+                \newcommand{\headline}{${theResume.headline.joinToString(separator = "{\\enskip\\starredbullet\\enskip}") { it }}}
+                \newcommand{\email}
+                    {\iconhref{${theResume.contactInformation.email.url}}{{\scriptsize\faEnvelope{}} ${theResume.contactInformation.email.displayName}}}
+                \newcommand{\linkedin}
+                    {\iconhref{${theResume.contactInformation.linkedin.url}}{\faLinkedin{} ${theResume.contactInformation.linkedin.displayName}}}
+                \newcommand{\github}
+                    {\iconhref{${theResume.contactInformation.github.url}}{\faGithub{} ${theResume.contactInformation.github.displayName}}}
+                \newcommand{\address}
+                    {\hspace{1pt}\iconhref{https://www.google.com/maps?q=+Maranhão,+Brazil}{\faMapMarker{}\hspace{1pt} Remote (UTC${'$'}-${'$'}3), Brazil}}
 
-            % constants
-            \newcommand{\name}{${theResume.name}}
-            \newcommand{\mytitle}{{\huge\textbf{\name}}}
-            \newcommand{\headline}{${theResume.headline.joinToString(separator = "{\\enskip\\starredbullet\\enskip}") { it }}}
-            \newcommand{\email}
-                {\iconhref{${theResume.contactInformation.email.url}}{{\scriptsize\faEnvelope{}} ${theResume.contactInformation.email.displayName}}}
-            \newcommand{\linkedin}
-                {\iconhref{${theResume.contactInformation.linkedin.url}}{\faLinkedin{} ${theResume.contactInformation.linkedin.displayName}}}
-            \newcommand{\github}
-                {\iconhref{${theResume.contactInformation.github.url}}{\faGithub{} ${theResume.contactInformation.github.displayName}}}
-            \newcommand{\address}
-                {\hspace{1pt}\iconhref{https://www.google.com/maps?q=+Maranhão,+Brazil}{\faMapMarker{}\hspace{1pt} Remote (UTC${'$'}-${'$'}3), Brazil}}
+                \begin{minipage}[t]{0.70\linewidth}%743
+                    \mytitle\\
+                    \headline
+                \end{minipage}
+                \hspace{8pt}
+                \begin{minipage}[t]{0.277\linewidth}
+                    {\flushleft\small
+                        \email\\
+                        \linkedin\\
+                        \github\\
+                        \address
+                    }
+                \end{minipage}
 
-            \begin{minipage}[t]{0.70\linewidth}%743
-                \mytitle\\
-                \headline
-            \end{minipage}
-            \hspace{8pt}
-            \begin{minipage}[t]{0.277\linewidth}
-                {\flushleft\small
-                    \email\\
-                    \linkedin\\
-                    \github\\
-                    \address
-                }
-            \end{minipage}
-
-            \vspace{-10pt}
-
-            %-----------EXPERIENCE-----------------
-            \section{Experience}
-                \begin{itemize}
-                    ${makeJobExperiences(theResume.jobExperiences)}
-                \end{itemize}
                 \vspace{-10pt}
 
-            %-----------PROJECTS-----------------
-            \section{Projects \textit{\&} Publications}
-                ${makeProjectsAndPublications(theResume.projectsAndPublications)}
-                \vspace{-10pt}
+                \section{Experience}
+        """.trimIndent() + "\n" +
+                makeJobExperiences(theResume.jobExperiences).reindent(2) + "\n\n" +
+        """
+                    \vspace{-10pt}
 
-            %-----------EDUCATION-----------------
+                \section{Projects \textit{\&} Publications}
+        """.reindent(1) + "\n" +
+                makeProjectsAndPublications(theResume.projectsAndPublications).reindent(2) + "\n" +
+        """
+                    \vspace{-10pt}
 
-            \section{Education}
-                ${makeEducation(theResume.education)}
-            %-------------------------------------------
+                \section{Education}
+        """.reindent(1) + "\n" +
+                makeEducation(theResume.education).reindent(2) + "\n" +
+        """
             \end{document}
-
         """.trimIndent()
         return toString
     }
 
     private fun makeJobExperiences(jobExperiences: List<JobExperience>): String {
-        return jobExperiences.joinToString("\n") {
+        val jobExperiencesStr = jobExperiences.joinToString("\n") {
             makeJobExperience(it)
         }
+
+        return "\\begin{itemize}\n${jobExperiencesStr.reindent(1)}\n\\end{itemize}"
     }
 
     private fun makeJobExperience(jobExperience: JobExperience): String {
@@ -160,14 +156,14 @@ class LatexSoberResumeDriver : ResumeDriver {
 
     private fun makeFirstRole(jobExperience: JobExperience): String {
         return """
-            \item \employment
-                {${jobExperience.company.url}}
-                {${jobExperience.company.displayName}}
-                {${jobExperience.location}}
-                {${jobExperience.roles.first().title}}
-                {${makeWorkPeriod(jobExperience.roles.first().period)}}
-            ${makeBulletPoints(jobExperience.roles.first().bulletPoints)}
-            """
+                \item \employment
+                    {${jobExperience.company.url}}
+                    {${jobExperience.company.displayName}}
+                    {${jobExperience.location}}
+                    {${jobExperience.roles.first().title}}
+                    {${makeWorkPeriod(jobExperience.roles.first().period)}}
+                """.trimIndent() + "\n" +
+                makeBulletPoints(jobExperience.roles.first().bulletPoints)
     }
 
     private fun makeOtherRoles(jobExperience: JobExperience): String {
@@ -179,19 +175,17 @@ class LatexSoberResumeDriver : ResumeDriver {
                 \position
                     {${role.title}}
                     {${makeWorkPeriod(role.period)}}
-                ${makeBulletPoints(role.bulletPoints)}
-                """
+                """.trimIndent() + "\n" +
+                        makeBulletPoints(role.bulletPoints)
             }
         }
     }
 
     private fun makeBulletPoints(bulletPoints: List<BulletPoint>): String {
         if (bulletPoints.isEmpty()) return ""
-        return """            
-            \begin{itemize}
-                ${bulletPoints.joinToString("\n") { makeBulletPoint(it) }}
-            \end{itemize}
-        """
+
+        val bulletPointsStr = bulletPoints.joinToString("\n") { makeBulletPoint(it) }
+        return "\\begin{itemize}\n${bulletPointsStr.reindent(1)}\n\\end{itemize}"
     }
 
     private fun makeBulletPoint(bulletPoints: BulletPoint): String {
@@ -205,11 +199,7 @@ class LatexSoberResumeDriver : ResumeDriver {
 
     private fun makeProjectsAndPublications(projectsAndPublications: List<ProjectOrPublication>): String {
         if (projectsAndPublications.isEmpty()) return ""
-        return """                
-            \begin{itemize}
-                ${projectsAndPublications.joinToString("\n") { makeProjectOrPublication(it) }} 
-            \end{itemize}
-        """
+        return "\\begin{itemize}\n${projectsAndPublications.joinToString("\n") { makeProjectOrPublication(it) }.reindent(1)}\n\\end{itemize}"
     }
 
     private fun makeProjectOrPublication(projectOrPublication: ProjectOrPublication): String {
@@ -218,16 +208,12 @@ class LatexSoberResumeDriver : ResumeDriver {
                 {${projectOrPublication.title.url}}
                 {${projectOrPublication.title.displayName}}
                 {${projectOrPublication.description}}
-        """
+        """.trimIndent()
     }
 
     private fun makeEducation(education: List<Degree>): String {
         if (education.isEmpty()) return ""
-        return """                
-            \begin{itemize}
-                ${education.joinToString("\n") { makeDegree(it) }} 
-            \end{itemize}
-        """
+        return "\\begin{itemize}\n${education.joinToString("\n") { makeDegree(it) }.reindent(1)}\n\\end{itemize}"
     }
 
     private fun makeDegree(degree: Degree): String {
@@ -238,7 +224,7 @@ class LatexSoberResumeDriver : ResumeDriver {
                 {${degree.location}}
                 {${degree.degree}}
                 {${makeEduPeriod(degree.period)}}
-        """
+        """.trimIndent()
     }
 
     private fun makeWorkPeriod(enrollmentPeriod: EnrollmentPeriod): String {
@@ -272,4 +258,8 @@ class LatexSoberResumeDriver : ResumeDriver {
             EnrollmentPeriod.EndDate.Present -> "Present"
         }
     }
+
+    private val baseIndent = " ".repeat(4)
+    private fun String.reindent(indentLevel: Int) = replaceIndent(baseIndent.repeat(indentLevel))
+
 }
