@@ -199,12 +199,13 @@ class LatexSoberResumeDriver : ResumeDriver {
 
     private fun makeProjectsAndPublications(projectsAndPublications: List<ProjectOrPublication>): String {
         if (projectsAndPublications.isEmpty()) return ""
-        return "\\begin{itemize}\n${projectsAndPublications.joinToString("\n") { makeProjectOrPublication(it) }.reindent(1)}\n\\end{itemize}"
+
+        return itemize(projectsAndPublications.map { makeProjectOrPublication(it) })
     }
 
     private fun makeProjectOrPublication(projectOrPublication: ProjectOrPublication): String {
         return """               
-            \item \project
+            \project
                 {${projectOrPublication.title.url}}
                 {${projectOrPublication.title.displayName}}
                 {${projectOrPublication.description}}
@@ -260,7 +261,7 @@ class LatexSoberResumeDriver : ResumeDriver {
     }
 
     private fun itemize(items: List<String>): String {
-        return "\\begin{itemize}\n${items.joinToString(separator = "\n", prefix = "\\item").reindent(1)}\n\\end{itemize}"
+        return "\\begin{itemize}\n${items.joinToString("\n") { "\\item $it" }.reindent(1)}\n\\end{itemize}"
     }
 
     private val baseIndent = " ".repeat(4)
