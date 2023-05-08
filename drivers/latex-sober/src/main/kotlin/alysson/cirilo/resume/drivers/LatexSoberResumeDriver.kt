@@ -9,7 +9,6 @@ class LatexSoberResumeDriver : ResumeDriver {
         return LatexSoberResumeBuilder(theResume)
             .makeHeader()
             .makeExperiences()
-            .startProjectAndPublicationsSection()
             .makeProjectsAndPublications()
             .startEducationSection()
             .makeEducation()

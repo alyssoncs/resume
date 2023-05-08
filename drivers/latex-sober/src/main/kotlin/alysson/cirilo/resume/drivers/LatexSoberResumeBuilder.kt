@@ -63,12 +63,8 @@ class LatexSoberResumeBuilder(private val theResume: Resume) {
         return this
     }
 
-    fun startProjectAndPublicationsSection(): LatexSoberResumeBuilder {
-        startSection("Projects \\textit{\\&} Publications")
-        return this
-    }
-
     fun makeProjectsAndPublications(): LatexSoberResumeBuilder {
+        startSection("Projects \\textit{\\&} Publications")
         updateOutput(
             makeProjectsAndPublications(theResume.projectsAndPublications)
                 .reindent(currentIndent) + "\n"
