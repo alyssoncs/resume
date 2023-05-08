@@ -213,12 +213,12 @@ class LatexSoberResumeDriver : ResumeDriver {
 
     private fun makeEducation(education: List<Degree>): String {
         if (education.isEmpty()) return ""
-        return "\\begin{itemize}\n${education.joinToString("\n") { makeDegree(it) }.reindent(1)}\n\\end{itemize}"
+        return itemize(education.map { makeDegree(it) })
     }
 
     private fun makeDegree(degree: Degree): String {
         return """                
-            \item \employment
+            \employment
                 {${degree.institution.url}}
                 {${degree.institution.displayName}}
                 {${degree.location}}
@@ -259,7 +259,10 @@ class LatexSoberResumeDriver : ResumeDriver {
         }
     }
 
+    private fun itemize(items: List<String>): String {
+        return "\\begin{itemize}\n${items.joinToString(separator = "\n", prefix = "\\item").reindent(1)}\n\\end{itemize}"
+    }
+
     private val baseIndent = " ".repeat(4)
     private fun String.reindent(indentLevel: Int) = replaceIndent(baseIndent.repeat(indentLevel))
-
 }
