@@ -20,9 +20,85 @@ class LatexSoberResumeBuilder(private val theResume: Resume) {
         output += newContent
     }
 
-    fun startResume(): LatexSoberResumeBuilder {
+    fun makeHeader(): LatexSoberResumeBuilder {
         updateOutput(
             """
+            % constants
+            \newcommand{\name}{${theResume.name}}
+            \newcommand{\mytitle}{{\huge\textbf{\name}}}
+            \newcommand{\headline}{${theResume.headline.joinToString(separator = "{\\enskip\\starredbullet\\enskip}") { it }}}
+            \newcommand{\email}
+                {\iconhref{${theResume.contactInformation.email.url}}{{\scriptsize\faEnvelope{}} ${theResume.contactInformation.email.displayName}}}
+            \newcommand{\linkedin}
+                {\iconhref{${theResume.contactInformation.linkedin.url}}{\faLinkedin{} ${theResume.contactInformation.linkedin.displayName}}}
+            \newcommand{\github}
+                {\iconhref{${theResume.contactInformation.github.url}}{\faGithub{} ${theResume.contactInformation.github.displayName}}}
+            \newcommand{\address}
+                {\hspace{1pt}\iconhref{https://www.google.com/maps?q=+Maranhão,+Brazil}{\faMapMarker{}\hspace{1pt} Remote (UTC${'$'}-${'$'}3), Brazil}}
+        """.reindent(currentIndent) + "\n\n" +
+                    """
+            \begin{minipage}[t]{0.70\linewidth}%743
+                \mytitle\\
+                \headline
+            \end{minipage}
+            \hspace{8pt}
+            \begin{minipage}[t]{0.277\linewidth}
+                {\flushleft\small
+                    \email\\
+                    \linkedin\\
+                    \github\\
+                    \address
+                }
+            \end{minipage}
+        """.reindent(currentIndent) + "\n"
+        )
+        return this
+    }
+
+    fun startExperienceSection(): LatexSoberResumeBuilder {
+        startSection("Experience")
+        return this
+    }
+
+    fun makeExperiences(): LatexSoberResumeBuilder {
+        updateOutput(
+            makeJobExperiences(theResume.jobExperiences).reindent(currentIndent) + "\n"
+        )
+        return this
+    }
+
+    fun startProjectAndPublicationsSection(): LatexSoberResumeBuilder {
+        startSection("Projects \\textit{\\&} Publications")
+        return this
+    }
+
+    fun makeProjectsAndPublications(): LatexSoberResumeBuilder {
+        updateOutput(
+            makeProjectsAndPublications(theResume.projectsAndPublications)
+                .reindent(currentIndent) + "\n"
+        )
+        return this
+    }
+
+    fun startEducationSection(): LatexSoberResumeBuilder {
+        startSection("Education")
+        return this
+    }
+
+    fun makeEducation(): LatexSoberResumeBuilder {
+        updateOutput(
+            makeEducation(theResume.education).reindent(currentIndent) + "\n"
+        )
+        return this
+    }
+
+    fun build(): String {
+        currentIndent = 0
+        return output.wrapAroundDocument()
+    }
+
+    private fun String.wrapAroundDocument(): String {
+        return """
             %!TEX TS-program = xelatex
             %!TEX encoding = UTF-8 Unicode
 
@@ -100,93 +176,9 @@ class LatexSoberResumeBuilder(private val theResume: Resume) {
             }
 
             \begin{document}
-            """.reindent(currentIndent) + "\n"
-        )
-
-        currentIndent++
-        return this
-    }
-
-    fun makeHeader(): LatexSoberResumeBuilder {
-        updateOutput(
-            """
-            % constants
-            \newcommand{\name}{${theResume.name}}
-            \newcommand{\mytitle}{{\huge\textbf{\name}}}
-            \newcommand{\headline}{${theResume.headline.joinToString(separator = "{\\enskip\\starredbullet\\enskip}") { it }}}
-            \newcommand{\email}
-                {\iconhref{${theResume.contactInformation.email.url}}{{\scriptsize\faEnvelope{}} ${theResume.contactInformation.email.displayName}}}
-            \newcommand{\linkedin}
-                {\iconhref{${theResume.contactInformation.linkedin.url}}{\faLinkedin{} ${theResume.contactInformation.linkedin.displayName}}}
-            \newcommand{\github}
-                {\iconhref{${theResume.contactInformation.github.url}}{\faGithub{} ${theResume.contactInformation.github.displayName}}}
-            \newcommand{\address}
-                {\hspace{1pt}\iconhref{https://www.google.com/maps?q=+Maranhão,+Brazil}{\faMapMarker{}\hspace{1pt} Remote (UTC${'$'}-${'$'}3), Brazil}}
-        """.reindent(currentIndent) + "\n\n" +
-                    """
-            \begin{minipage}[t]{0.70\linewidth}%743
-                \mytitle\\
-                \headline
-            \end{minipage}
-            \hspace{8pt}
-            \begin{minipage}[t]{0.277\linewidth}
-                {\flushleft\small
-                    \email\\
-                    \linkedin\\
-                    \github\\
-                    \address
-                }
-            \end{minipage}
-        """.reindent(currentIndent) + "\n"
-        )
-        return this
-    }
-
-    fun startExperienceSection(): LatexSoberResumeBuilder {
-        startSection("Experience")
-        return this
-    }
-
-    fun makeExperiences(): LatexSoberResumeBuilder {
-        updateOutput(
-            makeJobExperiences(theResume.jobExperiences).reindent(currentIndent) + "\n"
-        )
-        return this
-    }
-
-    fun startProjectAndPublicationsSection(): LatexSoberResumeBuilder {
-        startSection("Projects \\textit{\\&} Publications")
-        return this
-    }
-
-    fun makeProjectsAndPublications(): LatexSoberResumeBuilder {
-        updateOutput(
-            makeProjectsAndPublications(theResume.projectsAndPublications)
-                .reindent(currentIndent) + "\n"
-        )
-        return this
-    }
-
-    fun startEducationSection(): LatexSoberResumeBuilder {
-        startSection("Education")
-        return this
-    }
-
-    fun makeEducation(): LatexSoberResumeBuilder {
-        updateOutput(
-            makeEducation(theResume.education).reindent(currentIndent) + "\n"
-        )
-        return this
-    }
-
-    fun endResume(): LatexSoberResumeBuilder {
-        currentIndent = 0
-        updateOutput("\\end{document}".reindent(currentIndent) + "\n")
-        return this
-    }
-
-    fun build(): String {
-        return output
+            """.reindent(0) + "\n" +
+                this.reindent(1) + "\n" +
+        "\\end{document}\n"
     }
 
     private fun startSection(name: String) {
