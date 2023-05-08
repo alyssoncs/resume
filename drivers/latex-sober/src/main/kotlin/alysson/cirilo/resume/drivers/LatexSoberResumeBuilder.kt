@@ -72,12 +72,8 @@ class LatexSoberResumeBuilder(private val theResume: Resume) {
         return this
     }
 
-    fun startEducationSection(): LatexSoberResumeBuilder {
-        startSection("Education")
-        return this
-    }
-
     fun makeEducation(): LatexSoberResumeBuilder {
+        startSection("Education")
         updateOutput(
             makeEducation(theResume.education).reindent(currentIndent) + "\n"
         )
