@@ -138,6 +138,7 @@ class LatexSoberResumeDriver : ResumeDriver {
                 makeEducation(theResume.education).reindent(2) + "\n" +
         """
             \end{document}
+
         """.trimIndent()
         return toString
     }
