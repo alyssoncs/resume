@@ -8,7 +8,6 @@ class LatexSoberResumeDriver : ResumeDriver {
         val theResume = resume.reversedChronologically
         return LatexSoberResumeBuilder(theResume)
             .makeHeader()
-            .startExperienceSection()
             .makeExperiences()
             .startProjectAndPublicationsSection()
             .makeProjectsAndPublications()

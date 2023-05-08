@@ -55,12 +55,8 @@ class LatexSoberResumeBuilder(private val theResume: Resume) {
         return this
     }
 
-    fun startExperienceSection(): LatexSoberResumeBuilder {
-        startSection("Experience")
-        return this
-    }
-
     fun makeExperiences(): LatexSoberResumeBuilder {
+        startSection("Experience")
         updateOutput(
             makeJobExperiences(theResume.jobExperiences).reindent(currentIndent) + "\n"
         )
@@ -178,7 +174,7 @@ class LatexSoberResumeBuilder(private val theResume: Resume) {
             \begin{document}
             """.reindent(0) + "\n" +
                 this.reindent(1) + "\n" +
-        "\\end{document}\n"
+                "\\end{document}\n"
     }
 
     private fun startSection(name: String) {
