@@ -200,7 +200,7 @@ class LatexSoberResumeDriver : ResumeDriver {
     private fun makeProjectsAndPublications(projectsAndPublications: List<ProjectOrPublication>): String {
         if (projectsAndPublications.isEmpty()) return ""
 
-        return itemize(projectsAndPublications.map { makeProjectOrPublication(it) })
+        return itemize(projectsAndPublications.map(::makeProjectOrPublication))
     }
 
     private fun makeProjectOrPublication(projectOrPublication: ProjectOrPublication): String {
@@ -214,7 +214,7 @@ class LatexSoberResumeDriver : ResumeDriver {
 
     private fun makeEducation(education: List<Degree>): String {
         if (education.isEmpty()) return ""
-        return itemize(education.map { makeDegree(it) })
+        return itemize(education.map(::makeDegree))
     }
 
     private fun makeDegree(degree: Degree): String {
