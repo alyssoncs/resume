@@ -143,11 +143,7 @@ class LatexSoberResumeDriver : ResumeDriver {
     }
 
     private fun makeJobExperiences(jobExperiences: List<JobExperience>): String {
-        val jobExperiencesStr = jobExperiences.joinToString("\n") {
-            makeJobExperience(it)
-        }
-
-        return "\\begin{itemize}\n${jobExperiencesStr.reindent(1)}\n\\end{itemize}"
+        return itemize(jobExperiences.map(::makeJobExperience))
     }
 
     private fun makeJobExperience(jobExperience: JobExperience): String {
@@ -156,7 +152,7 @@ class LatexSoberResumeDriver : ResumeDriver {
 
     private fun makeFirstRole(jobExperience: JobExperience): String {
         return """
-                \item \employment
+                \employment
                     {${jobExperience.company.url}}
                     {${jobExperience.company.displayName}}
                     {${jobExperience.location}}
@@ -184,12 +180,11 @@ class LatexSoberResumeDriver : ResumeDriver {
     private fun makeBulletPoints(bulletPoints: List<BulletPoint>): String {
         if (bulletPoints.isEmpty()) return ""
 
-        val bulletPointsStr = bulletPoints.joinToString("\n") { makeBulletPoint(it) }
-        return "\\begin{itemize}\n${bulletPointsStr.reindent(1)}\n\\end{itemize}"
+        return itemize(bulletPoints.map(::makeBulletPoint))
     }
 
     private fun makeBulletPoint(bulletPoints: BulletPoint): String {
-        return bulletPoints.content.joinToString(separator = "", prefix = "\\item ") {
+        return bulletPoints.content.joinToString(separator = "") {
             when (it) {
                 is BulletPointContent.PlainText -> it.displayName
                 is BulletPointContent.Skill -> "\\textbf{${it.displayName}}"
