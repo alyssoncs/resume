@@ -129,7 +129,7 @@ class LatexSoberResumeDriver : ResumeDriver {
 
                 \section{Projects \textit{\&} Publications}
         """.reindent(1) + "\n" +
-                makeProjectsAndPublications(theResume.projectsAndPublications).reindent(2) + "\n" +
+                makeProjectsAndPublications(theResume.projectsAndPublications).reindent(2) + "\n\n" +
         """
                     \vspace{-10pt}
 
