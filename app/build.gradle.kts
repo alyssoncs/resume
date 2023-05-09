@@ -11,6 +11,7 @@ plugins {
 dependencies {
     implementation(projects.drivers.latexSober)
     implementation(projects.drivers.latexAwesome)
+    implementation(projects.drivers.markdown)
 }
 
 application {
