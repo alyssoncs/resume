@@ -183,7 +183,7 @@ private object Employments {
                 "Dagger",
                 "",
             ),
-            BulletPoint("Worked on a plugin based-architecture that enables the loading different payment methods, delivery options and other business logic."),
+            BulletPoint("Worked on a plugin based-architecture that enables loading different payment methods, delivery options and business logic."),
             BulletPoint("Created a script to manage code owners, making it easier to add/remove people and assign ownership to squads, with less errors and adaptability to team changes."),
         )
 
