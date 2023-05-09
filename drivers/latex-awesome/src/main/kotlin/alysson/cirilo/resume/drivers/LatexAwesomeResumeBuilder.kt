@@ -31,7 +31,7 @@ class LatexAwesomeResumeBuilder(private val theResume: Resume) {
     }
 
     fun makeProjectsAndPublications(): LatexAwesomeResumeBuilder {
-        latexSoberResume.startSection("Projects \\textit{\\&} Publications")
+        latexSoberResume.startSection("Projects \\& Publications")
         latexSoberResume.makeProjectsAndPublications(theResume.projectsAndPublications)
         return this
     }
