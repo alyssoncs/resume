@@ -219,7 +219,7 @@ private object Employments {
                 "Jetpack Compose",
                 ".",
             ),
-            BulletPoint("Designed and implemented a dependency injection model for a library that allows for consuming different capabilities from the host app without exposing the dependency injection framework."),
+            BulletPoint("Developed a flexible dependency injection model for a library that integrates with host apps without exposing the framework."),
         )
 
         val experience = JobExperience(
