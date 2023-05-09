@@ -10,7 +10,7 @@ import alysson.cirilo.resume.entities.ProjectOrPublication
 import java.time.format.DateTimeFormatter
 import java.util.Locale
 
-class LatexSoberResume(private val resource: String, private val contentPlaceholder: String) {
+class LatexSoberResume(resource: String, private val contentPlaceholder: String) {
 
     private var output = ""
     private var currentIndent = 0
