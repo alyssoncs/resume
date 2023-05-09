@@ -65,10 +65,6 @@ class LatexSoberResume(resource: String, private val contentPlaceholder: String)
             updateOutput(
                 "\n" +
                         """
-                        \vspace{-10pt}
-                        """.reindent(currentIndent) +
-                        "\n\n" +
-                        """
                         \section{$name}
                         """.reindent(theSectionIndent) + "\n"
             )
