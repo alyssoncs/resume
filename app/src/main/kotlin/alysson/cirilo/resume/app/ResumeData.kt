@@ -113,7 +113,6 @@ private object Employments {
                 "Coroutines",
                 " and Firebase Cloud Messaging allowing visitors to schedule and be notified about virtual visits to their imprisoned family members, important resource during the Covid-19 pandemic.",
             ),
-            BulletPoint("Collaborated with a team responsible for the system that manages all state's prison information."),
         )
 
         private val midLevel = Role(
