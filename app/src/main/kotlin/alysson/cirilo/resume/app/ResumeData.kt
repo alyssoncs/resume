@@ -190,7 +190,7 @@ private object Employments {
             title = "Android Developer II",
             start = LocalDate.of(2022, 4, 1),
             end = LocalDate.of(2021, 7, 1),
-            BulletPoint("Designed and implemented a dependency injection model for the checkout plugins, this solved the previous technical issue of manually injecting the plugins, which was cumbersome and inefficient."),
+            BulletPoint("Implemented dependency injection model for checkout plugins to solve inefficient manual injection."),
             BulletPoint("Implemented dynamic onboarding, allowing PMs to control the order and timing of onboarding based on remote configs and plugin availability. Improving user engagement and educating users on effective checkout feature usage."),
         )
 
