@@ -160,13 +160,11 @@ class LatexSoberResume(resource: String, private val contentPlaceholder: String)
         }
     }
 
-
     private fun makeBulletPoints(bulletPoints: List<BulletPoint>): String {
         if (bulletPoints.isEmpty()) return ""
 
         return itemize(bulletPoints.map(::makeBulletPoint))
     }
-
 
     private fun makeBulletPoint(bulletPoints: BulletPoint): String {
         return bulletPoints.content.joinToString(separator = "") {
