@@ -56,11 +56,11 @@ private object Employments {
                 ".",
             ),
             BulletPoint(
-                "Developed embedded software using the ",
-                "C programming",
-                " language on ",
+                "Programmed ",
                 "Arduino",
-                " boards, including the use of Bluetooth Low Energy technology.",
+                " boards using ",
+                "C programming",
+                " language to connect to Bluetooth Low Energy devices."
             ),
         )
 
