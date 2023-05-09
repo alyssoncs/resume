@@ -51,9 +51,9 @@ private object Employments {
             start = LocalDate.of(2017, 4, 1),
             end = LocalDate.of(2019, 7, 1),
             BulletPoint(
-                "Implemented a notification mechanism for discovery, connection and disconnection of smart objects in an IoT middleware using ",
+                "Built smart object encounter notification system for an Android IoT middleware using ",
                 "Java",
-                " on the Android platform.",
+                ".",
             ),
             BulletPoint(
                 "Developed embedded software using the ",
