@@ -37,7 +37,7 @@ class LatexSoberResume(resource: String, private val contentPlaceholder: String)
             \newcommand{\github}
                 {\iconhref{${contactInformation.github.url}}{\faGithub{} ${contactInformation.github.displayName}}}
             \newcommand{\address}
-                {\hspace{1pt}\iconhref{https://www.google.com/maps?q=+Maranhão,+Brazil}{\faMapMarker{}\hspace{1pt} Remote (UTC${'$'}-${'$'}3), Brazil}}
+                {\hspace{1pt}\iconhref{${contactInformation.location.url}}{\faMapMarker{}\hspace{1pt} ${contactInformation.location.displayName}}}
         """.reindent(currentIndent) + "\n\n" +
                     """
             \begin{minipage}[t]{0.70\linewidth}%743
