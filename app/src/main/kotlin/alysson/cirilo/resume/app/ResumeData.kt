@@ -184,7 +184,7 @@ private object Employments {
                 "",
             ),
             BulletPoint("Worked on a plugin based-architecture that enables loading different payment methods, delivery options and business logic."),
-            BulletPoint("Created a script to manage code owners, making it easier to add/remove people and assign ownership to squads, with less errors and adaptability to team changes."),
+            BulletPoint("Created a script to manage code ownership making the process less error-prone given the frequency teams structure changes."),
         )
 
         private val androidDeveloper2 = Role(
