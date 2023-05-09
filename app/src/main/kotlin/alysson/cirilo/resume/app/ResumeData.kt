@@ -38,7 +38,7 @@ private val contactInformation = ContactInformation(
         url = URL("https://www.github.com/alyssoncs")
     ),
     location = LinkedInformation(
-        displayName = "Remote, Brazil",
+        displayName = "Remote (UTC-3), Brazil",
         url = URL("https://www.google.com/maps?q=+Maranhão,+Brazil"),
     ),
 )
