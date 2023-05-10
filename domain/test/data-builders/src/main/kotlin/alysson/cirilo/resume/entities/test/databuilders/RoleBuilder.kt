@@ -1,4 +1,4 @@
-package alysson.cirilo.resume.entities.testbuilders
+package alysson.cirilo.resume.entities.test.databuilders
 
 import alysson.cirilo.resume.entities.EnrollmentPeriod
 import alysson.cirilo.resume.entities.Role

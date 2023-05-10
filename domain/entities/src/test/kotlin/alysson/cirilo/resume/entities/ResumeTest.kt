@@ -1,12 +1,12 @@
 package alysson.cirilo.resume.entities
 
-import alysson.cirilo.resume.entities.testbuilders.BulletPointBuilder
-import alysson.cirilo.resume.entities.testbuilders.ResumeBuilder
-import alysson.cirilo.resume.entities.testbuilders.aBulletPoint
-import alysson.cirilo.resume.entities.testbuilders.aJobExperience
-import alysson.cirilo.resume.entities.testbuilders.aResume
-import alysson.cirilo.resume.entities.testbuilders.aRole
-import alysson.cirilo.resume.entities.testbuilders.anEmptyBulletPoint
+import alysson.cirilo.resume.entities.test.databuilders.BulletPointBuilder
+import alysson.cirilo.resume.entities.test.databuilders.ResumeBuilder
+import alysson.cirilo.resume.entities.test.databuilders.aBulletPoint
+import alysson.cirilo.resume.entities.test.databuilders.aJobExperience
+import alysson.cirilo.resume.entities.test.databuilders.aResume
+import alysson.cirilo.resume.entities.test.databuilders.aRole
+import alysson.cirilo.resume.entities.test.databuilders.anEmptyBulletPoint
 import com.google.common.truth.Truth.assertThat
 import org.junit.jupiter.api.DynamicTest
 import org.junit.jupiter.api.DynamicTest.dynamicTest

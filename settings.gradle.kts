@@ -28,6 +28,7 @@ rootProject.name = "resume"
 include(":app")
 include(":domain:entities")
 include(":domain:infra")
+include(":domain:test:data-builders")
 include(":drivers:latex-awesome")
 include(":drivers:latex-sober")
 include(":drivers:markdown")
