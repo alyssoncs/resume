@@ -16,7 +16,8 @@ class MarkdownResume {
     private var output = ""
 
     private fun updateOutput(newContent: String) {
-        output += newContent
+        val separator = if (output.isEmpty()) "" else "\n"
+        output += separator + newContent
     }
 
     fun addHeader(name: String, headline: List<String>, contactInformation: ContactInformation) {
@@ -25,23 +26,23 @@ class MarkdownResume {
                 # $name
                 > ${headline.joinToString(" • ")}
                 
-                ## Contact information
+                ## Contact Information
                 - [${contactInformation.email.displayName}](${contactInformation.email.url})
                 - [${contactInformation.linkedin.displayName}](${contactInformation.linkedin.url})
                 - [${contactInformation.github.displayName}](${contactInformation.github.url})
                 - [${contactInformation.location.displayName}](${contactInformation.location.url})
-
             """.trimIndent()
         )
     }
 
     fun startSection(name: String) {
-        updateOutput("\n## $name\n")
+        val extraLine = if (output.isEmpty()) "" else "\n"
+        updateOutput("$extraLine## $name")
     }
 
     fun makeExperiences(jobExperiences: List<JobExperience>) {
         updateOutput(
-            makeJobExperiences(jobExperiences).trimIndent() + "\n"
+            makeJobExperiences(jobExperiences)
         )
     }
 
@@ -52,19 +53,19 @@ class MarkdownResume {
             itemize(projectsAndPublications.map(::makeProjectOrPublication))
 
         updateOutput(
-            projectsAndPublicationsStr.trimIndent() + "\n"
+            projectsAndPublicationsStr.trimIndent()
         )
     }
 
     fun makeEducation(education: List<Degree>) {
         updateOutput(
             (if (education.isEmpty()) ""
-            else itemize(education.map(::makeDegree))).trimIndent() + "\n"
+            else itemize(education.map(::makeDegree))).trimIndent()
         )
     }
 
     override fun toString(): String {
-        return output
+        return output + "\n"
     }
 
     private fun makeJobExperiences(jobExperiences: List<JobExperience>): String {
@@ -80,21 +81,24 @@ class MarkdownResume {
     }
 
     private fun makeRole(role: Role): String {
+        return listOfNotNull(
+            makeRoleHeader(role),
+            makeBulletPoints(role.bulletPoints),
+        ).joinToString("\n")
+    }
+
+    private fun makeRoleHeader(role: Role): String {
         return """
             #### ${role.title}
-            > ${makeWorkPeriod(role.period)}.
-            """.trimIndent() + "\n" +
-                makeBulletPoints(role.bulletPoints)
+            > ${makeWorkPeriod(role.period)}
+        """.trimIndent()
     }
 
     private fun makeWorkPeriod(enrollmentPeriod: EnrollmentPeriod): String {
         val formatter = DateTimeFormatter.ofPattern("MMM. yyyy").withLocale(Locale.US)
 
-        return "${formatter.format(enrollmentPeriod.start)} -- ${
-            makeEndDate(
-                formatter,
-                enrollmentPeriod.end
-            )
+        return "${formatter.format(enrollmentPeriod.start)} – ${
+            makeEndDate(formatter, enrollmentPeriod.end)
         }"
     }
 
@@ -108,14 +112,14 @@ class MarkdownResume {
         }
     }
 
-    private fun makeBulletPoints(bulletPoints: List<BulletPoint>): String {
-        if (bulletPoints.isEmpty()) return ""
+    private fun makeBulletPoints(bulletPoints: List<BulletPoint>): String? {
+        if (bulletPoints.isEmpty()) return null
 
-        return itemize(bulletPoints.map(::makeBulletPoint))
+        return itemize(bulletPoints.map(::makeBulletPointContent))
     }
 
-    private fun makeBulletPoint(bulletPoints: BulletPoint): String {
-        return bulletPoints.content.joinToString(separator = "") {
+    private fun makeBulletPointContent(bulletPoint: BulletPoint): String {
+        return bulletPoint.content.joinToString(separator = "") {
             when (it) {
                 is BulletPointContent.PlainText -> it.displayName
                 is BulletPointContent.Skill -> "**${it.displayName}**"
