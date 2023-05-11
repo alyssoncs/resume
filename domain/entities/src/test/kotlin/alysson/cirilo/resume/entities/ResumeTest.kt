@@ -23,7 +23,7 @@ class ResumeTest {
         return blankNames.map { blankName ->
             dynamicTest("a resume with name = \"$blankName\" cannot be created") {
                 assertThrows<IllegalArgumentException> {
-                    aResume().withName(blankName).build()
+                    aResume().from(blankName).build()
                 }
             }
         }
@@ -47,6 +47,28 @@ class ResumeTest {
     fun `should not accept bullet point without content`() {
         assertThrows<IllegalArgumentException> {
             aResume().with(aBulletPoint().withNoContent()).build()
+        }
+    }
+
+    @Test
+    fun `should not accept blank skill bullet point content`() {
+        assertThrows<IllegalArgumentException> {
+            aResume().with(
+                anEmptyBulletPoint()
+                    .appendText("worked with")
+                    .appendSkill("  ")
+            ).build()
+        }
+    }
+
+    @Test
+    fun `should not accept empty plaint text bullet point content`() {
+        assertThrows<IllegalArgumentException> {
+            aResume().with(
+                anEmptyBulletPoint()
+                    .appendText("  ")
+                    .appendSkill("kotlin")
+            ).build()
         }
     }
 

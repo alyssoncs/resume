@@ -50,9 +50,18 @@ data class BulletPoint(
 sealed interface BulletPointContent {
     val displayName: String
 
-    data class PlainText(override val displayName: String): BulletPointContent
+    data class PlainText(override val displayName: String): BulletPointContent {
+        init { validate() }
+    }
     data class Skill(val skill: ProfessionalSkill): BulletPointContent {
         override val displayName: String = skill.value
+
+        init { validate() }
+    }
+
+    companion object {
+        private fun BulletPointContent.validate() =
+            require(displayName.isNotBlank()) { "A bullet point content cannot be blank" }
     }
 }
 
