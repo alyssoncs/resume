@@ -2,39 +2,39 @@ package alysson.cirilo.resume.entities.test.databuilders
 
 import alysson.cirilo.resume.entities.JobExperience
 
-class JobExperienceBuilder {
-    private var roleBuilders: List<RoleBuilder> = listOf(RoleBuilder())
-    private var companyBuilder: LinkedInformationBuilder = aLinkedInfo()
+class JobExperienceBuilder private constructor(
+    private val roleBuilders: List<RoleBuilder> = listOf(RoleBuilder()),
+    private val companyBuilder: LinkedInformationBuilder = aLinkedInfo()
         .displaying("Cool Company")
-        .linkingTo("https://www.coolcompany.com")
+        .linkingTo("https://www.coolcompany.com"),
+    private val location: String = "Remote",
+) {
 
-    private var location: String = "Remote"
+    constructor() : this(
+        roleBuilders = listOf(RoleBuilder()),
+        companyBuilder = aLinkedInfo()
+            .displaying("Cool Company")
+            .linkingTo("https://www.coolcompany.com"),
+        location = "Remote",
+    )
 
-    fun with(roleBuilders: List<RoleBuilder>) = builderMethod {
-        this.roleBuilders = roleBuilders
-    }
+    fun with(roleBuilders: List<RoleBuilder>) =
+        JobExperienceBuilder(roleBuilders, companyBuilder, location)
 
     fun with(roleBuilder: RoleBuilder) = with(listOf(roleBuilder))
 
     fun withNoRole() = with(emptyList())
 
-    fun append(roleBuilder: RoleBuilder) = builderMethod {
-        this.roleBuilders += roleBuilder
-    }
+    fun append(roleBuilder: RoleBuilder) = with(roleBuilders + roleBuilder)
 
-    fun on(company: String) = builderMethod {
-        companyBuilder = companyBuilder.displaying(company)
-    }
+    fun on(company: String) = on(companyBuilder.displaying(company))
 
-    fun on(companyBuilder: LinkedInformationBuilder) = builderMethod {
-        this.companyBuilder = companyBuilder
-    }
+    fun on(companyBuilder: LinkedInformationBuilder) =
+        JobExperienceBuilder(roleBuilders, companyBuilder, location)
 
-    fun basedOn(location: String) = builderMethod {
-        this.location = location
-    }
+    fun basedOn(location: String) = JobExperienceBuilder(roleBuilders, companyBuilder, location)
 
-    fun build(): JobExperience{
+    fun build(): JobExperience {
         return JobExperience(
             company = companyBuilder.build(),
             location = location,
