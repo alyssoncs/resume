@@ -31,7 +31,7 @@ class MarkdownResumeTest {
 
     private val resume = aResume()
         .from("First Last")
-        .withHeadline(listOf("Software Engineer"))
+        .withHeadline(listOf("Software Engineer", "Android Developer"))
         .with(
             contactInfo()
                 .email(
@@ -89,7 +89,7 @@ class MarkdownResumeTest {
         assertThat(markdownResume.toString()).isEqualTo(
             """
                 # First Last
-                > Software Engineer
+                > Software Engineer • Android Developer
                 
                 ## Contact Information
                 - [email](https://www.email.com)
@@ -283,7 +283,7 @@ class MarkdownResumeTest {
         assertThat(markdownResume.toString()).isEqualTo(
             """
                 # First Last
-                > Software Engineer
+                > Software Engineer • Android Developer
                 
                 ## Contact Information
                 - [email](https://www.email.com)
