@@ -2,57 +2,92 @@ package alysson.cirilo.resume.entities.test.databuilders
 
 import alysson.cirilo.resume.entities.Resume
 
-class ResumeBuilder {
-    private var name: String = "Alysson Cirilo"
-    private var headline: List<String> = listOf("Android Developer", "Software Engineer")
-    private var contactInformationBuilder: ContactInformationBuilder = ContactInformationBuilder()
-    private var jobExperienceBuilders: List<JobExperienceBuilder> = listOf(JobExperienceBuilder())
-    private var projectAndPublicationBuilders: List<ProjectOrPublicationBuilder> = listOf(
-        ProjectOrPublicationBuilder()
+class ResumeBuilder private constructor(
+    private val name: String,
+    private val headline: List<String>,
+    private val contactInformationBuilder: ContactInformationBuilder,
+    private val jobExperienceBuilders: List<JobExperienceBuilder>,
+    private val projectAndPublicationBuilders: List<ProjectOrPublicationBuilder>,
+    private val degreeBuilders: List<DegreeBuilder>,
+) {
+    constructor() : this(
+        name = "Alysson Cirilo",
+        headline = listOf("Android Developer", "Software Engineer"),
+        contactInformationBuilder = ContactInformationBuilder(),
+        jobExperienceBuilders = listOf(JobExperienceBuilder()),
+        projectAndPublicationBuilders = listOf(ProjectOrPublicationBuilder()),
+        degreeBuilders = listOf(DegreeBuilder()),
     )
-    private var degreeBuilders: List<DegreeBuilder> = listOf(DegreeBuilder())
 
-    fun from(name: String) = builderMethod {
-        this.name = name
-    }
+    fun from(name: String) = ResumeBuilder(
+        name,
+        headline,
+        contactInformationBuilder,
+        jobExperienceBuilders,
+        projectAndPublicationBuilders,
+        degreeBuilders,
+    )
 
-    fun withHeadline(headline: List<String>) = builderMethod {
-        this.headline = headline
-    }
+    fun withHeadline(headline: List<String>) = ResumeBuilder(
+        name,
+        headline,
+        contactInformationBuilder,
+        jobExperienceBuilders,
+        projectAndPublicationBuilders,
+        degreeBuilders,
+    )
 
-    fun with(contactInformationBuilder: ContactInformationBuilder) = builderMethod {
-        this.contactInformationBuilder = contactInformationBuilder
-    }
+    fun with(contactInformationBuilder: ContactInformationBuilder) = ResumeBuilder(
+        name,
+        headline,
+        contactInformationBuilder,
+        jobExperienceBuilders,
+        projectAndPublicationBuilders,
+        degreeBuilders,
+    )
 
     fun withEmptyHeadline() = withHeadline(emptyList())
 
-    fun with(jobExperienceBuilders: List<JobExperienceBuilder>) = builderMethod {
-        this.jobExperienceBuilders = jobExperienceBuilders
-    }
+    fun with(jobExperienceBuilders: List<JobExperienceBuilder>) = ResumeBuilder(
+        name,
+        headline,
+        contactInformationBuilder,
+        jobExperienceBuilders,
+        projectAndPublicationBuilders,
+        degreeBuilders,
+    )
 
-    fun with(jobExperienceBuilder: JobExperienceBuilder) = builderMethod {
-        this.jobExperienceBuilders = listOf(jobExperienceBuilder)
-    }
+    fun with(jobExperienceBuilder: JobExperienceBuilder) = with(listOf(jobExperienceBuilder))
 
     fun withNoExperience() = with(emptyList<JobExperienceBuilder>())
 
-    fun append(jobExperienceBuilder: JobExperienceBuilder) = builderMethod {
-        this.jobExperienceBuilders += jobExperienceBuilder
-    }
+    fun append(jobExperienceBuilder: JobExperienceBuilder) =
+        with(jobExperienceBuilders + jobExperienceBuilder)
 
     @JvmName("withProjectsAndPublications")
-    fun with(projectAndPublicationBuilders: List<ProjectOrPublicationBuilder>) = builderMethod {
-        this.projectAndPublicationBuilders = projectAndPublicationBuilders
-    }
+    fun with(projectAndPublicationBuilders: List<ProjectOrPublicationBuilder>) = ResumeBuilder(
+        name,
+        headline,
+        contactInformationBuilder,
+        jobExperienceBuilders,
+        projectAndPublicationBuilders,
+        degreeBuilders,
+    )
 
-    fun with(projectsAndPublicationsBuilder: ProjectOrPublicationBuilder) = with(listOf(projectsAndPublicationsBuilder))
+    fun with(projectsAndPublicationsBuilder: ProjectOrPublicationBuilder) =
+        with(listOf(projectsAndPublicationsBuilder))
 
     fun withNoProjectsOrPublications() = with(emptyList<ProjectOrPublicationBuilder>())
 
     @JvmName("withDegress")
-    fun with(degreeBuilders: List<DegreeBuilder>) = builderMethod {
-        this.degreeBuilders = degreeBuilders
-    }
+    fun with(degreeBuilders: List<DegreeBuilder>) = ResumeBuilder(
+        name,
+        headline,
+        contactInformationBuilder,
+        jobExperienceBuilders,
+        projectAndPublicationBuilders,
+        degreeBuilders,
+    )
 
     fun with(degreeBuilder: DegreeBuilder) = with(listOf(degreeBuilder))
 
@@ -68,7 +103,6 @@ class ResumeBuilder {
             education = degreeBuilders.map(DegreeBuilder::build),
         )
     }
-
 }
 
 fun aResume(): ResumeBuilder = ResumeBuilder()
