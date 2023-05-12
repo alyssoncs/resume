@@ -2,38 +2,39 @@ package alysson.cirilo.resume.entities.test.databuilders
 
 import alysson.cirilo.resume.entities.ContactInformation
 
-class ContactInformationBuilder {
-    private var emailBuilder: LinkedInformationBuilder = aLinkedInfo()
-        .displaying("alysson.cirilo@gmail.com")
-        .linkingTo("mailto:alysson.cirilo@gmail.com")
+class ContactInformationBuilder private constructor(
+    private val emailBuilder: LinkedInformationBuilder,
+    private val linkedinBuilder: LinkedInformationBuilder,
+    private val githubBuilder: LinkedInformationBuilder,
+    private val locationBuilder: LinkedInformationBuilder,
+) {
 
-    private var linkedinBuilder: LinkedInformationBuilder = aLinkedInfo()
-        .displaying("linkedin.com/in/alysson-cirilo")
-        .linkingTo("https://www.linkedin.com/in/alysson-cirilo")
+    constructor() : this(
+        emailBuilder = aLinkedInfo()
+            .displaying("alysson.cirilo@gmail.com")
+            .linkingTo("mailto:alysson.cirilo@gmail.com"),
+        linkedinBuilder = aLinkedInfo()
+            .displaying("linkedin.com/in/alysson-cirilo")
+            .linkingTo("https://www.linkedin.com/in/alysson-cirilo"),
+        githubBuilder = aLinkedInfo()
+            .displaying("github.com/alyssoncs")
+            .linkingTo("https://www.github.com/alyssoncs"),
+        locationBuilder = aLinkedInfo()
+            .displaying("Remote, Brazil")
+            .linkingTo("https://www.example.com"),
+    )
 
-    private var githubBuilder: LinkedInformationBuilder = aLinkedInfo()
-        .displaying("github.com/alyssoncs")
-        .linkingTo("https://www.github.com/alyssoncs")
+    fun email(emailBuilder: LinkedInformationBuilder) =
+        ContactInformationBuilder(emailBuilder, linkedinBuilder, githubBuilder, locationBuilder)
 
-    private var locationBuilder: LinkedInformationBuilder = aLinkedInfo()
-        .displaying("Remote, Brazil")
-        .linkingTo("https://www.example.com")
+    fun linkedin(linkedinBuilder: LinkedInformationBuilder) =
+        ContactInformationBuilder(emailBuilder, linkedinBuilder, githubBuilder, locationBuilder)
 
-    fun email(emailBuilder: LinkedInformationBuilder) = builderMethod {
-        this.emailBuilder = emailBuilder
-    }
+    fun github(githubBuilder: LinkedInformationBuilder) =
+        ContactInformationBuilder(emailBuilder, linkedinBuilder, githubBuilder, locationBuilder)
 
-    fun linkedin(linkedinBuilder: LinkedInformationBuilder) = builderMethod {
-        this.linkedinBuilder = linkedinBuilder
-    }
-
-    fun github(githubBuilder: LinkedInformationBuilder) = builderMethod {
-        this.githubBuilder = githubBuilder
-    }
-
-    fun location(locationBuilder: LinkedInformationBuilder) = builderMethod {
-        this.locationBuilder = locationBuilder
-    }
+    fun location(locationBuilder: LinkedInformationBuilder) =
+        ContactInformationBuilder(emailBuilder, linkedinBuilder, githubBuilder, locationBuilder)
 
     fun build(): ContactInformation {
         return ContactInformation(
