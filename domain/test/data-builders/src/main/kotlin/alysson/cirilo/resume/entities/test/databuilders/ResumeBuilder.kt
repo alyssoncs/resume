@@ -79,7 +79,7 @@ class ResumeBuilder private constructor(
 
     fun withNoProjectsOrPublications() = with(emptyList<ProjectOrPublicationBuilder>())
 
-    @JvmName("withDegress")
+    @JvmName("withDegrees")
     fun with(degreeBuilders: List<DegreeBuilder>) = ResumeBuilder(
         name,
         headline,
