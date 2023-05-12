@@ -2,34 +2,32 @@ package alysson.cirilo.resume.entities.test.databuilders
 
 import alysson.cirilo.resume.entities.Degree
 
-class DegreeBuilder {
-    private var institutionBuilder: LinkedInformationBuilder = aLinkedInfo()
-        .displaying("Top institution")
-        .linkingTo("https://www.example.com")
+class DegreeBuilder private constructor(
+    private val institutionBuilder: LinkedInformationBuilder,
+    private val location: String,
+    private val degree: String,
+    private val periodBuilder: EnrollmentPeriodBuilder,
+) {
+    constructor() : this(
+        institutionBuilder = aLinkedInfo()
+            .displaying("Top institution")
+            .linkingTo("https://www.example.com"),
+        location = "Brazil",
+        degree = "BSc. in Computer Science",
+        periodBuilder = period().from(5, 2020).upToNow(),
+    )
 
-    private var location: String = "Brazil"
+    fun at(institutionBuilder: LinkedInformationBuilder) =
+        DegreeBuilder(institutionBuilder, location, degree, periodBuilder)
 
-    private var degree: String = "BSc. in Computer Science"
+    fun on(location: String) =
+        DegreeBuilder(institutionBuilder, location, degree, periodBuilder)
 
-    private var periodBuilder: EnrollmentPeriodBuilder = period()
-        .from(5, 2020)
-        .upToNow()
+    fun tile(degree: String) =
+        DegreeBuilder(institutionBuilder, location, degree, periodBuilder)
 
-    fun at(institutionBuilder: LinkedInformationBuilder) = builderMethod {
-        this.institutionBuilder = institutionBuilder
-    }
-
-    fun on(location: String) = builderMethod {
-        this.location = location
-    }
-
-    fun tile(degree: String) = builderMethod {
-        this.degree = degree
-    }
-
-    fun during(periodBuilder: EnrollmentPeriodBuilder) = builderMethod {
-        this.periodBuilder = periodBuilder
-    }
+    fun during(periodBuilder: EnrollmentPeriodBuilder) =
+        DegreeBuilder(institutionBuilder, location, degree, periodBuilder)
 
     fun build(): Degree {
         return Degree(
