@@ -3,17 +3,18 @@ package alysson.cirilo.resume.entities.test.databuilders
 import alysson.cirilo.resume.entities.LinkedInformation
 import java.net.URL
 
-class LinkedInformationBuilder {
-    private var displayName: String = "cool information"
-    private var url: URL = URL("https://www.example.com")
+class LinkedInformationBuilder private constructor(
+    private val displayName: String,
+    private val url: URL,
+) {
+    constructor(): this(
+        displayName = "cool information",
+        url = URL("https://www.example.com"),
+    )
 
-    fun displaying(displayName: String) = builderMethod {
-        this.displayName = displayName
-    }
+    fun displaying(displayName: String) = LinkedInformationBuilder(displayName, url)
 
-    fun linkingTo(urlSpec: String) = builderMethod {
-        this.url = URL(urlSpec)
-    }
+    fun linkingTo(urlSpec: String) = LinkedInformationBuilder(displayName, URL(urlSpec))
 
     fun build(): LinkedInformation {
         return LinkedInformation(displayName, url)

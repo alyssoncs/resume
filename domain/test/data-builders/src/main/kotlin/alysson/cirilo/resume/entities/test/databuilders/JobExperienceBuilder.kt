@@ -23,7 +23,7 @@ class JobExperienceBuilder {
     }
 
     fun on(company: String) = builderMethod {
-        companyBuilder.displaying(company)
+        companyBuilder = companyBuilder.displaying(company)
     }
 
     fun on(companyBuilder: LinkedInformationBuilder) = builderMethod {
