@@ -21,7 +21,7 @@ class RoleBuilder private constructor(
     fun withNoBulletPoints() = with(emptyList())
 
     fun append(bulletPointBuilder: BulletPointBuilder) =
-        RoleBuilder(title, bulletPointBuilders + bulletPointBuilder, enrollmentPeriodBuilder)
+        with(bulletPointBuilders + bulletPointBuilder)
 
     fun `as`(title: String) =
         RoleBuilder(title, bulletPointBuilders, enrollmentPeriodBuilder)
