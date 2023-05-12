@@ -7,7 +7,7 @@ class LinkedInformationBuilder private constructor(
     private val displayName: String,
     private val url: URL,
 ) {
-    constructor(): this(
+    constructor() : this(
         displayName = "cool information",
         url = URL("https://www.example.com"),
     )

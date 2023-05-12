@@ -17,9 +17,11 @@ class ProjectOrPublicationBuilder private constructor(
 
     fun named(name: String) = ProjectOrPublicationBuilder(name, url, description)
 
-    fun hostedOn(urlSpec: String) = ProjectOrPublicationBuilder(projectName, URL(urlSpec), description)
+    fun hostedOn(urlSpec: String) =
+        ProjectOrPublicationBuilder(projectName, URL(urlSpec), description)
 
-    fun description(description: String) = ProjectOrPublicationBuilder(projectName, url, description)
+    fun description(description: String) =
+        ProjectOrPublicationBuilder(projectName, url, description)
 
     fun build(): ProjectOrPublication {
         return ProjectOrPublication(
