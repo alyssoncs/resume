@@ -7,20 +7,19 @@ import alysson.cirilo.resume.entities.Degree
 import alysson.cirilo.resume.entities.EnrollmentPeriod
 import alysson.cirilo.resume.entities.JobExperience
 import alysson.cirilo.resume.entities.ProjectOrPublication
+import alysson.cirilo.resume.entities.Role
 import java.time.format.DateTimeFormatter
 import java.util.Locale
 
-class LatexSoberResume(resource: String, private val contentPlaceholder: String) {
+class LatexSoberResume(private val template: String, private val contentPlaceholder: String) {
 
     private var output = ""
     private var currentIndent = 0
     private var sectionIndent: Int? = null
-    private val template: String by lazy {
-        javaClass.getResource(resource)!!.readText()
-    }
 
     private fun updateOutput(newContent: String) {
-        output += newContent
+        val separator = if (output.isEmpty()) "" else "\n"
+        output += separator + newContent
     }
 
     fun addHeader(name: String, headline: List<String>, contactInformation: ContactInformation) {
@@ -38,8 +37,7 @@ class LatexSoberResume(resource: String, private val contentPlaceholder: String)
                 {\iconhref{${contactInformation.github.url}}{\faGithub{} ${contactInformation.github.displayName}}}
             \newcommand{\address}
                 {\hspace{1pt}\iconhref{${contactInformation.location.url}}{\faMapMarker{}\hspace{1pt} ${contactInformation.location.displayName}}}
-        """.reindent(currentIndent) + "\n\n" +
-                    """
+            
             \begin{minipage}[t]{0.70\linewidth}%743
                 \mytitle\\
                 \headline
@@ -53,7 +51,7 @@ class LatexSoberResume(resource: String, private val contentPlaceholder: String)
                     \address
                 }
             \end{minipage}
-        """.reindent(currentIndent) + "\n"
+        """.reindent(currentIndent)
         )
     }
 
@@ -66,73 +64,82 @@ class LatexSoberResume(resource: String, private val contentPlaceholder: String)
                 "\n" +
                         """
                         \section{$name}
-                        """.reindent(theSectionIndent) + "\n"
+                        """.reindent(theSectionIndent)
             )
             currentIndent = theSectionIndent.inc()
         }
     }
 
     fun makeExperiences(jobExperiences: List<JobExperience>) {
-        updateOutput(
-            makeJobExperiences(jobExperiences).reindent(currentIndent) + "\n"
-        )
+        makeJobExperiences(jobExperiences)?.let {
+            updateOutput(it.reindent(currentIndent))
+        }
     }
 
     fun makeProjectsAndPublications(projectsAndPublications: List<ProjectOrPublication>) {
-        val projectsAndPublicationsStr = if (projectsAndPublications.isEmpty())
-            ""
-        else
-            itemize(projectsAndPublications.map(::makeProjectOrPublication))
-
-        updateOutput(
-            projectsAndPublicationsStr.reindent(currentIndent) + "\n"
-        )
+        itemize(projectsAndPublications.map(::makeProjectOrPublication))?.let { itemizedProjectAnPubs ->
+            updateOutput(itemizedProjectAnPubs.reindent(currentIndent))
+        }
     }
 
     fun makeEducation(education: List<Degree>) {
-        updateOutput(
-            (if (education.isEmpty()) ""
-            else itemize(education.map(::makeDegree))).reindent(currentIndent) + "\n"
-        )
+        itemize(education.map(::makeDegree))?.let { itemizedDegrees ->
+            updateOutput(itemizedDegrees.reindent(currentIndent))
+        }
     }
 
     override fun toString(): String {
-        return template.replace(contentPlaceholder, output.reindent(1))
+        return template.replace(contentPlaceholder, output.reindent(1)) + "\n"
     }
 
-    private fun makeJobExperiences(jobExperiences: List<JobExperience>): String {
-        return itemize(jobExperiences.map(::makeJobExperience))
+    private fun makeJobExperiences(jobExperiences: List<JobExperience>): String? {
+        return itemize(jobExperiences.map(::makeJobExperience), "\n\n")
     }
 
     private fun makeJobExperience(jobExperience: JobExperience): String {
-        return "${makeFirstRole(jobExperience)}\n${makeOtherRoles(jobExperience)}"
+        return listOfNotNull(
+            makeFirstRole(jobExperience),
+            makeOtherRoles(jobExperience),
+        ).joinToString("\n\n")
     }
 
     private fun makeFirstRole(jobExperience: JobExperience): String {
-        return """
-                \employment
-                    {${jobExperience.company.url}}
-                    {${jobExperience.company.displayName}}
-                    {${jobExperience.location}}
-                    {${jobExperience.roles.first().title}}
-                    {${makeWorkPeriod(jobExperience.roles.first().period)}}
-                """.trimIndent() + "\n" +
-                makeBulletPoints(jobExperience.roles.first().bulletPoints)
+        return listOfNotNull(
+            makeEmployment(jobExperience),
+            makeBulletPoints(jobExperience.roles.first().bulletPoints),
+        ).joinToString("\n")
     }
 
-    private fun makeOtherRoles(jobExperience: JobExperience): String {
+    private fun makeEmployment(jobExperience: JobExperience): String {
+        return """
+            \employment
+                {${jobExperience.company.url}}
+                {${jobExperience.company.displayName}}
+                {${jobExperience.location}}
+                {${jobExperience.roles.first().title}}
+                {${makeWorkPeriod(jobExperience.roles.first().period)}}
+        """.trimIndent()
+    }
+
+    private fun makeOtherRoles(jobExperience: JobExperience): String? {
         return if (jobExperience.roles.size == 1) {
-            ""
+            null
         } else {
             jobExperience.roles.drop(1).joinToString("\n\n") { role ->
-                """
-                \position
-                    {${role.title}}
-                    {${makeWorkPeriod(role.period)}}
-                """.trimIndent() + "\n" +
-                        makeBulletPoints(role.bulletPoints)
+                listOfNotNull(
+                    makePosition(role),
+                    makeBulletPoints(role.bulletPoints),
+                ).joinToString("\n")
             }
         }
+    }
+
+    private fun makePosition(role: Role): String {
+        return """
+            \position
+                {${role.title}}
+                {${makeWorkPeriod(role.period)}}
+        """.trimIndent()
     }
 
     private fun makeWorkPeriod(enrollmentPeriod: EnrollmentPeriod): String {
@@ -156,9 +163,7 @@ class LatexSoberResume(resource: String, private val contentPlaceholder: String)
         }
     }
 
-    private fun makeBulletPoints(bulletPoints: List<BulletPoint>): String {
-        if (bulletPoints.isEmpty()) return ""
-
+    private fun makeBulletPoints(bulletPoints: List<BulletPoint>): String? {
         return itemize(bulletPoints.map(::makeBulletPoint))
     }
 
@@ -171,9 +176,10 @@ class LatexSoberResume(resource: String, private val contentPlaceholder: String)
         }
     }
 
-    private fun itemize(items: List<String>): String {
-        return "\\begin{itemize}\n${
-            items.joinToString("\n") { "\\item $it" }.reindent(1)
+    private fun itemize(items: List<String>, itemsSeparator: String = "\n"): String? {
+        return if (items.isEmpty()) null
+        else "\\begin{itemize}\n${
+            items.joinToString(itemsSeparator) { "\\item $it" }.reindent(1)
         }\n\\end{itemize}"
     }
 

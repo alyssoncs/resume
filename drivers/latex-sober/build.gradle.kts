@@ -4,4 +4,5 @@ plugins {
 
 dependencies {
     api(projects.domain.infra)
+    testImplementation(projects.domain.test.dataBuilders)
 }

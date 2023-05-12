@@ -5,7 +5,8 @@ import alysson.cirilo.resume.entities.Resume
 class LatexSoberResumeBuilder(private val theResume: Resume) {
 
     private val latexSoberResume by lazy {
-        LatexSoberResume("/latex-sober-resume-template.tex", "%%content-goes-here%%")
+        val template = javaClass.getResource("/latex-sober-resume-template.tex")!!.readText()
+        LatexSoberResume(template, "%%content-goes-here%%")
     }
 
     fun makeHeader(): LatexSoberResumeBuilder {
