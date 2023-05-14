@@ -1,5 +1,6 @@
 package alysson.cirilo.resume.drivers
 
+import alysson.cirilo.resume.drivers.factory.ResumeSyntaxFactory
 import alysson.cirilo.resume.entities.BulletPoint
 import alysson.cirilo.resume.entities.BulletPointContent
 import alysson.cirilo.resume.entities.ContactInformation
@@ -11,7 +12,7 @@ import java.time.format.DateTimeFormatter
 import java.util.Locale
 
 class LatexAwesomeSyntaxFactory(
-    resource: String,
+    private val template: String,
     private val firstNamePlaceholder: String,
     private val lastNamePlaceholder: String,
     private val headlinePlaceholder: String,
@@ -20,14 +21,11 @@ class LatexAwesomeSyntaxFactory(
     private val githubPlaceholder: String,
     private val linkedinPlaceholder: String,
     private val contentPlaceholder: String,
-) {
+) : ResumeSyntaxFactory {
 
     private var output = ""
     private var currentIndent = 0
     private var sectionIndent: Int? = null
-    private val template: String by lazy {
-        javaClass.getResource(resource)!!.readText()
-    }
 
     private var firstName: String? = null
     private var lastName: String? = null
@@ -38,14 +36,15 @@ class LatexAwesomeSyntaxFactory(
         output += newContent
     }
 
-    fun addHeader(name: String, headline: List<String>, contactInformation: ContactInformation) {
-        firstName = name.substringBefore(' ')
-        lastName = name.substringAfter(' ')
+    override fun addHeader(name: String, headline: List<String>, contactInformation: ContactInformation) {
+        val space = ' '
+        firstName = name.substringBefore(space)
+        lastName = name.substringAfter(space)
         this.headline = headline
         this.contactInformation = contactInformation
     }
 
-    fun startSection(name: String) {
+    override fun startSection(name: String) {
         if (sectionIndent == null) {
             sectionIndent = currentIndent
         }
@@ -60,13 +59,13 @@ class LatexAwesomeSyntaxFactory(
         }
     }
 
-    fun makeExperiences(jobExperiences: List<JobExperience>) {
+    override fun makeExperiences(jobExperiences: List<JobExperience>) {
         updateOutput(
             makeJobExperiences(jobExperiences).reindent(currentIndent) + "\n"
         )
     }
 
-    fun makeProjectsAndPublications(projectsAndPublications: List<ProjectOrPublication>) {
+    override fun makeProjectsAndPublications(projectsAndPublications: List<ProjectOrPublication>) {
         val projectsAndPublicationsStr = if (projectsAndPublications.isEmpty())
             ""
         else
@@ -91,7 +90,7 @@ class LatexAwesomeSyntaxFactory(
         )
     }
 
-    fun makeEducation(education: List<Degree>) {
+    override fun makeEducation(education: List<Degree>) {
         updateOutput(
             if (education.isEmpty()) ""
             else
@@ -101,7 +100,7 @@ class LatexAwesomeSyntaxFactory(
         )
     }
 
-    override fun toString(): String {
+    override fun create(): String {
         return template
             .replace(firstNamePlaceholder, firstName.orEmpty())
             .replace(lastNamePlaceholder, lastName.orEmpty())
