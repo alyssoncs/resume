@@ -1,5 +1,6 @@
 package alysson.cirilo.resume.drivers
 
+import alysson.cirilo.resume.drivers.factory.ResumeSyntaxFactory
 import alysson.cirilo.resume.entities.BulletPoint
 import alysson.cirilo.resume.entities.BulletPointContent
 import alysson.cirilo.resume.entities.ContactInformation
@@ -11,7 +12,7 @@ import alysson.cirilo.resume.entities.Role
 import java.time.format.DateTimeFormatter
 import java.util.Locale
 
-class MarkdownResume {
+class MarkdownSyntaxFactory : ResumeSyntaxFactory {
 
     private var output = ""
 
@@ -20,7 +21,7 @@ class MarkdownResume {
         output += separator + newContent
     }
 
-    fun addHeader(name: String, headline: List<String>, contactInformation: ContactInformation) {
+    override fun addHeader(name: String, headline: List<String>, contactInformation: ContactInformation) {
         updateOutput(
             """
                 # $name
@@ -35,18 +36,18 @@ class MarkdownResume {
         )
     }
 
-    fun startSection(name: String) {
+    override fun startSection(name: String) {
         val extraLine = if (output.isEmpty()) "" else "\n"
         updateOutput("$extraLine## $name")
     }
 
-    fun makeExperiences(jobExperiences: List<JobExperience>) {
+    override fun makeExperiences(jobExperiences: List<JobExperience>) {
         updateOutput(
             makeJobExperiences(jobExperiences)
         )
     }
 
-    fun makeProjectsAndPublications(projectsAndPublications: List<ProjectOrPublication>) {
+    override fun makeProjectsAndPublications(projectsAndPublications: List<ProjectOrPublication>) {
         val projectsAndPublicationsStr = if (projectsAndPublications.isEmpty())
             ""
         else
@@ -57,14 +58,14 @@ class MarkdownResume {
         )
     }
 
-    fun makeEducation(education: List<Degree>) {
+    override fun makeEducation(education: List<Degree>) {
         updateOutput(
             (if (education.isEmpty()) ""
             else itemize(education.map(::makeDegree))).trimIndent()
         )
     }
 
-    override fun toString(): String {
+    override fun create(): String {
         return output + "\n"
     }
 
