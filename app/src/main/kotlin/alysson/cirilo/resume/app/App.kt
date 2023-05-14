@@ -3,11 +3,11 @@
  */
 package alysson.cirilo.resume.app
 
-import alysson.cirilo.resume.drivers.LatexSoberResumeDriver
+import alysson.cirilo.resume.drivers.makeLatexSoberDriver
 
 fun main() {
     val resume = makeResume()
-    val toString = LatexSoberResumeDriver().convert(resume)
+    val toString = makeLatexSoberDriver().convert(resume)
     print(toString)
 }
 
