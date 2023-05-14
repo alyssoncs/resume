@@ -8,13 +8,7 @@ class LatexAwesomeResumeBuilder(private val theResume: Resume) {
         fun String.asPlaceholder() = "%%${this}%%"
         LatexAwesomeSyntaxFactory(
             template = javaClass.getResource("/latex-awesome-resume-template.tex")!!.readText(),
-            firstNamePlaceholder = "first-name".asPlaceholder(),
-            lastNamePlaceholder = "last-name".asPlaceholder(),
-            headlinePlaceholder = "headline".asPlaceholder(),
-            addressPlaceholder = "address".asPlaceholder(),
-            emailPlaceholder = "email".asPlaceholder(),
-            githubPlaceholder = "github".asPlaceholder(),
-            linkedinPlaceholder = "linkedin".asPlaceholder(),
+            headerPlaceholder = "header".asPlaceholder(),
             contentPlaceholder = "content-goes-here".asPlaceholder()
         )
     }

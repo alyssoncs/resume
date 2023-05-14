@@ -13,35 +13,42 @@ import java.util.Locale
 
 class LatexAwesomeSyntaxFactory(
     private val template: String,
-    private val firstNamePlaceholder: String,
-    private val lastNamePlaceholder: String,
-    private val headlinePlaceholder: String,
-    private val addressPlaceholder: String,
-    private val emailPlaceholder: String,
-    private val githubPlaceholder: String,
-    private val linkedinPlaceholder: String,
+    private val headerPlaceholder: String,
     private val contentPlaceholder: String,
 ) : ResumeSyntaxFactory {
 
     private var output = ""
+    private var header: Header? = null
     private var currentIndent = 0
     private var sectionIndent: Int? = null
 
-    private var firstName: String? = null
-    private var lastName: String? = null
-    private var headline: List<String> = emptyList()
-    private var contactInformation: ContactInformation? = null
+    data class Header(
+        val firstName: String,
+        val lastName: String,
+        val headline: List<String>,
+        val contactInformation: ContactInformation,
+    )
 
-    private fun updateOutput(newContent: String) {
-        output += newContent
+    private fun updateOutput(newContent: String, addNl: Boolean = false) {
+        output += if (output.isNotEmpty() && addNl) {
+            "\n" + newContent
+        } else {
+            newContent
+        }
     }
 
-    override fun addHeader(name: String, headline: List<String>, contactInformation: ContactInformation) {
+    override fun addHeader(
+        name: String,
+        headline: List<String>,
+        contactInformation: ContactInformation,
+    ) {
         val space = ' '
-        firstName = name.substringBefore(space)
-        lastName = name.substringAfter(space)
-        this.headline = headline
-        this.contactInformation = contactInformation
+        header = Header(
+            firstName = name.substringBefore(space),
+            lastName = name.substringAfter(space),
+            headline = headline,
+            contactInformation = contactInformation,
+        )
     }
 
     override fun startSection(name: String) {
@@ -50,19 +57,19 @@ class LatexAwesomeSyntaxFactory(
         }
         sectionIndent?.let { theSectionIndent ->
             updateOutput(
-                "\n" +
                         """
                         \cvsection{$name}
-                        """.reindent(theSectionIndent) + "\n"
+                        """.reindent(theSectionIndent) + "\n",
+                true
             )
             currentIndent = theSectionIndent.inc()
         }
     }
 
     override fun makeExperiences(jobExperiences: List<JobExperience>) {
-        updateOutput(
-            makeJobExperiences(jobExperiences).reindent(currentIndent) + "\n"
-        )
+        makeJobExperiences(jobExperiences)?.let {
+            updateOutput(it.reindent(currentIndent) + "\n")
+        }
     }
 
     override fun makeProjectsAndPublications(projectsAndPublications: List<ProjectOrPublication>) {
@@ -70,7 +77,7 @@ class LatexAwesomeSyntaxFactory(
             ""
         else
             """
-            \vspace{-14pt}
+            \vspace{-15pt}
             \begin{cventries}
                 \cventry
                     {}
@@ -94,26 +101,37 @@ class LatexAwesomeSyntaxFactory(
         updateOutput(
             if (education.isEmpty()) ""
             else
-                ("\\vspace{-2pt}\\begin{cventries}\n" +
+                ("\\begin{cventries}\n" +
                         education.joinToString("\n") { makeDegree(it) }.reindent(1) +
                         "\n\\end{cventries}").reindent(currentIndent)
         )
     }
 
     override fun create(): String {
+        val makeHeader = if (header != null) "\\makecvheader[C]" else null
+        val actualOutput = listOfNotNull(makeHeader, output).joinToString("\n\n")
         return template
-            .replace(firstNamePlaceholder, firstName.orEmpty())
-            .replace(lastNamePlaceholder, lastName.orEmpty())
-            .replace(headlinePlaceholder, headline.joinToString(separator = "{\\enskip\\starredbullet\\enskip}") { it })
-            .replace(addressPlaceholder, contactInformation?.location?.displayName.orEmpty())
-            .replace(emailPlaceholder, contactInformation?.email?.displayName.orEmpty())
-            .replace(githubPlaceholder, contactInformation?.github?.displayName.orEmpty())
-            .replace(linkedinPlaceholder, contactInformation?.linkedin?.displayName.orEmpty())
-            .replace(contentPlaceholder, output.reindent(1))
+            .replace(headerPlaceholder, awesomeHeader())
+            .replace(contentPlaceholder, actualOutput.reindent(1)) +
+                "\n"
     }
 
-    private fun makeJobExperiences(jobExperiences: List<JobExperience>): String {
-        return "\\vspace{-6pt}\\begin{cventries}" + "\n" +
+    private fun awesomeHeader(): String {
+        return header?.let { safeHeader ->
+            return """
+            \name{${safeHeader.firstName.orEmpty()}}{${safeHeader.lastName.orEmpty()}}
+            \position{${safeHeader.headline.joinToString("{\\enskip\\starredbullet\\enskip}")}}
+            \address{${safeHeader.contactInformation?.location?.displayName.orEmpty()}}
+            \email{${safeHeader.contactInformation?.email?.displayName.orEmpty()}}
+            \github{${safeHeader.contactInformation?.github?.displayName.orEmpty()}}
+            \linkedin{${safeHeader.contactInformation?.linkedin?.displayName.orEmpty()}}
+        """.trimIndent()
+        } ?: ""
+    }
+
+    private fun makeJobExperiences(jobExperiences: List<JobExperience>): String? {
+        return if (jobExperiences.isEmpty()) null
+        else "\\begin{cventries}" + "\n" +
                 jobExperiences.joinToString("\n\n") { makeJobExperience(it) }.reindent(1) +
                 "\n\\end{cventries}\n"
     }
@@ -129,10 +147,17 @@ class LatexAwesomeSyntaxFactory(
                     {${jobExperience.company.displayName}}
                     {${jobExperience.location}}
                     {${makeWorkPeriod(jobExperience.roles.first().period)}}
-                    {
-                """.trimIndent() + "\n" +
-                makeBulletPoints(jobExperience.roles.first().bulletPoints).reindent(2) + "\n" +
-                "}".reindent(1)
+                """.trimIndent() +
+                "\n" +
+                if (jobExperience.roles.first().bulletPoints.isEmpty()) {
+                    "{}".reindent(1)
+                } else {
+                    "{".reindent(1) +
+                            "\n" +
+                            makeBulletPoints(jobExperience.roles.first().bulletPoints).reindent(2) +
+                            "\n" +
+                            "}".reindent(1)
+                }
 
     }
 
@@ -147,10 +172,17 @@ class LatexAwesomeSyntaxFactory(
                     {}
                     {}
                     {${makeWorkPeriod(role.period)}}
-                    {
-                """.trimIndent() + "\n" +
-                        makeBulletPoints(role.bulletPoints).reindent(2) + "\n" +
-                        "}".reindent(1)
+                """.trimIndent() +
+                        "\n" +
+                        if (role.bulletPoints.isEmpty()) {
+                            "{}".reindent(1)
+                        } else {
+                            "{".reindent(1) +
+                                    "\n" +
+                                    makeBulletPoints(role.bulletPoints).reindent(2) +
+                                    "\n" +
+                                    "}".reindent(1)
+                        }
             }
         }
     }
