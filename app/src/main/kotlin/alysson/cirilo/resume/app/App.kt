@@ -3,7 +3,7 @@
  */
 package alysson.cirilo.resume.app
 
-import alysson.cirilo.resume.drivers.makeLatexSoberDriver
+import alysson.cirilo.resume.drivers.latexsober.makeLatexSoberDriver
 
 fun main() {
     val resume = makeResume()

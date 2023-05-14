@@ -1,4 +1,4 @@
-package alysson.cirilo.resume.drivers
+package alysson.cirilo.resume.drivers.latexsober
 
 import alysson.cirilo.resume.entities.Resume
 

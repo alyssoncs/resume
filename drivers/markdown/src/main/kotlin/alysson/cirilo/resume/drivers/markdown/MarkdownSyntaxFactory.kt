@@ -1,6 +1,6 @@
-package alysson.cirilo.resume.drivers
+package alysson.cirilo.resume.drivers.markdown
 
-import alysson.cirilo.resume.drivers.syntaxfactory.ResumeSyntaxFactory
+import alysson.cirilo.resume.drivers.utils.syntaxfactory.ResumeSyntaxFactory
 import alysson.cirilo.resume.entities.BulletPoint
 import alysson.cirilo.resume.entities.BulletPointContent
 import alysson.cirilo.resume.entities.ContactInformation

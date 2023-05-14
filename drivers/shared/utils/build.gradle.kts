@@ -3,6 +3,6 @@ plugins {
 }
 
 dependencies {
-
     api(projects.domain.entities)
+    implementation(projects.domain.infra)
 }

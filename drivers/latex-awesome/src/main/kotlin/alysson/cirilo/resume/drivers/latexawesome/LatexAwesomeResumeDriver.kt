@@ -1,12 +1,12 @@
-package alysson.cirilo.resume.drivers
+package alysson.cirilo.resume.drivers.latexawesome
 
 import alysson.cirilo.resume.entities.Resume
 import alysson.cirilo.resume.infra.ResumeDriver
 
-class LatexSoberResumeDriver : ResumeDriver {
+class LatexAwesomeResumeDriver : ResumeDriver {
     override fun convert(resume: Resume): String {
         val theResume = resume.reversedChronologically
-        return LatexSoberResumeBuilder(theResume)
+        return LatexAwesomeResumeBuilder(theResume)
             .makeHeader()
             .makeExperiences()
             .makeProjectsAndPublications()
