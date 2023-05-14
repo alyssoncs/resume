@@ -1,4 +1,4 @@
-package alysson.cirilo.resume.drivers.factory
+package alysson.cirilo.resume.drivers.syntaxfactory
 
 import alysson.cirilo.resume.entities.ContactInformation
 import alysson.cirilo.resume.entities.Degree

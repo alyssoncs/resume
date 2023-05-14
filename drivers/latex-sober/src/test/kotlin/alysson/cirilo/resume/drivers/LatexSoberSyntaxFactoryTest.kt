@@ -1,6 +1,6 @@
 package alysson.cirilo.resume.drivers
 
-import alysson.cirilo.resume.drivers.factory.ResumeSyntaxFactory
+import alysson.cirilo.resume.drivers.syntaxfactory.ResumeSyntaxFactory
 import alysson.cirilo.resume.drivers.test.ResumeSyntaxFactoryTest
 import alysson.cirilo.resume.entities.ContactInformation
 import alysson.cirilo.resume.entities.Degree
