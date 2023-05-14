@@ -266,10 +266,10 @@ class LatexSoberSyntaxFactoryTest : ResumeSyntaxFactoryTest() {
     }
 
     private fun wrapAroundDocument(content: String): String {
-        return ("\\begin{document}\n" +
+        return "\\begin{document}\n" +
                 content.replaceIndent("    ") +
                 "\n" +
-                "\\end{document}").trimIndent() +
+                "\\end{document}" +
                 "\n"
     }
 }
