@@ -180,7 +180,7 @@ private object Employments {
                 "single-activity",
                 ", clean architecture, multi-module application, using ",
                 "Dagger",
-                "",
+                ".",
             ),
             BulletPoint("Worked on a plugin based-architecture that enables loading different payment methods, delivery options and business logic."),
             BulletPoint("Created a script to manage code ownership making the process less error-prone given the frequency teams structure changes."),
