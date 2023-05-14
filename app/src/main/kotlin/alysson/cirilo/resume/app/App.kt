@@ -8,6 +8,6 @@ import alysson.cirilo.resume.drivers.LatexSoberResumeDriver
 fun main() {
     val resume = makeResume()
     val toString = LatexSoberResumeDriver().convert(resume)
-    println(toString)
+    print(toString)
 }
 
