@@ -24,7 +24,7 @@ import org.junit.jupiter.api.Test
 
 abstract class ResumeSyntaxFactoryTest {
 
-    private lateinit var syntaxFactory: ResumeSyntaxFactory
+    lateinit var syntaxFactory: ResumeSyntaxFactory
     
     @BeforeEach
     fun setup() {

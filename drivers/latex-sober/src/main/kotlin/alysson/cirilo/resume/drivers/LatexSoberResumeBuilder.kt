@@ -21,7 +21,7 @@ class LatexSoberResumeBuilder(private val theResume: Resume) {
     }
 
     fun makeProjectsAndPublications(): LatexSoberResumeBuilder {
-        latexSoberSyntaxFactory.startSection("Projects \\textit{\\&} Publications")
+        latexSoberSyntaxFactory.startSection("Projects & Publications")
         latexSoberSyntaxFactory.makeProjectsAndPublications(theResume.projectsAndPublications)
         return this
     }

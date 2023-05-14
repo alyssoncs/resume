@@ -7,6 +7,8 @@ import alysson.cirilo.resume.entities.Degree
 import alysson.cirilo.resume.entities.JobExperience
 import alysson.cirilo.resume.entities.LinkedInformation
 import alysson.cirilo.resume.entities.ProjectOrPublication
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Test
 
 class LatexSoberSyntaxFactoryTest : ResumeSyntaxFactoryTest() {
 
@@ -18,7 +20,9 @@ class LatexSoberSyntaxFactoryTest : ResumeSyntaxFactoryTest() {
     }
 
     override fun generateEmptyOutput() = wrapAroundDocument("")
-    override fun generateSection(sectionName: String) = wrapAroundDocument("\\section{$sectionName}")
+    override fun generateSection(sectionName: String) =
+        wrapAroundDocument("\\section{$sectionName}")
+
     override fun generateHeader(
         name: String,
         firstHeadlineElement: String,
@@ -250,6 +254,16 @@ class LatexSoberSyntaxFactoryTest : ResumeSyntaxFactoryTest() {
                 \end{itemize}
         """.trimIndent()
     )
+
+    @Test
+    fun `ampersand in the section should be italic`() {
+        syntaxFactory.startSection("this & that")
+
+        assertEquals(
+            wrapAroundDocument("\\section{this \\textit{\\&} that}"),
+            syntaxFactory.create(),
+        )
+    }
 
     private fun wrapAroundDocument(content: String): String {
         return ("\\begin{document}\n" +

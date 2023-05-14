@@ -67,7 +67,7 @@ class LatexSoberSyntaxFactory(
             updateOutput(
                 "\n" +
                         """
-                        \section{$name}
+                        \section{${name.replace("&", "\\textit{\\&}")}}
                         """.reindent(theSectionIndent)
             )
             currentIndent = theSectionIndent.inc()
