@@ -32,6 +32,6 @@ class MarkdownResumeBuilder(private val theResume: Resume) {
     }
 
     fun build(): String {
-        return markdownSyntaxFactory.toString()
+        return markdownSyntaxFactory.create()
     }
 }

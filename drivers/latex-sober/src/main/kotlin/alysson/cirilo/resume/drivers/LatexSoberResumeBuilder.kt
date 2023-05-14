@@ -33,6 +33,6 @@ class LatexSoberResumeBuilder(private val theResume: Resume) {
     }
 
     fun build(): String {
-        return latexSoberSyntaxFactory.toString()
+        return latexSoberSyntaxFactory.create()
     }
 }
