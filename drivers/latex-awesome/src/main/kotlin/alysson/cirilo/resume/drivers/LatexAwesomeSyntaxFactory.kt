@@ -10,7 +10,7 @@ import alysson.cirilo.resume.entities.ProjectOrPublication
 import java.time.format.DateTimeFormatter
 import java.util.Locale
 
-class LatexAwesomeResume(
+class LatexAwesomeSyntaxFactory(
     resource: String,
     private val firstNamePlaceholder: String,
     private val lastNamePlaceholder: String,
