@@ -4,35 +4,35 @@ import alysson.cirilo.resume.entities.Resume
 
 class LatexSoberResumeBuilder(private val theResume: Resume) {
 
-    private val latexSoberResume by lazy {
+    private val latexSoberSyntaxFactory by lazy {
         val template = javaClass.getResource("/latex-sober-resume-template.tex")!!.readText()
-        LatexSoberResume(template, "%%content-goes-here%%")
+        LatexSoberSyntaxFactory(template, "%%content-goes-here%%")
     }
 
     fun makeHeader(): LatexSoberResumeBuilder {
-        latexSoberResume.addHeader(theResume.name, theResume.headline, theResume.contactInformation)
+        latexSoberSyntaxFactory.addHeader(theResume.name, theResume.headline, theResume.contactInformation)
         return this
     }
 
     fun makeExperiences(): LatexSoberResumeBuilder {
-        latexSoberResume.startSection("Experience")
-        latexSoberResume.makeExperiences(theResume.jobExperiences)
+        latexSoberSyntaxFactory.startSection("Experience")
+        latexSoberSyntaxFactory.makeExperiences(theResume.jobExperiences)
         return this
     }
 
     fun makeProjectsAndPublications(): LatexSoberResumeBuilder {
-        latexSoberResume.startSection("Projects \\textit{\\&} Publications")
-        latexSoberResume.makeProjectsAndPublications(theResume.projectsAndPublications)
+        latexSoberSyntaxFactory.startSection("Projects \\textit{\\&} Publications")
+        latexSoberSyntaxFactory.makeProjectsAndPublications(theResume.projectsAndPublications)
         return this
     }
 
     fun makeEducation(): LatexSoberResumeBuilder {
-        latexSoberResume.startSection("Education")
-        latexSoberResume.makeEducation(theResume.education)
+        latexSoberSyntaxFactory.startSection("Education")
+        latexSoberSyntaxFactory.makeEducation(theResume.education)
         return this
     }
 
     fun build(): String {
-        return latexSoberResume.toString()
+        return latexSoberSyntaxFactory.toString()
     }
 }
