@@ -1,13 +1,16 @@
 package alysson.cirilo.resume.drivers
 
-import alysson.cirilo.resume.entities.test.databuilders.ResumeBuilder
+import alysson.cirilo.resume.entities.ContactInformation
+import alysson.cirilo.resume.entities.Degree
+import alysson.cirilo.resume.entities.JobExperience
+import alysson.cirilo.resume.entities.ProjectOrPublication
+import alysson.cirilo.resume.entities.test.databuilders.JobExperienceBuilder
 import alysson.cirilo.resume.entities.test.databuilders.aBulletPoint
 import alysson.cirilo.resume.entities.test.databuilders.aCompany
 import alysson.cirilo.resume.entities.test.databuilders.aDegree
 import alysson.cirilo.resume.entities.test.databuilders.aJobExperience
 import alysson.cirilo.resume.entities.test.databuilders.aLinkedInfo
 import alysson.cirilo.resume.entities.test.databuilders.aProject
-import alysson.cirilo.resume.entities.test.databuilders.aResume
 import alysson.cirilo.resume.entities.test.databuilders.aRole
 import alysson.cirilo.resume.entities.test.databuilders.anEmptyBulletPoint
 import alysson.cirilo.resume.entities.test.databuilders.contactInfo
@@ -16,64 +19,12 @@ import alysson.cirilo.resume.entities.test.databuilders.period
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
-
 class LatexSoberResumeTest {
 
     private val latexSoberResume = LatexSoberResume(
         template = "\\begin{document}\n<content>\n\\end{document}",
         contentPlaceholder = "<content>",
     )
-
-    private val role = aRole()
-        .`as`("SWE 1")
-        .between(period().from(10, 2019).to(12, 2019))
-        .with(aBulletPoint().thatReads("worked with kotlin"))
-
-    private val jobExperience = aJobExperience()
-        .on(aCompany("Company 1", "https://www.company.com"))
-        .basedOn("Remote")
-        .with(role)
-
-    private val resume = aResume()
-        .from("First Last")
-        .withHeadline(listOf("Software Engineer", "Android Developer"))
-        .with(
-            contactInfo()
-                .email(
-                    aLinkedInfo()
-                        .displaying("email")
-                        .linkingTo("https://www.email.com")
-                )
-                .linkedin(
-                    aLinkedInfo()
-                        .displaying("linkedin")
-                        .linkingTo("https://www.linkedin.com")
-                )
-                .github(
-                    aLinkedInfo()
-                        .displaying("github")
-                        .linkingTo("https://www.github.com")
-                )
-                .location(
-                    aLinkedInfo()
-                        .displaying("location")
-                        .linkingTo("https://www.gps.com")
-                )
-        )
-        .with(jobExperience)
-        .with(
-            aProject()
-                .named("Project X")
-                .hostedOn("https://www.projectx.com")
-                .description("Project X description")
-        )
-        .with(
-            aDegree()
-                .at(institution("Top institution", "https://www.topinstitution.edu"))
-                .on("Brazil")
-                .during(period().from(2, 2022).upToNow())
-                .tile("BSc. in Computer Science")
-        )
 
     @Test
     fun `no content generates nothing`() {
@@ -89,7 +40,7 @@ class LatexSoberResumeTest {
 
     @Test
     fun `can generate a header`() {
-        latexSoberResume.addHeader(resume)
+        latexSoberResume.addHeader(Dataset.name, Dataset.headline, Dataset.contactInfo)
 
         assertGenerates(
             """
@@ -125,28 +76,14 @@ class LatexSoberResumeTest {
 
     @Test
     fun `no job experiences generates nothing`() {
-        latexSoberResume.makeExperiences(resume.withNoExperience())
+        latexSoberResume.makeExperiences(Dataset.noExperience)
 
         assertGenerates("")
     }
 
     @Test
     fun `can generate job experiences`() {
-        val resume = resume.withNoExperience()
-            .append(jobExperience.with(role.withNoBulletPoints()))
-            .append(
-                aJobExperience()
-                    .on(aCompany("Company 2", "https://www.company.com"))
-                    .basedOn("Remote")
-                    .with(
-                        aRole()
-                            .`as`("SWE 2")
-                            .withNoBulletPoints()
-                            .between(period().from(12, 2019).upToNow())
-                    )
-            )
-
-        latexSoberResume.makeExperiences(resume)
+        latexSoberResume.makeExperiences(Dataset.twoExperiencesWithNoBullets)
 
         assertGenerates(
             """
@@ -171,10 +108,7 @@ class LatexSoberResumeTest {
 
     @Test
     fun `can generate single role`() {
-        val resume = resume
-            .with(jobExperience.with(role.withNoBulletPoints()))
-
-        latexSoberResume.makeExperiences(resume)
+        latexSoberResume.makeExperiences(Dataset.singleRoleExperienceWithNoBullets)
 
         assertGenerates(
             """
@@ -192,23 +126,7 @@ class LatexSoberResumeTest {
 
     @Test
     fun `can generate role with bullets`() {
-        val resume = resume
-            .with(
-                jobExperience
-                    .with(
-                        role.withNoBulletPoints()
-                            .append(aBulletPoint().thatReads("delivered value"))
-                            .append(aBulletPoint().withSkill("android"))
-                            .append(
-                                anEmptyBulletPoint()
-                                    .appendText("delivered value with ")
-                                    .appendSkill("kotlin")
-                                    .appendText(" but at what cost?")
-                            )
-                    )
-            )
-
-        latexSoberResume.makeExperiences(resume)
+        latexSoberResume.makeExperiences(Dataset.singleRoleExperienceWithSkillBullets)
 
         assertGenerates(
             """
@@ -231,18 +149,7 @@ class LatexSoberResumeTest {
 
     @Test
     fun `can generate multiple roles`() {
-        val resume = resume
-            .with(
-                jobExperience
-                    .append(
-                        aRole()
-                            .`as`("SWE 2")
-                            .between(period().from(12, 2019).upToNow())
-                            .with(aBulletPoint().thatReads("been promoted"))
-                    )
-            )
-
-        latexSoberResume.makeExperiences(resume)
+        latexSoberResume.makeExperiences(Dataset.twoRoleExperienceWithBullets)
 
         assertGenerates(
             """
@@ -270,14 +177,14 @@ class LatexSoberResumeTest {
 
     @Test
     fun `no projects and publications generates nothing`() {
-        latexSoberResume.makeProjectsAndPublications(resume.withNoProjectsOrPublications())
+        latexSoberResume.makeProjectsAndPublications(Dataset.noProjectsOrPublications)
 
         assertGenerates("")
     }
 
     @Test
     fun `can generate project and publications`() {
-        latexSoberResume.makeProjectsAndPublications(resume)
+        latexSoberResume.makeProjectsAndPublications(Dataset.singleProject)
 
         assertGenerates(
             """
@@ -293,15 +200,14 @@ class LatexSoberResumeTest {
 
     @Test
     fun `no education generates nothing`() {
-        latexSoberResume.makeEducation(resume.withNoEducation())
+        latexSoberResume.makeEducation(Dataset.noEducation)
 
         assertGenerates("")
     }
 
-
     @Test
     fun `can generate education`() {
-        latexSoberResume.makeEducation(resume)
+        latexSoberResume.makeEducation(Dataset.singleDegree)
 
         assertGenerates(
             """
@@ -320,13 +226,13 @@ class LatexSoberResumeTest {
     @Test
     fun integration() {
         with(latexSoberResume) {
-            addHeader(resume)
+            addHeader(Dataset.name, Dataset.headline, Dataset.contactInfo)
             startSection("Section 1")
-            makeExperiences(resume)
+            makeExperiences(Dataset.singleRoleExperienceWithTextBullets)
             startSection("Section 2")
-            makeProjectsAndPublications(resume)
+            makeProjectsAndPublications(Dataset.singleProject)
             startSection("Section 3")
-            makeEducation(resume)
+            makeEducation(Dataset.singleDegree)
         }
 
         assertGenerates(
@@ -407,24 +313,118 @@ class LatexSoberResumeTest {
                 "\n"
     }
 
-    private fun LatexSoberResume.addHeader(resumeBuilder: ResumeBuilder) {
-        val theResume = resumeBuilder.build()
-        this.addHeader(
-            name = theResume.name,
-            headline = theResume.headline,
-            contactInformation = theResume.contactInformation,
-        )
-    }
+    companion object {
 
-    private fun LatexSoberResume.makeExperiences(resumeBuilder: ResumeBuilder) {
-        this.makeExperiences(resumeBuilder.build().jobExperiences)
-    }
+        object Dataset {
+            const val name: String = "First Last"
 
-    private fun LatexSoberResume.makeProjectsAndPublications(resume: ResumeBuilder) {
-        this.makeProjectsAndPublications(resume.build().projectsAndPublications)
-    }
+            val headline: List<String> = listOf("Software Engineer", "Android Developer")
 
-    private fun LatexSoberResume.makeEducation(resume: ResumeBuilder) {
-        this.makeEducation(resume.build().education)
+            val contactInfo: ContactInformation = contactInfo()
+                .email(
+                    aLinkedInfo()
+                        .displaying("email")
+                        .linkingTo("https://www.email.com")
+                )
+                .linkedin(
+                    aLinkedInfo()
+                        .displaying("linkedin")
+                        .linkingTo("https://www.linkedin.com")
+                )
+                .github(
+                    aLinkedInfo()
+                        .displaying("github")
+                        .linkingTo("https://www.github.com")
+                )
+                .location(
+                    aLinkedInfo()
+                        .displaying("location")
+                        .linkingTo("https://www.gps.com")
+                )
+                .build()
+
+            val noExperience: List<JobExperience> = emptyList()
+
+            val twoExperiencesWithNoBullets: List<JobExperience> = buildList {
+                add(Builders.jobExperienceBuilder.with(Builders.role.withNoBulletPoints()))
+                add(
+                    aJobExperience()
+                        .on(aCompany("Company 2", "https://www.company.com"))
+                        .basedOn("Remote")
+                        .with(
+                            aRole()
+                                .`as`("SWE 2")
+                                .withNoBulletPoints()
+                                .between(period().from(12, 2019).upToNow())
+                        )
+                )
+            }.map(JobExperienceBuilder::build)
+
+            val singleRoleExperienceWithNoBullets: List<JobExperience> = listOf(
+                Builders.jobExperienceBuilder.with(Builders.role.withNoBulletPoints()).build()
+            )
+
+            val singleRoleExperienceWithSkillBullets: List<JobExperience> = listOf(
+                Builders.jobExperienceBuilder
+                    .with(
+                        Builders.role.withNoBulletPoints()
+                            .append(aBulletPoint().thatReads("delivered value"))
+                            .append(aBulletPoint().withSkill("android"))
+                            .append(
+                                anEmptyBulletPoint()
+                                    .appendText("delivered value with ")
+                                    .appendSkill("kotlin")
+                                    .appendText(" but at what cost?")
+                            )
+                    )
+                    .build()
+            )
+
+            val twoRoleExperienceWithBullets: List<JobExperience> = listOf(
+                Builders.jobExperienceBuilder
+                    .append(
+                        aRole()
+                            .`as`("SWE 2")
+                            .between(period().from(12, 2019).upToNow())
+                            .with(aBulletPoint().thatReads("been promoted"))
+                    )
+                    .build()
+            )
+
+            val singleRoleExperienceWithTextBullets = listOf(Builders.jobExperienceBuilder.build())
+
+            val noProjectsOrPublications: List<ProjectOrPublication> = emptyList()
+
+            val singleProject: List<ProjectOrPublication> = listOf(
+                aProject()
+                    .named("Project X")
+                    .hostedOn("https://www.projectx.com")
+                    .description("Project X description")
+                    .build()
+            )
+
+            val noEducation: List<Degree> = emptyList()
+
+            val singleDegree: List<Degree> = listOf(
+                aDegree()
+                    .at(institution("Top institution", "https://www.topinstitution.edu"))
+                    .on("Brazil")
+                    .during(period().from(2, 2022).upToNow())
+                    .tile("BSc. in Computer Science")
+                    .build()
+            )
+        }
+
+        private object Builders {
+            val role = aRole()
+                .`as`("SWE 1")
+                .between(period().from(10, 2019).to(12, 2019))
+                .with(aBulletPoint().thatReads("worked with kotlin"))
+
+            val jobExperienceBuilder = aJobExperience()
+                .on(aCompany("Company 1", "https://www.company.com"))
+                .basedOn("Remote")
+                .with(role)
+        }
     }
 }
