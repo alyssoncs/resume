@@ -29,8 +29,8 @@ class LatexAwesomeSyntaxFactory(
         val contactInformation: ContactInformation,
     )
 
-    private fun updateOutput(newContent: String, addNl: Boolean = false) {
-        output += if (output.isNotEmpty() && addNl) {
+    private fun updateOutput(newContent: String) {
+        output += if (output.isNotEmpty()) {
             "\n" + newContent
         } else {
             newContent
@@ -56,19 +56,15 @@ class LatexAwesomeSyntaxFactory(
             sectionIndent = currentIndent
         }
         sectionIndent?.let { theSectionIndent ->
-            updateOutput(
-                        """
-                        \cvsection{$name}
-                        """.reindent(theSectionIndent) + "\n",
-                true
-            )
+            val separator = if (output.isEmpty()) "" else "\n"
+            updateOutput(separator + "\\cvsection{$name}".reindent(theSectionIndent))
             currentIndent = theSectionIndent.inc()
         }
     }
 
     override fun makeExperiences(jobExperiences: List<JobExperience>) {
         makeJobExperiences(jobExperiences)?.let {
-            updateOutput(it.reindent(currentIndent) + "\n")
+            updateOutput(it.reindent(currentIndent))
         }
     }
 
@@ -93,7 +89,7 @@ class LatexAwesomeSyntaxFactory(
                 """.trimIndent()
 
         updateOutput(
-            projectsAndPublicationsStr.reindent(currentIndent) + "\n"
+            projectsAndPublicationsStr.reindent(currentIndent)
         )
     }
 
@@ -119,12 +115,12 @@ class LatexAwesomeSyntaxFactory(
     private fun awesomeHeader(): String {
         return header?.let { safeHeader ->
             return """
-            \name{${safeHeader.firstName.orEmpty()}}{${safeHeader.lastName.orEmpty()}}
+            \name{${safeHeader.firstName}}{${safeHeader.lastName}}
             \position{${safeHeader.headline.joinToString("{\\enskip\\starredbullet\\enskip}")}}
-            \address{${safeHeader.contactInformation?.location?.displayName.orEmpty()}}
-            \email{${safeHeader.contactInformation?.email?.displayName.orEmpty()}}
-            \github{${safeHeader.contactInformation?.github?.displayName.orEmpty()}}
-            \linkedin{${safeHeader.contactInformation?.linkedin?.displayName.orEmpty()}}
+            \address{${safeHeader.contactInformation.location.displayName}}
+            \email{${safeHeader.contactInformation.email.displayName}}
+            \github{${safeHeader.contactInformation.github.displayName}}
+            \linkedin{${safeHeader.contactInformation.linkedin.displayName}}
         """.trimIndent()
         } ?: ""
     }
@@ -133,11 +129,13 @@ class LatexAwesomeSyntaxFactory(
         return if (jobExperiences.isEmpty()) null
         else "\\begin{cventries}" + "\n" +
                 jobExperiences.joinToString("\n\n") { makeJobExperience(it) }.reindent(1) +
-                "\n\\end{cventries}\n"
+                "\n\\end{cventries}"
     }
 
     private fun makeJobExperience(jobExperience: JobExperience): String {
-        return "${makeFirstRole(jobExperience)}${makeOtherRoles(jobExperience)}"
+        if (jobExperience.roles.size > 1)
+            return "${makeFirstRole(jobExperience)}\n\n${makeOtherRoles(jobExperience)}"
+        return makeFirstRole(jobExperience)
     }
 
     private fun makeFirstRole(jobExperience: JobExperience): String {
@@ -165,7 +163,7 @@ class LatexAwesomeSyntaxFactory(
         return if (jobExperience.roles.size == 1) {
             ""
         } else {
-            jobExperience.roles.drop(1).joinToString("\n\n", prefix = "\n\n") { role ->
+            jobExperience.roles.drop(1).joinToString("\n\n") { role ->
                 """
                 \cventry
                     {${role.title}}
