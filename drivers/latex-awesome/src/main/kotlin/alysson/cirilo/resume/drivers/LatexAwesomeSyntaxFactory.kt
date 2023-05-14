@@ -8,6 +8,7 @@ import alysson.cirilo.resume.entities.Degree
 import alysson.cirilo.resume.entities.EnrollmentPeriod
 import alysson.cirilo.resume.entities.JobExperience
 import alysson.cirilo.resume.entities.ProjectOrPublication
+import alysson.cirilo.resume.entities.Role
 import java.time.format.DateTimeFormatter
 import java.util.Locale
 
@@ -133,56 +134,44 @@ class LatexAwesomeSyntaxFactory(
     }
 
     private fun makeJobExperience(jobExperience: JobExperience): String {
-        if (jobExperience.roles.size > 1)
-            return "${makeFirstRole(jobExperience)}\n\n${makeOtherRoles(jobExperience)}"
-        return makeFirstRole(jobExperience)
+        return listOfNotNull(
+            makeFirstRole(jobExperience),
+            makeOtherRoles(jobExperience),
+        ).joinToString("\n\n")
     }
 
     private fun makeFirstRole(jobExperience: JobExperience): String {
+        return makeARole(jobExperience, jobExperience.roles.first(), true)
+    }
+
+    private fun makeOtherRoles(jobExperience: JobExperience): String? {
+        return if (jobExperience.roles.size == 1) {
+            null
+        } else {
+            jobExperience.roles.drop(1).joinToString("\n\n") { role ->
+                makeARole(jobExperience, role, false)
+            }
+        }
+    }
+
+    private fun makeARole(jobExperience: JobExperience, role: Role, isFirstRole: Boolean): String {
         return """
-                \cventry
-                    {${jobExperience.roles.first().title}}
-                    {${jobExperience.company.displayName}}
-                    {${jobExperience.location}}
-                    {${makeWorkPeriod(jobExperience.roles.first().period)}}
-                """.trimIndent() +
+            \cventry
+                {${role.title}}
+                ${if (isFirstRole) "{${jobExperience.company.displayName}}" else "{}"}
+                ${if (isFirstRole) "{${jobExperience.location}}" else "{}"}
+                {${makeWorkPeriod(role.period)}}
+        """.trimIndent() +
                 "\n" +
-                if (jobExperience.roles.first().bulletPoints.isEmpty()) {
+                if (role.bulletPoints.isEmpty()) {
                     "{}".reindent(1)
                 } else {
                     "{".reindent(1) +
                             "\n" +
-                            makeBulletPoints(jobExperience.roles.first().bulletPoints).reindent(2) +
+                            makeBulletPoints(role.bulletPoints).reindent(2) +
                             "\n" +
                             "}".reindent(1)
                 }
-
-    }
-
-    private fun makeOtherRoles(jobExperience: JobExperience): String {
-        return if (jobExperience.roles.size == 1) {
-            ""
-        } else {
-            jobExperience.roles.drop(1).joinToString("\n\n") { role ->
-                """
-                \cventry
-                    {${role.title}}
-                    {}
-                    {}
-                    {${makeWorkPeriod(role.period)}}
-                """.trimIndent() +
-                        "\n" +
-                        if (role.bulletPoints.isEmpty()) {
-                            "{}".reindent(1)
-                        } else {
-                            "{".reindent(1) +
-                                    "\n" +
-                                    makeBulletPoints(role.bulletPoints).reindent(2) +
-                                    "\n" +
-                                    "}".reindent(1)
-                        }
-            }
-        }
     }
 
     private fun makeWorkPeriod(enrollmentPeriod: EnrollmentPeriod): String {
