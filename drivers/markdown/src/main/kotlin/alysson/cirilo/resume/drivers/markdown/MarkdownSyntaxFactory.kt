@@ -12,7 +12,10 @@ import alysson.cirilo.resume.entities.Role
 import java.time.format.DateTimeFormatter
 import java.util.Locale
 
-class MarkdownSyntaxFactory : ResumeSyntaxFactory {
+class MarkdownSyntaxFactory(
+    private val workDateFormatter: DateTimeFormatter,
+    private val educationDateFormatter: DateTimeFormatter,
+) : ResumeSyntaxFactory {
 
     private var output = ""
 
@@ -96,10 +99,10 @@ class MarkdownSyntaxFactory : ResumeSyntaxFactory {
     }
 
     private fun makeWorkPeriod(enrollmentPeriod: EnrollmentPeriod): String {
-        val formatter = DateTimeFormatter.ofPattern("MMM. yyyy").withLocale(Locale.US)
+        DateTimeFormatter.ofPattern("MMM. yyyy").withLocale(Locale.US)
 
-        return "${formatter.format(enrollmentPeriod.start)} – ${
-            makeEndDate(formatter, enrollmentPeriod.end)
+        return "${workDateFormatter.format(enrollmentPeriod.start)} – ${
+            makeEndDate(workDateFormatter, enrollmentPeriod.end)
         }"
     }
 
@@ -149,11 +152,9 @@ class MarkdownSyntaxFactory : ResumeSyntaxFactory {
     }
 
     private fun makeEduPeriod(enrollmentPeriod: EnrollmentPeriod): String {
-        val formatter = DateTimeFormatter.ofPattern("yyyy").withLocale(Locale.US)
-
-        return "${formatter.format(enrollmentPeriod.start)} – ${
+        return "${educationDateFormatter.format(enrollmentPeriod.start)} – ${
             makeEndDate(
-                formatter,
+                educationDateFormatter,
                 enrollmentPeriod.end
             )
         }"

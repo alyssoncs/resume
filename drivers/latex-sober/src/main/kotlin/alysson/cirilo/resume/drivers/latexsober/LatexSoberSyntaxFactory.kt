@@ -10,11 +10,12 @@ import alysson.cirilo.resume.entities.JobExperience
 import alysson.cirilo.resume.entities.ProjectOrPublication
 import alysson.cirilo.resume.entities.Role
 import java.time.format.DateTimeFormatter
-import java.util.Locale
 
 class LatexSoberSyntaxFactory(
     private val template: String,
     private val contentPlaceholder: String,
+    private val workDateFormatter: DateTimeFormatter,
+    private val educationDateFormatter: DateTimeFormatter,
 ) : ResumeSyntaxFactory {
 
     private var output = ""
@@ -147,11 +148,9 @@ class LatexSoberSyntaxFactory(
     }
 
     private fun makeWorkPeriod(enrollmentPeriod: EnrollmentPeriod): String {
-        val formatter = DateTimeFormatter.ofPattern("MMM. yyyy").withLocale(Locale.US)
-
-        return "${formatter.format(enrollmentPeriod.start)} -- ${
+        return "${workDateFormatter.format(enrollmentPeriod.start)} -- ${
             makeEndDate(
-                formatter,
+                workDateFormatter,
                 enrollmentPeriod.end
             )
         }"
@@ -208,11 +207,9 @@ class LatexSoberSyntaxFactory(
     }
 
     private fun makeEduPeriod(enrollmentPeriod: EnrollmentPeriod): String {
-        val formatter = DateTimeFormatter.ofPattern("yyyy").withLocale(Locale.US)
-
-        return "${formatter.format(enrollmentPeriod.start)} -- ${
+        return "${educationDateFormatter.format(enrollmentPeriod.start)} -- ${
             makeEndDate(
-                formatter,
+                educationDateFormatter,
                 enrollmentPeriod.end
             )
         }"

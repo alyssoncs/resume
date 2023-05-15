@@ -7,10 +7,14 @@ import alysson.cirilo.resume.entities.Degree
 import alysson.cirilo.resume.entities.JobExperience
 import alysson.cirilo.resume.entities.LinkedInformation
 import alysson.cirilo.resume.entities.ProjectOrPublication
+import java.time.format.DateTimeFormatter
 
 class MarkdownSyntaxFactoryTest : ResumeSyntaxFactoryTest() {
-    override fun createSyntaxFactory(): ResumeSyntaxFactory {
-        return MarkdownSyntaxFactory()
+    override fun createSyntaxFactory(
+        workDateFormatter: DateTimeFormatter,
+        educationDateFormatter: DateTimeFormatter,
+    ): ResumeSyntaxFactory {
+        return MarkdownSyntaxFactory(workDateFormatter, educationDateFormatter)
     }
 
     override fun generateEmptyOutput(): String {
@@ -43,21 +47,24 @@ class MarkdownSyntaxFactoryTest : ResumeSyntaxFactoryTest() {
     override fun generateTwoExperiencesWithNoBullets(
         firstExperience: JobExperience,
         firstExperienceRole: String,
+        firstExperienceRoleStartDate: String,
+        firstExperienceRoleEndDate: String,
         secondExperience: JobExperience,
         secondExperienceRole: String,
+        secondExperienceRoleStartDate: String
     ): String {
         return """
             ### [${firstExperience.company.displayName}](${firstExperience.company.url})
             - ${firstExperience.location}
             
             #### $firstExperienceRole
-            > Oct. 2019 – Dec. 2019
+            > $firstExperienceRoleStartDate – $firstExperienceRoleEndDate
             
             ### [${secondExperience.company.displayName}](${secondExperience.company.url})
             - ${secondExperience.location}
             
             #### $secondExperienceRole
-            > Dec. 2019 – Present
+            > $secondExperienceRoleStartDate – Present
             
         """.trimIndent()
     }
@@ -65,13 +72,15 @@ class MarkdownSyntaxFactoryTest : ResumeSyntaxFactoryTest() {
     override fun generateSingleRoleExperienceWithNoBullets(
         experience: JobExperience,
         role: String,
+        roleStartDate: String,
+        roleEndDate: String
     ): String {
         return """
             ### [${experience.company.displayName}](${experience.company.url})
             - ${experience.location}
             
             #### $role
-            > Oct. 2019 – Dec. 2019
+            > $roleStartDate – $roleEndDate
             
         """.trimIndent()
     }
@@ -79,18 +88,20 @@ class MarkdownSyntaxFactoryTest : ResumeSyntaxFactoryTest() {
     override fun generateSingleRoleExperienceWithSkillBullets(
         experience: JobExperience,
         role: String,
+        roleStartDate: String,
+        roleEndDate: String,
         firstBullet: String,
         secondBullet: String,
         thirdBulletFirstPart: String,
         thirdBulletSecondPart: String,
-        thirdBulletThirdPart: String,
+        thirdBulletThirdPart: String
     ): String {
         return """
             ### [${experience.company.displayName}](${experience.company.url})
             - ${experience.location}
             
             #### $role
-            > Oct. 2019 – Dec. 2019
+            > $roleStartDate – $roleEndDate
             - $firstBullet
             - **$secondBullet**
             - $thirdBulletFirstPart**$thirdBulletSecondPart**$thirdBulletThirdPart
@@ -102,20 +113,23 @@ class MarkdownSyntaxFactoryTest : ResumeSyntaxFactoryTest() {
         company: LinkedInformation,
         location: String,
         firstRole: String,
+        firstExperienceRoleStartDate: String,
+        firstExperienceRoleEndDate: String,
         firstRoleBullet: String,
         secondRole: String,
-        secondRoleBullet: String,
+        secondRoleStartDate: String,
+        secondRoleBullet: String
     ): String {
         return """
             ### [${company.displayName}](${company.url})
             - $location
             
             #### $firstRole
-            > Oct. 2019 – Dec. 2019
+            > $firstExperienceRoleStartDate – $firstExperienceRoleEndDate
             - $firstRoleBullet
             
             #### $secondRole
-            > Dec. 2019 – Present
+            > $secondRoleStartDate – Present
             - $secondRoleBullet
             
         """.trimIndent()
@@ -128,9 +142,9 @@ class MarkdownSyntaxFactoryTest : ResumeSyntaxFactoryTest() {
         """.trimIndent()
     }
 
-    override fun generateSingleDegree(degree: Degree): String {
+    override fun generateSingleDegree(degree: Degree, startDate: String): String {
         return """
-            - **[${degree.institution.displayName}](${degree.institution.url})**: ${degree.degree} (${degree.location} 2022 – Present)
+            - **[${degree.institution.displayName}](${degree.institution.url})**: ${degree.degree} (${degree.location} $startDate – Present)
             
         """.trimIndent()
     }
@@ -143,11 +157,14 @@ class MarkdownSyntaxFactoryTest : ResumeSyntaxFactoryTest() {
         firstSectionName: String,
         experience: JobExperience,
         role: String,
+        roleStartDate: String,
+        roleEndDate: String,
         bullet: String,
         secondSectionName: String,
         project: ProjectOrPublication,
         thirdSectionName: String,
         degree: Degree,
+        degreeStartDate: String
     ): String {
         return """
             # $name
@@ -164,14 +181,14 @@ class MarkdownSyntaxFactoryTest : ResumeSyntaxFactoryTest() {
             - ${experience.location}
             
             #### $role
-            > Oct. 2019 – Dec. 2019
+            > $roleStartDate – $roleEndDate
             - $bullet
             
             ## $secondSectionName
             - **[${project.title.displayName}](${project.title.url})**: ${project.description}
             
             ## $thirdSectionName
-            - **[${degree.institution.displayName}](${degree.institution.url})**: ${degree.degree} (${degree.location} 2022 – Present)
+            - **[${degree.institution.displayName}](${degree.institution.url})**: ${degree.degree} (${degree.location} $degreeStartDate – Present)
             
         """.trimIndent()
     }

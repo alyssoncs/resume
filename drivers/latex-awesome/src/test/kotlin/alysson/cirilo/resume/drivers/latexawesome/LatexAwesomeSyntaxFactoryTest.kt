@@ -7,6 +7,7 @@ import alysson.cirilo.resume.entities.Degree
 import alysson.cirilo.resume.entities.JobExperience
 import alysson.cirilo.resume.entities.LinkedInformation
 import alysson.cirilo.resume.entities.ProjectOrPublication
+import java.time.format.DateTimeFormatter
 
 class LatexAwesomeSyntaxFactoryTest : ResumeSyntaxFactoryTest() {
     private val template = """
@@ -16,11 +17,16 @@ class LatexAwesomeSyntaxFactoryTest : ResumeSyntaxFactoryTest() {
         \end{document}
     """.trimIndent()
 
-    override fun createSyntaxFactory(): ResumeSyntaxFactory {
+    override fun createSyntaxFactory(
+        workDateFormatter: DateTimeFormatter,
+        educationDateFormatter: DateTimeFormatter,
+    ): ResumeSyntaxFactory {
         return LatexAwesomeSyntaxFactory(
             template = template,
             headerPlaceholder = "<header>",
-            contentPlaceholder = "<content>"
+            contentPlaceholder = "<content>",
+            workDateFormatter = workDateFormatter,
+            educationDateFormatter = educationDateFormatter,
         )
     }
 
@@ -53,8 +59,11 @@ class LatexAwesomeSyntaxFactoryTest : ResumeSyntaxFactoryTest() {
     override fun generateTwoExperiencesWithNoBullets(
         firstExperience: JobExperience,
         firstExperienceRole: String,
+        firstExperienceRoleStartDate: String,
+        firstExperienceRoleEndDate: String,
         secondExperience: JobExperience,
         secondExperienceRole: String,
+        secondExperienceRoleStartDate: String,
     ): String {
         return wrapAroundDocument(
             header = "",
@@ -64,14 +73,14 @@ class LatexAwesomeSyntaxFactoryTest : ResumeSyntaxFactoryTest() {
                         {$firstExperienceRole}
                         {${firstExperience.company.displayName}}
                         {${firstExperience.location}}
-                        {Oct. 2019 -- Dec. 2019}
+                        {$firstExperienceRoleStartDate -- $firstExperienceRoleEndDate}
                         {}
                     
                     \cventry
                         {$secondExperienceRole}
                         {${secondExperience.company.displayName}}
                         {${secondExperience.location}}
-                        {Dec. 2019 -- Present}
+                        {$secondExperienceRoleStartDate -- Present}
                         {}
                 \end{cventries}
             """.trimIndent(),
@@ -81,6 +90,8 @@ class LatexAwesomeSyntaxFactoryTest : ResumeSyntaxFactoryTest() {
     override fun generateSingleRoleExperienceWithNoBullets(
         experience: JobExperience,
         role: String,
+        roleStartDate: String,
+        roleEndDate: String,
     ): String = wrapAroundDocument(
         header = "",
         content = """
@@ -89,7 +100,7 @@ class LatexAwesomeSyntaxFactoryTest : ResumeSyntaxFactoryTest() {
                     {$role}
                     {${experience.company.displayName}}
                     {${experience.location}}
-                    {Oct. 2019 -- Dec. 2019}
+                    {$roleStartDate -- $roleEndDate}
                     {}
             \end{cventries}
         """.trimIndent(),
@@ -98,6 +109,8 @@ class LatexAwesomeSyntaxFactoryTest : ResumeSyntaxFactoryTest() {
     override fun generateSingleRoleExperienceWithSkillBullets(
         experience: JobExperience,
         role: String,
+        roleStartDate: String,
+        roleEndDate: String,
         firstBullet: String,
         secondBullet: String,
         thirdBulletFirstPart: String,
@@ -111,7 +124,7 @@ class LatexAwesomeSyntaxFactoryTest : ResumeSyntaxFactoryTest() {
                     {$role}
                     {${experience.company.displayName}}
                     {${experience.location}}
-                    {Oct. 2019 -- Dec. 2019}
+                    {$roleStartDate -- $roleEndDate}
                     {
                         \begin{cvitems}
                             \item $firstBullet
@@ -127,8 +140,11 @@ class LatexAwesomeSyntaxFactoryTest : ResumeSyntaxFactoryTest() {
         company: LinkedInformation,
         location: String,
         firstRole: String,
+        firstExperienceRoleStartDate: String,
+        firstExperienceRoleEndDate: String,
         firstRoleBullet: String,
         secondRole: String,
+        secondRoleStartDate: String,
         secondRoleBullet: String,
     ): String = wrapAroundDocument(
         header = "",
@@ -138,7 +154,7 @@ class LatexAwesomeSyntaxFactoryTest : ResumeSyntaxFactoryTest() {
                     {$firstRole}
                     {${company.displayName}}
                     {${location}}
-                    {Oct. 2019 -- Dec. 2019}
+                    {$firstExperienceRoleStartDate -- $firstExperienceRoleEndDate}
                     {
                         \begin{cvitems}
                             \item $firstRoleBullet
@@ -149,7 +165,7 @@ class LatexAwesomeSyntaxFactoryTest : ResumeSyntaxFactoryTest() {
                     {$secondRole}
                     {}
                     {}
-                    {Dec. 2019 -- Present}
+                    {$secondRoleStartDate -- Present}
                     {
                         \begin{cvitems}
                             \item $secondRoleBullet
@@ -178,7 +194,7 @@ class LatexAwesomeSyntaxFactoryTest : ResumeSyntaxFactoryTest() {
         """.trimIndent(),
     )
 
-    override fun generateSingleDegree(degree: Degree): String = wrapAroundDocument(
+    override fun generateSingleDegree(degree: Degree, startDate: String): String = wrapAroundDocument(
         header = "",
         content = """
             \begin{cventries}
@@ -186,7 +202,7 @@ class LatexAwesomeSyntaxFactoryTest : ResumeSyntaxFactoryTest() {
                     {${degree.degree}}
                     {${degree.institution.displayName}}
                     {${degree.location}}
-                    {2022 -- Present}
+                    {$startDate -- Present}
                     {}
             \end{cventries}
         """.trimIndent(),
@@ -200,11 +216,14 @@ class LatexAwesomeSyntaxFactoryTest : ResumeSyntaxFactoryTest() {
         firstSectionName: String,
         experience: JobExperience,
         role: String,
+        roleStartDate: String,
+        roleEndDate: String,
         bullet: String,
         secondSectionName: String,
         project: ProjectOrPublication,
         thirdSectionName: String,
         degree: Degree,
+        degreeStartDate: String
     ): String = wrapAroundDocument(
         header = """
             \name{${name.substringBefore(' ')}}{${name.substringAfter(' ')}}
@@ -223,7 +242,7 @@ class LatexAwesomeSyntaxFactoryTest : ResumeSyntaxFactoryTest() {
                         {$role}
                         {${experience.company.displayName}}
                         {${experience.location}}
-                        {Oct. 2019 -- Dec. 2019}
+                        {$roleStartDate -- $roleEndDate}
                         {
                             \begin{cvitems}
                                 \item $bullet
@@ -252,7 +271,7 @@ class LatexAwesomeSyntaxFactoryTest : ResumeSyntaxFactoryTest() {
                         {${degree.degree}}
                         {${degree.institution.displayName}}
                         {${degree.location}}
-                        {2022 -- Present}
+                        {$degreeStartDate -- Present}
                         {}
                 \end{cventries}
         """.trimIndent()

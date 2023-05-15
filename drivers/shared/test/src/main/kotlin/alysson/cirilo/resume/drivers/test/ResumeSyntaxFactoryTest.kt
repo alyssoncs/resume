@@ -3,6 +3,7 @@ package alysson.cirilo.resume.drivers.test
 import alysson.cirilo.resume.drivers.utils.syntaxfactory.ResumeSyntaxFactory
 import alysson.cirilo.resume.entities.ContactInformation
 import alysson.cirilo.resume.entities.Degree
+import alysson.cirilo.resume.entities.EnrollmentPeriod
 import alysson.cirilo.resume.entities.JobExperience
 import alysson.cirilo.resume.entities.LinkedInformation
 import alysson.cirilo.resume.entities.ProjectOrPublication
@@ -21,44 +22,64 @@ import alysson.cirilo.resume.entities.test.databuilders.period
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
+import java.util.Locale
 
 abstract class ResumeSyntaxFactoryTest {
 
     lateinit var syntaxFactory: ResumeSyntaxFactory
-    
+
+    private val locale = Locale.US
+    private val workDateFormatter = DateTimeFormatter.ofPattern("MMM. yyyy").withLocale(locale)
+    private val educationDateFormatter = DateTimeFormatter.ofPattern("MM. yyyy").withLocale(locale)
+
     @BeforeEach
     fun setup() {
-        syntaxFactory = createSyntaxFactory()
+        syntaxFactory = createSyntaxFactory(
+            workDateFormatter,
+            educationDateFormatter,
+        )
     }
 
-    abstract fun createSyntaxFactory(): ResumeSyntaxFactory
-    
+    abstract fun createSyntaxFactory(
+        workDateFormatter: DateTimeFormatter,
+        educationDateFormatter: DateTimeFormatter,
+    ): ResumeSyntaxFactory
+
     abstract fun generateEmptyOutput(): String
-    
+
     abstract fun generateSection(sectionName: String): String
-    
+
     abstract fun generateHeader(
         name: String,
         firstHeadlineElement: String,
         secondHeadlineElement: String,
         contactInfo: ContactInformation,
     ): String
-    
+
     abstract fun generateTwoExperiencesWithNoBullets(
         firstExperience: JobExperience,
         firstExperienceRole: String,
+        firstExperienceRoleStartDate: String,
+        firstExperienceRoleEndDate: String,
         secondExperience: JobExperience,
         secondExperienceRole: String,
+        secondExperienceRoleStartDate: String,
     ): String
 
     abstract fun generateSingleRoleExperienceWithNoBullets(
         experience: JobExperience,
         role: String,
+        roleStartDate: String,
+        roleEndDate: String,
     ): String
 
     abstract fun generateSingleRoleExperienceWithSkillBullets(
         experience: JobExperience,
         role: String,
+        roleStartDate: String,
+        roleEndDate: String,
         firstBullet: String,
         secondBullet: String,
         thirdBulletFirstPart: String,
@@ -70,14 +91,17 @@ abstract class ResumeSyntaxFactoryTest {
         company: LinkedInformation,
         location: String,
         firstRole: String,
+        firstExperienceRoleStartDate: String,
+        firstExperienceRoleEndDate: String,
         firstRoleBullet: String,
         secondRole: String,
+        secondRoleStartDate: String,
         secondRoleBullet: String,
     ): String
 
     abstract fun generateSingleProject(project: ProjectOrPublication): String
 
-    abstract fun generateSingleDegree(degree: Degree): String
+    abstract fun generateSingleDegree(degree: Degree, startDate: String): String
 
     abstract fun generateIntegration(
         name: String,
@@ -87,11 +111,14 @@ abstract class ResumeSyntaxFactoryTest {
         firstSectionName: String,
         experience: JobExperience,
         role: String,
+        roleStartDate: String,
+        roleEndDate: String,
         bullet: String,
         secondSectionName: String,
         project: ProjectOrPublication,
         thirdSectionName: String,
         degree: Degree,
+        degreeStartDate: String,
     ): String
 
     @Test
@@ -130,11 +157,16 @@ abstract class ResumeSyntaxFactoryTest {
     fun `can generate job experiences`() {
         syntaxFactory.makeExperiences(Dataset.twoExperiencesWithNoBullets)
 
+        val firstExperienceRole = Dataset.twoExperiencesWithNoBullets.first().roles.first()
+        val secondExperienceRole = Dataset.twoExperiencesWithNoBullets.last().roles.first()
         val output = generateTwoExperiencesWithNoBullets(
             firstExperience = Dataset.twoExperiencesWithNoBullets.first(),
-            firstExperienceRole = Dataset.twoExperiencesWithNoBullets.first().roles.first().title,
+            firstExperienceRole = firstExperienceRole.title,
+            firstExperienceRoleStartDate = workDateFormatter.format(firstExperienceRole.period.start),
+            firstExperienceRoleEndDate = workDateFormatter.format(firstExperienceRole.period.end.toDate()),
             secondExperience = Dataset.twoExperiencesWithNoBullets.last(),
-            secondExperienceRole = Dataset.twoExperiencesWithNoBullets.last().roles.first().title,
+            secondExperienceRole = secondExperienceRole.title,
+            secondExperienceRoleStartDate = workDateFormatter.format(secondExperienceRole.period.start),
         )
         assertEquals(output, syntaxFactory.create())
     }
@@ -143,9 +175,12 @@ abstract class ResumeSyntaxFactoryTest {
     fun `can generate single role`() {
         syntaxFactory.makeExperiences(Dataset.singleRoleExperienceWithNoBullets)
 
+        val role = Dataset.singleRoleExperienceWithNoBullets.first().roles.first()
         val output = generateSingleRoleExperienceWithNoBullets(
             experience = Dataset.singleRoleExperienceWithNoBullets.first(),
-            role = Dataset.singleRoleExperienceWithNoBullets.first().roles.first().title,
+            role = role.title,
+            roleStartDate = workDateFormatter.format(role.period.start),
+            roleEndDate = workDateFormatter.format(role.period.end.toDate()),
         )
         assertEquals(output, syntaxFactory.create())
     }
@@ -159,6 +194,8 @@ abstract class ResumeSyntaxFactoryTest {
         val output = generateSingleRoleExperienceWithSkillBullets(
             experience = experience,
             role = role.title,
+            roleStartDate = workDateFormatter.format(role.period.start),
+            roleEndDate = workDateFormatter.format(role.period.end.toDate()),
             firstBullet = role.bulletPoints[0].content[0].displayName,
             secondBullet = role.bulletPoints[1].content[0].displayName,
             thirdBulletFirstPart = role.bulletPoints[2].content[0].displayName,
@@ -180,8 +217,11 @@ abstract class ResumeSyntaxFactoryTest {
             company = experience.company,
             location = experience.location,
             firstRole = firstRole.title,
+            firstExperienceRoleStartDate = workDateFormatter.format(firstRole.period.start),
+            firstExperienceRoleEndDate = workDateFormatter.format(firstRole.period.end.toDate()),
             firstRoleBullet = firstRole.bulletPoints.first().content.first().displayName,
             secondRole = secondRole.title,
+            secondRoleStartDate = workDateFormatter.format(secondRole.period.start),
             secondRoleBullet = secondRole.bulletPoints.first().content.first().displayName,
         )
         assertEquals(output, syntaxFactory.create())
@@ -213,8 +253,12 @@ abstract class ResumeSyntaxFactoryTest {
     fun `can generate education`() {
         syntaxFactory.makeEducation(Dataset.singleDegree)
 
+        val degree = Dataset.singleDegree.first()
         assertEquals(
-            generateSingleDegree(Dataset.singleDegree.first()),
+            generateSingleDegree(
+                degree,
+                educationDateFormatter.format(degree.period.start),
+            ),
             syntaxFactory.create()
         )
     }
@@ -241,13 +285,20 @@ abstract class ResumeSyntaxFactoryTest {
             firstSectionName = "Section 1",
             experience = experience,
             role = role.title,
+            roleStartDate = workDateFormatter.format(role.period.start),
+            roleEndDate = workDateFormatter.format(role.period.end.toDate()),
             bullet = role.bulletPoints.first().content.first().displayName,
             secondSectionName = "Section 2",
             project = Dataset.singleProject.first(),
             thirdSectionName = "Section 3",
             degree = Dataset.singleDegree.first(),
+            degreeStartDate = educationDateFormatter.format(Dataset.singleDegree.first().period.start),
         )
         assertEquals(output, syntaxFactory.create())
+    }
+
+    private fun EnrollmentPeriod.EndDate.toDate(): LocalDate {
+        return (this as EnrollmentPeriod.EndDate.Past).date
     }
 
     companion object {

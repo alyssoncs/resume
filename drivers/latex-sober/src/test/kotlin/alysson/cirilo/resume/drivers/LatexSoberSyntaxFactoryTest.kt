@@ -10,13 +10,19 @@ import alysson.cirilo.resume.entities.ProjectOrPublication
 import alysson.cirilo.resume.drivers.latexsober.LatexSoberSyntaxFactory
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
+import java.time.format.DateTimeFormatter
 
 class LatexSoberSyntaxFactoryTest : ResumeSyntaxFactoryTest() {
 
-    override fun createSyntaxFactory(): ResumeSyntaxFactory {
+    override fun createSyntaxFactory(
+        workDateFormatter: DateTimeFormatter,
+        educationDateFormatter: DateTimeFormatter,
+    ): ResumeSyntaxFactory {
         return LatexSoberSyntaxFactory(
             template = "\\begin{document}\n<content>\n\\end{document}",
             contentPlaceholder = "<content>",
+            workDateFormatter = workDateFormatter,
+            educationDateFormatter = educationDateFormatter,
         )
     }
 
@@ -63,9 +69,12 @@ class LatexSoberSyntaxFactoryTest : ResumeSyntaxFactoryTest() {
     override fun generateTwoExperiencesWithNoBullets(
         firstExperience: JobExperience,
         firstExperienceRole: String,
+        firstExperienceRoleStartDate: String,
+        firstExperienceRoleEndDate: String,
         secondExperience: JobExperience,
         secondExperienceRole: String,
-    ) = wrapAroundDocument(
+        secondExperienceRoleStartDate: String,
+    ): String = wrapAroundDocument(
         """
             \begin{itemize}
                 \item \employment
@@ -73,14 +82,14 @@ class LatexSoberSyntaxFactoryTest : ResumeSyntaxFactoryTest() {
                     {${firstExperience.company.displayName}}
                     {${firstExperience.location}}
                     {$firstExperienceRole}
-                    {Oct. 2019 -- Dec. 2019}
+                    {$firstExperienceRoleStartDate -- $firstExperienceRoleEndDate}
                 
                 \item \employment
                     {${secondExperience.company.url}}
                     {${secondExperience.company.displayName}}
                     {${secondExperience.location}}
                     {$secondExperienceRole}
-                    {Dec. 2019 -- Present}
+                    {$secondExperienceRoleStartDate -- Present}
             \end{itemize}
         """.trimIndent()
     )
@@ -88,7 +97,9 @@ class LatexSoberSyntaxFactoryTest : ResumeSyntaxFactoryTest() {
     override fun generateSingleRoleExperienceWithNoBullets(
         experience: JobExperience,
         role: String,
-    ) = wrapAroundDocument(
+        roleStartDate: String,
+        roleEndDate: String,
+    ): String = wrapAroundDocument(
         """
             \begin{itemize}
                 \item \employment
@@ -96,7 +107,7 @@ class LatexSoberSyntaxFactoryTest : ResumeSyntaxFactoryTest() {
                     {${experience.company.displayName}}
                     {${experience.location}}
                     {$role}
-                    {Oct. 2019 -- Dec. 2019}
+                    {$roleStartDate -- $roleEndDate}
             \end{itemize}
         """.trimIndent()
     )
@@ -104,12 +115,14 @@ class LatexSoberSyntaxFactoryTest : ResumeSyntaxFactoryTest() {
     override fun generateSingleRoleExperienceWithSkillBullets(
         experience: JobExperience,
         role: String,
+        roleStartDate: String,
+        roleEndDate: String,
         firstBullet: String,
         secondBullet: String,
         thirdBulletFirstPart: String,
         thirdBulletSecondPart: String,
         thirdBulletThirdPart: String,
-    ) = wrapAroundDocument(
+    ): String = wrapAroundDocument(
         """
             \begin{itemize}
                 \item \employment
@@ -117,7 +130,7 @@ class LatexSoberSyntaxFactoryTest : ResumeSyntaxFactoryTest() {
                     {${experience.company.displayName}}
                     {${experience.location}}
                     {$role}
-                    {Oct. 2019 -- Dec. 2019}
+                    {$roleStartDate -- $roleEndDate}
                 \begin{itemize}
                     \item $firstBullet
                     \item \textbf{$secondBullet}
@@ -131,10 +144,13 @@ class LatexSoberSyntaxFactoryTest : ResumeSyntaxFactoryTest() {
         company: LinkedInformation,
         location: String,
         firstRole: String,
+        firstExperienceRoleStartDate: String,
+        firstExperienceRoleEndDate: String,
         firstRoleBullet: String,
         secondRole: String,
+        secondRoleStartDate: String,
         secondRoleBullet: String,
-    ) = wrapAroundDocument(
+    ): String = wrapAroundDocument(
         """
             \begin{itemize}
                 \item \employment
@@ -142,14 +158,14 @@ class LatexSoberSyntaxFactoryTest : ResumeSyntaxFactoryTest() {
                     {${company.displayName}}
                     {$location}
                     {$firstRole}
-                    {Oct. 2019 -- Dec. 2019}
+                    {$firstExperienceRoleStartDate -- $firstExperienceRoleEndDate}
                 \begin{itemize}
                     \item $firstRoleBullet
                 \end{itemize}
                 
                 \position
                     {$secondRole}
-                    {Dec. 2019 -- Present}
+                    {$secondRoleStartDate -- Present}
                 \begin{itemize}
                     \item $secondRoleBullet
                 \end{itemize}
@@ -168,7 +184,7 @@ class LatexSoberSyntaxFactoryTest : ResumeSyntaxFactoryTest() {
         """.trimIndent()
     )
 
-    override fun generateSingleDegree(degree: Degree) = wrapAroundDocument(
+    override fun generateSingleDegree(degree: Degree, startDate: String): String = wrapAroundDocument(
         """
             \begin{itemize}
                 \item \employment
@@ -176,7 +192,7 @@ class LatexSoberSyntaxFactoryTest : ResumeSyntaxFactoryTest() {
                     {${degree.institution.displayName}}
                     {${degree.location}}
                     {${degree.degree}}
-                    {2022 -- Present}
+                    {$startDate -- Present}
             \end{itemize}
         """.trimIndent()
     )
@@ -189,12 +205,15 @@ class LatexSoberSyntaxFactoryTest : ResumeSyntaxFactoryTest() {
         firstSectionName: String,
         experience: JobExperience,
         role: String,
+        roleStartDate: String,
+        roleEndDate: String,
         bullet: String,
         secondSectionName: String,
         project: ProjectOrPublication,
         thirdSectionName: String,
         degree: Degree,
-    ) = wrapAroundDocument(
+        degreeStartDate: String
+    ): String = wrapAroundDocument(
         """
             % constants
             \newcommand{\name}{$name}
@@ -230,7 +249,7 @@ class LatexSoberSyntaxFactoryTest : ResumeSyntaxFactoryTest() {
                         {${experience.company.displayName}}
                         {${experience.location}}
                         {$role}
-                        {Oct. 2019 -- Dec. 2019}
+                        {$roleStartDate -- $roleEndDate}
                     \begin{itemize}
                         \item $bullet
                     \end{itemize}
@@ -251,7 +270,7 @@ class LatexSoberSyntaxFactoryTest : ResumeSyntaxFactoryTest() {
                         {${degree.institution.displayName}}
                         {${degree.location}}
                         {${degree.degree}}
-                        {2022 -- Present}
+                        {$degreeStartDate -- Present}
                 \end{itemize}
         """.trimIndent()
     )
