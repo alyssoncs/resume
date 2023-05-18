@@ -1,4 +1,4 @@
-package alysson.cirilo.resume.app
+package alysson.cirilo.resume.cli
 
 import alysson.cirilo.resume.entities.BulletPoint
 import alysson.cirilo.resume.entities.ContactInformation

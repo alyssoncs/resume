@@ -16,5 +16,5 @@ dependencies {
 
 application {
     // Define the main class for the application.
-    mainClass.set("alysson.cirilo.resume.app.AppKt")
+    mainClass.set("alysson.cirilo.resume.cli.AppKt")
 }
