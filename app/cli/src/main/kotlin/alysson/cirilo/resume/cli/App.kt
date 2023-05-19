@@ -3,11 +3,40 @@
  */
 package alysson.cirilo.resume.cli
 
+import alysson.cirilo.resume.drivers.latexawesome.makeLatexAwesomeDriver
 import alysson.cirilo.resume.drivers.latexsober.makeLatexSoberDriver
+import alysson.cirilo.resume.drivers.markdown.makeMarkdownDriver
+import alysson.cirilo.resume.infra.ResumeDriver
+import kotlinx.cli.ArgParser
+import kotlinx.cli.ArgType
+import kotlinx.cli.required
 
-fun main() {
+fun main(args: Array<String>) {
+    val parser = ArgParser("build-resume")
+
+    val flavor by parser.option(
+        ArgType.Choice<Flavor>(),
+        shortName = "f",
+        description = "The flavor of the generated resume",
+    ).required()
+
+    parser.parse(args)
+
     val resume = makeResume()
-    val toString = makeLatexSoberDriver().convert(resume)
+    val toString = flavor.driver.convert(resume)
     print(toString)
 }
 
+private enum class Flavor {
+    Awesome {
+        override val driver: ResumeDriver get() = makeLatexAwesomeDriver()
+    },
+    Sober {
+        override val driver: ResumeDriver get() = makeLatexSoberDriver()
+    },
+    Markdown {
+        override val driver: ResumeDriver get() = makeMarkdownDriver()
+    };
+
+    abstract val driver: ResumeDriver
+}

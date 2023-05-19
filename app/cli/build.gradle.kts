@@ -12,6 +12,8 @@ dependencies {
     implementation(projects.drivers.latexSober)
     implementation(projects.drivers.latexAwesome)
     implementation(projects.drivers.markdown)
+
+    implementation(libs.kotlinx.cli)
 }
 
 application {
