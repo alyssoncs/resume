@@ -10,7 +10,6 @@ import alysson.cirilo.resume.entities.JobExperience
 import alysson.cirilo.resume.entities.ProjectOrPublication
 import alysson.cirilo.resume.entities.Role
 import java.time.format.DateTimeFormatter
-import java.util.Locale
 
 class MarkdownSyntaxFactory(
     private val workDateFormatter: DateTimeFormatter,
@@ -99,8 +98,6 @@ class MarkdownSyntaxFactory(
     }
 
     private fun makeWorkPeriod(enrollmentPeriod: EnrollmentPeriod): String {
-        DateTimeFormatter.ofPattern("MMM. yyyy").withLocale(Locale.US)
-
         return "${workDateFormatter.format(enrollmentPeriod.start)} – ${
             makeEndDate(workDateFormatter, enrollmentPeriod.end)
         }"
