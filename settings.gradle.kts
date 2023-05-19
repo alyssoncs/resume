@@ -26,6 +26,7 @@ plugins {
 
 rootProject.name = "resume"
 include(":app:cli")
+include(":app:serialization")
 include(":domain:entities")
 include(":domain:infra")
 include(":domain:test:data-builders")
