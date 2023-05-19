@@ -150,7 +150,6 @@ class ResumeDeserializerTest {
         assertThat(degree.period.end).isEqualTo(Past(LocalDate.of(2022, 1, 1)))
     }
 
-
     private fun String.asResource(): String {
         return object {}.javaClass.getResource(this)!!.readText()
     }
