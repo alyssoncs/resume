@@ -7,6 +7,8 @@ import alysson.cirilo.resume.entities.Degree
 import alysson.cirilo.resume.entities.JobExperience
 import alysson.cirilo.resume.entities.LinkedInformation
 import alysson.cirilo.resume.entities.ProjectOrPublication
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Test
 import java.time.format.DateTimeFormatter
 
 class LatexAwesomeSyntaxFactoryTest : ResumeSyntaxFactoryTest() {
@@ -276,6 +278,16 @@ class LatexAwesomeSyntaxFactoryTest : ResumeSyntaxFactoryTest() {
                 \end{cventries}
         """.trimIndent()
     )
+
+    @Test
+    fun `ampersand in the section should be escaped`() {
+        syntaxFactory.startSection("this & that")
+
+        assertEquals(
+            wrapAroundDocument("", "\\cvsection{this \\& that}"),
+            syntaxFactory.create(),
+        )
+    }
 
     private fun wrapAroundDocument(header: String, content: String): String {
         return header +

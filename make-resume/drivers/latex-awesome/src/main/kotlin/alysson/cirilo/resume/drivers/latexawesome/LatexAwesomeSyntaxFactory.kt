@@ -59,7 +59,7 @@ class LatexAwesomeSyntaxFactory(
         }
         sectionIndent?.let { theSectionIndent ->
             val separator = if (output.isEmpty()) "" else "\n"
-            updateOutput(separator + "\\cvsection{$name}".reindent(theSectionIndent))
+            updateOutput(separator + "\\cvsection{${name.replace("&", "\\&")}}".reindent(theSectionIndent))
             currentIndent = theSectionIndent.inc()
         }
     }
