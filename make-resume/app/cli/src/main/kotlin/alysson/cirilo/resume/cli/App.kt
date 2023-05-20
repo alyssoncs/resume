@@ -7,24 +7,37 @@ import alysson.cirilo.resume.drivers.latexawesome.makeLatexAwesomeDriver
 import alysson.cirilo.resume.drivers.latexsober.makeLatexSoberDriver
 import alysson.cirilo.resume.drivers.markdown.makeMarkdownDriver
 import alysson.cirilo.resume.infra.ResumeDriver
+import alysson.cirilo.resume.serialization.deserialize
 import kotlinx.cli.ArgParser
 import kotlinx.cli.ArgType
 import kotlinx.cli.required
+import java.io.File
 
 fun main(args: Array<String>) {
-    val parser = ArgParser("build-resume")
+    val argPasser = ArgParser(programName = "build-resume")
 
-    val flavor by parser.option(
+    val resumeFlavor by argPasser.option(
         ArgType.Choice<Flavor>(),
         shortName = "f",
+        fullName = "flavor",
         description = "The flavor of the generated resume",
     ).required()
 
-    parser.parse(args)
+    val inputFile by argPasser.option(
+        ArgType.String,
+        shortName = "i",
+        fullName = "input",
+        description = "path to a json file with the resume data",
+    ).required()
+    argPasser.parse(args)
 
-    val resume = makeResume()
-    val toString = flavor.driver.convert(resume)
-    print(toString)
+    print(formatResume(inputFile, resumeFlavor))
+}
+
+private fun formatResume(inputFile: String, resumeFlavor: Flavor): String {
+    val jsonResume = File(inputFile).readText()
+    val resume = deserialize(jsonResume)
+    return resumeFlavor.driver.convert(resume)
 }
 
 private enum class Flavor {

@@ -9,6 +9,7 @@ plugins {
 }
 
 dependencies {
+    implementation(projects.app.serialization)
     implementation(projects.drivers.latexSober)
     implementation(projects.drivers.latexAwesome)
     implementation(projects.drivers.markdown)
