@@ -1,0 +1,427 @@
+{
+    "name": "Alysson Cirilo Silva",
+    "headline": [
+        "Software Engineer",
+        "Android Developer"
+    ],
+    "contactInfo": {
+        "email": {
+            "displayName": "alysson.cirilo@gmail.com",
+            "url": "mailto:alysson.cirilo@gmail.com"
+        },
+        "linkedin": {
+            "displayName": "linkedin.com/in/alysson-cirilo",
+            "url": "https://www.linkedin.com/in/alysson-cirilo"
+        },
+        "github": {
+            "displayName": "github.com/alyssoncs",
+            "url": "https://www.github.com/alyssoncs"
+        },
+        "location": {
+            "displayName": "Remote (UTC-3), Brazil",
+            "url": "https://www.google.com/maps?q=+Maranhão,+Brazil"
+        }
+    },
+    "experiences": [
+        {
+            "company": {
+                "displayName": "Laboratory of Intelligent Distributed Systems (LSDi)",
+                "url": "http://www.lsdi.ufma.br/projetos/"
+            },
+            "location": "São Luís - MA, Brazil",
+            "roles": [
+                {
+                    "title": "Undergraduate Research Fellow",
+                    "period": {
+                        "from": "04-2017",
+                        "to": "07-2019"
+                    },
+                    "bulletPoints": [
+                        [
+                            {
+                                "type": "plainText",
+                                "content": "Built smart object encounter notification system for an Android IoT middleware using "
+                            },
+                            {
+                                "type": "skill",
+                                "content": "Java"
+                            },
+                            {
+                                "type": "plainText",
+                                "content": "."
+                            }
+                        ],
+                        [
+                            {
+                                "type": "plainText",
+                                "content": "Programmed "
+                            },
+                            {
+                                "type": "skill",
+                                "content": "Arduino"
+                            },
+                            {
+                                "type": "plainText",
+                                "content": " boards using "
+                            },
+                            {
+                                "type": "skill",
+                                "content": "C programming"
+                            },
+                            {
+                                "type": "plainText",
+                                "content": " language to connect to Bluetooth Low Energy devices."
+                            }
+                        ]
+                    ]
+                },
+                {
+                    "title": "Intern",
+                    "period": {
+                        "from": "05-2019",
+                        "to": "07-2019"
+                    },
+                    "bulletPoints": [
+                        [
+                            {
+                                "type": "plainText",
+                                "content": "Developed an indoor location system."
+                            }
+                        ],
+                        [
+                            {
+                                "type": "plainText",
+                                "content": "Developed a system that manages the relationships between users, bluetooth beacons and physical spaces using "
+                            },
+                            {
+                                "type": "skill",
+                                "content": "Spring Boot"
+                            },
+                            {
+                                "type": "plainText",
+                                "content": "."
+                            }
+                        ],
+                        [
+                            {
+                                "type": "plainText",
+                                "content": "Developed Android application that detects bluetooth beacons and registers this encounter in a web service using "
+                            },
+                            {
+                                "type": "skill",
+                                "content": "Retrofit"
+                            },
+                            {
+                                "type": "plainText",
+                                "content": "."
+                            }
+                        ]
+                    ]
+                }
+            ]
+        },
+        {
+            "company": {
+                "displayName": "State Secretariat for Penitentiary Administration of Maranhão (SEAP-MA)",
+                "url": "http://seap.ma.gov.br/"
+            },
+            "location": "São Luís - MA, Brazil",
+            "roles": [
+                {
+                    "title": "Entry-level Developer",
+                    "period": {
+                        "from": "09-2019",
+                        "to": "07-2020"
+                    },
+                    "bulletPoints": [
+                        [
+                            {
+                                "type": "plainText",
+                                "content": "Built a flexible service and API for storing log information of other systems using Spring Boot and "
+                            },
+                            {
+                                "type": "skill",
+                                "content": "MongoDB"
+                            },
+                            {
+                                "type": "plainText",
+                                "content": "."
+                            }
+                        ],
+                        [
+                            {
+                                "type": "plainText",
+                                "content": "Built a "
+                            },
+                            {
+                                "type": "skill",
+                                "content": "Clean Architecture"
+                            },
+                            {
+                                "type": "plainText",
+                                "content": " Android app using "
+                            },
+                            {
+                                "type": "skill",
+                                "content": "Kotlin"
+                            },
+                            {
+                                "type": "plainText",
+                                "content": ", "
+                            },
+                            {
+                                "type": "skill",
+                                "content": "Coroutines"
+                            },
+                            {
+                                "type": "plainText",
+                                "content": " and Firebase Cloud Messaging allowing visitors to schedule and be notified about virtual visits to their imprisoned family members, important resource during the Covid-19 pandemic."
+                            }
+                        ]
+                    ]
+                },
+                {
+                    "title": "Mid-level Developer",
+                    "period": {
+                        "from": "07-2020",
+                        "to": "09-2020"
+                    },
+                    "bulletPoints": [
+                        [
+                            {
+                                "type": "plainText",
+                                "content": "Developed the Android app that allows searching information about the state's prisoners and fugitives using Kotlin."
+                            }
+                        ]
+                    ]
+                }
+            ]
+        },
+        {
+            "company": {
+                "displayName": "Meta (Consulting Company)",
+                "url": "https://www.meta.com.br/"
+            },
+            "location": "Remote, Brazil",
+            "roles": [
+                {
+                    "title": "Android Developer",
+                    "period": {
+                        "from": "09-2020",
+                        "to": "05-2021"
+                    },
+                    "bulletPoints": [
+                        [
+                            {
+                                "type": "plainText",
+                                "content": "Built a digital wallet and credit card rewards app for a big bank using coroutines and "
+                            },
+                            {
+                                "type": "skill",
+                                "content": "Koin"
+                            },
+                            {
+                                "type": "plainText",
+                                "content": " as the dependency injection framework."
+                            }
+                        ],
+                        [
+                            {
+                                "type": "plainText",
+                                "content": "Integrated code coverage tool in a "
+                            },
+                            {
+                                "type": "skill",
+                                "content": "multi-module"
+                            },
+                            {
+                                "type": "plainText",
+                                "content": " Android project."
+                            }
+                        ],
+                        [
+                            {
+                                "type": "plainText",
+                                "content": "Implemented the subsystem responsible for the digital signature of all http requests made from the app with "
+                            },
+                            {
+                                "type": "skill",
+                                "content": "OkHttp interceptors"
+                            },
+                            {
+                                "type": "plainText",
+                                "content": "."
+                            }
+                        ],
+                        [
+                            {
+                                "type": "plainText",
+                                "content": "Designed a testable biometric authentication abstraction adapting the original callback syntax to coroutines."
+                            }
+                        ]
+                    ]
+                }
+            ]
+        },
+        {
+            "company": {
+                "displayName": "iFood",
+                "url": "https://www.ifood.com.br/"
+            },
+            "location": "Remote, Brazil",
+            "roles": [
+                {
+                    "title": "Android Developer I",
+                    "period": {
+                        "from": "05-2021",
+                        "to": "04-2022"
+                    },
+                    "bulletPoints": [
+                        [
+                            {
+                                "type": "plainText",
+                                "content": "Worked at the checkout team on a "
+                            },
+                            {
+                                "type": "skill",
+                                "content": "single-activity"
+                            },
+                            {
+                                "type": "plainText",
+                                "content": ", clean architecture, multi-module application, using "
+                            },
+                            {
+                                "type": "skill",
+                                "content": "Dagger"
+                            },
+                            {
+                                "type": "plainText",
+                                "content": "."
+                            }
+                        ],
+                        [
+                            {
+                                "type": "plainText",
+                                "content": "Worked on a plugin based-architecture that enables loading different payment methods, delivery options and business logic."
+                            }
+                        ],
+                        [
+                            {
+                                "type": "plainText",
+                                "content": "Created a script to manage code ownership making the process less error-prone given the frequency teams structure changes."
+                            }
+                        ]
+                    ]
+                },
+                {
+                    "title": "Android Developer II",
+                    "period": {
+                        "from": "04-2022",
+                        "to": "07-2022"
+                    },
+                    "bulletPoints": [
+                        [
+                            {
+                                "type": "plainText",
+                                "content": "Implemented dependency injection model for checkout plugins to solve inefficient manual injection."
+                            }
+                        ],
+                        [
+                            {
+                                "type": "plainText",
+                                "content": "Implemented dynamic onboarding, allowing PMs to control the order and timing of onboarding based on remote configs and plugin availability. Improving user engagement and educating users on effective checkout feature usage."
+                            }
+                        ]
+                    ]
+                }
+            ]
+        },
+        {
+            "company": {
+                "displayName": "Microsoft",
+                "url": "https://www.microsoft.com/"
+            },
+            "location": "Remote, Brazil",
+            "roles": [
+                {
+                    "title": "Android Developer I",
+                    "period": {
+                        "from": "07-2022",
+                        "to": "now"
+                    },
+                    "bulletPoints": [
+                        [
+                            {
+                                "type": "plainText",
+                                "content": "Worked on a geographically distributed team."
+                            }
+                        ],
+                        [
+                            {
+                                "type": "plainText",
+                                "content": "Delivered features on the voice assistant in Outlook Android app."
+                            }
+                        ],
+                        [
+                            {
+                                "type": "plainText",
+                                "content": "Worked on the M365 copilot on Outlook mobile powered by GPT-4 using "
+                            },
+                            {
+                                "type": "skill",
+                                "content": "Jetpack Compose"
+                            },
+                            {
+                                "type": "plainText",
+                                "content": "."
+                            }
+                        ],
+                        [
+                            {
+                                "type": "plainText",
+                                "content": "Developed a flexible dependency injection model for a library that integrates with host apps without exposing the framework."
+                            }
+                        ]
+                    ]
+                }
+            ]
+        }
+    ],
+    "projectsAndPublications": [
+        {
+            "title": {
+                "displayName": "Cirilo's Algorithm",
+                "url": "https://github.com/alyssoncs/cirilo-algorithm/"
+            },
+            "description": "An algorithm for finding the smallest pair of values between two unsorted arrays."
+        },
+        {
+            "title": {
+                "displayName": "Jetpack Compose – Don't throw your presenters off",
+                "url": "https://dev.to/alyssoncs/jetpack-compose-don-t-throw-your-presenters-off-43f"
+            },
+            "description": "Blog post about using model-view-presenter (MVP) on Jetpack Compose."
+        },
+        {
+            "title": {
+                "displayName": "Internet of Things Applied to Presence and Meeting Management of People in Smart Buildings",
+                "url": "https://revistas.unifacs.br/index.php/rsc/article/view/6890"
+            },
+            "description": "Paper on mobile computing and IoT."
+        }
+    ],
+    "education": [
+        {
+            "institution": {
+                "displayName": "Federal University of Maranhão (UFMA)",
+                "url": "https://portalpadrao.ufma.br/site/"
+            },
+            "location": "São Luís - MA, Brazil",
+            "degree": "BSc. in Computer Science",
+            "period": {
+                "from": "01-2013",
+                "to": "01-2019"
+            }
+        }
+    ]
+}
