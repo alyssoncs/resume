@@ -24,7 +24,7 @@ plugins {
     id("org.gradle.toolchains.foojay-resolver-convention") version "0.4.0"
 }
 
-rootProject.name = "resume"
+rootProject.name = "make-resume"
 include(":app:cli")
 include(":app:serialization")
 include(":domain:entities")
