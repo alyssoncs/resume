@@ -7,6 +7,15 @@ DEPENDS=$(JSON_RESUME) | $(OUTPUT_DIR)/ $(OUTPUT_DIR)/awesome $(OUTPUT_DIR)/sobe
 .PHONY: all
 all: $(OUTPUT_DIR)/awesome/$(RESUME_NAME).pdf $(OUTPUT_DIR)/sober/$(RESUME_NAME).pdf $(OUTPUT_DIR)/markdown/$(RESUME_NAME).md
 
+.PHONY: awesome
+awesome: $(OUTPUT_DIR)/awesome/$(RESUME_NAME).pdf 
+
+.PHONY: sober
+sober: $(OUTPUT_DIR)/sober/$(RESUME_NAME).pdf 
+
+.PHONY: markdown
+markdown: $(OUTPUT_DIR)/markdown/$(RESUME_NAME).md
+
 $(OUTPUT_DIR)/awesome/$(RESUME_NAME).tex: | $(OUTPUT_DIR)/awesome
 	cd make-resume && ./gradlew run --console=plain --quiet --args="-f awesome -i ../../../$(JSON_RESUME)" > ../$@
 
