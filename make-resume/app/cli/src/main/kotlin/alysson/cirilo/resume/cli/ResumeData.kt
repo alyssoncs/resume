@@ -246,7 +246,7 @@ private val projectOrPublications = listOf(
     ProjectOrPublication(
         title = LinkedInformation(
             displayName = "Cirilo's Algorithm",
-            url = URL("https://github.com/alyssoncs/cirilo-algorithm/")
+            url = URL("https://github.com/alyssoncs/cirilo-algorithm/"),
         ),
         description = "An algorithm for finding the smallest pair of values between two unsorted arrays.",
     ),
@@ -260,7 +260,7 @@ private val projectOrPublications = listOf(
     ProjectOrPublication(
         title = LinkedInformation(
             displayName = "Internet of Things Applied to Presence and Meeting Management of People in Smart Buildings",
-            url = URL("https://revistas.unifacs.br/index.php/rsc/article/view/6890")
+            url = URL("https://revistas.unifacs.br/index.php/rsc/article/view/6890"),
         ),
         description = "Paper on mobile computing and IoT.",
     ),
