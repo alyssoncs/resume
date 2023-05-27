@@ -26,7 +26,12 @@ jobs:
     needs: build-and-test-make-resume
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v3
+      - name: Set up LaTeX
+        uses: teatimeguest/setup-texlive-action@v2
+        with:
+          packages: >-
+            scheme-basic
       - name: Make outputs
         run: make
-
 
