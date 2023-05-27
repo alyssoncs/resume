@@ -31,12 +31,8 @@ jobs:
         with:
           java-version: '17'
           distribution: 'adopt'
-      - name: debug
-        run: cd make-resume && ./gradlew run --console=plain --quiet --args="-f awesome -i ../../../data/resume.json"
       - name: Set up LaTeX
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y texlive-xetex
+        uses: DanySK/setup-texlive-action@master
       - name: Make outputs
         run: make
 
