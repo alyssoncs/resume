@@ -27,7 +27,7 @@ $(OUTPUT_DIR)/markdown/$(RESUME_NAME).md: | $(OUTPUT_DIR)/markdown
 
 $(OUTPUT_DIR)/awesome/$(RESUME_NAME).pdf: | $(OUTPUT_DIR)/awesome/$(RESUME_NAME).tex
 	cp -r dependencies/awesome/Awesome-CV $(OUTPUT_DIR)/awesome
-	cd output/awesome && cat $(RESUME_NAME).tex && ls Awesome-CV && xelatex $(RESUME_NAME).tex
+	cd output/awesome && ls && ls Awesome-CV && xelatex $(RESUME_NAME).tex
 
 $(OUTPUT_DIR)/sober/$(RESUME_NAME).pdf: | $(OUTPUT_DIR)/sober/$(RESUME_NAME).tex
 	cp dependencies/sober/sober-resume.cls $(OUTPUT_DIR)/sober
