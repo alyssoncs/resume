@@ -38,31 +38,14 @@ class LatexSoberSyntaxFactoryTest : ResumeSyntaxFactoryTest() {
     ) = wrapAroundDocument(
         """
             % constants
-            \newcommand{\name}{$name}
-            \newcommand{\mytitle}{{\huge\textbf{\name}}}
-            \newcommand{\headline}{$firstHeadlineElement{\enskip\starredbullet\enskip}$secondHeadlineElement}
-            \newcommand{\email}
-                {\iconhref{${contactInfo.email.url}}{{\scriptsize\faEnvelope{}} ${contactInfo.email.displayName}}}
-            \newcommand{\linkedin}
-                {\iconhref{${contactInfo.linkedin.url}}{\faLinkedin{} ${contactInfo.linkedin.displayName}}}
-            \newcommand{\github}
-                {\iconhref{${contactInfo.github.url}}{\faGithub{} ${contactInfo.github.displayName}}}
-            \newcommand{\address}
-                {\hspace{1pt}\iconhref{${contactInfo.location.url}}{\faMapMarker{}\hspace{1pt} ${contactInfo.location.displayName}}}
+            \name{$name}
+            \headline{$firstHeadlineElement{\enskip\starredbullet\enskip}$secondHeadlineElement}
+            \email{${contactInfo.email.url}}{${contactInfo.email.displayName}}
+            \linkedin{${contactInfo.linkedin.url}}{${contactInfo.linkedin.displayName}}
+            \github{${contactInfo.github.url}}{${contactInfo.github.displayName}}
+            \address{${contactInfo.location.url}}{${contactInfo.location.displayName}}
             
-            \begin{minipage}[t]{0.70\linewidth}%743
-                \mytitle\\
-                \headline
-            \end{minipage}
-            \hspace{8pt}
-            \begin{minipage}[t]{0.277\linewidth}
-                {\flushleft\small
-                    \email\\
-                    \linkedin\\
-                    \github\\
-                    \address
-                }
-            \end{minipage}
+            \makeheader
         """.trimIndent()
     )
 
@@ -216,31 +199,14 @@ class LatexSoberSyntaxFactoryTest : ResumeSyntaxFactoryTest() {
     ): String = wrapAroundDocument(
         """
             % constants
-            \newcommand{\name}{$name}
-            \newcommand{\mytitle}{{\huge\textbf{\name}}}
-            \newcommand{\headline}{$firstHeadlineElement{\enskip\starredbullet\enskip}$secondHeadlineElement}
-            \newcommand{\email}
-                {\iconhref{${contactInfo.email.url}}{{\scriptsize\faEnvelope{}} ${contactInfo.email.displayName}}}
-            \newcommand{\linkedin}
-                {\iconhref{${contactInfo.linkedin.url}}{\faLinkedin{} ${contactInfo.linkedin.displayName}}}
-            \newcommand{\github}
-                {\iconhref{${contactInfo.github.url}}{\faGithub{} ${contactInfo.github.displayName}}}
-            \newcommand{\address}
-                {\hspace{1pt}\iconhref{${contactInfo.location.url}}{\faMapMarker{}\hspace{1pt} ${contactInfo.location.displayName}}}
+            \name{$name}
+            \headline{$firstHeadlineElement{\enskip\starredbullet\enskip}$secondHeadlineElement}
+            \email{${contactInfo.email.url}}{${contactInfo.email.displayName}}
+            \linkedin{${contactInfo.linkedin.url}}{${contactInfo.linkedin.displayName}}
+            \github{${contactInfo.github.url}}{${contactInfo.github.displayName}}
+            \address{${contactInfo.location.url}}{${contactInfo.location.displayName}}
             
-            \begin{minipage}[t]{0.70\linewidth}%743
-                \mytitle\\
-                \headline
-            \end{minipage}
-            \hspace{8pt}
-            \begin{minipage}[t]{0.277\linewidth}
-                {\flushleft\small
-                    \email\\
-                    \linkedin\\
-                    \github\\
-                    \address
-                }
-            \end{minipage}
+            \makeheader
             
             \section{$firstSectionName}
                 \begin{itemize}

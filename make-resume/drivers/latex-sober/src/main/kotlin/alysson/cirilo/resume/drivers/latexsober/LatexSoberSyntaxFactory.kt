@@ -31,31 +31,14 @@ class LatexSoberSyntaxFactory(
         updateOutput(
             """
             % constants
-            \newcommand{\name}{${name}}
-            \newcommand{\mytitle}{{\huge\textbf{\name}}}
-            \newcommand{\headline}{${headline.joinToString(separator = "{\\enskip\\starredbullet\\enskip}") { it }}}
-            \newcommand{\email}
-                {\iconhref{${contactInformation.email.url}}{{\scriptsize\faEnvelope{}} ${contactInformation.email.displayName}}}
-            \newcommand{\linkedin}
-                {\iconhref{${contactInformation.linkedin.url}}{\faLinkedin{} ${contactInformation.linkedin.displayName}}}
-            \newcommand{\github}
-                {\iconhref{${contactInformation.github.url}}{\faGithub{} ${contactInformation.github.displayName}}}
-            \newcommand{\address}
-                {\hspace{1pt}\iconhref{${contactInformation.location.url}}{\faMapMarker{}\hspace{1pt} ${contactInformation.location.displayName}}}
+            \name{$name}
+            \headline{${headline.joinToString(separator = "{\\enskip\\starredbullet\\enskip}") { it }}}
+            \email{${contactInformation.email.url}}{${contactInformation.email.displayName}}
+            \linkedin{${contactInformation.linkedin.url}}{${contactInformation.linkedin.displayName}}
+            \github{${contactInformation.github.url}}{${contactInformation.github.displayName}}
+            \address{${contactInformation.location.url}}{${contactInformation.location.displayName}}
             
-            \begin{minipage}[t]{0.70\linewidth}%743
-                \mytitle\\
-                \headline
-            \end{minipage}
-            \hspace{8pt}
-            \begin{minipage}[t]{0.277\linewidth}
-                {\flushleft\small
-                    \email\\
-                    \linkedin\\
-                    \github\\
-                    \address
-                }
-            \end{minipage}
+            \makeheader
         """.reindent(currentIndent)
         )
     }

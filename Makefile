@@ -30,6 +30,7 @@ $(OUTPUT_DIR)/awesome/$(RESUME_NAME).pdf: | $(OUTPUT_DIR)/awesome/$(RESUME_NAME)
 	cd output/awesome && xelatex $(RESUME_NAME).tex
 
 $(OUTPUT_DIR)/sober/$(RESUME_NAME).pdf: | $(OUTPUT_DIR)/sober/$(RESUME_NAME).tex
+	cp dependencies/sober/sober-resume.cls $(OUTPUT_DIR)/sober
 	cd output/sober && xelatex $(RESUME_NAME).tex
 
 
