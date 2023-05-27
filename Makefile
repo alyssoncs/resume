@@ -18,6 +18,7 @@ markdown: $(OUTPUT_DIR)/markdown/$(RESUME_NAME).md
 
 $(OUTPUT_DIR)/awesome/$(RESUME_NAME).tex: | $(OUTPUT_DIR)/awesome
 	cd make-resume && ./gradlew run --console=plain --quiet --args="-f awesome -i ../../../$(JSON_RESUME)" > ../$@
+	cd make-resume && ./gradlew run --console=plain --quiet --args="-f awesome -i ../../../$(JSON_RESUME)" && echo done
 
 $(OUTPUT_DIR)/sober/$(RESUME_NAME).tex: | $(OUTPUT_DIR)/sober
 	cd make-resume && ./gradlew run --console=plain --quiet --args="-f sober -i ../../../$(JSON_RESUME)" > ../$@
