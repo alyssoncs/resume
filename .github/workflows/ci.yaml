@@ -33,6 +33,7 @@ jobs:
           distribution: 'adopt'
       - name: Set up LaTeX
         uses: DanySK/setup-texlive-action@master
+      - name: Set up XeLaTeX
         run: |
           sudo apt-get update
           sudo apt-get install -y texlive-xetex
