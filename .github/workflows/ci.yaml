@@ -23,7 +23,6 @@ jobs:
           arguments: build
           build-root-directory: make-resume
   make-outputs:
-    needs: build-and-test-make-resume
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
