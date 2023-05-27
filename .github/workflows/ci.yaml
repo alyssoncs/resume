@@ -28,10 +28,9 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Set up LaTeX
-        uses: teatimeguest/setup-texlive-action@v2
-        with:
-          packages: >-
-            scheme-basic
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y texlive-latex-extra
       - name: Make outputs
         run: make
 
