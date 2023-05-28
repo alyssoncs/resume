@@ -3,7 +3,14 @@
 \LoadClass[a4paper,11pt]{article}
 
 \RequirePackage{fontspec}
-\setmainfont{EB Garamond}
+\setmainfont[
+  Path = ./,
+  Extension = .otf,
+  UprightFont = *-Regular,
+  BoldFont = *-SemiBold,
+  ItalicFont = *-Italic,
+  BoldItalicFont = *-BoldItalic
+]{EBGaramond}
 \RequirePackage{fourier-orns}
 \RequirePackage{titlesec}
 \RequirePackage{enumitem}
