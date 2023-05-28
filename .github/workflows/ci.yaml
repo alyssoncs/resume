@@ -37,6 +37,4 @@ jobs:
           sudo apt-get install -y texlive-full
       - name: Make outputs
         run: make
-      - name: debug
-        run: tree output
 
