@@ -11,6 +11,26 @@ dependencies {
     implementation(libs.kotlinx.cli)
 }
 
+private val applicationClass = "alysson.cirilo.resume.cli.AppKt"
+
 application {
-    mainClass.set("alysson.cirilo.resume.cli.AppKt")
+    mainClass.set(applicationClass)
+}
+
+tasks.withType(Jar::class.java) {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    manifest {
+        attributes["Main-Class"] = applicationClass
+    }
+}
+
+tasks.register<Jar>("uberJar") {
+    archiveClassifier.set("uber")
+
+    from(sourceSets.main.get().output)
+
+    dependsOn(configurations.runtimeClasspath)
+    from({
+        configurations.runtimeClasspath.get().filter { it.name.endsWith("jar") }.map { zipTree(it) }
+    })
 }
