@@ -84,3 +84,5 @@ jobs:
             alysson-cirilo-sober-resume.pdf
             alysson-cirilo-markdown-resume.md
           tag_name: current
+          token: ${{ secrets.GITHUB_TOKEN }}
+
