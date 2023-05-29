@@ -26,14 +26,15 @@ $(OUTPUT_DIR)/sober/$(RESUME_NAME).tex: $(MAKE_RESUME) | $(OUTPUT_DIR)/sober
 $(OUTPUT_DIR)/markdown/$(RESUME_NAME).md: $(MAKE_RESUME) | $(OUTPUT_DIR)/markdown
 	java -jar $(MAKE_RESUME) -f markdown -i $(JSON_RESUME) > $@
 
-$(OUTPUT_DIR)/awesome/$(RESUME_NAME).pdf: | $(OUTPUT_DIR)/awesome/$(RESUME_NAME).tex
+$(OUTPUT_DIR)/awesome/$(RESUME_NAME).pdf: $(OUTPUT_DIR)/awesome/$(RESUME_NAME).tex
 	cp -r dependencies/awesome/Awesome-CV $(OUTPUT_DIR)/awesome
 	cd output/awesome && xelatex $(RESUME_NAME).tex
 
-$(OUTPUT_DIR)/sober/$(RESUME_NAME).pdf: | $(OUTPUT_DIR)/sober/$(RESUME_NAME).tex
+$(OUTPUT_DIR)/sober/$(RESUME_NAME).pdf: $(OUTPUT_DIR)/sober/$(RESUME_NAME).tex
 	cp dependencies/sober/* $(OUTPUT_DIR)/sober
 	cd output/sober && xelatex $(RESUME_NAME).tex
 
+.PHONY: $(MAKE_RESUME)
 $(MAKE_RESUME):
 	cd make-resume && ./gradlew uberJar
 
