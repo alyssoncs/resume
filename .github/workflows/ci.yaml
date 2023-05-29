@@ -57,9 +57,10 @@ jobs:
       - name: Debug
         run: tree .
       - name: Rename resumes
-        run: mv awesome/alysson-cirilo-resume.pdf alysson-cirilo-fancy-resume.pdf
-        run: mv sober/alysson-cirilo-resume.pdf alysson-cirilo-sober-resume.pdf
-        run: mv markdown/alysson-cirilo-resume.md alysson-cirilo-markdown-resume.md
+        run: |
+          mv awesome/alysson-cirilo-resume.pdf alysson-cirilo-fancy-resume.pdf
+          mv sober/alysson-cirilo-resume.pdf alysson-cirilo-sober-resume.pdf
+          mv markdown/alysson-cirilo-resume.md alysson-cirilo-markdown-resume.md
       - name: Upload release
         uses: softprops/action-gh-release@v1
         with:
