@@ -22,7 +22,7 @@ jobs:
         with:
           arguments: build
           build-root-directory: make-resume
-  make-outputs:
+  make-resumes:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -35,6 +35,25 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y texlive-full
-      - name: Make outputs
+      - name: Make resumes
         run: make
+      - name: Share resumes
+        uses: actions/upload-artifact@v3
+        with:
+          name: resumes
+          path: |
+            output/awesome/alysson-cirilo-resume.pdf
+            output/sober/alysson-cirilo-resume.pdf
+            output/markdown/alysson-cirilo-resume.md
+          retention-days: 1
+  upload-resumes:
+    needs: make-resumes
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download resumes
+        uses: actions/download-artifact@v3
+        with:
+          name: resumes
+      - name: Debug
+        run: tree .
 
