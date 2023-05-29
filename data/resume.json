@@ -390,7 +390,7 @@
     "projectsAndPublications": [
         {
             "title": {
-                "displayName": "make-resume",
+                "displayName": "Resume",
                 "url": "https://github.com/alyssoncs/resume/"
             },
             "description": "The tool that built the resumé that you are reading right now."
