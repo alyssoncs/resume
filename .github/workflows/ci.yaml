@@ -76,9 +76,9 @@ jobs:
     steps:
       - name: Generate files
         run: |
-          >alysson-cirilo-fancy-resume.pdf
-          >alysson-cirilo-sober-resume.pdf
-          >alysson-cirilo-markdown-resume.md
+          echo "haha" > alysson-cirilo-fancy-resume.pdf
+          echo "haha" > alysson-cirilo-sober-resume.pdf
+          echo "haha" > alysson-cirilo-markdown-resume.md
       - name: Upload release
         uses: softprops/action-gh-release@v1
         with:
