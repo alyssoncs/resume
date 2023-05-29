@@ -87,4 +87,9 @@ jobs:
             alysson-cirilo-sober-resume.pdf
             alysson-cirilo-markdown-resume.md
           tag_name: current
+          body: |
+            You can choose between the following resume flavors:
+            * `alysson-cirilo-fancy-resume.pdf` if you want a modern and colored resume.
+            * `alysson-cirilo-sober-resume.pdf` if you want a classic sober resume.
+            * `alysson-cirilo-markdown-resume.md` if you want a resume in markdown format.
 
