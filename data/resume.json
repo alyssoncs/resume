@@ -390,6 +390,13 @@
     "projectsAndPublications": [
         {
             "title": {
+                "displayName": "make-resume",
+                "url": "https://github.com/alyssoncs/resume/"
+            },
+            "description": "The tool that built the resumé that you are reading right now."
+        },
+        {
+            "title": {
                 "displayName": "Cirilo's Algorithm",
                 "url": "https://github.com/alyssoncs/cirilo-algorithm/"
             },
