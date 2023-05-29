@@ -47,7 +47,7 @@ jobs:
             output/markdown/alysson-cirilo-resume.md
           retention-days: 1
   upload-resumes:
-    needs: make-resumes
+    needs: [build-and-test-make-resume, make-resumes]
     runs-on: ubuntu-latest
     steps:
       - name: Download resumes
@@ -68,6 +68,19 @@ jobs:
             alysson-cirilo-fancy-resume.pdf
             alysson-cirilo-sober-resume.pdf
             alysson-cirilo-markdown-resume.md
-
-
-
+  upload-debug:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Generate files
+        run: |
+          >alysson-cirilo-fancy-resume.pdf
+          >alysson-cirilo-sober-resume.pdf
+          >alysson-cirilo-markdown-resume.md
+      - name: Upload release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            alysson-cirilo-fancy-resume.pdf
+            alysson-cirilo-sober-resume.pdf
+            alysson-cirilo-markdown-resume.md
+          tag_name: current
