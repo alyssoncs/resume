@@ -18,7 +18,7 @@ Here is a preview on how they look like:
 
 ### What it does?
 
-This is a program that generates my resume in different formats based on the data in a [json file](data/resume.json). So I can write my resume data in a single place (the JSON file) and the program will convert it to a given format.
+This is a program that generates my resume in different formats based on the data in a [JSON file](data/resume.json). So I can write my resume data in a single place (the JSON file) and the program will convert it to a given format.
 
 ### I'm still not bored, how does it work?
 
