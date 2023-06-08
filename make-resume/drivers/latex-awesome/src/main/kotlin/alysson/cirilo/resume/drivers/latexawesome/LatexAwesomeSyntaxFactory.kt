@@ -159,7 +159,7 @@ class LatexAwesomeSyntaxFactory(
         return """
             \cventry
                 {${role.title}}
-                ${if (isFirstRole) "{${jobExperience.company.displayName}}" else "{}"}
+                ${if (isFirstRole) "{\\iconhref{${jobExperience.company.url}}{${jobExperience.company.displayName}}}" else "{}"}
                 ${if (isFirstRole) "{${jobExperience.location}}" else "{}"}
                 {${makeWorkPeriod(role.period)}}
         """.trimIndent() +
@@ -216,14 +216,14 @@ class LatexAwesomeSyntaxFactory(
     }
 
     private fun makeProjectOrPublication(projectOrPublication: ProjectOrPublication): String {
-        return "\\textbf{${projectOrPublication.title.displayName}:} ${projectOrPublication.description}"
+        return "\\textbf{\\iconhref{${projectOrPublication.title.url}}{${projectOrPublication.title.displayName}}:} ${projectOrPublication.description}"
     }
 
     private fun makeDegree(degree: Degree): String {
         return """
             \cventry
                 {${degree.degree}}
-                {${degree.institution.displayName}}
+                {\iconhref{${degree.institution.url}}{${degree.institution.displayName}}}
                 {${degree.location}}
                 {${makeEduPeriod(degree.period)}}
                 {}

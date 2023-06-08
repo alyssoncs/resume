@@ -73,14 +73,14 @@ class LatexAwesomeSyntaxFactoryTest : ResumeSyntaxFactoryTest() {
                 \begin{cventries}
                     \cventry
                         {$firstExperienceRole}
-                        {${firstExperience.company.displayName}}
+                        {\iconhref{${firstExperience.company.url}}{${firstExperience.company.displayName}}}
                         {${firstExperience.location}}
                         {$firstExperienceRoleStartDate -- $firstExperienceRoleEndDate}
                         {}
                     
                     \cventry
                         {$secondExperienceRole}
-                        {${secondExperience.company.displayName}}
+                        {\iconhref{${secondExperience.company.url}}{${secondExperience.company.displayName}}}
                         {${secondExperience.location}}
                         {$secondExperienceRoleStartDate -- Present}
                         {}
@@ -100,7 +100,7 @@ class LatexAwesomeSyntaxFactoryTest : ResumeSyntaxFactoryTest() {
             \begin{cventries}
                 \cventry
                     {$role}
-                    {${experience.company.displayName}}
+                    {\iconhref{${experience.company.url}}{${experience.company.displayName}}}
                     {${experience.location}}
                     {$roleStartDate -- $roleEndDate}
                     {}
@@ -124,7 +124,7 @@ class LatexAwesomeSyntaxFactoryTest : ResumeSyntaxFactoryTest() {
             \begin{cventries}
                 \cventry
                     {$role}
-                    {${experience.company.displayName}}
+                    {\iconhref{${experience.company.url}}{${experience.company.displayName}}}
                     {${experience.location}}
                     {$roleStartDate -- $roleEndDate}
                     {
@@ -154,7 +154,7 @@ class LatexAwesomeSyntaxFactoryTest : ResumeSyntaxFactoryTest() {
             \begin{cventries}
                 \cventry
                     {$firstRole}
-                    {${company.displayName}}
+                    {\iconhref{${company.url}}{${company.displayName}}}
                     {${location}}
                     {$firstExperienceRoleStartDate -- $firstExperienceRoleEndDate}
                     {
@@ -189,7 +189,7 @@ class LatexAwesomeSyntaxFactoryTest : ResumeSyntaxFactoryTest() {
                     {}
                     {
                         \begin{cvitems}
-                            \item \textbf{${project.title.displayName}:} ${project.description}
+                            \item \textbf{\iconhref{${project.title.url}}{${project.title.displayName}}:} ${project.description}
                         \end{cvitems}
                     }
             \end{cventries}
@@ -202,7 +202,7 @@ class LatexAwesomeSyntaxFactoryTest : ResumeSyntaxFactoryTest() {
             \begin{cventries}
                 \cventry
                     {${degree.degree}}
-                    {${degree.institution.displayName}}
+                    {\iconhref{${degree.institution.url}}{${degree.institution.displayName}}}
                     {${degree.location}}
                     {$startDate -- Present}
                     {}
@@ -242,7 +242,7 @@ class LatexAwesomeSyntaxFactoryTest : ResumeSyntaxFactoryTest() {
                 \begin{cventries}
                     \cventry
                         {$role}
-                        {${experience.company.displayName}}
+                        {\iconhref{${experience.company.url}}{${experience.company.displayName}}}
                         {${experience.location}}
                         {$roleStartDate -- $roleEndDate}
                         {
@@ -262,7 +262,7 @@ class LatexAwesomeSyntaxFactoryTest : ResumeSyntaxFactoryTest() {
                         {}
                         {
                             \begin{cvitems}
-                                \item \textbf{${project.title.displayName}:} ${project.description}
+                                \item \textbf{\iconhref{${project.title.url}}{${project.title.displayName}}:} ${project.description}
                             \end{cvitems}
                         }
                 \end{cventries}
@@ -271,7 +271,7 @@ class LatexAwesomeSyntaxFactoryTest : ResumeSyntaxFactoryTest() {
                 \begin{cventries}
                     \cventry
                         {${degree.degree}}
-                        {${degree.institution.displayName}}
+                        {\iconhref{${degree.institution.url}}{${degree.institution.displayName}}}
                         {${degree.location}}
                         {$degreeStartDate -- Present}
                         {}
