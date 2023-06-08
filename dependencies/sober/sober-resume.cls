@@ -26,7 +26,7 @@
     footskip = 10.73pt,
 %showframe,
 ]{geometry}
-\RequirePackage{fontawesome}
+\RequirePackage{fontawesome5}
 
 % page formatting
 \pagestyle{fancy}
@@ -53,7 +53,7 @@
 
 % custom commands
 
-\newcommand{\iconhref}[2]{\href{#1}{#2~\textsuperscript{\tiny{\faExternalLink}}}}
+\newcommand{\iconhref}[2]{\href{#1}{#2~\textsuperscript{\tiny{\faExternalLink*}}}}
 
 % companyUrl, companyName, location, positionName, positionDate
 \newcommand{\employment}[5]{
