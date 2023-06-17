@@ -205,7 +205,6 @@ abstract class ResumeSyntaxFactoryTest {
         assertEquals(output, syntaxFactory.create())
     }
 
-
     @Test
     fun `can generate multiple roles`() {
         syntaxFactory.makeExperiences(Dataset.twoRoleExperienceWithBullets)
