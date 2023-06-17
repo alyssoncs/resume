@@ -9,6 +9,13 @@ permissions:
   contents: write
 
 jobs:
+  debug-release:
+    - name: Upload release
+      uses: softprops/action-gh-release@v1
+      if: startsWith(github.ref, 'refs/tags/')
+      with:
+        body: |
+          this is a test
   build-and-test-make-resume:
     runs-on: ubuntu-latest
     steps:
@@ -77,7 +84,7 @@ jobs:
             * `alysson-cirilo-fancy-resume.pdf` if you want a modern and colored resume.
             * `alysson-cirilo-sober-resume.pdf` if you want a classic sober resume.
             * `alysson-cirilo-markdown-resume.md` if you want a resume in markdown format.
-  delte-old-releases:
+  delete-old-releases:
     needs: [upload-resumes]
     runs-on: ubuntu-latest
     steps:
