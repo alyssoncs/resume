@@ -1,5 +1,6 @@
 package alysson.cirilo.resume.drivers.latexawesome
 
+import alysson.cirilo.resume.drivers.utils.indent.reindent
 import alysson.cirilo.resume.drivers.utils.syntaxfactory.ResumeSyntaxFactory
 import alysson.cirilo.resume.entities.BulletPoint
 import alysson.cirilo.resume.entities.BulletPointContent
@@ -238,8 +239,4 @@ class LatexAwesomeSyntaxFactory(
             )
         }"
     }
-
-    private val baseIndent = " ".repeat(4)
-    private fun String.reindent(indentLevel: Int) =
-        replaceIndent(baseIndent.repeat(indentLevel))
 }
