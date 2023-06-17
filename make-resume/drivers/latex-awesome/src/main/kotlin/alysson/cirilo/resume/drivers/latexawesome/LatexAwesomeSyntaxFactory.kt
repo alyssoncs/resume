@@ -217,7 +217,8 @@ class LatexAwesomeSyntaxFactory(
     }
 
     private fun makeProjectOrPublication(projectOrPublication: ProjectOrPublication): String {
-        return "\\textbf{\\iconhref{${projectOrPublication.title.url}}{${projectOrPublication.title.displayName}}:} ${projectOrPublication.description}"
+        return "\\textbf{\\iconhref{${projectOrPublication.title.url}}" +
+                "{${projectOrPublication.title.displayName}}:} ${projectOrPublication.description}"
     }
 
     private fun makeDegree(degree: Degree): String {
