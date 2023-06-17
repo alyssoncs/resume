@@ -8,4 +8,5 @@ repositories {
 
 dependencies {
     implementation(libs.kotlin.gradle)
+    implementation(libs.detekt.gradle)
 }
