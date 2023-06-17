@@ -10,12 +10,14 @@ permissions:
 
 jobs:
   debug-release:
-    - name: Upload release
-      uses: softprops/action-gh-release@v1
-      if: startsWith(github.ref, 'refs/tags/')
-      with:
-        body: |
-          this is a test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Upload release
+        uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          body: |
+            this is a test
   build-and-test-make-resume:
     runs-on: ubuntu-latest
     steps:
