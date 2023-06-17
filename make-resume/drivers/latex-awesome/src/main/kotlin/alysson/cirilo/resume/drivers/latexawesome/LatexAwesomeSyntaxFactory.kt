@@ -100,9 +100,11 @@ class LatexAwesomeSyntaxFactory(
         updateOutput(
             if (education.isEmpty()) ""
             else
-                ("\\begin{cventries}\n" +
+                (
+                    "\\begin{cventries}\n" +
                         education.joinToString("\n") { makeDegree(it) }.reindent(1) +
-                        "\n\\end{cventries}").reindent(currentIndent)
+                        "\n\\end{cventries}"
+                ).reindent(currentIndent)
         )
     }
 
