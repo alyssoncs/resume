@@ -22,13 +22,13 @@ data class Role(
         start: LocalDate,
         end: LocalDate,
         vararg bulletPoints: BulletPoint,
-    ): this(title, EnrollmentPeriod(start, EnrollmentPeriod.EndDate.Past(end)), bulletPoints.toList())
+    ) : this(title, EnrollmentPeriod(start, EnrollmentPeriod.EndDate.Past(end)), bulletPoints.toList())
 
     constructor(
         title: String,
         start: LocalDate,
         vararg bulletPoints: BulletPoint,
-    ): this(title, EnrollmentPeriod(start, EnrollmentPeriod.EndDate.Present), bulletPoints.toList())
+    ) : this(title, EnrollmentPeriod(start, EnrollmentPeriod.EndDate.Present), bulletPoints.toList())
 }
 
 data class BulletPoint(
@@ -50,10 +50,10 @@ data class BulletPoint(
 sealed interface BulletPointContent {
     val displayName: String
 
-    data class PlainText(override val displayName: String): BulletPointContent {
+    data class PlainText(override val displayName: String) : BulletPointContent {
         init { validate() }
     }
-    data class Skill(val skill: ProfessionalSkill): BulletPointContent {
+    data class Skill(val skill: ProfessionalSkill) : BulletPointContent {
         override val displayName: String = skill.value
 
         init { validate() }
