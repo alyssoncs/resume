@@ -168,16 +168,16 @@ class LatexAwesomeSyntaxFactory(
                 ${if (isFirstRole) "{${jobExperience.location}}" else "{}"}
                 {${makeWorkPeriod(role.period)}}
         """.trimIndent() +
-                "\n" +
-                if (role.bulletPoints.isEmpty()) {
-                    "{}".reindent(1)
-                } else {
-                    "{".reindent(1) +
-                            "\n" +
-                            makeBulletPoints(role.bulletPoints).reindent(2) +
-                            "\n" +
-                            "}".reindent(1)
-                }
+            "\n" +
+            if (role.bulletPoints.isEmpty()) {
+                "{}".reindent(1)
+            } else {
+                "{".reindent(1) +
+                    "\n" +
+                    makeBulletPoints(role.bulletPoints).reindent(2) +
+                    "\n" +
+                    "}".reindent(1)
+            }
     }
 
     private fun makeWorkPeriod(enrollmentPeriod: EnrollmentPeriod): String {
