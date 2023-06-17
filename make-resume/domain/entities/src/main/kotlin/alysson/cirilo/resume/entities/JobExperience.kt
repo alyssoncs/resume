@@ -64,4 +64,3 @@ sealed interface BulletPointContent {
             require(displayName.isNotBlank()) { "A bullet point content cannot be blank" }
     }
 }
-
