@@ -155,7 +155,7 @@ class LatexAwesomeSyntaxFactoryTest : ResumeSyntaxFactoryTest() {
                 \cventry
                     {$firstRole}
                     {\iconhref{${company.url}}{${company.displayName}}}
-                    {${location}}
+                    {$location}
                     {$firstExperienceRoleStartDate -- $firstExperienceRoleEndDate}
                     {
                         \begin{cvitems}
