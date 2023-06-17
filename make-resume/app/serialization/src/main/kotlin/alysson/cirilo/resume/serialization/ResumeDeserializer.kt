@@ -95,7 +95,6 @@ private fun mapRole(role: SerializableRole): Role {
     )
 }
 
-
 private fun mapEnrollmentPeriod(period: SerializableEnrollmentPeriod): EnrollmentPeriod {
     return EnrollmentPeriod(
         start = mapDate(period.from),
@@ -129,4 +128,3 @@ private fun mapBulletContent(bulletPoint: SerializableBulletPoint): BulletPointC
         SerializableBulletPoint.Type.Skill -> Skill(ProfessionalSkill(bulletPoint.content))
     }
 }
-
