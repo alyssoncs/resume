@@ -291,11 +291,11 @@ class LatexAwesomeSyntaxFactoryTest : ResumeSyntaxFactoryTest() {
 
     private fun wrapAroundDocument(header: String, content: String): String {
         return header +
-                "\n" +
-                "\\begin{document}\n" +
-                content.replaceIndent("    ") +
-                "\n" +
-                "\\end{document}" +
-                "\n"
+            "\n" +
+            "\\begin{document}\n" +
+            content.replaceIndent("    ") +
+            "\n" +
+            "\\end{document}" +
+            "\n"
     }
 }
