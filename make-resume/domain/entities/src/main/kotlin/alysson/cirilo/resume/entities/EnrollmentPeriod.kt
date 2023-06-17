@@ -7,7 +7,7 @@ data class EnrollmentPeriod(
     val end: EndDate,
 ) {
     sealed interface EndDate {
-        data class Past(val date: LocalDate): EndDate
-        object Present: EndDate
+        data class Past(val date: LocalDate) : EndDate
+        object Present : EndDate
     }
 }

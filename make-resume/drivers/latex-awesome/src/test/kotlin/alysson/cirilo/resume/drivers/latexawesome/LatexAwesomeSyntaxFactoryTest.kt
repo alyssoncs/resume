@@ -1,7 +1,7 @@
 package alysson.cirilo.resume.drivers.latexawesome
 
-import alysson.cirilo.resume.drivers.utils.syntaxfactory.ResumeSyntaxFactory
 import alysson.cirilo.resume.drivers.test.ResumeSyntaxFactoryTest
+import alysson.cirilo.resume.drivers.utils.syntaxfactory.ResumeSyntaxFactory
 import alysson.cirilo.resume.entities.ContactInformation
 import alysson.cirilo.resume.entities.Degree
 import alysson.cirilo.resume.entities.JobExperience
@@ -155,7 +155,7 @@ class LatexAwesomeSyntaxFactoryTest : ResumeSyntaxFactoryTest() {
                 \cventry
                     {$firstRole}
                     {\iconhref{${company.url}}{${company.displayName}}}
-                    {${location}}
+                    {$location}
                     {$firstExperienceRoleStartDate -- $firstExperienceRoleEndDate}
                     {
                         \begin{cvitems}
@@ -291,11 +291,11 @@ class LatexAwesomeSyntaxFactoryTest : ResumeSyntaxFactoryTest() {
 
     private fun wrapAroundDocument(header: String, content: String): String {
         return header +
-                "\n" +
-                "\\begin{document}\n" +
-                content.replaceIndent("    ") +
-                "\n" +
-                "\\end{document}" +
-                "\n"
+            "\n" +
+            "\\begin{document}\n" +
+            content.replaceIndent("    ") +
+            "\n" +
+            "\\end{document}" +
+            "\n"
     }
 }

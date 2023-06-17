@@ -51,9 +51,9 @@ class LatexSoberSyntaxFactory(
         sectionIndent?.let { theSectionIndent ->
             updateOutput(
                 "\n" +
-                        """
-                        \section{${name.replace("&", "\\textit{\\&}")}}
-                        """.reindent(theSectionIndent)
+                    """
+                    \section{${name.replace("&", "\\textit{\\&}")}}
+                    """.reindent(theSectionIndent)
             )
             currentIndent = theSectionIndent.inc()
         }

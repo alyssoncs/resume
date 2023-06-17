@@ -22,24 +22,26 @@ data class Role(
         start: LocalDate,
         end: LocalDate,
         vararg bulletPoints: BulletPoint,
-    ): this(title, EnrollmentPeriod(start, EnrollmentPeriod.EndDate.Past(end)), bulletPoints.toList())
+    ) : this(title, EnrollmentPeriod(start, EnrollmentPeriod.EndDate.Past(end)), bulletPoints.toList())
 
     constructor(
         title: String,
         start: LocalDate,
         vararg bulletPoints: BulletPoint,
-    ): this(title, EnrollmentPeriod(start, EnrollmentPeriod.EndDate.Present), bulletPoints.toList())
+    ) : this(title, EnrollmentPeriod(start, EnrollmentPeriod.EndDate.Present), bulletPoints.toList())
 }
 
 data class BulletPoint(
     val content: List<BulletPointContent>
 ) {
     constructor(vararg bullets: BulletPointContent) : this(bullets.toList())
-    constructor(vararg bullets: String) : this(bullets.mapIndexed { idx, bullet ->
-        if (idx % 2 != 0)
-            BulletPointContent.Skill(ProfessionalSkill(bullet))
-        else
-            BulletPointContent.PlainText(bullet) }
+    constructor(vararg bullets: String) : this(
+        bullets.mapIndexed { idx, bullet ->
+            if (idx % 2 != 0)
+                BulletPointContent.Skill(ProfessionalSkill(bullet))
+            else
+                BulletPointContent.PlainText(bullet)
+        }
     )
 
     init {
@@ -50,10 +52,10 @@ data class BulletPoint(
 sealed interface BulletPointContent {
     val displayName: String
 
-    data class PlainText(override val displayName: String): BulletPointContent {
+    data class PlainText(override val displayName: String) : BulletPointContent {
         init { validate() }
     }
-    data class Skill(val skill: ProfessionalSkill): BulletPointContent {
+    data class Skill(val skill: ProfessionalSkill) : BulletPointContent {
         override val displayName: String = skill.value
 
         init { validate() }
@@ -64,4 +66,3 @@ sealed interface BulletPointContent {
             require(displayName.isNotBlank()) { "A bullet point content cannot be blank" }
     }
 }
-

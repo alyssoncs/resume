@@ -84,11 +84,11 @@ class LatexAwesomeSyntaxFactory(
                     {}
                     {}
                     {
-        """.trimIndent() + "\n" +
-                    itemize(projectsAndPublications.map(::makeProjectOrPublication)).reindent(3) + "\n" +
-                    """
-                            }
-                    \end{cventries}
+            """.trimIndent() + "\n" +
+                itemize(projectsAndPublications.map(::makeProjectOrPublication)).reindent(3) + "\n" +
+                """
+                        }
+                \end{cventries}
                 """.trimIndent()
 
         updateOutput(
@@ -100,9 +100,11 @@ class LatexAwesomeSyntaxFactory(
         updateOutput(
             if (education.isEmpty()) ""
             else
-                ("\\begin{cventries}\n" +
+                (
+                    "\\begin{cventries}\n" +
                         education.joinToString("\n") { makeDegree(it) }.reindent(1) +
-                        "\n\\end{cventries}").reindent(currentIndent)
+                        "\n\\end{cventries}"
+                    ).reindent(currentIndent)
         )
     }
 
@@ -112,7 +114,7 @@ class LatexAwesomeSyntaxFactory(
         return template
             .replace(headerPlaceholder, awesomeHeader())
             .replace(contentPlaceholder, actualOutput.reindent(1)) +
-                "\n"
+            "\n"
     }
 
     private fun awesomeHeader(): String {
@@ -124,13 +126,15 @@ class LatexAwesomeSyntaxFactory(
             \email{${safeHeader.contactInformation.email.displayName}}
             \github{${safeHeader.contactInformation.github.displayName}}
             \linkedin{${safeHeader.contactInformation.linkedin.displayName}}
-        """.trimIndent()
+            """.trimIndent()
         } ?: ""
     }
 
     private fun makeJobExperiences(jobExperiences: List<JobExperience>): String? {
-        return if (jobExperiences.isEmpty()) null
-        else "\\begin{cventries}" + "\n" +
+        return if (jobExperiences.isEmpty())
+            null
+        else
+            "\\begin{cventries}" + "\n" +
                 jobExperiences.joinToString("\n\n") { makeJobExperience(it) }.reindent(1) +
                 "\n\\end{cventries}"
     }
@@ -164,16 +168,16 @@ class LatexAwesomeSyntaxFactory(
                 ${if (isFirstRole) "{${jobExperience.location}}" else "{}"}
                 {${makeWorkPeriod(role.period)}}
         """.trimIndent() +
-                "\n" +
-                if (role.bulletPoints.isEmpty()) {
-                    "{}".reindent(1)
-                } else {
-                    "{".reindent(1) +
-                            "\n" +
-                            makeBulletPoints(role.bulletPoints).reindent(2) +
-                            "\n" +
-                            "}".reindent(1)
-                }
+            "\n" +
+            if (role.bulletPoints.isEmpty()) {
+                "{}".reindent(1)
+            } else {
+                "{".reindent(1) +
+                    "\n" +
+                    makeBulletPoints(role.bulletPoints).reindent(2) +
+                    "\n" +
+                    "}".reindent(1)
+            }
     }
 
     private fun makeWorkPeriod(enrollmentPeriod: EnrollmentPeriod): String {
@@ -218,7 +222,7 @@ class LatexAwesomeSyntaxFactory(
 
     private fun makeProjectOrPublication(projectOrPublication: ProjectOrPublication): String {
         return "\\textbf{\\iconhref{${projectOrPublication.title.url}}" +
-                "{${projectOrPublication.title.displayName}}:} ${projectOrPublication.description}"
+            "{${projectOrPublication.title.displayName}}:} ${projectOrPublication.description}"
     }
 
     private fun makeDegree(degree: Degree): String {

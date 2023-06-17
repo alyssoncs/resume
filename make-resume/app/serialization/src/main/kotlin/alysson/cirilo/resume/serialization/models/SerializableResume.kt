@@ -21,7 +21,6 @@ data class SerializableContactInformation(
     val location: SerializableLinkedInformation,
 )
 
-
 @Serializable
 data class SerializableJobExperience(
     val company: SerializableLinkedInformation,
@@ -44,8 +43,11 @@ data class SerializableBulletPoint(
 
     @Serializable
     enum class Type {
-        @SerialName("plainText") PlainText,
-        @SerialName("skill") Skill,
+        @SerialName("plainText")
+        PlainText,
+
+        @SerialName("skill")
+        Skill,
     }
 }
 

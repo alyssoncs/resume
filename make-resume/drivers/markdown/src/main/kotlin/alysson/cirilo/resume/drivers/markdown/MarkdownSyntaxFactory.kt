@@ -62,8 +62,7 @@ class MarkdownSyntaxFactory(
 
     override fun makeEducation(education: List<Degree>) {
         updateOutput(
-            (if (education.isEmpty()) ""
-            else itemize(education.map(::makeDegree))).trimIndent()
+            (if (education.isEmpty()) "" else itemize(education.map(::makeDegree))).trimIndent()
         )
     }
 
@@ -80,7 +79,7 @@ class MarkdownSyntaxFactory(
             ### [${jobExperience.company.displayName}](${jobExperience.company.url})
             - ${jobExperience.location}
         """.trimIndent() + "\n\n" +
-                jobExperience.roles.joinToString(separator = "\n\n") { makeRole(it) }
+            jobExperience.roles.joinToString(separator = "\n\n") { makeRole(it) }
     }
 
     private fun makeRole(role: Role): String {
