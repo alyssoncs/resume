@@ -6,4 +6,3 @@ data class ContactInformation(
     val github: LinkedInformation,
     val location: LinkedInformation,
 )
-
