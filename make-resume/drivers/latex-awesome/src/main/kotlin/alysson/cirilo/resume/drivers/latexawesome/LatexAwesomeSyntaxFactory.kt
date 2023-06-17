@@ -114,7 +114,7 @@ class LatexAwesomeSyntaxFactory(
         return template
             .replace(headerPlaceholder, awesomeHeader())
             .replace(contentPlaceholder, actualOutput.reindent(1)) +
-                "\n"
+            "\n"
     }
 
     private fun awesomeHeader(): String {
