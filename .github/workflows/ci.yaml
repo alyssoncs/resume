@@ -30,7 +30,7 @@ jobs:
       - name: Lint
         uses: gradle/gradle-build-action@v2
         with:
-          arguments: detekt
+          arguments: detektMain detektTest
           build-root-directory: make-resume
   make-resumes:
     runs-on: ubuntu-latest
