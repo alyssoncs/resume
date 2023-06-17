@@ -79,7 +79,7 @@ class MarkdownSyntaxFactory(
         return """
             ### [${jobExperience.company.displayName}](${jobExperience.company.url})
             - ${jobExperience.location}
-        """.trimIndent() + "\n\n" +
+            """.trimIndent() + "\n\n" +
                 jobExperience.roles.joinToString(separator = "\n\n") { makeRole(it) }
     }
 
