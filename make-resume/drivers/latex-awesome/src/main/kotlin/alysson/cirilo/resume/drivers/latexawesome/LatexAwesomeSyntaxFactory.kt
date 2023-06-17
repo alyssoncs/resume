@@ -126,7 +126,7 @@ class LatexAwesomeSyntaxFactory(
             \email{${safeHeader.contactInformation.email.displayName}}
             \github{${safeHeader.contactInformation.github.displayName}}
             \linkedin{${safeHeader.contactInformation.linkedin.displayName}}
-        """.trimIndent()
+            """.trimIndent()
         } ?: ""
     }
 
