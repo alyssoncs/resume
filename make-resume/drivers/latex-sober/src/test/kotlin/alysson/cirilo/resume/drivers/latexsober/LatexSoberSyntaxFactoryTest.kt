@@ -1,4 +1,4 @@
-package alysson.cirilo.resume.drivers
+package alysson.cirilo.resume.drivers.latexsober
 
 import alysson.cirilo.resume.drivers.utils.syntaxfactory.ResumeSyntaxFactory
 import alysson.cirilo.resume.drivers.test.ResumeSyntaxFactoryTest
@@ -7,7 +7,6 @@ import alysson.cirilo.resume.entities.Degree
 import alysson.cirilo.resume.entities.JobExperience
 import alysson.cirilo.resume.entities.LinkedInformation
 import alysson.cirilo.resume.entities.ProjectOrPublication
-import alysson.cirilo.resume.drivers.latexsober.LatexSoberSyntaxFactory
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import java.time.format.DateTimeFormatter
