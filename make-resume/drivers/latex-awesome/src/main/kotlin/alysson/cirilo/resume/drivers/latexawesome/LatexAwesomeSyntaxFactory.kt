@@ -127,7 +127,7 @@ class LatexAwesomeSyntaxFactory(
             \github{${safeHeader.contactInformation.github.displayName}}
             \linkedin{${safeHeader.contactInformation.linkedin.displayName}}
             """.trimIndent()
-        } ?: ""
+        }.orEmpty()
     }
 
     private fun makeJobExperiences(jobExperiences: List<JobExperience>): String? {
