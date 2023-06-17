@@ -84,11 +84,11 @@ class LatexAwesomeSyntaxFactory(
                     {}
                     {}
                     {
-        """.trimIndent() + "\n" +
-                    itemize(projectsAndPublications.map(::makeProjectOrPublication)).reindent(3) + "\n" +
-                    """
-                            }
-                    \end{cventries}
+            """.trimIndent() + "\n" +
+                itemize(projectsAndPublications.map(::makeProjectOrPublication)).reindent(3) + "\n" +
+                """
+                        }
+                \end{cventries}
                 """.trimIndent()
 
         updateOutput(
