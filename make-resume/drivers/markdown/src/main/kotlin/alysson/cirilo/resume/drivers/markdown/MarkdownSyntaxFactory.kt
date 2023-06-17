@@ -62,8 +62,7 @@ class MarkdownSyntaxFactory(
 
     override fun makeEducation(education: List<Degree>) {
         updateOutput(
-            (if (education.isEmpty()) ""
-            else itemize(education.map(::makeDegree))).trimIndent()
+            (if (education.isEmpty()) "" else itemize(education.map(::makeDegree))).trimIndent()
         )
     }
 
