@@ -131,8 +131,10 @@ class LatexAwesomeSyntaxFactory(
     }
 
     private fun makeJobExperiences(jobExperiences: List<JobExperience>): String? {
-        return if (jobExperiences.isEmpty()) null
-        else "\\begin{cventries}" + "\n" +
+        return if (jobExperiences.isEmpty())
+            null
+        else
+            "\\begin{cventries}" + "\n" +
                 jobExperiences.joinToString("\n\n") { makeJobExperience(it) }.reindent(1) +
                 "\n\\end{cventries}"
     }
