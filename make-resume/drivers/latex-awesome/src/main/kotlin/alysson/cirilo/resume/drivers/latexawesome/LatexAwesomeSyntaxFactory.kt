@@ -104,7 +104,7 @@ class LatexAwesomeSyntaxFactory(
                     "\\begin{cventries}\n" +
                         education.joinToString("\n") { makeDegree(it) }.reindent(1) +
                         "\n\\end{cventries}"
-                ).reindent(currentIndent)
+                    ).reindent(currentIndent)
         )
     }
 
