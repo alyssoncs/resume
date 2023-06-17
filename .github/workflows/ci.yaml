@@ -11,7 +11,7 @@ permissions:
   contents: write
 
 jobs:
-  build-and-test-make-resume:
+  make-resume-ci:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -26,6 +26,11 @@ jobs:
         uses: gradle/gradle-build-action@v2
         with:
           arguments: build
+          build-root-directory: make-resume
+      - name: Lint
+        uses: gradle/gradle-build-action@v2
+        with:
+          arguments: detekt
           build-root-directory: make-resume
   make-resumes:
     runs-on: ubuntu-latest
@@ -52,7 +57,7 @@ jobs:
             output/markdown/alysson-cirilo-resume.md
           retention-days: 1
   upload-resumes:
-    needs: [build-and-test-make-resume, make-resumes]
+    needs: [make-resume-ci, make-resumes]
     runs-on: ubuntu-latest
     steps:
       - name: Download resumes
