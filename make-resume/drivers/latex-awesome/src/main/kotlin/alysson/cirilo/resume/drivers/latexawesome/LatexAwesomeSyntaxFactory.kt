@@ -72,6 +72,7 @@ class LatexAwesomeSyntaxFactory(
     }
 
     override fun makeProjectsAndPublications(projectsAndPublications: List<ProjectOrPublication>) {
+        val indentLevel = 3
         val projectsAndPublicationsStr = if (projectsAndPublications.isEmpty())
             ""
         else
@@ -85,7 +86,8 @@ class LatexAwesomeSyntaxFactory(
                     {}
                     {
             """.trimIndent() + "\n" +
-                itemize(projectsAndPublications.map(::makeProjectOrPublication)).reindent(3) + "\n" +
+                itemize(projectsAndPublications.map(::makeProjectOrPublication))
+                    .reindent(indentLevel) + "\n" +
                 """
                         }
                 \end{cventries}
