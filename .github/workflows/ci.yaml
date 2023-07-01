@@ -84,14 +84,4 @@ jobs:
             * `alysson-cirilo-fancy-resume.pdf` if you want a modern and colored resume.
             * `alysson-cirilo-sober-resume.pdf` if you want a classic sober resume.
             * `alysson-cirilo-markdown-resume.md` if you want a resume in markdown format.
-  delete-old-releases:
-    needs: [upload-resumes]
-    runs-on: ubuntu-latest
-    steps:
-      - name: Delete old releases
-        uses: dev-drprasad/delete-older-releases@v0.2.1
-        with:
-          keep_latest: 1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
