@@ -85,13 +85,7 @@
                         [
                             {
                                 "type": "plainText",
-                                "content": "Developed an indoor location system."
-                            }
-                        ],
-                        [
-                            {
-                                "type": "plainText",
-                                "content": "Developed a system that manages the relationships between users, bluetooth beacons and physical spaces using "
+                                "content": "Developed a system that manages the relationships between users, bluetooth beacons and physical spaces with "
                             },
                             {
                                 "type": "skill",
@@ -105,7 +99,7 @@
                         [
                             {
                                 "type": "plainText",
-                                "content": "Developed Android application that detects bluetooth beacons and registers this encounter in a web service using "
+                                "content": "Developed Android application that detects bluetooth beacons and registers this encounter in a web service with "
                             },
                             {
                                 "type": "skill",
@@ -323,13 +317,13 @@
                         [
                             {
                                 "type": "plainText",
-                                "content": "Implemented dependency injection model for checkout plugins to solve inefficient manual injection."
+                                "content": "Implemented dependency injection model for checkout plugins with Dagger to solve previously inefficient manual injection approach."
                             }
                         ],
                         [
                             {
                                 "type": "plainText",
-                                "content": "Implemented dynamic onboarding, allowing PMs to control the order and timing of onboarding based on remote configs and plugin availability. Improving user engagement and educating users on effective checkout feature usage."
+                                "content": "Implemented dynamic onboarding, allowing PMs to control the order and timing of onboarding based on remote configs and plugin availability, improving user engagement and educating users on effective checkout feature usage."
                             }
                         ]
                     ]
@@ -344,7 +338,7 @@
             "location": "Remote, Brazil",
             "roles": [
                 {
-                    "title": "Android Developer I",
+                    "title": "Software Engineer II",
                     "period": {
                         "from": "07-2022",
                         "to": "now"
@@ -353,19 +347,13 @@
                         [
                             {
                                 "type": "plainText",
-                                "content": "Worked on a geographically distributed team."
+                                "content": "Worked on a geographically distributed team delivering features on the voice assistant in Outlook Android app."
                             }
                         ],
                         [
                             {
                                 "type": "plainText",
-                                "content": "Delivered features on the voice assistant in Outlook Android app."
-                            }
-                        ],
-                        [
-                            {
-                                "type": "plainText",
-                                "content": "Worked on the M365 copilot on Outlook mobile powered by GPT-4 using "
+                                "content": "Developed a set of libraries so that mobile apps can seamlessly integrate the Microsoft Business Chat experience powered by GPT-4 using "
                             },
                             {
                                 "type": "skill",
@@ -379,7 +367,27 @@
                         [
                             {
                                 "type": "plainText",
-                                "content": "Developed a flexible dependency injection model for a library that integrates with host apps without exposing the framework."
+                                "content": "Designed and led the development of a dependency injection model for that does not exposes the framework to host apps."
+                            }
+                        ],
+                        [
+                            {
+                                "type": "plainText",
+                                "content": "Adapted a callback-based Chat SDK to reactive programming with "
+                            },
+                            {
+                                "type": "skill",
+                                "content": "Kotlin Flow"
+                            },
+                            {
+                                "type": "plainText",
+                                "content": " making the codebase easier to maintain."
+                            }
+                        ],
+                        [
+                            {
+                                "type": "plainText",
+                                "content": "Integrated a common set of static analysis and lint rule in all the libraries that allowed code reviews to focus on architecturally significant decisions instead of small details."
                             }
                         ]
                     ]

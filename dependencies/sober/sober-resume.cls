@@ -64,7 +64,7 @@
 % companyUrl, companyName, location
 \newcommand{\company}[3]{
     \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
-        \iconhref{#1}{\textbf{#2}} & {\small#3}\\
+        \iconhref{#1}{\textbf{#2}} & {\textbf{\small#3}}\\
     \end{tabular*}
 }
 
