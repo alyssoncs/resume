@@ -17,6 +17,7 @@ test-truth = { module = "com.google.truth:truth", version.ref = "truth" }
 
 # :build-logic
 kotlin-gradle = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
+kotlin-serialization-gradle = { module = "org.jetbrains.kotlin:kotlin-serialization", version.ref = "kotlin" }
 detekt-gradle = { module = "io.gitlab.arturbosch.detekt:detekt-gradle-plugin", version.ref = "detekt" }
 detekt-formatting = { module = "io.gitlab.arturbosch.detekt:detekt-formatting", version.ref = "detekt" }
 
