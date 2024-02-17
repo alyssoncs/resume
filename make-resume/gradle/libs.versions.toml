@@ -5,7 +5,7 @@ junit = "5.10.2"
 kotlin = "1.9.22"
 kotlin-serialization-json = "1.6.3"
 kotlinx-cli = "0.3.6"
-truth = "1.1.5"
+truth = "1.4.1"
 
 [libraries]
 kotlinx-cli = { module = "org.jetbrains.kotlinx:kotlinx-cli", version.ref = "kotlinx-cli" }
