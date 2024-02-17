@@ -3,7 +3,7 @@ detekt = "1.23.5"
 java = "17"
 junit = "5.10.2"
 kotlin = "1.9.22"
-kotlin-serialization-json = "1.6.0"
+kotlin-serialization-json = "1.6.3"
 kotlinx-cli = "0.3.6"
 truth = "1.1.5"
 
