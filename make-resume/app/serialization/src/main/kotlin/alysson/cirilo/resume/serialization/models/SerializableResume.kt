@@ -4,7 +4,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class SerializableResume(
+internal data class SerializableResume(
     val name: String,
     val headline: List<String>,
     val contactInfo: SerializableContactInformation,
@@ -14,7 +14,7 @@ data class SerializableResume(
 )
 
 @Serializable
-data class SerializableContactInformation(
+internal data class SerializableContactInformation(
     val email: SerializableLinkedInformation,
     val linkedin: SerializableLinkedInformation,
     val github: SerializableLinkedInformation,
@@ -22,21 +22,21 @@ data class SerializableContactInformation(
 )
 
 @Serializable
-data class SerializableJobExperience(
+internal data class SerializableJobExperience(
     val company: SerializableLinkedInformation,
     val location: String,
     val roles: List<SerializableRole>,
 )
 
 @Serializable
-data class SerializableRole(
+internal data class SerializableRole(
     val title: String,
     val period: SerializableEnrollmentPeriod,
     val bulletPoints: List<List<SerializableBulletPoint>>,
 )
 
 @Serializable
-data class SerializableBulletPoint(
+internal data class SerializableBulletPoint(
     val type: Type,
     val content: String,
 ) {
@@ -52,13 +52,13 @@ data class SerializableBulletPoint(
 }
 
 @Serializable
-data class SerializableProjectOrPublication(
+internal data class SerializableProjectOrPublication(
     val title: SerializableLinkedInformation,
     val description: String,
 )
 
 @Serializable
-data class SerializableDegree(
+internal data class SerializableDegree(
     val institution: SerializableLinkedInformation,
     val location: String,
     val degree: String,
@@ -66,13 +66,13 @@ data class SerializableDegree(
 )
 
 @Serializable
-data class SerializableLinkedInformation(
+internal data class SerializableLinkedInformation(
     val displayName: String,
     val url: String,
 )
 
 @Serializable
-data class SerializableEnrollmentPeriod(
+internal data class SerializableEnrollmentPeriod(
     val from: String,
     val to: String = CURRENT,
 ) {
