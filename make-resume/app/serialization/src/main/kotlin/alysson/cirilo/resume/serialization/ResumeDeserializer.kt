@@ -23,7 +23,7 @@ import alysson.cirilo.resume.serialization.models.SerializableProjectOrPublicati
 import alysson.cirilo.resume.serialization.models.SerializableResume
 import alysson.cirilo.resume.serialization.models.SerializableRole
 import kotlinx.serialization.json.Json
-import java.net.URL
+import java.net.URI
 import java.time.YearMonth
 import java.time.format.DateTimeFormatter
 import java.util.Locale
@@ -82,7 +82,7 @@ private fun mapDegree(degree: SerializableDegree): Degree {
 private fun mapLinkedInfo(info: SerializableLinkedInformation): LinkedInformation {
     return LinkedInformation(
         displayName = info.displayName,
-        url = URL(info.url),
+        url = URI(info.url).toURL(),
     )
 }
 

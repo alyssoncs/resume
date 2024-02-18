@@ -1,5 +1,6 @@
 package alysson.cirilo.resume.entities
 
+import java.net.URI
 import java.net.URL
 
 class LinkedInformationBuilder private constructor(
@@ -8,7 +9,7 @@ class LinkedInformationBuilder private constructor(
 ) {
     constructor() : this(
         displayName = "cool information",
-        url = URL("https://www.example.com"),
+        url = URI("https://www.example.com").toURL(),
     )
 
     fun displaying(displayName: String) = LinkedInformationBuilder(displayName, url)

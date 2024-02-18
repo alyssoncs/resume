@@ -1,5 +1,6 @@
 package alysson.cirilo.resume.entities
 
+import java.net.URI
 import java.net.URL
 
 class ProjectOrPublicationBuilder private constructor(
@@ -16,7 +17,7 @@ class ProjectOrPublicationBuilder private constructor(
     fun named(name: String) = ProjectOrPublicationBuilder(name, url, description)
 
     fun hostedOn(urlSpec: String) =
-        ProjectOrPublicationBuilder(projectName, URL(urlSpec), description)
+        ProjectOrPublicationBuilder(projectName, URI(urlSpec).toURL(), description)
 
     fun description(description: String) =
         ProjectOrPublicationBuilder(projectName, url, description)
