@@ -78,11 +78,11 @@ data class SerializableEnrollmentPeriod(
 ) {
     init {
         require(dateRegex.matches(from)) {
-            "\"from\" should be in the \"dd-yyyy\" format, but was $from"
+            "\"from\" should be in the \"MM-yyyy\" format, but was $from"
         }
 
         require(dateRegex.matches(to) || to == CURRENT) {
-            "\"to\" should be \"$CURRENT\" or be in the \"dd-yyyy\" format, but was \"$to\""
+            "\"to\" should be \"$CURRENT\" or be in the \"MM-yyyy\" format, but was \"$to\""
         }
     }
 
