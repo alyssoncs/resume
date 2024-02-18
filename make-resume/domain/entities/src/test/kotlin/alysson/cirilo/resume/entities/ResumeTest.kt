@@ -95,7 +95,7 @@ class ResumeTest {
     }
 
     @Test
-    fun `resume with skills on bullet points should have skills on the same order`() {
+    fun `resume with skills on bullet points should have the same skills`() {
         val resume = aResume()
             .with(
                 aJobExperience()
@@ -135,7 +135,47 @@ class ResumeTest {
             ProfessionalSkill("jetpack compose"),
             ProfessionalSkill("retrofit"),
             ProfessionalSkill("android"),
-        ).inOrder()
+        )
+    }
+
+    @Test
+    fun `resume with duplicated skills on bullet points should have the unique skills`() {
+        val resume = aResume()
+            .with(
+                aJobExperience()
+                    .with(
+                        aRole()
+                            .with(
+                                anEmptyBulletPoint()
+                                    .appendText("worked with ")
+                                    .appendSkill("kotlin"),
+                            )
+                            .and(
+                                anEmptyBulletPoint()
+                                    .appendText("created layouts in ")
+                                    .appendSkill("jetpack compose")
+                                    .appendText("using ")
+                                    .appendSkill("kotlin"),
+                            ),
+                    )
+                    .and(
+                        aRole()
+                            .with(aBulletPoint().thatReads("no skills here"))
+                            .and(
+                                anEmptyBulletPoint()
+                                    .appendText("worked with ")
+                                    .appendSkill("retrofit"),
+                            ),
+                    ),
+            )
+            .build()
+
+        assertThat(resume.skills).hasSize(3)
+        assertThat(resume.skills).containsExactly(
+            ProfessionalSkill("kotlin"),
+            ProfessionalSkill("jetpack compose"),
+            ProfessionalSkill("retrofit"),
+        )
     }
 
     @Test
