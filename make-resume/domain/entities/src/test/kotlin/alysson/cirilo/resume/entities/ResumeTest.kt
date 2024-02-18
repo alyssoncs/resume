@@ -197,15 +197,11 @@ class ResumeTest {
     @Test
     fun `roles can be reversed`() {
         val chronologicalExperiences = listOf(
-            aJobExperience().with(
-                listOf(
-                    aRole().`as`("SWE 1"),
-                    aRole().`as`("SWE 2"),
-                ),
-            ),
-            aJobExperience().with(
-                aRole().`as`("SWE 3"),
-            ),
+            aJobExperience()
+                .with(aRole().`as`("SWE 1"))
+                .and(aRole().`as`("SWE 2")),
+            aJobExperience()
+                .with(aRole().`as`("SWE 3")),
         )
 
         val reversedResume = aResume()
