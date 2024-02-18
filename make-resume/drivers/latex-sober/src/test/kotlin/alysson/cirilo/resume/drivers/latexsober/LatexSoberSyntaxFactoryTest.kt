@@ -7,7 +7,7 @@ import alysson.cirilo.resume.entities.Degree
 import alysson.cirilo.resume.entities.JobExperience
 import alysson.cirilo.resume.entities.LinkedInformation
 import alysson.cirilo.resume.entities.ProjectOrPublication
-import org.junit.jupiter.api.Assertions.assertEquals
+import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
 import java.time.format.DateTimeFormatter
 
@@ -244,10 +244,7 @@ class LatexSoberSyntaxFactoryTest : ResumeSyntaxFactoryTest() {
     fun `ampersand in the section should be italic`() {
         syntaxFactory.startSection("this & that")
 
-        assertEquals(
-            wrapAroundDocument("\\section{this \\textit{\\&} that}"),
-            syntaxFactory.create(),
-        )
+        wrapAroundDocument("\\section{this \\textit{\\&} that}") shouldBe syntaxFactory.create()
     }
 
     private fun wrapAroundDocument(content: String): String {
