@@ -6,7 +6,6 @@ kotest = "5.8.0"
 kotlin = "1.9.22"
 kotlin-serialization-json = "1.6.3"
 kotlinx-cli = "0.3.6"
-truth = "1.4.1"
 
 [libraries]
 kotlinx-cli = { module = "org.jetbrains.kotlinx:kotlinx-cli", version.ref = "kotlinx-cli" }
@@ -15,7 +14,6 @@ test-junit-api = { module = "org.junit.jupiter:junit-jupiter-api", version.ref =
 test-junit-engine = { module = "org.junit.jupiter:junit-jupiter-engine", version.ref = "junit" }
 test-junit-params = { module = "org.junit.jupiter:junit-jupiter-params", version.ref = "junit" }
 test-kotest-assertions = { module = "io.kotest:kotest-assertions-core", version.ref = "kotest" }
-test-truth = { module = "com.google.truth:truth", version.ref = "truth" }
 
 # :build-logic
 kotlin-gradle = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
@@ -24,7 +22,7 @@ detekt-gradle = { module = "io.gitlab.arturbosch.detekt:detekt-gradle-plugin", v
 detekt-formatting = { module = "io.gitlab.arturbosch.detekt:detekt-formatting", version.ref = "detekt" }
 
 [bundles]
-unitTest = ["test-junit-api", "test-junit-params", "test-truth", "test-kotest-assertions"]
+unitTest = ["test-junit-api", "test-junit-params", "test-kotest-assertions"]
 
 [plugins]
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
