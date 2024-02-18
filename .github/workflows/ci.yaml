@@ -48,7 +48,7 @@ jobs:
       - name: Make resumes
         run: make
       - name: Share resumes
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: resumes
           path: |
