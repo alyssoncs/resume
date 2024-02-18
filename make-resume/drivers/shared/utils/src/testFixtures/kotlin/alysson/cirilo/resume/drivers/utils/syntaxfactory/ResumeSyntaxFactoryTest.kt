@@ -21,7 +21,7 @@ import alysson.cirilo.resume.entities.period
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
-import java.time.LocalDate
+import java.time.YearMonth
 import java.time.format.DateTimeFormatter
 import java.util.Locale
 
@@ -295,7 +295,7 @@ abstract class ResumeSyntaxFactoryTest {
         assertEquals(output, syntaxFactory.create())
     }
 
-    private fun EnrollmentPeriod.EndDate.toDate(): LocalDate {
+    private fun EnrollmentPeriod.EndDate.toDate(): YearMonth {
         return (this as EnrollmentPeriod.EndDate.Past).date
     }
 

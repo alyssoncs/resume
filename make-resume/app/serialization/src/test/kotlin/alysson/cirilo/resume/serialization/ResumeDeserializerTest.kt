@@ -5,7 +5,7 @@ import alysson.cirilo.resume.entities.EnrollmentPeriod.EndDate.Past
 import alysson.cirilo.resume.entities.EnrollmentPeriod.EndDate.Present
 import com.google.common.truth.Truth.assertThat
 import org.junit.jupiter.api.Test
-import java.time.LocalDate
+import java.time.YearMonth
 
 class ResumeDeserializerTest {
     private val jsonResume: String = "/test-resume.json".asResource()
@@ -87,10 +87,10 @@ class ResumeDeserializerTest {
     fun `should contain the role period`() {
         val roles = resume.jobExperiences.first().roles
 
-        assertThat(roles[0].period.start).isEqualTo(LocalDate.of(2022, 2, 1))
-        assertThat(roles[0].period.end).isEqualTo(Past(LocalDate.of(2022, 12, 1)))
+        assertThat(roles[0].period.start).isEqualTo(YearMonth.of(2022, 2))
+        assertThat(roles[0].period.end).isEqualTo(Past(2022, 12))
 
-        assertThat(roles[1].period.start).isEqualTo(LocalDate.of(2022, 12, 1))
+        assertThat(roles[1].period.start).isEqualTo(YearMonth.of(2022, 12))
         assertThat(roles[1].period.end).isEqualTo(Present)
     }
 
@@ -146,8 +146,8 @@ class ResumeDeserializerTest {
         assertThat(degree.institution.url.toString()).isEqualTo("https://www.topinstitution.edu")
         assertThat(degree.location).isEqualTo("Brazil")
         assertThat(degree.degree).isEqualTo("BSc. in Computer Science")
-        assertThat(degree.period.start).isEqualTo(LocalDate.of(2018, 1, 1))
-        assertThat(degree.period.end).isEqualTo(Past(LocalDate.of(2022, 1, 1)))
+        assertThat(degree.period.start).isEqualTo(YearMonth.of(2018, 1))
+        assertThat(degree.period.end).isEqualTo(Past(2022, 1))
     }
 
     private fun String.asResource(): String {

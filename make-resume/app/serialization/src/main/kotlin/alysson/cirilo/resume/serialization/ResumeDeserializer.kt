@@ -24,7 +24,6 @@ import alysson.cirilo.resume.serialization.models.SerializableResume
 import alysson.cirilo.resume.serialization.models.SerializableRole
 import kotlinx.serialization.json.Json
 import java.net.URL
-import java.time.LocalDate
 import java.time.YearMonth
 import java.time.format.DateTimeFormatter
 import java.util.Locale
@@ -109,9 +108,9 @@ private fun mapEndDate(period: SerializableEnrollmentPeriod): EnrollmentPeriod.E
         EnrollmentPeriod.EndDate.Past(mapDate(period.to))
 }
 
-private fun mapDate(strDate: String): LocalDate {
+private fun mapDate(strDate: String): YearMonth {
     val formatter = DateTimeFormatter.ofPattern("MM-yyyy").withLocale(Locale.US)
-    return YearMonth.parse(strDate, formatter).atDay(1)
+    return YearMonth.parse(strDate, formatter)
 }
 
 private fun mapBulletPoints(it: SerializableRole): List<BulletPoint> {
