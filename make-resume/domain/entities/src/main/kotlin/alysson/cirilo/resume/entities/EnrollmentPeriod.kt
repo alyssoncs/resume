@@ -11,6 +11,6 @@ data class EnrollmentPeriod(
             constructor(year: Int, month: Int) : this(YearMonth.of(year, month))
         }
 
-        object Present : EndDate
+        data object Present : EndDate
     }
 }
