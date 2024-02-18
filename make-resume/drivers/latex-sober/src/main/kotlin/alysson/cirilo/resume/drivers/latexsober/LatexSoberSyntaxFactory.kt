@@ -12,7 +12,7 @@ import alysson.cirilo.resume.entities.ProjectOrPublication
 import alysson.cirilo.resume.entities.Role
 import java.time.format.DateTimeFormatter
 
-class LatexSoberSyntaxFactory(
+internal class LatexSoberSyntaxFactory(
     private val template: String,
     private val contentPlaceholder: String,
     private val workDateFormatter: DateTimeFormatter,
