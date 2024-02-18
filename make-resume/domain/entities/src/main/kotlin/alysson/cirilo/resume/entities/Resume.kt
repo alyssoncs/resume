@@ -12,7 +12,7 @@ data class Resume(
         this.copy(
             jobExperiences = this.jobExperiences.reversed().map { jobExperience ->
                 jobExperience.copy(roles = jobExperience.roles.reversed())
-            }
+            },
         )
     }
 

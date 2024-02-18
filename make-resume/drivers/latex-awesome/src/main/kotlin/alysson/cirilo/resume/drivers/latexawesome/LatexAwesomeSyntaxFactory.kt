@@ -93,7 +93,7 @@ class LatexAwesomeSyntaxFactory(
                 """.trimIndent()
 
         updateOutput(
-            projectsAndPublicationsStr.reindent(currentIndent)
+            projectsAndPublicationsStr.reindent(currentIndent),
         )
     }
 
@@ -105,7 +105,7 @@ class LatexAwesomeSyntaxFactory(
                     "\\begin{cventries}\n" +
                         education.joinToString("\n") { makeDegree(it) }.reindent(1) +
                         "\n\\end{cventries}"
-                    ).reindent(currentIndent)
+                    ).reindent(currentIndent),
         )
     }
 
@@ -185,7 +185,7 @@ class LatexAwesomeSyntaxFactory(
         return "${workDateFormatter.format(enrollmentPeriod.start)} -- ${
             makeEndDate(
                 workDateFormatter,
-                enrollmentPeriod.end
+                enrollmentPeriod.end,
             )
         }"
     }
@@ -241,7 +241,7 @@ class LatexAwesomeSyntaxFactory(
         return "${educationDateFormatter.format(enrollmentPeriod.start)} -- ${
             makeEndDate(
                 educationDateFormatter,
-                enrollmentPeriod.end
+                enrollmentPeriod.end,
             )
         }"
     }

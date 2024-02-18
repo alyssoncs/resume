@@ -34,7 +34,7 @@ class MarkdownSyntaxFactory(
                 - [${contactInformation.linkedin.displayName}](${contactInformation.linkedin.url})
                 - [${contactInformation.github.displayName}](${contactInformation.github.url})
                 - [${contactInformation.location.displayName}](${contactInformation.location.url})
-            """.trimIndent()
+            """.trimIndent(),
         )
     }
 
@@ -45,7 +45,7 @@ class MarkdownSyntaxFactory(
 
     override fun makeExperiences(jobExperiences: List<JobExperience>) {
         updateOutput(
-            makeJobExperiences(jobExperiences)
+            makeJobExperiences(jobExperiences),
         )
     }
 
@@ -56,13 +56,13 @@ class MarkdownSyntaxFactory(
             itemize(projectsAndPublications.map(::makeProjectOrPublication))
 
         updateOutput(
-            projectsAndPublicationsStr.trimIndent()
+            projectsAndPublicationsStr.trimIndent(),
         )
     }
 
     override fun makeEducation(education: List<Degree>) {
         updateOutput(
-            (if (education.isEmpty()) "" else itemize(education.map(::makeDegree))).trimIndent()
+            (if (education.isEmpty()) "" else itemize(education.map(::makeDegree))).trimIndent(),
         )
     }
 
@@ -141,7 +141,7 @@ class MarkdownSyntaxFactory(
         return """
                 **[${degree.institution.displayName}](${degree.institution.url})**: ${degree.degree} (${degree.location} ${
             makeEduPeriod(
-                degree.period
+                degree.period,
             )
         })
         """.trimIndent()
@@ -151,7 +151,7 @@ class MarkdownSyntaxFactory(
         return "${educationDateFormatter.format(enrollmentPeriod.start)} – ${
             makeEndDate(
                 educationDateFormatter,
-                enrollmentPeriod.end
+                enrollmentPeriod.end,
             )
         }"
     }

@@ -51,7 +51,7 @@ class MarkdownSyntaxFactoryTest : ResumeSyntaxFactoryTest() {
         firstExperienceRoleEndDate: String,
         secondExperience: JobExperience,
         secondExperienceRole: String,
-        secondExperienceRoleStartDate: String
+        secondExperienceRoleStartDate: String,
     ): String {
         return """
             ### [${firstExperience.company.displayName}](${firstExperience.company.url})
@@ -73,7 +73,7 @@ class MarkdownSyntaxFactoryTest : ResumeSyntaxFactoryTest() {
         experience: JobExperience,
         role: String,
         roleStartDate: String,
-        roleEndDate: String
+        roleEndDate: String,
     ): String {
         return """
             ### [${experience.company.displayName}](${experience.company.url})
@@ -94,7 +94,7 @@ class MarkdownSyntaxFactoryTest : ResumeSyntaxFactoryTest() {
         secondBullet: String,
         thirdBulletFirstPart: String,
         thirdBulletSecondPart: String,
-        thirdBulletThirdPart: String
+        thirdBulletThirdPart: String,
     ): String {
         return """
             ### [${experience.company.displayName}](${experience.company.url})
@@ -118,7 +118,7 @@ class MarkdownSyntaxFactoryTest : ResumeSyntaxFactoryTest() {
         firstRoleBullet: String,
         secondRole: String,
         secondRoleStartDate: String,
-        secondRoleBullet: String
+        secondRoleBullet: String,
     ): String {
         return """
             ### [${company.displayName}](${company.url})
@@ -164,7 +164,7 @@ class MarkdownSyntaxFactoryTest : ResumeSyntaxFactoryTest() {
         project: ProjectOrPublication,
         thirdSectionName: String,
         degree: Degree,
-        degreeStartDate: String
+        degreeStartDate: String,
     ): String {
         return """
             # $name

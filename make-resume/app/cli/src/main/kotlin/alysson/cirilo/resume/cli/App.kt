@@ -46,7 +46,8 @@ private enum class Flavor {
     },
     Markdown {
         override val driver: ResumeDriver get() = makeMarkdownDriver()
-    };
+    },
+    ;
 
     abstract val driver: ResumeDriver
 }

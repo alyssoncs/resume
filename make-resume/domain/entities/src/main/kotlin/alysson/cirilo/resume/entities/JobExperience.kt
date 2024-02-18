@@ -13,11 +13,11 @@ data class JobExperience(
 data class Role(
     val title: String,
     val period: EnrollmentPeriod,
-    val bulletPoints: List<BulletPoint>
+    val bulletPoints: List<BulletPoint>,
 )
 
 data class BulletPoint(
-    val content: List<BulletPointContent>
+    val content: List<BulletPointContent>,
 ) {
     constructor(vararg bullets: BulletPointContent) : this(bullets.toList())
     constructor(vararg bullets: String) : this(
@@ -26,7 +26,7 @@ data class BulletPoint(
                 BulletPointContent.Skill(ProfessionalSkill(bullet))
             else
                 BulletPointContent.PlainText(bullet)
-        }
+        },
     )
 
     init {

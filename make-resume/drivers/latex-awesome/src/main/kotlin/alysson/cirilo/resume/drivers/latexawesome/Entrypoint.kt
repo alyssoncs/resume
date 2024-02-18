@@ -13,7 +13,7 @@ fun makeLatexAwesomeDriver(): ResumeDriver {
         headerPlaceholder = "header".asPlaceholder(),
         contentPlaceholder = "content-goes-here".asPlaceholder(),
         workDateFormatter = workDateFormatter,
-        educationDateFormatter = educationDateFormatter
+        educationDateFormatter = educationDateFormatter,
     )
     return makeAgnosticDriver(syntaxFactory)
 }

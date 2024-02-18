@@ -45,7 +45,7 @@ class LatexSoberSyntaxFactoryTest : ResumeSyntaxFactoryTest() {
             \address{${contactInfo.location.url}}{${contactInfo.location.displayName}}
             
             \makeheader
-        """.trimIndent()
+        """.trimIndent(),
     )
 
     override fun generateTwoExperiencesWithNoBullets(
@@ -73,7 +73,7 @@ class LatexSoberSyntaxFactoryTest : ResumeSyntaxFactoryTest() {
                     {$secondExperienceRole}
                     {$secondExperienceRoleStartDate -- Present}
             \end{itemize}
-        """.trimIndent()
+        """.trimIndent(),
     )
 
     override fun generateSingleRoleExperienceWithNoBullets(
@@ -91,7 +91,7 @@ class LatexSoberSyntaxFactoryTest : ResumeSyntaxFactoryTest() {
                     {$role}
                     {$roleStartDate -- $roleEndDate}
             \end{itemize}
-        """.trimIndent()
+        """.trimIndent(),
     )
 
     override fun generateSingleRoleExperienceWithSkillBullets(
@@ -119,7 +119,7 @@ class LatexSoberSyntaxFactoryTest : ResumeSyntaxFactoryTest() {
                     \item $thirdBulletFirstPart\textbf{$thirdBulletSecondPart}$thirdBulletThirdPart
                 \end{itemize}
             \end{itemize}
-        """.trimIndent()
+        """.trimIndent(),
     )
 
     override fun generateTwoRoleExperienceWithBullets(
@@ -152,7 +152,7 @@ class LatexSoberSyntaxFactoryTest : ResumeSyntaxFactoryTest() {
                     \item $secondRoleBullet
                 \end{itemize}
             \end{itemize}
-        """.trimIndent()
+        """.trimIndent(),
     )
 
     override fun generateSingleProject(project: ProjectOrPublication) = wrapAroundDocument(
@@ -163,7 +163,7 @@ class LatexSoberSyntaxFactoryTest : ResumeSyntaxFactoryTest() {
                     {${project.title.displayName}}
                     {${project.description}}
             \end{itemize}
-        """.trimIndent()
+        """.trimIndent(),
     )
 
     override fun generateSingleDegree(degree: Degree, startDate: String): String = wrapAroundDocument(
@@ -176,7 +176,7 @@ class LatexSoberSyntaxFactoryTest : ResumeSyntaxFactoryTest() {
                     {${degree.degree}}
                     {$startDate -- Present}
             \end{itemize}
-        """.trimIndent()
+        """.trimIndent(),
     )
 
     override fun generateIntegration(
@@ -194,7 +194,7 @@ class LatexSoberSyntaxFactoryTest : ResumeSyntaxFactoryTest() {
         project: ProjectOrPublication,
         thirdSectionName: String,
         degree: Degree,
-        degreeStartDate: String
+        degreeStartDate: String,
     ): String = wrapAroundDocument(
         """
             % constants
@@ -237,7 +237,7 @@ class LatexSoberSyntaxFactoryTest : ResumeSyntaxFactoryTest() {
                         {${degree.degree}}
                         {$degreeStartDate -- Present}
                 \end{itemize}
-        """.trimIndent()
+        """.trimIndent(),
     )
 
     @Test

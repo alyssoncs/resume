@@ -12,7 +12,7 @@ fun makeLatexSoberDriver(): ResumeDriver {
         template,
         "%%content-goes-here%%",
         workDateFormatter,
-        educationDateFormatter
+        educationDateFormatter,
     )
     return makeAgnosticDriver(syntaxFactory)
 }

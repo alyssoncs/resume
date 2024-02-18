@@ -5,7 +5,7 @@ import alysson.cirilo.resume.entities.Resume
 
 internal class AgnosticResumeBuilder(
     private val theResume: Resume,
-    private val resumeSyntaxFactory: ResumeSyntaxFactory
+    private val resumeSyntaxFactory: ResumeSyntaxFactory,
 ) {
 
     fun makeHeader(): AgnosticResumeBuilder {

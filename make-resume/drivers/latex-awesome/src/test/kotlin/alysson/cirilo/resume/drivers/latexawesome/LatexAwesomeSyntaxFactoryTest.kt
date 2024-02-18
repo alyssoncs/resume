@@ -225,7 +225,7 @@ class LatexAwesomeSyntaxFactoryTest : ResumeSyntaxFactoryTest() {
         project: ProjectOrPublication,
         thirdSectionName: String,
         degree: Degree,
-        degreeStartDate: String
+        degreeStartDate: String,
     ): String = wrapAroundDocument(
         header = """
             \name{${name.substringBefore(' ')}}{${name.substringAfter(' ')}}
@@ -276,7 +276,7 @@ class LatexAwesomeSyntaxFactoryTest : ResumeSyntaxFactoryTest() {
                         {$degreeStartDate -- Present}
                         {}
                 \end{cventries}
-        """.trimIndent()
+        """.trimIndent(),
     )
 
     @Test

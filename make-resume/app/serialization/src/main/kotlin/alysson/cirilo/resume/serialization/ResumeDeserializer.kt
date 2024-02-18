@@ -40,7 +40,7 @@ private fun SerializableResume.toDomain(): Resume {
         contactInformation = mapContactInfo(contactInfo),
         jobExperiences = experiences.map(::mapExperience),
         projectsAndPublications = projectsAndPublications.map(::mapProjectOrPublication),
-        education = education.map(::mapDegree)
+        education = education.map(::mapDegree),
     )
 }
 
@@ -57,7 +57,7 @@ private fun mapExperience(experience: SerializableJobExperience): JobExperience 
     return JobExperience(
         company = mapLinkedInfo(experience.company),
         location = experience.location,
-        roles = experience.roles.map(::mapRole)
+        roles = experience.roles.map(::mapRole),
     )
 }
 
@@ -75,7 +75,7 @@ private fun mapDegree(degree: SerializableDegree): Degree {
         institution = mapLinkedInfo(degree.institution),
         location = degree.location,
         degree = degree.degree,
-        period = mapEnrollmentPeriod(degree.period)
+        period = mapEnrollmentPeriod(degree.period),
     )
 }
 
@@ -90,14 +90,14 @@ private fun mapRole(role: SerializableRole): Role {
     return Role(
         title = role.title,
         period = mapEnrollmentPeriod(role.period),
-        bulletPoints = mapBulletPoints(role)
+        bulletPoints = mapBulletPoints(role),
     )
 }
 
 private fun mapEnrollmentPeriod(period: SerializableEnrollmentPeriod): EnrollmentPeriod {
     return EnrollmentPeriod(
         start = mapDate(period.from),
-        end = mapEndDate(period)
+        end = mapEndDate(period),
     )
 }
 

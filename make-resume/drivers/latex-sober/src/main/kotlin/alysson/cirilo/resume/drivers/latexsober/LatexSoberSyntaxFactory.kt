@@ -40,7 +40,7 @@ class LatexSoberSyntaxFactory(
             \address{${contactInformation.location.url}}{${contactInformation.location.displayName}}
             
             \makeheader
-        """.reindent(currentIndent)
+        """.reindent(currentIndent),
         )
     }
 
@@ -53,7 +53,7 @@ class LatexSoberSyntaxFactory(
                 "\n" +
                     """
                     \section{${name.replace("&", "\\textit{\\&}")}}
-                    """.reindent(theSectionIndent)
+                    """.reindent(theSectionIndent),
             )
             currentIndent = theSectionIndent.inc()
         }
@@ -135,7 +135,7 @@ class LatexSoberSyntaxFactory(
         return "${workDateFormatter.format(enrollmentPeriod.start)} -- ${
             makeEndDate(
                 workDateFormatter,
-                enrollmentPeriod.end
+                enrollmentPeriod.end,
             )
         }"
     }
@@ -194,7 +194,7 @@ class LatexSoberSyntaxFactory(
         return "${educationDateFormatter.format(enrollmentPeriod.start)} -- ${
             makeEndDate(
                 educationDateFormatter,
-                enrollmentPeriod.end
+                enrollmentPeriod.end,
             )
         }"
     }

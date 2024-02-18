@@ -49,7 +49,7 @@ class ResumeTest {
             aResume().with(
                 anEmptyBulletPoint()
                     .appendText("worked with")
-                    .appendSkill("  ")
+                    .appendSkill("  "),
             ).build()
         }
     }
@@ -60,7 +60,7 @@ class ResumeTest {
             aResume().with(
                 anEmptyBulletPoint()
                     .appendText("  ")
-                    .appendSkill("kotlin")
+                    .appendSkill("kotlin"),
             ).build()
         }
     }
@@ -124,12 +124,12 @@ class ResumeTest {
                                     .appendText("worked with ")
                                     .appendSkill("retrofit"),
                             ),
-                    )
+                    ),
             )
             .append(
                 aJobExperience()
                     .with(
-                        aRole().with(aBulletPoint().withSkill("android"))
+                        aRole().with(aBulletPoint().withSkill("android")),
                     ),
             ).build()
 
@@ -165,11 +165,11 @@ class ResumeTest {
                 listOf(
                     aRole().`as`("SWE 1"),
                     aRole().`as`("SWE 2"),
-                )
+                ),
             ),
             aJobExperience().with(
-                aRole().`as`("SWE 3")
-            )
+                aRole().`as`("SWE 3"),
+            ),
         )
 
         val reversedResume = aResume()
