@@ -1,7 +1,7 @@
 package alysson.cirilo.resume.drivers.latexawesome
 
-import alysson.cirilo.resume.drivers.test.ResumeSyntaxFactoryTest
 import alysson.cirilo.resume.drivers.utils.syntaxfactory.ResumeSyntaxFactory
+import alysson.cirilo.resume.drivers.utils.syntaxfactory.ResumeSyntaxFactoryTest
 import alysson.cirilo.resume.entities.ContactInformation
 import alysson.cirilo.resume.entities.Degree
 import alysson.cirilo.resume.entities.JobExperience

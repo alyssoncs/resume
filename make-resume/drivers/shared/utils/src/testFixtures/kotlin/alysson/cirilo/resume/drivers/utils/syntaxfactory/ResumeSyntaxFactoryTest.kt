@@ -1,4 +1,4 @@
-package alysson.cirilo.resume.drivers.test
+package alysson.cirilo.resume.drivers.utils.syntaxfactory
 
 import alysson.cirilo.resume.drivers.utils.syntaxfactory.ResumeSyntaxFactory
 import alysson.cirilo.resume.entities.ContactInformation
