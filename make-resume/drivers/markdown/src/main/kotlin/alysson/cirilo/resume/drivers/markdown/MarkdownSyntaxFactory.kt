@@ -11,7 +11,7 @@ import alysson.cirilo.resume.entities.ProjectOrPublication
 import alysson.cirilo.resume.entities.Role
 import java.time.format.DateTimeFormatter
 
-class MarkdownSyntaxFactory(
+internal class MarkdownSyntaxFactory(
     private val workDateFormatter: DateTimeFormatter,
     private val educationDateFormatter: DateTimeFormatter,
 ) : ResumeSyntaxFactory {
