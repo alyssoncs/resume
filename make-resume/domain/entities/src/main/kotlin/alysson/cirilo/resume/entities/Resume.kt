@@ -25,7 +25,8 @@ data class Resume(
         jobExperiences.flatMap { jobExperience ->
             jobExperience.roles.flatMap { role ->
                 role.bulletPoints.flatMap { bulletPoint ->
-                    bulletPoint.content.filterIsInstance<BulletPointContent.Skill>().map(BulletPointContent.Skill::skill)
+                    bulletPoint.content.filterIsInstance<BulletPointContent.Skill>()
+                        .map(BulletPointContent.Skill::skill)
                 }
             }
         }.toSet()
