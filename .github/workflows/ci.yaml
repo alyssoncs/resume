@@ -64,8 +64,6 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: resumes
-      - name: Debug
-        run: tree .
       - name: Rename resumes
         run: |
           mv awesome/alysson-cirilo-resume.pdf alysson-cirilo-fancy-resume.pdf
