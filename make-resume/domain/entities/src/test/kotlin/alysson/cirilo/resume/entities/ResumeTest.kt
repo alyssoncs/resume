@@ -39,7 +39,7 @@ class ResumeTest {
     @Test
     fun `should not accept bullet point without content`() {
         assertThrows<IllegalArgumentException> {
-            aResume().with(aBulletPoint().withNoContent()).build()
+            aResume().with(anEmptyBulletPoint()).build()
         }
     }
 
