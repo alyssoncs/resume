@@ -3,7 +3,10 @@ package alysson.cirilo.resume.serialization
 import alysson.cirilo.resume.entities.EnrollmentPeriod.EndDate.Past
 import alysson.cirilo.resume.entities.EnrollmentPeriod.EndDate.Present
 import alysson.cirilo.resume.entities.aBulletPoint
-import com.google.common.truth.Truth.assertThat
+import io.kotest.matchers.collections.containExactly
+import io.kotest.matchers.collections.shouldHaveSize
+import io.kotest.matchers.should
+import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
 import java.time.YearMonth
 
@@ -13,144 +16,142 @@ class ResumeDeserializerTest {
 
     @Test
     fun `should contain the name`() {
-        assertThat(resume.name).isEqualTo("First Last")
+        resume.name shouldBe "First Last"
     }
 
     @Test
     fun `should contain the headline`() {
-        assertThat(resume.headline)
-            .containsExactly("Software Engineer", "Android Developer")
-            .inOrder()
+        resume.headline should containExactly("Software Engineer", "Android Developer")
     }
 
     @Test
     fun `should contain email`() {
         val email = resume.contactInformation.email
-        assertThat(email.displayName).isEqualTo("email")
-        assertThat(email.url.toString()).isEqualTo("https://www.email.com")
+
+        email.displayName shouldBe "email"
+        email.url.toString() shouldBe "https://www.email.com"
     }
 
     @Test
     fun `should contain linkedin`() {
         val linkedin = resume.contactInformation.linkedin
-        assertThat(linkedin.displayName).isEqualTo("linkedin")
-        assertThat(linkedin.url.toString()).isEqualTo("https://www.linkedin.com")
+        linkedin.displayName shouldBe "linkedin"
+        linkedin.url.toString() shouldBe "https://www.linkedin.com"
     }
 
     @Test
     fun `should contain github`() {
         val github = resume.contactInformation.github
-        assertThat(github.displayName).isEqualTo("github")
-        assertThat(github.url.toString()).isEqualTo("https://www.github.com")
+        github.displayName shouldBe "github"
+        github.url.toString() shouldBe "https://www.github.com"
     }
 
     @Test
     fun `should contain location`() {
         val location = resume.contactInformation.location
-        assertThat(location.displayName).isEqualTo("location")
-        assertThat(location.url.toString()).isEqualTo("https://www.gps.com")
+        location.displayName shouldBe "location"
+        location.url.toString() shouldBe "https://www.gps.com"
     }
 
     @Test
     fun `should contain the same number of job experiences`() {
         val experiences = resume.jobExperiences
-        assertThat(experiences).hasSize(1)
+        experiences shouldHaveSize 1
     }
 
     @Test
     fun `should contain the company`() {
         val experience = resume.jobExperiences.first()
-        assertThat(experience.company.displayName).isEqualTo("Company")
-        assertThat(experience.company.url.toString()).isEqualTo("https://www.company.com")
+        experience.company.displayName shouldBe "Company"
+        experience.company.url.toString() shouldBe "https://www.company.com"
     }
 
     @Test
     fun `should contain experience location`() {
         val experience = resume.jobExperiences.first()
-        assertThat(experience.location).isEqualTo("Remote")
+        experience.location shouldBe "Remote"
     }
 
     @Test
     fun `should contain the same number of roles`() {
         val roles = resume.jobExperiences.first().roles
-        assertThat(roles).hasSize(2)
+        roles shouldHaveSize 2
     }
 
     @Test
     fun `should contain the role title`() {
         val roles = resume.jobExperiences.first().roles
-        assertThat(roles[0].title).isEqualTo("SWE 1")
-        assertThat(roles[1].title).isEqualTo("SWE 2")
+        roles[0].title shouldBe "SWE 1"
+        roles[1].title shouldBe "SWE 2"
     }
 
     @Test
     fun `should contain the role period`() {
         val roles = resume.jobExperiences.first().roles
 
-        assertThat(roles[0].period.start).isEqualTo(YearMonth.of(2022, 2))
-        assertThat(roles[0].period.end).isEqualTo(Past(2022, 12))
+        roles[0].period.start shouldBe YearMonth.of(2022, 2)
+        roles[0].period.end shouldBe Past(2022, 12)
 
-        assertThat(roles[1].period.start).isEqualTo(YearMonth.of(2022, 12))
-        assertThat(roles[1].period.end).isEqualTo(Present)
+        roles[1].period.start shouldBe YearMonth.of(2022, 12)
+        roles[1].period.end shouldBe Present
     }
 
     @Test
     fun `should contain the same number of bullet points`() {
         val roles = resume.jobExperiences.first().roles
 
-        assertThat(roles[0].bulletPoints).hasSize(1)
-        assertThat(roles[1].bulletPoints).hasSize(2)
+        roles[0].bulletPoints shouldHaveSize 1
+        roles[1].bulletPoints shouldHaveSize 2
     }
 
     @Test
     fun `should contain the bullet points`() {
         val roles = resume.jobExperiences.first().roles
 
-        assertThat(roles[0].bulletPoints[0])
-            .isEqualTo(aBulletPoint().thatReads("delivered value.").build())
+        roles[0].bulletPoints[0] shouldBe aBulletPoint().thatReads("delivered value.").build()
 
-        assertThat(roles[1].bulletPoints[0])
-            .isEqualTo(aBulletPoint().containing("delivered value with ", "kotlin", ".").build())
-        assertThat(roles[1].bulletPoints[1])
-            .isEqualTo(aBulletPoint().thatReads("another cool thing").build())
+        roles[1].bulletPoints[0] shouldBe aBulletPoint()
+            .containing("delivered value with ", "kotlin", ".")
+            .build()
+        roles[1].bulletPoints[1] shouldBe aBulletPoint().thatReads("another cool thing").build()
     }
 
     @Test
     fun `should contain the same number of projects`() {
         val projects = resume.projectsAndPublications
 
-        assertThat(projects).hasSize(1)
+        projects shouldHaveSize 1
     }
 
     @Test
     fun `should contain the projects`() {
         val project = resume.projectsAndPublications[0]
 
-        assertThat(project.title.displayName).isEqualTo("Project")
-        assertThat(project.title.url.toString()).isEqualTo("https://www.project.com")
-        assertThat(project.description).isEqualTo("This is a kotlin project")
+        project.title.displayName shouldBe "Project"
+        project.title.url.toString() shouldBe "https://www.project.com"
+        project.description shouldBe "This is a kotlin project"
     }
 
     @Test
     fun `should contain the same number of degrees`() {
         val degrees = resume.education
 
-        assertThat(degrees).hasSize(1)
+        degrees shouldHaveSize 1
     }
 
     @Test
     fun `should contain the degrees`() {
         val degree = resume.education[0]
 
-        assertThat(degree.institution.displayName).isEqualTo("Top institution")
-        assertThat(degree.institution.url.toString()).isEqualTo("https://www.topinstitution.edu")
-        assertThat(degree.location).isEqualTo("Brazil")
-        assertThat(degree.degree).isEqualTo("BSc. in Computer Science")
-        assertThat(degree.period.start).isEqualTo(YearMonth.of(2018, 1))
-        assertThat(degree.period.end).isEqualTo(Past(2022, 1))
+        degree.institution.displayName shouldBe "Top institution"
+        degree.institution.url.toString() shouldBe "https://www.topinstitution.edu"
+        degree.location shouldBe "Brazil"
+        degree.degree shouldBe "BSc. in Computer Science"
+        degree.period.start shouldBe YearMonth.of(2018, 1)
+        degree.period.end shouldBe Past(2022, 1)
     }
 
     private fun String.asResource(): String {
-        return object {}.javaClass.getResource(this)!!.readText()
+        return Unit.javaClass.getResource(this)!!.readText()
     }
 }
