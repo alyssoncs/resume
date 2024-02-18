@@ -1,11 +1,14 @@
 package alysson.cirilo.resume.entities
 
-import com.google.common.truth.Truth.assertThat
+import io.kotest.assertions.throwables.shouldThrow
+import io.kotest.matchers.collections.beEmpty
+import io.kotest.matchers.collections.shouldContainExactly
+import io.kotest.matchers.collections.shouldHaveSize
+import io.kotest.matchers.should
 import org.junit.jupiter.api.DynamicTest
 import org.junit.jupiter.api.DynamicTest.dynamicTest
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestFactory
-import org.junit.jupiter.api.assertThrows
 
 class ResumeTest {
 
@@ -15,7 +18,7 @@ class ResumeTest {
 
         return blankNames.map { blankName ->
             dynamicTest("a resume with name = \"$blankName\" cannot be created") {
-                assertThrows<IllegalArgumentException> {
+                shouldThrow<IllegalArgumentException> {
                     aResume().from(blankName).build()
                 }
             }
@@ -24,28 +27,28 @@ class ResumeTest {
 
     @Test
     fun `should not accept empty headline`() {
-        assertThrows<IllegalArgumentException> {
+        shouldThrow<IllegalArgumentException> {
             aResume().withEmptyHeadline().build()
         }
     }
 
     @Test
     fun `should not accept job experience without a role`() {
-        assertThrows<IllegalArgumentException> {
+        shouldThrow<IllegalArgumentException> {
             aResume().with(aJobExperience().withNoRoles()).build()
         }
     }
 
     @Test
     fun `should not accept bullet point without content`() {
-        assertThrows<IllegalArgumentException> {
+        shouldThrow<IllegalArgumentException> {
             aResume().with(anEmptyBulletPoint()).build()
         }
     }
 
     @Test
     fun `should not accept blank skill bullet point content`() {
-        assertThrows<IllegalArgumentException> {
+        shouldThrow<IllegalArgumentException> {
             aResume().with(
                 anEmptyBulletPoint()
                     .appendText("worked with")
@@ -56,7 +59,7 @@ class ResumeTest {
 
     @Test
     fun `should not accept empty plaint text bullet point content`() {
-        assertThrows<IllegalArgumentException> {
+        shouldThrow<IllegalArgumentException> {
             aResume().with(
                 anEmptyBulletPoint()
                     .appendText("  ")
@@ -69,29 +72,29 @@ class ResumeTest {
     fun `resume with no experience should have no skills`() {
         val resume = aResume().withNoExperiences().build()
 
-        assertThat(resume.skills).isEmpty()
+        resume.skills should beEmpty()
     }
 
     @Test
     fun `resume with no bullet points should have no skills`() {
         val resume = aResume().with(aJobExperience().with(aRole().withNoBulletPoints())).build()
 
-        assertThat(resume.skills).isEmpty()
+        resume.skills should beEmpty()
     }
 
     @Test
     fun `resume with bullet point with no skills should have no skills`() {
         val resume = aResume().with(aBulletPoint().thatReads("Achieved result X.")).build()
 
-        assertThat(resume.skills).isEmpty()
+        resume.skills should beEmpty()
     }
 
     @Test
     fun `resume with skill on bullet point should have skill`() {
         val resume = aResume().with(aBulletPoint().withSkill("kotlin")).build()
 
-        assertThat(resume.skills).hasSize(1)
-        assertThat(resume.skills).containsExactly(ProfessionalSkill("kotlin"))
+        resume.skills shouldHaveSize 1
+        resume.skills.shouldContainExactly(ProfessionalSkill("kotlin"))
     }
 
     @Test
@@ -129,8 +132,8 @@ class ResumeTest {
                     ),
             ).build()
 
-        assertThat(resume.skills).hasSize(4)
-        assertThat(resume.skills).containsExactly(
+        resume.skills shouldHaveSize 4
+        resume.skills.shouldContainExactly(
             ProfessionalSkill("kotlin"),
             ProfessionalSkill("jetpack compose"),
             ProfessionalSkill("retrofit"),
@@ -170,8 +173,8 @@ class ResumeTest {
             )
             .build()
 
-        assertThat(resume.skills).hasSize(3)
-        assertThat(resume.skills).containsExactly(
+        resume.skills shouldHaveSize 3
+        resume.skills.shouldContainExactly(
             ProfessionalSkill("kotlin"),
             ProfessionalSkill("jetpack compose"),
             ProfessionalSkill("retrofit"),
@@ -189,9 +192,8 @@ class ResumeTest {
         val reversedResume = aResume()
             .with(chronologicalExperiences).build().reversedChronologically
 
-        assertThat(reversedResume.jobExperiences.map { it.company.displayName })
-            .containsExactly("Microsoft", "iFood", "Meta")
-            .inOrder()
+        reversedResume.jobExperiences.map { it.company.displayName }
+            .shouldContainExactly("Microsoft", "iFood", "Meta")
     }
 
     @Test
@@ -208,9 +210,7 @@ class ResumeTest {
             .with(chronologicalExperiences).build().reversedChronologically
 
         val titles = reversedResume.jobExperiences.flatMap { it.roles }.map { it.title }
-        assertThat(titles)
-            .containsExactly("SWE 3", "SWE 2", "SWE 1")
-            .inOrder()
+        titles.shouldContainExactly("SWE 3", "SWE 2", "SWE 1")
     }
 
     private fun ResumeBuilder.with(aBulletPoint: BulletPointBuilder) =
