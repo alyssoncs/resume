@@ -19,16 +19,6 @@ data class Role(
 data class BulletPoint(
     val content: List<BulletPointContent>,
 ) {
-    constructor(vararg bullets: BulletPointContent) : this(bullets.toList())
-    constructor(vararg bullets: String) : this(
-        bullets.mapIndexed { idx, bullet ->
-            if (idx % 2 != 0)
-                BulletPointContent.Skill(ProfessionalSkill(bullet))
-            else
-                BulletPointContent.PlainText(bullet)
-        },
-    )
-
     init {
         require(content.isNotEmpty()) { "A bullet point must have content." }
     }

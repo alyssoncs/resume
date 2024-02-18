@@ -1,8 +1,8 @@
 package alysson.cirilo.resume.serialization
 
-import alysson.cirilo.resume.entities.BulletPoint
 import alysson.cirilo.resume.entities.EnrollmentPeriod.EndDate.Past
 import alysson.cirilo.resume.entities.EnrollmentPeriod.EndDate.Present
+import alysson.cirilo.resume.entities.aBulletPoint
 import com.google.common.truth.Truth.assertThat
 import org.junit.jupiter.api.Test
 import java.time.YearMonth
@@ -107,12 +107,12 @@ class ResumeDeserializerTest {
         val roles = resume.jobExperiences.first().roles
 
         assertThat(roles[0].bulletPoints[0])
-            .isEqualTo(BulletPoint("delivered value."))
+            .isEqualTo(aBulletPoint().thatReads("delivered value.").build())
 
         assertThat(roles[1].bulletPoints[0])
-            .isEqualTo(BulletPoint("delivered value with ", "kotlin", "."))
+            .isEqualTo(aBulletPoint().containing("delivered value with ", "kotlin", ".").build())
         assertThat(roles[1].bulletPoints[1])
-            .isEqualTo(BulletPoint("another cool thing"))
+            .isEqualTo(aBulletPoint().thatReads("another cool thing").build())
     }
 
     @Test
