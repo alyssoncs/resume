@@ -1,6 +1,5 @@
-package alysson.cirilo.resume.entities.test.databuilders
+package alysson.cirilo.resume.entities
 
-import alysson.cirilo.resume.entities.EnrollmentPeriod
 import java.time.LocalDate
 
 class EnrollmentPeriodBuilder private constructor(

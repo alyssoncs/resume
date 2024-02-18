@@ -1,6 +1,4 @@
-package alysson.cirilo.resume.entities.test.databuilders
-
-import alysson.cirilo.resume.entities.JobExperience
+package alysson.cirilo.resume.entities
 
 class JobExperienceBuilder private constructor(
     private val roleBuilders: List<RoleBuilder> = listOf(RoleBuilder()),

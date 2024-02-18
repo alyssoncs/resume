@@ -1,6 +1,4 @@
-package alysson.cirilo.resume.entities.test.databuilders
-
-import alysson.cirilo.resume.entities.Degree
+package alysson.cirilo.resume.entities
 
 class DegreeBuilder private constructor(
     private val institutionBuilder: LinkedInformationBuilder,

@@ -1,6 +1,4 @@
-package alysson.cirilo.resume.entities.test.databuilders
-
-import alysson.cirilo.resume.entities.Role
+package alysson.cirilo.resume.entities
 
 class RoleBuilder private constructor(
     private val title: String,

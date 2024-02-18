@@ -1,6 +1,4 @@
-package alysson.cirilo.resume.entities.test.databuilders
-
-import alysson.cirilo.resume.entities.ContactInformation
+package alysson.cirilo.resume.entities
 
 class ContactInformationBuilder private constructor(
     private val emailBuilder: LinkedInformationBuilder,

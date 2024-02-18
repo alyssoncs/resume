@@ -1,7 +1,5 @@
-package alysson.cirilo.resume.entities.test.databuilders
+package alysson.cirilo.resume.entities
 
-import alysson.cirilo.resume.entities.LinkedInformation
-import alysson.cirilo.resume.entities.ProjectOrPublication
 import java.net.URL
 
 class ProjectOrPublicationBuilder private constructor(

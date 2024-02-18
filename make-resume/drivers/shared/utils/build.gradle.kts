@@ -7,6 +7,6 @@ dependencies {
     api(projects.domain.entities)
     implementation(projects.domain.infra)
 
-    testFixturesImplementation(projects.domain.test.dataBuilders)
+    testFixturesImplementation(testFixtures(projects.domain.entities))
     testFixturesImplementation(libs.bundles.unitTest)
 }

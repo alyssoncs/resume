@@ -1,6 +1,4 @@
-package alysson.cirilo.resume.entities.test.databuilders
-
-import alysson.cirilo.resume.entities.Resume
+package alysson.cirilo.resume.entities
 
 class ResumeBuilder private constructor(
     private val name: String,

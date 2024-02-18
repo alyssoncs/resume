@@ -1,8 +1,4 @@
-package alysson.cirilo.resume.entities.test.databuilders
-
-import alysson.cirilo.resume.entities.BulletPoint
-import alysson.cirilo.resume.entities.BulletPointContent
-import alysson.cirilo.resume.entities.ProfessionalSkill
+package alysson.cirilo.resume.entities
 
 class BulletPointBuilder private constructor(
     private val content: List<BulletPointContent>,
