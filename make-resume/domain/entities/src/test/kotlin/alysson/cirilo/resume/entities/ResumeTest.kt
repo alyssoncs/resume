@@ -97,36 +97,32 @@ class ResumeTest {
     @Test
     fun `resume with skills on bullet points should have skills on the same order`() {
         val resume = aResume()
-            .withNoExperiences()
-            .append(
+            .with(
                 aJobExperience()
-                    .withNoRoles()
-                    .append(
+                    .with(
                         aRole()
-                            .withNoBulletPoints()
-                            .append(
+                            .with(
                                 anEmptyBulletPoint()
                                     .appendText("worked with ")
                                     .appendSkill("kotlin"),
                             )
-                            .append(
+                            .and(
                                 anEmptyBulletPoint()
                                     .appendText("created layouts in ")
                                     .appendSkill("jetpack compose"),
                             ),
                     )
-                    .append(
+                    .and(
                         aRole()
-                            .withNoBulletPoints()
-                            .append(aBulletPoint().thatReads("no skills here"))
-                            .append(
+                            .with(aBulletPoint().thatReads("no skills here"))
+                            .and(
                                 anEmptyBulletPoint()
                                     .appendText("worked with ")
                                     .appendSkill("retrofit"),
                             ),
                     ),
             )
-            .append(
+            .and(
                 aJobExperience()
                     .with(
                         aRole().with(aBulletPoint().withSkill("android")),

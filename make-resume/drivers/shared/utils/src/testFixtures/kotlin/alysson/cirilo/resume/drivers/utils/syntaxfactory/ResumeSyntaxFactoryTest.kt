@@ -353,10 +353,10 @@ abstract class ResumeSyntaxFactoryTest {
             val singleRoleExperienceWithSkillBullets: List<JobExperience> = listOf(
                 Builders.jobExperienceBuilder
                     .with(
-                        Builders.role.withNoBulletPoints()
-                            .append(aBulletPoint().thatReads("delivered value"))
-                            .append(aBulletPoint().withSkill("android"))
-                            .append(
+                        Builders.role
+                            .with(aBulletPoint().thatReads("delivered value"))
+                            .and(aBulletPoint().withSkill("android"))
+                            .and(
                                 anEmptyBulletPoint()
                                     .appendText("delivered value with ")
                                     .appendSkill("kotlin")
@@ -368,7 +368,7 @@ abstract class ResumeSyntaxFactoryTest {
 
             val twoRoleExperienceWithBullets: List<JobExperience> = listOf(
                 Builders.jobExperienceBuilder
-                    .append(
+                    .and(
                         aRole()
                             .`as`("SWE 2")
                             .between(period().from(12, 2019).upToNow())

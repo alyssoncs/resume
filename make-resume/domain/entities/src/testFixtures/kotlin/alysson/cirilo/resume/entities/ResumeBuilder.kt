@@ -59,7 +59,7 @@ class ResumeBuilder private constructor(
 
     fun withNoExperiences() = with(emptyList<JobExperienceBuilder>())
 
-    fun append(jobExperienceBuilder: JobExperienceBuilder) =
+    fun and(jobExperienceBuilder: JobExperienceBuilder) =
         with(jobExperienceBuilders + jobExperienceBuilder)
 
     @JvmName("withProjectsAndPublications")

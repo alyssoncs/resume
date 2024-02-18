@@ -23,7 +23,7 @@ class JobExperienceBuilder private constructor(
 
     fun withNoRoles() = with(emptyList())
 
-    fun append(roleBuilder: RoleBuilder) = with(roleBuilders + roleBuilder)
+    fun and(roleBuilder: RoleBuilder) = with(roleBuilders + roleBuilder)
 
     fun on(company: String) = on(companyBuilder.displaying(company))
 

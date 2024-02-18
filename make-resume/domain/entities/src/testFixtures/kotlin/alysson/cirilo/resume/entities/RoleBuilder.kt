@@ -18,7 +18,7 @@ class RoleBuilder private constructor(
 
     fun withNoBulletPoints() = with(emptyList())
 
-    fun append(bulletPointBuilder: BulletPointBuilder) =
+    fun and(bulletPointBuilder: BulletPointBuilder) =
         with(bulletPointBuilders + bulletPointBuilder)
 
     fun `as`(title: String) =
@@ -37,3 +37,4 @@ class RoleBuilder private constructor(
 }
 
 fun aRole() = RoleBuilder()
+fun anotherRole() = aRole()
