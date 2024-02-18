@@ -32,7 +32,7 @@ class ResumeTest {
     @Test
     fun `should not accept job experience without a role`() {
         assertThrows<IllegalArgumentException> {
-            aResume().with(aJobExperience().withNoRole()).build()
+            aResume().with(aJobExperience().withNoRoles()).build()
         }
     }
 
@@ -100,7 +100,7 @@ class ResumeTest {
             .withNoExperience()
             .append(
                 aJobExperience()
-                    .withNoRole()
+                    .withNoRoles()
                     .append(
                         aRole()
                             .withNoBulletPoints()

@@ -21,7 +21,7 @@ class JobExperienceBuilder private constructor(
 
     fun with(roleBuilder: RoleBuilder) = with(listOf(roleBuilder))
 
-    fun withNoRole() = with(emptyList())
+    fun withNoRoles() = with(emptyList())
 
     fun append(roleBuilder: RoleBuilder) = with(roleBuilders + roleBuilder)
 
