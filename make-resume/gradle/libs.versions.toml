@@ -1,6 +1,6 @@
 [versions]
 detekt = "1.23.5"
-java = "17"
+java = "21"
 junit = "5.10.2"
 kotlin = "1.9.22"
 kotlin-serialization-json = "1.6.3"
