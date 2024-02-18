@@ -67,7 +67,7 @@ class ResumeTest {
 
     @Test
     fun `resume with no experience should have no skills`() {
-        val resume = aResume().withNoExperience().build()
+        val resume = aResume().withNoExperiences().build()
 
         assertThat(resume.skills).isEmpty()
     }
@@ -97,7 +97,7 @@ class ResumeTest {
     @Test
     fun `resume with skills on bullet points should have skills on the same order`() {
         val resume = aResume()
-            .withNoExperience()
+            .withNoExperiences()
             .append(
                 aJobExperience()
                     .withNoRoles()

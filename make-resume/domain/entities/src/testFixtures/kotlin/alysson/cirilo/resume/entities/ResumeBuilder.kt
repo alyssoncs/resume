@@ -57,7 +57,7 @@ class ResumeBuilder private constructor(
 
     fun with(jobExperienceBuilder: JobExperienceBuilder) = with(listOf(jobExperienceBuilder))
 
-    fun withNoExperience() = with(emptyList<JobExperienceBuilder>())
+    fun withNoExperiences() = with(emptyList<JobExperienceBuilder>())
 
     fun append(jobExperienceBuilder: JobExperienceBuilder) =
         with(jobExperienceBuilders + jobExperienceBuilder)
