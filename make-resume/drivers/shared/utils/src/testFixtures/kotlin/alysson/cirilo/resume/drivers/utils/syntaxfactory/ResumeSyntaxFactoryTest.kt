@@ -18,7 +18,7 @@ import alysson.cirilo.resume.entities.anEmptyBulletPoint
 import alysson.cirilo.resume.entities.contactInfo
 import alysson.cirilo.resume.entities.institution
 import alysson.cirilo.resume.entities.period
-import org.junit.jupiter.api.Assertions.assertEquals
+import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import java.time.YearMonth
@@ -122,14 +122,14 @@ abstract class ResumeSyntaxFactoryTest {
 
     @Test
     fun `no content generates nothing`() {
-        assertEquals(generateEmptyOutput(), syntaxFactory.create())
+        syntaxFactory.create() shouldBe generateEmptyOutput()
     }
 
     @Test
     fun `can generate a section`() {
         syntaxFactory.startSection("Section Name")
 
-        assertEquals(generateSection("Section Name"), syntaxFactory.create())
+        syntaxFactory.create() shouldBe generateSection("Section Name")
     }
 
     @Test
@@ -142,14 +142,14 @@ abstract class ResumeSyntaxFactoryTest {
             Dataset.headline.last(),
             Dataset.contactInfo,
         )
-        assertEquals(header, syntaxFactory.create())
+        syntaxFactory.create() shouldBe header
     }
 
     @Test
     fun `no job experiences generates nothing`() {
         syntaxFactory.makeExperiences(Dataset.noExperience)
 
-        assertEquals(generateEmptyOutput(), syntaxFactory.create())
+        syntaxFactory.create() shouldBe generateEmptyOutput()
     }
 
     @Test
@@ -167,7 +167,7 @@ abstract class ResumeSyntaxFactoryTest {
             secondExperienceRole = secondExperienceRole.title,
             secondExperienceRoleStartDate = workDateFormatter.format(secondExperienceRole.period.start),
         )
-        assertEquals(output, syntaxFactory.create())
+        syntaxFactory.create() shouldBe output
     }
 
     @Test
@@ -181,7 +181,7 @@ abstract class ResumeSyntaxFactoryTest {
             roleStartDate = workDateFormatter.format(role.period.start),
             roleEndDate = workDateFormatter.format(role.period.end.toDate()),
         )
-        assertEquals(output, syntaxFactory.create())
+        syntaxFactory.create() shouldBe output
     }
 
     @Test
@@ -201,7 +201,7 @@ abstract class ResumeSyntaxFactoryTest {
             thirdBulletSecondPart = role.bulletPoints[2].content[1].displayName,
             thirdBulletThirdPart = role.bulletPoints[2].content[2].displayName,
         )
-        assertEquals(output, syntaxFactory.create())
+        syntaxFactory.create() shouldBe output
     }
 
     @Test
@@ -222,14 +222,14 @@ abstract class ResumeSyntaxFactoryTest {
             secondRoleStartDate = workDateFormatter.format(secondRole.period.start),
             secondRoleBullet = secondRole.bulletPoints.first().content.first().displayName,
         )
-        assertEquals(output, syntaxFactory.create())
+        syntaxFactory.create() shouldBe output
     }
 
     @Test
     fun `no projects and publications generates nothing`() {
         syntaxFactory.makeProjectsAndPublications(Dataset.noProjectsOrPublications)
 
-        assertEquals(generateEmptyOutput(), syntaxFactory.create())
+        syntaxFactory.create() shouldBe generateEmptyOutput()
     }
 
     @Test
@@ -237,14 +237,14 @@ abstract class ResumeSyntaxFactoryTest {
         syntaxFactory.makeProjectsAndPublications(Dataset.singleProject)
 
         val output = generateSingleProject(Dataset.singleProject.first())
-        assertEquals(output, syntaxFactory.create())
+        syntaxFactory.create() shouldBe output
     }
 
     @Test
     fun `no education generates nothing`() {
         syntaxFactory.makeEducation(Dataset.noEducation)
 
-        assertEquals(generateEmptyOutput(), syntaxFactory.create())
+        syntaxFactory.create() shouldBe generateEmptyOutput()
     }
 
     @Test
@@ -252,12 +252,9 @@ abstract class ResumeSyntaxFactoryTest {
         syntaxFactory.makeEducation(Dataset.singleDegree)
 
         val degree = Dataset.singleDegree.first()
-        assertEquals(
-            generateSingleDegree(
-                degree,
-                educationDateFormatter.format(degree.period.start),
-            ),
-            syntaxFactory.create()
+        syntaxFactory.create() shouldBe generateSingleDegree(
+            degree,
+            educationDateFormatter.format(degree.period.start),
         )
     }
 
@@ -292,7 +289,7 @@ abstract class ResumeSyntaxFactoryTest {
             degree = Dataset.singleDegree.first(),
             degreeStartDate = educationDateFormatter.format(Dataset.singleDegree.first().period.start),
         )
-        assertEquals(output, syntaxFactory.create())
+        syntaxFactory.create() shouldBe output
     }
 
     private fun EnrollmentPeriod.EndDate.toDate(): YearMonth {
