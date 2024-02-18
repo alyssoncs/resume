@@ -353,7 +353,7 @@
                         [
                             {
                                 "type": "plainText",
-                                "content": "Developed a set of libraries so that mobile apps can seamlessly integrate the Microsoft Business Chat experience powered by GPT-4 using "
+                                "content": "Developed a set of SDKs used by multiple mobile apps to seamlessly integrate the Microsoft Copilot experience powered by GPT-4 using "
                             },
                             {
                                 "type": "skill",
