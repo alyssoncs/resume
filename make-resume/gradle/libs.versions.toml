@@ -2,7 +2,7 @@
 detekt = "1.23.6"
 java = "21"
 junit = "5.10.2"
-kotest = "5.8.0"
+kotest = "5.8.1"
 kotlin = "1.9.22"
 kotlin-serialization-json = "1.6.3"
 kotlinx-cli = "0.3.6"
