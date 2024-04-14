@@ -32,7 +32,7 @@ internal data class SerializableJobExperience(
 internal data class SerializableRole(
     val title: String,
     val period: SerializableEnrollmentPeriod,
-    val bulletPoints: List<List<SerializableBulletPoint>>,
+    val bulletPoints: List<String>,
 )
 
 @Serializable

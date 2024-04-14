@@ -2,8 +2,6 @@ package alysson.cirilo.resume.serialization
 
 import alysson.cirilo.resume.entities.BulletPoint
 import alysson.cirilo.resume.entities.BulletPointContent
-import alysson.cirilo.resume.entities.BulletPointContent.PlainText
-import alysson.cirilo.resume.entities.BulletPointContent.Skill
 import alysson.cirilo.resume.entities.ContactInformation
 import alysson.cirilo.resume.entities.Degree
 import alysson.cirilo.resume.entities.EnrollmentPeriod
@@ -13,7 +11,6 @@ import alysson.cirilo.resume.entities.ProfessionalSkill
 import alysson.cirilo.resume.entities.ProjectOrPublication
 import alysson.cirilo.resume.entities.Resume
 import alysson.cirilo.resume.entities.Role
-import alysson.cirilo.resume.serialization.models.SerializableBulletPoint
 import alysson.cirilo.resume.serialization.models.SerializableContactInformation
 import alysson.cirilo.resume.serialization.models.SerializableDegree
 import alysson.cirilo.resume.serialization.models.SerializableEnrollmentPeriod
@@ -117,13 +114,64 @@ private fun mapBulletPoints(it: SerializableRole): List<BulletPoint> {
     return it.bulletPoints.map(::mapBulletPoint)
 }
 
-private fun mapBulletPoint(bulletContent: List<SerializableBulletPoint>): BulletPoint {
-    return BulletPoint(bulletContent.map(::mapBulletContent))
-}
+private fun mapBulletPoint(bulletPoint: String): BulletPoint {
+    validateMatchingBrackets(bulletPoint)
 
-private fun mapBulletContent(bulletPoint: SerializableBulletPoint): BulletPointContent {
-    return when (bulletPoint.type) {
-        SerializableBulletPoint.Type.PlainText -> PlainText(bulletPoint.content)
-        SerializableBulletPoint.Type.Skill -> Skill(ProfessionalSkill(bulletPoint.content))
+    return BulletPoint(mapBulletContent(bulletPoint, emptyList())).also {
+        validateFlatSkills(it)
     }
 }
+
+private fun validateFlatSkills(bulletPoint: BulletPoint) {
+    val containsBracketInsideBracket = bulletPoint.content
+        .filterIsInstance<BulletPointContent.Skill>()
+        .any { it.displayName.contains('{') }
+    if (containsBracketInsideBracket) throw ParsingException("Cannot have a skill inside another skill")
+}
+
+private tailrec fun mapBulletContent(bulletPoint: String, content: List<BulletPointContent>): List<BulletPointContent> {
+    if (bulletPoint.isEmpty()) return content
+
+    val (element, subStr) = if (bulletPoint.first() != '{') {
+        val element = extractPlainText(bulletPoint)
+        element to bulletPoint.substringAfter(element.displayName)
+    } else {
+        extractSkill(bulletPoint) to bulletPoint.substringAfter('}')
+    }
+
+    return mapBulletContent(subStr, content + element)
+}
+
+private fun extractPlainText(str: String): BulletPointContent.PlainText {
+    val subStr = str.substringBefore('{')
+    return BulletPointContent.PlainText(subStr)
+}
+
+private fun extractSkill(str: String): BulletPointContent.Skill {
+    val subStr = str.substring(1).substringBefore('}')
+    return BulletPointContent.Skill(ProfessionalSkill(subStr))
+}
+
+private fun validateMatchingBrackets(bulletPoint: String) {
+    validateMatchingBrackets(bulletPoint = bulletPoint, insideBracket = bulletPoint.first() == '{')
+        .getOrThrow()
+}
+
+private tailrec fun validateMatchingBrackets(bulletPoint: String, insideBracket: Boolean): Result<Unit> {
+    if (bulletPoint.isEmpty()) {
+        return if (insideBracket)
+            Result.failure(ParsingException("Missing closing bracket"))
+        else
+            Result.success(Unit)
+    }
+
+    val updatedInsideBracket = if (insideBracket && bulletPoint.first() == '}') {
+        false
+    } else {
+        bulletPoint.first() == '{' || insideBracket
+    }
+
+    return validateMatchingBrackets(bulletPoint.substring(1), updatedInsideBracket)
+}
+
+class ParsingException(message: String) : RuntimeException(message)
