@@ -1,5 +1,5 @@
 [versions]
-detekt = "1.23.5"
+detekt = "1.23.6"
 java = "21"
 junit = "5.10.2"
 kotest = "5.8.0"
