@@ -37,42 +37,8 @@
                         "to": "07-2019"
                     },
                     "bulletPoints": [
-                        [
-                            {
-                                "type": "plainText",
-                                "content": "Built smart object encounter notification system for an Android IoT middleware using "
-                            },
-                            {
-                                "type": "skill",
-                                "content": "Java"
-                            },
-                            {
-                                "type": "plainText",
-                                "content": "."
-                            }
-                        ],
-                        [
-                            {
-                                "type": "plainText",
-                                "content": "Programmed "
-                            },
-                            {
-                                "type": "skill",
-                                "content": "Arduino"
-                            },
-                            {
-                                "type": "plainText",
-                                "content": " boards using "
-                            },
-                            {
-                                "type": "skill",
-                                "content": "C programming"
-                            },
-                            {
-                                "type": "plainText",
-                                "content": " language to connect to Bluetooth Low Energy devices."
-                            }
-                        ]
+                        "Built smart object encounter notification system for an Android IoT middleware using {Java}.",
+                        "Programmed {Arduino} boards using {C programming} language to connect to Bluetooth Low Energy devices."
                     ]
                 },
                 {
@@ -82,34 +48,8 @@
                         "to": "07-2019"
                     },
                     "bulletPoints": [
-                        [
-                            {
-                                "type": "plainText",
-                                "content": "Developed a system that manages the relationships between users, bluetooth beacons and physical spaces with "
-                            },
-                            {
-                                "type": "skill",
-                                "content": "Spring Boot"
-                            },
-                            {
-                                "type": "plainText",
-                                "content": "."
-                            }
-                        ],
-                        [
-                            {
-                                "type": "plainText",
-                                "content": "Developed Android application that detects bluetooth beacons and registers this encounter in a web service with "
-                            },
-                            {
-                                "type": "skill",
-                                "content": "Retrofit"
-                            },
-                            {
-                                "type": "plainText",
-                                "content": "."
-                            }
-                        ]
+                        "Developed a system that manages the relationships between users, bluetooth beacons and physical spaces with {Spring Boot}.",
+                        "Developed Android application that detects bluetooth beacons and registers this encounter in a web service with {Retrofit}."
                     ]
                 }
             ]
@@ -128,50 +68,8 @@
                         "to": "07-2020"
                     },
                     "bulletPoints": [
-                        [
-                            {
-                                "type": "plainText",
-                                "content": "Built a flexible service and API for storing log information of other systems using Spring Boot and "
-                            },
-                            {
-                                "type": "skill",
-                                "content": "MongoDB"
-                            },
-                            {
-                                "type": "plainText",
-                                "content": "."
-                            }
-                        ],
-                        [
-                            {
-                                "type": "plainText",
-                                "content": "Built a "
-                            },
-                            {
-                                "type": "skill",
-                                "content": "Clean Architecture"
-                            },
-                            {
-                                "type": "plainText",
-                                "content": " Android app using "
-                            },
-                            {
-                                "type": "skill",
-                                "content": "Kotlin"
-                            },
-                            {
-                                "type": "plainText",
-                                "content": ", "
-                            },
-                            {
-                                "type": "skill",
-                                "content": "Coroutines"
-                            },
-                            {
-                                "type": "plainText",
-                                "content": " and Firebase Cloud Messaging allowing visitors to schedule and be notified about virtual visits to their imprisoned family members, important resource during the Covid-19 pandemic."
-                            }
-                        ]
+                        "Built a flexible service and API for storing log information of other systems using Spring Boot and {MongoDB}.",
+                        "Built a {Clean Architecture} Android app using {Kotlin}, {Coroutines} and Firebase Cloud Messaging allowing visitors to schedule and be notified about virtual visits to their imprisoned family members, important resource during the Covid-19 pandemic."
                     ]
                 },
                 {
@@ -181,12 +79,7 @@
                         "to": "09-2020"
                     },
                     "bulletPoints": [
-                        [
-                            {
-                                "type": "plainText",
-                                "content": "Developed the Android app that allows searching information about the state's prisoners and fugitives using Kotlin."
-                            }
-                        ]
+                        "Developed the Android app that allows searching information about the state's prisoners and fugitives using Kotlin."
                     ]
                 }
             ]
@@ -205,54 +98,10 @@
                         "to": "05-2021"
                     },
                     "bulletPoints": [
-                        [
-                            {
-                                "type": "plainText",
-                                "content": "Built a digital wallet and credit card rewards app for a big bank using coroutines and "
-                            },
-                            {
-                                "type": "skill",
-                                "content": "Koin"
-                            },
-                            {
-                                "type": "plainText",
-                                "content": " as the dependency injection framework."
-                            }
-                        ],
-                        [
-                            {
-                                "type": "plainText",
-                                "content": "Integrated code coverage tool in a "
-                            },
-                            {
-                                "type": "skill",
-                                "content": "multi-module"
-                            },
-                            {
-                                "type": "plainText",
-                                "content": " Android project."
-                            }
-                        ],
-                        [
-                            {
-                                "type": "plainText",
-                                "content": "Implemented the subsystem responsible for the digital signature of all http requests made from the app with "
-                            },
-                            {
-                                "type": "skill",
-                                "content": "OkHttp interceptors"
-                            },
-                            {
-                                "type": "plainText",
-                                "content": "."
-                            }
-                        ],
-                        [
-                            {
-                                "type": "plainText",
-                                "content": "Designed a testable biometric authentication abstraction adapting the original callback syntax to coroutines."
-                            }
-                        ]
+                        "Built a digital wallet and credit card rewards app for a big bank using coroutines and {Koin} as the dependency injection framework.",
+                        "Integrated code coverage tool in a {multi-module} Android project.",
+                        "Implemented the subsystem responsible for the digital signature of all http requests made from the app with {OkHttp interceptors}.",
+                        "Designed a testable biometric authentication abstraction adapting the original callback syntax to coroutines."
                     ]
                 }
             ]
@@ -271,40 +120,9 @@
                         "to": "04-2022"
                     },
                     "bulletPoints": [
-                        [
-                            {
-                                "type": "plainText",
-                                "content": "Worked at the checkout team on a "
-                            },
-                            {
-                                "type": "skill",
-                                "content": "single-activity"
-                            },
-                            {
-                                "type": "plainText",
-                                "content": ", clean architecture, multi-module application, using "
-                            },
-                            {
-                                "type": "skill",
-                                "content": "Dagger"
-                            },
-                            {
-                                "type": "plainText",
-                                "content": "."
-                            }
-                        ],
-                        [
-                            {
-                                "type": "plainText",
-                                "content": "Worked on a plugin based-architecture that enables loading different payment methods, delivery options and business logic."
-                            }
-                        ],
-                        [
-                            {
-                                "type": "plainText",
-                                "content": "Created a script to manage code ownership making the process less error-prone given the frequency teams structure changes."
-                            }
-                        ]
+                        "Worked at the checkout team on a {single-activity}, clean architecture, multi-module application, using {Dagger}.",
+                        "Worked on a plugin based-architecture that enables loading different payment methods, delivery options and business logic.",
+                        "Created a script to manage code ownership making the process less error-prone given the frequency teams structure changes."
                     ]
                 },
                 {
@@ -314,18 +132,8 @@
                         "to": "07-2022"
                     },
                     "bulletPoints": [
-                        [
-                            {
-                                "type": "plainText",
-                                "content": "Implemented dependency injection model for checkout plugins with Dagger to solve previously inefficient manual injection approach."
-                            }
-                        ],
-                        [
-                            {
-                                "type": "plainText",
-                                "content": "Implemented dynamic onboarding, allowing PMs to control the order and timing of onboarding based on remote configs and plugin availability, improving user engagement and educating users on effective checkout feature usage."
-                            }
-                        ]
+                        "Implemented dependency injection model for checkout plugins with Dagger to solve previously inefficient manual injection approach.",
+                        "Implemented dynamic onboarding, allowing PMs to control the order and timing of onboarding based on remote configs and plugin availability, improving user engagement and educating users on effective checkout feature usage."
                     ]
                 }
             ]
@@ -344,52 +152,11 @@
                         "to": "now"
                     },
                     "bulletPoints": [
-                        [
-                            {
-                                "type": "plainText",
-                                "content": "Worked on a geographically distributed team delivering features on the voice assistant in Outlook Android app."
-                            }
-                        ],
-                        [
-                            {
-                                "type": "plainText",
-                                "content": "Developed a set of SDKs used by multiple mobile apps to seamlessly integrate the Microsoft Copilot experience powered by GPT-4 using "
-                            },
-                            {
-                                "type": "skill",
-                                "content": "Jetpack Compose"
-                            },
-                            {
-                                "type": "plainText",
-                                "content": "."
-                            }
-                        ],
-                        [
-                            {
-                                "type": "plainText",
-                                "content": "Designed and led the development of a dependency injection model for that does not exposes the framework to host apps."
-                            }
-                        ],
-                        [
-                            {
-                                "type": "plainText",
-                                "content": "Adapted a callback-based Chat SDK to reactive programming with "
-                            },
-                            {
-                                "type": "skill",
-                                "content": "Kotlin Flow"
-                            },
-                            {
-                                "type": "plainText",
-                                "content": " making the codebase easier to maintain."
-                            }
-                        ],
-                        [
-                            {
-                                "type": "plainText",
-                                "content": "Integrated a common set of static analysis and lint rule in all the libraries that allowed code reviews to focus on architecturally significant decisions instead of small details."
-                            }
-                        ]
+                        "Worked on a geographically distributed team delivering features on the voice assistant in Outlook Android app.",
+                        "Developed a set of SDKs used by multiple mobile apps to seamlessly integrate the Microsoft Copilot experience powered by GPT-4 using {Jetpack Compose}.",
+                        "Designed and led the development of a dependency injection model for that does not exposes the framework to host apps.",
+                        "Adapted a callback-based Chat SDK to reactive programming with {Kotlin Flow} making the codebase easier to maintain.",
+                        "Integrated a common set of static analysis and lint rule in all the libraries that allowed code reviews to focus on architecturally significant decisions instead of small details."
                     ]
                 }
             ]
