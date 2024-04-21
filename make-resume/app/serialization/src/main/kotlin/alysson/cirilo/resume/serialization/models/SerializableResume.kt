@@ -1,6 +1,5 @@
 package alysson.cirilo.resume.serialization.models
 
-import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -34,22 +33,6 @@ internal data class SerializableRole(
     val period: SerializableEnrollmentPeriod,
     val bulletPoints: List<String>,
 )
-
-@Serializable
-internal data class SerializableBulletPoint(
-    val type: Type,
-    val content: String,
-) {
-
-    @Serializable
-    enum class Type {
-        @SerialName("plainText")
-        PlainText,
-
-        @SerialName("skill")
-        Skill,
-    }
-}
 
 @Serializable
 internal data class SerializableProjectOrPublication(
