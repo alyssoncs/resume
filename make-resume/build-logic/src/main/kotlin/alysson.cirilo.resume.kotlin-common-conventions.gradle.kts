@@ -15,9 +15,9 @@ repositories {
 }
 
 dependencies {
-    val catalog = project.versionCatalog
-    add("testRuntimeOnly", catalog.getLibrary("test.junit.engine"))
-    add("testImplementation", catalog.getBundle("unitTest"))
+    val catalog = versionCatalog
+    "testRuntimeOnly"(catalog.getLibrary("test.junit.engine"))
+    "testImplementation"(catalog.getBundle("unitTest"))
 }
 
 project.tasks.withType<Test>().configureEach {
