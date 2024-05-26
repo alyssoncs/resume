@@ -22,16 +22,14 @@ jobs:
           distribution: 'adopt'
       - name: Validate Gradle wrapper
         uses: gradle/wrapper-validation-action@v2
-      - name: Build with Gradle
+      - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v3
-        with:
-          arguments: build
-          build-root-directory: make-resume
+      - name: Build
+        working-directory: make-resume
+        run: ./gradlew build
       - name: Lint
-        uses: gradle/actions/setup-gradle@v3
-        with:
-          arguments: detektMain detektTest
-          build-root-directory: make-resume
+        working-directory: make-resume
+        run: ./gradlew build
   make-resumes:
     runs-on: ubuntu-latest
     steps:
@@ -45,6 +43,8 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y texlive-full
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v3
       - name: Make resumes
         run: make
       - name: Share resumes
