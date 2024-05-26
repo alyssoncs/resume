@@ -4,7 +4,7 @@ java = "21"
 junit = "5.11.0-M2"
 kotest = "5.9.0"
 kotlin = "2.0.0"
-kotlin-serialization-json = "1.6.3"
+kotlin-serialization-json = "1.7.0-RC"
 kotlinx-cli = "0.3.6"
 
 [libraries]
