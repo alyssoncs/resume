@@ -1,5 +1,5 @@
 plugins {
-    id("alysson.cirilo.resume.kotlin-application-conventions")
+    alias(libs.plugins.resume.application)
 }
 
 dependencies {
