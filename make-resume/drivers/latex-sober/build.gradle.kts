@@ -8,4 +8,5 @@ dependencies {
 
     testImplementation(testFixtures(projects.drivers.shared.utils))
     testImplementation(testFixtures(projects.domain.entities))
+    testImplementation(testFixtures(projects.drivers.shared.latexEscape))
 }
