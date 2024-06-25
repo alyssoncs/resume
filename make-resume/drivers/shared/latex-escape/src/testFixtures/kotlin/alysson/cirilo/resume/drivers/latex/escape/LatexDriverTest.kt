@@ -24,24 +24,12 @@ abstract class LatexDriverTest {
     private val workDateFormatter = DateTimeFormatter.ofPattern("MMM. yyyy").withLocale(locale)
     private val educationDateFormatter = DateTimeFormatter.ofPattern("MM. yyyy").withLocale(locale)
 
-    private val driver by lazy { makeLatexDriver(workDateFormatter, educationDateFormatter) }
+    protected val driver by lazy { makeLatexDriver(workDateFormatter, educationDateFormatter) }
 
     abstract fun makeLatexDriver(
         workDateFormatter: DateTimeFormatter,
         educationDateFormatter: DateTimeFormatter,
     ): ResumeDriver
-
-    @LatexEscapeParams
-    fun `should escape name`(
-        raw: String,
-        escaped: String,
-    ) {
-        val resume = aResume().from(raw)
-
-        val output = driver.convert(resume)
-
-        output shouldContain escaped
-    }
 
     @LatexEscapeParams
     fun `should escape headline`(
@@ -269,7 +257,7 @@ abstract class LatexDriverTest {
         output shouldContain escaped
     }
 
-    private fun ResumeDriver.convert(resume: ResumeBuilder) = convert(resume.build())
+    protected fun ResumeDriver.convert(resume: ResumeBuilder) = convert(resume.build())
 
     @ParameterizedTest
     @ArgumentsSource(LatexEscapeCharacterProvider::class)
