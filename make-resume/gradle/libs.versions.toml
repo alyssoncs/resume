@@ -31,3 +31,4 @@ kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", versi
 
 # convention plugins
 resume-kotlin-library = { id = "alysson.cirilo.resume.kotlin-library-conventions" }
+resume-serialization = { id = "alysson.cirilo.resume.kotlin-serialization-conventions" }

@@ -1,6 +1,6 @@
 plugins {
     alias(libs.plugins.resume.kotlin.library)
-    id("alysson.cirilo.resume.kotlin-serialization-conventions")
+    alias(libs.plugins.resume.serialization)
 }
 
 dependencies {
