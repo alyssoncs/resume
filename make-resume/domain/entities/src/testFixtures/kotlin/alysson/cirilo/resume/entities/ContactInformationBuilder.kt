@@ -25,14 +25,26 @@ class ContactInformationBuilder private constructor(
     fun email(emailBuilder: LinkedInformationBuilder) =
         ContactInformationBuilder(emailBuilder, linkedinBuilder, githubBuilder, locationBuilder)
 
+    fun email(config: LinkedInformationBuilder.() -> LinkedInformationBuilder) =
+        email(aLinkedInfo().config())
+
     fun linkedin(linkedinBuilder: LinkedInformationBuilder) =
         ContactInformationBuilder(emailBuilder, linkedinBuilder, githubBuilder, locationBuilder)
+
+    fun linkedin(config: LinkedInformationBuilder.() -> LinkedInformationBuilder) =
+        linkedin(aLinkedInfo().config())
 
     fun github(githubBuilder: LinkedInformationBuilder) =
         ContactInformationBuilder(emailBuilder, linkedinBuilder, githubBuilder, locationBuilder)
 
+    fun github(config: LinkedInformationBuilder.() -> LinkedInformationBuilder) =
+        github(aLinkedInfo().config())
+
     fun location(locationBuilder: LinkedInformationBuilder) =
         ContactInformationBuilder(emailBuilder, linkedinBuilder, githubBuilder, locationBuilder)
+
+    fun location(config: LinkedInformationBuilder.() -> LinkedInformationBuilder) =
+        location(aLinkedInfo().config())
 
     fun build(): ContactInformation {
         return ContactInformation(

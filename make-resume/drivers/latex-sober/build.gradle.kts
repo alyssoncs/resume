@@ -7,4 +7,5 @@ dependencies {
     implementation(projects.drivers.shared.utils)
 
     testImplementation(testFixtures(projects.drivers.shared.utils))
+    testImplementation(testFixtures(projects.domain.entities))
 }

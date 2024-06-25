@@ -35,6 +35,15 @@ class ResumeBuilder private constructor(
         degreeBuilders,
     )
 
+    fun withHeadline(headline: String) = ResumeBuilder(
+        name,
+        listOf(headline),
+        contactInformationBuilder,
+        jobExperienceBuilders,
+        projectAndPublicationBuilders,
+        degreeBuilders,
+    )
+
     fun with(contactInformationBuilder: ContactInformationBuilder) = ResumeBuilder(
         name,
         headline,
@@ -43,6 +52,9 @@ class ResumeBuilder private constructor(
         projectAndPublicationBuilders,
         degreeBuilders,
     )
+
+    fun with(config: ContactInformationBuilder.() -> ContactInformationBuilder) =
+        with(contactInfo().config())
 
     fun withEmptyHeadline() = withHeadline(emptyList())
 
