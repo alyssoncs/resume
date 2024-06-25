@@ -1,5 +1,5 @@
 plugins {
-    id("alysson.cirilo.resume.kotlin-library-conventions")
+    alias(libs.plugins.resume.kotlin.library)
     `java-test-fixtures`
 }
 

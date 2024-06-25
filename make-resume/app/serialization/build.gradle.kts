@@ -1,5 +1,5 @@
 plugins {
-    id("alysson.cirilo.resume.kotlin-library-conventions")
+    alias(libs.plugins.resume.kotlin.library)
     id("alysson.cirilo.resume.kotlin-serialization-conventions")
 }
 

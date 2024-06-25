@@ -28,3 +28,6 @@ unitTest = ["test-junit-api", "test-junit-params", "test-kotest-assertions"]
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+
+# convention plugins
+resume-kotlin-library = { id = "alysson.cirilo.resume.kotlin-library-conventions" }
