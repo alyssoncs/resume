@@ -31,23 +31,14 @@
             "location": "São Luís - MA, Brazil",
             "roles": [
                 {
-                    "title": "Undergraduate Research Fellow",
+                    "title": "Intern",
                     "period": {
                         "from": "04-2017",
                         "to": "07-2019"
                     },
                     "bulletPoints": [
                         "Built smart object encounter notification system for an Android IoT middleware using {Java}.",
-                        "Programmed {Arduino} boards using {C programming} language to connect to Bluetooth Low Energy devices."
-                    ]
-                },
-                {
-                    "title": "Intern",
-                    "period": {
-                        "from": "05-2019",
-                        "to": "07-2019"
-                    },
-                    "bulletPoints": [
+                        "Programmed {Arduino} boards using {C programming} language to connect to Bluetooth Low Energy devices.",
                         "Developed a system that manages the relationships between users, bluetooth beacons and physical spaces with {Spring Boot}.",
                         "Developed Android application that detects bluetooth beacons and registers this encounter in a web service with {Retrofit}."
                     ]
@@ -156,7 +147,8 @@
                         "Developed a set of SDKs used by multiple mobile apps to seamlessly integrate the Microsoft Copilot experience powered by GPT-4 using {Jetpack Compose}.",
                         "Designed and led the development of a dependency injection model that does not exposes the framework to host apps.",
                         "Adapted a callback-based Chat SDK to reactive programming with {Kotlin Flow} making the codebase easier to maintain.",
-                        "Integrated a common set of static analysis and lint rules in all the libraries that allowed code reviews to focus on architecturally significant decisions instead of small details."
+                        "Integrated a common set of static analysis and lint rules in all the libraries that allowed code reviews to focus on architecturally significant decisions instead of small details.",
+                        "Achieved a 67% improvement in CI pipeline performance by identifying and decomposing independent work into parallel jobs and properly configuring {Gradle} builds."
                     ]
                 }
             ]
