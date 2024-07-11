@@ -19,6 +19,7 @@ repositories {
 dependencies {
     val catalog = versionCatalog
     "testRuntimeOnly"(catalog.getLibrary("test.junit.engine"))
+    "testRuntimeOnly"(catalog.getLibrary("test.junit.launcher"))
     "testImplementation"(catalog.getBundle("unitTest"))
 }
 

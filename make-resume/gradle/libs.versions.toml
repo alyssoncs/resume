@@ -13,6 +13,7 @@ kotlinx-cli = { module = "org.jetbrains.kotlinx:kotlinx-cli", version.ref = "kot
 kotlin-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlin-serialization-json" }
 test-junit-api = { module = "org.junit.jupiter:junit-jupiter-api", version.ref = "junit" }
 test-junit-engine = { module = "org.junit.jupiter:junit-jupiter-engine", version.ref = "junit" }
+test-junit-launcher = { module = "org.junit.platform:junit-platform-launcher" }
 test-junit-params = { module = "org.junit.jupiter:junit-jupiter-params", version.ref = "junit" }
 test-kotest-assertions = { module = "io.kotest:kotest-assertions-core", version.ref = "kotest" }
 
