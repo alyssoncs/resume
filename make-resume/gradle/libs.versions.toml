@@ -17,7 +17,7 @@ test-junit-params = { module = "org.junit.jupiter:junit-jupiter-params", version
 test-kotest-assertions = { module = "io.kotest:kotest-assertions-core", version.ref = "kotest" }
 
 # :build-logic
-dependencies-sorter = { module = "com.squareup:sort-dependencies-gradle-plugin", version.ref = "dependencies-sorter" }
+dependencies-sorter-gradle = { module = "com.squareup:sort-dependencies-gradle-plugin", version.ref = "dependencies-sorter" }
 kotlin-gradle = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 kotlin-serialization-gradle = { module = "org.jetbrains.kotlin:kotlin-serialization", version.ref = "kotlin" }
 detekt-gradle = { module = "io.gitlab.arturbosch.detekt:detekt-gradle-plugin", version.ref = "detekt" }
