@@ -1,20 +1,19 @@
 package alysson.cirilo.resume.entities
 
 import java.net.URI
-import java.net.URL
 
 class LinkedInformationBuilder private constructor(
     private val displayName: String,
-    private val url: URL,
+    private val url: URI,
 ) {
     constructor() : this(
         displayName = "cool information",
-        url = URI("https://www.example.com").toURL(),
+        url = URI("https://www.example.com"),
     )
 
     fun displaying(displayName: String) = LinkedInformationBuilder(displayName, url)
 
-    fun linkingTo(urlSpec: String) = LinkedInformationBuilder(displayName, URL(urlSpec))
+    fun linkingTo(urlSpec: String) = LinkedInformationBuilder(displayName, URI(urlSpec))
 
     fun build(): LinkedInformation {
         return LinkedInformation(displayName, url)

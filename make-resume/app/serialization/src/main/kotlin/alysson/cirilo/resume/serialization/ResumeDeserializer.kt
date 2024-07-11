@@ -79,7 +79,7 @@ private fun mapDegree(degree: SerializableDegree): Degree {
 private fun mapLinkedInfo(info: SerializableLinkedInformation): LinkedInformation {
     return LinkedInformation(
         displayName = info.displayName,
-        url = URI(info.url).toURL(),
+        url = URI(info.url),
     )
 }
 

@@ -1,10 +1,10 @@
 package alysson.cirilo.resume.entities
 
-import java.net.URL
+import java.net.URI
 
 data class LinkedInformation(
     val displayName: String,
-    val url: URL,
+    val url: URI,
 ) {
     init {
         require(displayName.isNotBlank()) {
