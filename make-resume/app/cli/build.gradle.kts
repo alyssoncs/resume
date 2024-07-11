@@ -3,12 +3,11 @@ plugins {
 }
 
 dependencies {
-    implementation(projects.app.serialization)
-    implementation(projects.drivers.latexSober)
-    implementation(projects.drivers.latexAwesome)
-    implementation(projects.drivers.markdown)
-
     implementation(libs.kotlinx.cli)
+    implementation(projects.app.serialization)
+    implementation(projects.drivers.latexAwesome)
+    implementation(projects.drivers.latexSober)
+    implementation(projects.drivers.markdown)
 }
 
 private val applicationClass = "alysson.cirilo.resume.cli.AppKt"
