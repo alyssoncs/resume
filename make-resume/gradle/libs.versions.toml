@@ -1,6 +1,6 @@
 [versions]
 dependencies-sorter = "0.7"
-detekt = "1.23.6"
+detekt = "main-SNAPSHOT"
 java = "21"
 junit = "5.11.0-M2"
 kotest = "5.9.1"

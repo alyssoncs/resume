@@ -28,12 +28,17 @@ sealed interface BulletPointContent {
     val displayName: String
 
     data class PlainText(override val displayName: String) : BulletPointContent {
-        init { validate() }
+        init {
+            validate()
+        }
     }
+
     data class Skill(val skill: ProfessionalSkill) : BulletPointContent {
         override val displayName: String = skill.value
 
-        init { validate() }
+        init {
+            validate()
+        }
     }
 
     companion object {

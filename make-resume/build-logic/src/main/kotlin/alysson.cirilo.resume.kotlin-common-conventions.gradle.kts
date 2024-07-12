@@ -11,11 +11,6 @@ plugins {
     id("alysson.cirilo.resume.quality")
 }
 
-repositories {
-    // Use Maven Central for resolving dependencies.
-    mavenCentral()
-}
-
 dependencies {
     val catalog = versionCatalog
     "testRuntimeOnly"(catalog.getLibrary("test.junit.engine"))

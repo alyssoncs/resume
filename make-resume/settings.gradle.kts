@@ -5,6 +5,20 @@ pluginManagement {
 
     repositories {
         gradlePluginPortal()
+        // for detekt snapshot
+        maven {
+            url = uri("https://oss.sonatype.org/content/repositories/snapshots/")
+        }
+    }
+}
+
+dependencyResolutionManagement {
+    repositories {
+        mavenCentral()
+        // for detekt snapshot
+        maven {
+            url = uri("https://oss.sonatype.org/content/repositories/snapshots/")
+        }
     }
 }
 
