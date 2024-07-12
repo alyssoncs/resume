@@ -1,3 +1,4 @@
+import alysson.cirilo.resume.utils.RESUME_GROUP
 import alysson.cirilo.resume.utils.getBundle
 import alysson.cirilo.resume.utils.getLibrary
 import alysson.cirilo.resume.utils.getVersion
@@ -17,6 +18,8 @@ dependencies {
     "testRuntimeOnly"(catalog.getLibrary("test.junit.launcher"))
     "testImplementation"(catalog.getBundle("unitTest"))
 }
+
+project.group = RESUME_GROUP
 
 project.tasks.withType<Test>().configureEach {
     useJUnitPlatform()

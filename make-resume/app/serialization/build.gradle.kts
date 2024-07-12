@@ -1,3 +1,5 @@
+import alysson.cirilo.resume.utils.resumeFixtures
+
 plugins {
     alias(libs.plugins.resume.kotlin.library)
     alias(libs.plugins.resume.serialization)
@@ -8,5 +10,5 @@ dependencies {
 
     implementation(libs.kotlin.serialization.json)
 
-    testImplementation(testFixtures(projects.domain.entities))
+    testImplementation(resumeFixtures(projects.domain.entities))
 }
