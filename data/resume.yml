@@ -1,0 +1,160 @@
+name: Alysson Cirilo Silva
+headline:
+  - Software Engineer
+  - Android Developer
+contactInfo:
+  email:
+    displayName: alysson.cirilo@gmail.com
+    url: mailto:alysson.cirilo@gmail.com
+  linkedin:
+    displayName: linkedin.com/in/alysson-cirilo
+    url: https://www.linkedin.com/in/alysson-cirilo
+  github:
+    displayName: github.com/alyssoncs
+    url: https://www.github.com/alyssoncs
+  location:
+    displayName: Remote (UTC-3), Brazil
+    url: https://www.google.com/maps?q=+Maranhão,+Brazil
+experiences:
+  - company:
+      displayName: Laboratory of Intelligent Distributed Systems (LSDi)
+      url: http://www.lsdi.ufma.br
+    location: São Luís - MA, Brazil
+    roles:
+      - title: Intern
+        period:
+          from: 04-2017
+          to: 07-2019
+        bulletPoints:
+          - Built smart object encounter notification system for an Android IoT
+            middleware using {Java}.
+          - Programmed {Arduino} boards using {C programming} language to
+            connect to Bluetooth Low Energy devices.
+          - Developed a system that manages the relationships between users,
+            bluetooth beacons and physical spaces with {Spring Boot}.
+          - Developed Android application that detects bluetooth beacons and
+            registers this encounter in a web service with {Retrofit}.
+  - company:
+      displayName: State Secretariat for Penitentiary Administration of Maranhão (SEAP-MA)
+      url: http://seap.ma.gov.br/
+    location: São Luís - MA, Brazil
+    roles:
+      - title: Entry-level Developer
+        period:
+          from: 09-2019
+          to: 07-2020
+        bulletPoints:
+          - Built a flexible service and API for storing log information of
+            other systems using Spring Boot and {MongoDB}.
+          - Built a {Clean Architecture} Android app using {Kotlin},
+            {Coroutines} and Firebase Cloud Messaging allowing visitors to
+            schedule and be notified about virtual visits to their imprisoned
+            family members, important resource during the Covid-19 pandemic.
+      - title: Mid-level Developer
+        period:
+          from: 07-2020
+          to: 09-2020
+        bulletPoints:
+          - Developed the Android app that allows searching information about
+            the state's prisoners and fugitives using Kotlin.
+          - Proactively identified and swiftly eliminated critical SQL injection
+            vulnerabilities, significantly enhancing system security.
+  - company:
+      displayName: Meta (Consulting Company)
+      url: https://www.meta.com.br/
+    location: Remote, Brazil
+    roles:
+      - title: Android Developer
+        period:
+          from: 09-2020
+          to: 05-2021
+        bulletPoints:
+          - Built a digital wallet and credit card rewards app for a big bank
+            using coroutines and {Koin} as the dependency injection framework.
+          - Integrated code coverage tool in a {multi-module} Android project.
+          - Implemented the subsystem responsible for the digital signature of
+            all http requests made from the app with {OkHttp interceptors}.
+          - Designed a testable biometric authentication abstraction adapting
+            the original callback syntax to coroutines.
+  - company:
+      displayName: iFood
+      url: https://www.ifood.com.br/
+    location: Remote, Brazil
+    roles:
+      - title: Android Developer I
+        period:
+          from: 05-2021
+          to: 04-2022
+        bulletPoints:
+          - Worked at the checkout team on a {single-activity}, clean
+            architecture, multi-module application, using {Dagger}.
+          - Worked on a plugin based-architecture that enables loading different
+            payment methods, delivery options and business logic.
+          - Created a script to manage code ownership making the process less
+            error-prone given the frequency teams structure changes.
+      - title: Android Developer II
+        period:
+          from: 04-2022
+          to: 07-2022
+        bulletPoints:
+          - Implemented dependency injection model for checkout plugins with
+            Dagger to solve previously inefficient manual injection approach.
+          - Implemented dynamic onboarding, allowing PMs to control the order
+            and timing of onboarding based on remote configs and plugin
+            availability, improving user engagement and educating users on
+            effective checkout feature usage.
+  - company:
+      displayName: Microsoft
+      url: https://www.microsoft.com/
+    location: Remote, Brazil
+    roles:
+      - title: Software Engineer II
+        period:
+          from: 07-2022
+          to: now
+        bulletPoints:
+          - Worked on a geographically distributed team delivering features on
+            the voice assistant in Outlook Android app.
+          - Developed an SDK used by multiple mobile apps to seamlessly
+            integrate the Microsoft Copilot experience using {Jetpack Compose}.
+          - Designed and led the development of a dependency injection model
+            that does not exposes the framework to host apps.
+          - Adapted a callback-based Chat SDK to reactive programming with
+            {Kotlin Flow} making the codebase easier to maintain.
+          - Integrated a common set of static analysis and lint rules in all the
+            libraries that allowed code reviews to focus on architecturally
+            significant decisions instead of small details.
+          - Achieved a 67% improvement in CI pipeline performance by identifying
+            and decomposing independent work into parallel jobs and properly
+            configuring {Gradle} builds.
+projectsAndPublications:
+  - title:
+      displayName: Resume
+      url: https://github.com/alyssoncs/resume/
+    description: The tool that built the resumé that you are reading right now.
+  - title:
+      displayName: Cirilo's Algorithm
+      url: https://github.com/alyssoncs/cirilo-algorithm/
+    description:
+      An algorithm for finding the smallest pair of values between two
+      unsorted arrays.
+  - title:
+      displayName: Jetpack Compose – Don't throw your presenters off
+      url: https://dev.to/alyssoncs/jetpack-compose-don-t-throw-your-presenters-off-43fk
+    description: Blog post about using model-view-presenter (MVP) on Jetpack Compose.
+  - title:
+      displayName:
+        Internet of Things Applied to Presence and Meeting Management of
+        People in Smart Buildings
+      url: https://revistas.unifacs.br/index.php/rsc/article/view/6890
+    description: Paper on mobile computing and IoT.
+education:
+  - institution:
+      displayName: Federal University of Maranhão (UFMA)
+      url: https://portalpadrao.ufma.br/site/
+    location: São Luís - MA, Brazil
+    degree: BSc. in Computer Science
+    period:
+      from: 01-2013
+      to: 01-2019
+

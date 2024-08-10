@@ -1,7 +1,7 @@
 OUTPUT_DIR=output
 PREVIEW_DIR=previews
 RESUME_NAME=alysson-cirilo-resume
-JSON_RESUME=data/resume.json
+YAML_RESUME=data/resume.yml
 MAKE_RESUME=make-resume/app/cli/build/libs/cli-uber.jar
 
 .PHONY: all
@@ -20,13 +20,13 @@ markdown: $(OUTPUT_DIR)/markdown/$(RESUME_NAME).md
 previews: $(PREVIEW_DIR)/sober-resume-preview.png $(PREVIEW_DIR)/awesome-resume-preview.png
 
 $(OUTPUT_DIR)/awesome/$(RESUME_NAME).tex: $(MAKE_RESUME) | $(OUTPUT_DIR)/awesome
-	java -jar $(MAKE_RESUME) -f awesome -i $(JSON_RESUME) > $@
+	java -jar $(MAKE_RESUME) -f awesome -i $(YAML_RESUME) > $@
 
 $(OUTPUT_DIR)/sober/$(RESUME_NAME).tex: $(MAKE_RESUME) | $(OUTPUT_DIR)/sober
-	java -jar $(MAKE_RESUME) -f sober -i $(JSON_RESUME) > $@
+	java -jar $(MAKE_RESUME) -f sober -i $(YAML_RESUME) > $@
 
 $(OUTPUT_DIR)/markdown/$(RESUME_NAME).md: $(MAKE_RESUME) | $(OUTPUT_DIR)/markdown
-	java -jar $(MAKE_RESUME) -f markdown -i $(JSON_RESUME) > $@
+	java -jar $(MAKE_RESUME) -f markdown -i $(YAML_RESUME) > $@
 
 $(OUTPUT_DIR)/awesome/$(RESUME_NAME).pdf: $(OUTPUT_DIR)/awesome/$(RESUME_NAME).tex
 	cp -r dependencies/awesome/Awesome-CV $(OUTPUT_DIR)/awesome
