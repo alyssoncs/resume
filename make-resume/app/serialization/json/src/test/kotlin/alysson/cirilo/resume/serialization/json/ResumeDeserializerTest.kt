@@ -167,7 +167,7 @@ class ResumeDeserializerTest {
 
         private fun resume(path: String): Resume {
             val malformedJson = "/valid/$path".read()
-            return deserialize(malformedJson)
+            return deserializeJson(malformedJson)
         }
     }
 
@@ -189,7 +189,7 @@ class ResumeDeserializerTest {
 
         private fun malformedResume(path: String): Resume {
             val malformedJson = "/malformed/$path".read()
-            return deserialize(malformedJson)
+            return deserializeJson(malformedJson)
         }
     }
 
