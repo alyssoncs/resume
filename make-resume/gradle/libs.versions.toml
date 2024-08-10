@@ -6,11 +6,13 @@ junit = "5.11.0-RC1"
 kotest = "5.9.1"
 kotlin = "2.0.20-RC"
 kotlin-serialization-json = "1.7.1"
+kotlin-serialization-yaml = "0.60.0"
 kotlinx-cli = "0.3.6"
 
 [libraries]
 kotlinx-cli = { module = "org.jetbrains.kotlinx:kotlinx-cli", version.ref = "kotlinx-cli" }
 kotlin-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlin-serialization-json" }
+kotlin-serialization-yaml = { module = "com.charleskorn.kaml:kaml", version.ref = "kotlin-serialization-yaml" }
 test-junit-api = { module = "org.junit.jupiter:junit-jupiter-api", version.ref = "junit" }
 test-junit-engine = { module = "org.junit.jupiter:junit-jupiter-engine", version.ref = "junit" }
 test-junit-launcher = { module = "org.junit.platform:junit-platform-launcher" }

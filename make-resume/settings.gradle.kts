@@ -29,6 +29,7 @@ plugins {
 rootProject.name = "make-resume"
 include(":app:cli")
 include(":app:serialization")
+include(":app:yaml")
 include(":domain:entities")
 include(":domain:infra")
 include(":drivers:latex-awesome")
