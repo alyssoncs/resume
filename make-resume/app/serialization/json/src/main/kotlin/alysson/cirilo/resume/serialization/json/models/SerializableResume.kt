@@ -1,4 +1,4 @@
-package alysson.cirilo.resume.serialization.models
+package alysson.cirilo.resume.serialization.json.models
 
 import kotlinx.serialization.Serializable
 

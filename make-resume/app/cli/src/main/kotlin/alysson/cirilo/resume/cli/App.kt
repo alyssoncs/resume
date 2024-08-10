@@ -4,7 +4,7 @@ import alysson.cirilo.resume.drivers.latexawesome.makeLatexAwesomeDriver
 import alysson.cirilo.resume.drivers.latexsober.makeLatexSoberDriver
 import alysson.cirilo.resume.drivers.markdown.makeMarkdownDriver
 import alysson.cirilo.resume.infra.ResumeDriver
-import alysson.cirilo.resume.serialization.deserialize
+import alysson.cirilo.resume.serialization.json.deserialize
 import kotlinx.cli.ArgParser
 import kotlinx.cli.ArgType
 import kotlinx.cli.required

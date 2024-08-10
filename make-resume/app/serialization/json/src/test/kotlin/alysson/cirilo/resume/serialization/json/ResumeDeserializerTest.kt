@@ -1,4 +1,4 @@
-package alysson.cirilo.resume.serialization
+package alysson.cirilo.resume.serialization.json
 
 import alysson.cirilo.resume.entities.EnrollmentPeriod.EndDate.Past
 import alysson.cirilo.resume.entities.EnrollmentPeriod.EndDate.Present
