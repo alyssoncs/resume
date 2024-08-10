@@ -31,7 +31,7 @@ jobs:
         working-directory: make-resume
         run: ./gradlew build
   make-resumes:
-    #runs-on: ubuntu-latest
+    runs-on: ubuntu-latest
     container: texlive/texlive:latest
     steps:
       - uses: actions/checkout@v4
