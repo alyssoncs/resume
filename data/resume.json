@@ -70,7 +70,8 @@
                         "to": "09-2020"
                     },
                     "bulletPoints": [
-                        "Developed the Android app that allows searching information about the state's prisoners and fugitives using Kotlin."
+                        "Developed the Android app that allows searching information about the state's prisoners and fugitives using Kotlin.",
+                        "Proactively identified and swiftly eliminated critical SQL injection vulnerabilities, significantly enhancing system security."
                     ]
                 }
             ]
@@ -144,7 +145,7 @@
                     },
                     "bulletPoints": [
                         "Worked on a geographically distributed team delivering features on the voice assistant in Outlook Android app.",
-                        "Developed a set of SDKs used by multiple mobile apps to seamlessly integrate the Microsoft Copilot experience powered by GPT-4 using {Jetpack Compose}.",
+                        "Developed an SDK used by multiple mobile apps to seamlessly integrate the Microsoft Copilot experience using {Jetpack Compose}.",
                         "Designed and led the development of a dependency injection model that does not exposes the framework to host apps.",
                         "Adapted a callback-based Chat SDK to reactive programming with {Kotlin Flow} making the codebase easier to maintain.",
                         "Integrated a common set of static analysis and lint rules in all the libraries that allowed code reviews to focus on architecturally significant decisions instead of small details.",
