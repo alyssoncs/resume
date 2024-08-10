@@ -167,7 +167,7 @@ class YamlDeserializerTest {
 
         private fun resume(path: String): Resume {
             val malformedJson = "/valid/$path".read()
-            return deserialize(malformedJson)
+            return deserializeYaml(malformedJson)
         }
     }
 
@@ -189,7 +189,7 @@ class YamlDeserializerTest {
 
         private fun malformedResume(path: String): Resume {
             val malformedJson = "/malformed/$path".read()
-            return deserialize(malformedJson)
+            return deserializeYaml(malformedJson)
         }
     }
 
