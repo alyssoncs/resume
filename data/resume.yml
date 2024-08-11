@@ -124,7 +124,7 @@ experiences:
           - Integrated a common set of static analysis and lint rules in all the
             libraries that allowed code reviews to focus on architecturally
             significant decisions instead of small details.
-          - Achieved a 67% improvement in CI pipeline performance by identifying
+          - Achieved a 57% improvement in CI pipeline performance by identifying
             and decomposing independent work into parallel jobs and properly
             configuring {Gradle} builds.
 projectsAndPublications:
