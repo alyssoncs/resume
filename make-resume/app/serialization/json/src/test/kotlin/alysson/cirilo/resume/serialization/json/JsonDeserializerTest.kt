@@ -4,6 +4,7 @@ import alysson.cirilo.resume.entities.EnrollmentPeriod.EndDate.Past
 import alysson.cirilo.resume.entities.EnrollmentPeriod.EndDate.Present
 import alysson.cirilo.resume.entities.Resume
 import alysson.cirilo.resume.entities.aBulletPoint
+import alysson.cirilo.resume.serialization.ParsingException
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.matchers.collections.containExactly
 import io.kotest.matchers.collections.shouldHaveSize
