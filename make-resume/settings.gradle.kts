@@ -29,6 +29,7 @@ plugins {
 rootProject.name = "make-resume"
 include(":app:cli")
 include(":app:serialization:json")
+include(":app:serialization:kotlinx-mapper")
 include(":app:serialization:kotlinx-model")
 include(":app:serialization:yaml")
 include(":domain:entities")
