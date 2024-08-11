@@ -56,22 +56,13 @@ private fun getInputType(inputFile: File, inputTypeArg: InputType?): InputType {
 private fun formatResume(inputFile: File, inputType: InputType, resumeFlavor: Flavor): String {
     val serializedResume = inputFile.readText()
     val resume = inputType.deserialize(serializedResume)
-    return resumeFlavor.driver.convert(resume)
+    return resumeFlavor.convert(resume)
 }
 
-private enum class Flavor {
-    Awesome {
-        override val driver: ResumeDriver get() = makeLatexAwesomeDriver()
-    },
-    Sober {
-        override val driver: ResumeDriver get() = makeLatexSoberDriver()
-    },
-    Markdown {
-        override val driver: ResumeDriver get() = makeMarkdownDriver()
-    },
-    ;
-
-    abstract val driver: ResumeDriver
+private enum class Flavor(driver: ResumeDriver) : ResumeDriver by driver {
+    Awesome(driver = makeLatexAwesomeDriver()),
+    Sober(driver = makeLatexSoberDriver()),
+    Markdown(driver = makeMarkdownDriver()),
 }
 
 private enum class InputType(private val extension: String, val deserialize: (String) -> Resume) {
