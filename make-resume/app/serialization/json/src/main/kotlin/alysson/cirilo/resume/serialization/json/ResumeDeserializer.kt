@@ -129,10 +129,7 @@ private fun validateFlatSkills(bulletPoint: BulletPoint) {
     if (containsBracketInsideBracket) throw ParsingException("Cannot have a skill inside another skill")
 }
 
-private tailrec fun mapBulletContent(
-    bulletPoint: String,
-    content: List<BulletPointContent>
-): List<BulletPointContent> {
+private tailrec fun mapBulletContent(bulletPoint: String, content: List<BulletPointContent>): List<BulletPointContent> {
     if (bulletPoint.isEmpty()) return content
 
     val (element, subStr) = if (bulletPoint.first() != '{') {
@@ -160,10 +157,7 @@ private fun validateMatchingBrackets(bulletPoint: String) {
         .getOrThrow()
 }
 
-private tailrec fun validateMatchingBrackets(
-    bulletPoint: String,
-    insideBracket: Boolean
-): Result<Unit> {
+private tailrec fun validateMatchingBrackets(bulletPoint: String, insideBracket: Boolean): Result<Unit> {
     if (bulletPoint.isEmpty()) {
         return if (insideBracket)
             Result.failure(ParsingException("Missing closing bracket"))
