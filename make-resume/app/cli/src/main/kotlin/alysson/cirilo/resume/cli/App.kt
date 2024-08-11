@@ -13,6 +13,11 @@ import kotlinx.cli.required
 import java.io.File
 
 fun main(args: Array<String>) {
+    val (resumeFlavor, file, inputType) = parse(args)
+    print(formatResume(file, inputType, resumeFlavor))
+}
+
+private fun parse(args: Array<String>): Triple<Flavor, File, InputType> {
     val argParser = ArgParser(programName = "cli-uber")
 
     val resumeFlavor by argParser.option(
@@ -40,8 +45,7 @@ fun main(args: Array<String>) {
 
     val file = File(inputFile)
     val inputType: InputType = getInputType(file, inputTypeArg)
-
-    print(formatResume(file, inputType, resumeFlavor))
+    return Triple(resumeFlavor, file, inputType)
 }
 
 private fun getInputType(inputFile: File, inputTypeArg: InputType?): InputType {
