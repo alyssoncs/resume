@@ -25,8 +25,8 @@ import java.time.YearMonth
 import java.time.format.DateTimeFormatter
 import java.util.Locale
 
-fun deserializeYaml(jsonResume: String): Resume {
-    val serializableResume = Yaml.default.decodeFromString(SerializableResume.serializer(), jsonResume)
+fun deserializeYaml(yamlResume: String): Resume {
+    val serializableResume = Yaml.default.decodeFromString(SerializableResume.serializer(), yamlResume)
     return serializableResume.toDomain()
 }
 
