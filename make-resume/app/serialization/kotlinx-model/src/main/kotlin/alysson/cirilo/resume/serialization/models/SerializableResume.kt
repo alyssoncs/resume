@@ -74,6 +74,6 @@ data class SerializableEnrollmentPeriod(
 
     companion object {
         private val dateRegex = Regex("\\d{2}-\\d{4}")
-        private const val CURRENT = "now"
+        const val CURRENT = "now"
     }
 }
