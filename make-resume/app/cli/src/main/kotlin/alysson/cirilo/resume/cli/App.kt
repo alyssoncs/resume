@@ -38,22 +38,23 @@ fun main(args: Array<String>) {
 
     argParser.parse(args)
 
-    val inputType: InputType = getInputType(inputFile, inputTypeArg)
+    val file = File(inputFile)
+    val inputType: InputType = getInputType(file, inputTypeArg)
 
-    print(formatResume(inputFile, inputType, resumeFlavor))
+    print(formatResume(file, inputType, resumeFlavor))
 }
 
-private fun getInputType(inputFile: String, inputTypeArg: InputType?): InputType {
+private fun getInputType(inputFile: File, inputTypeArg: InputType?): InputType {
     return if (inputTypeArg == null) {
-        val extension = File(inputFile).extension
+        val extension = inputFile.extension
         InputType.fromExtension(extension) ?: error("Unknown extension: $extension")
     } else {
         inputTypeArg
     }
 }
 
-private fun formatResume(inputFile: String, inputType: InputType, resumeFlavor: Flavor): String {
-    val serializedResume = File(inputFile).readText()
+private fun formatResume(inputFile: File, inputType: InputType, resumeFlavor: Flavor): String {
+    val serializedResume = inputFile.readText()
     val resume = inputType.deserialize(serializedResume)
     return resumeFlavor.driver.convert(resume)
 }
