@@ -11,14 +11,14 @@ import alysson.cirilo.resume.entities.ProfessionalSkill
 import alysson.cirilo.resume.entities.ProjectOrPublication
 import alysson.cirilo.resume.entities.Resume
 import alysson.cirilo.resume.entities.Role
-import alysson.cirilo.resume.serialization.json.models.SerializableContactInformation
-import alysson.cirilo.resume.serialization.json.models.SerializableDegree
-import alysson.cirilo.resume.serialization.json.models.SerializableEnrollmentPeriod
-import alysson.cirilo.resume.serialization.json.models.SerializableJobExperience
-import alysson.cirilo.resume.serialization.json.models.SerializableLinkedInformation
-import alysson.cirilo.resume.serialization.json.models.SerializableProjectOrPublication
-import alysson.cirilo.resume.serialization.json.models.SerializableResume
-import alysson.cirilo.resume.serialization.json.models.SerializableRole
+import alysson.cirilo.resume.serialization.models.SerializableContactInformation
+import alysson.cirilo.resume.serialization.models.SerializableDegree
+import alysson.cirilo.resume.serialization.models.SerializableEnrollmentPeriod
+import alysson.cirilo.resume.serialization.models.SerializableJobExperience
+import alysson.cirilo.resume.serialization.models.SerializableLinkedInformation
+import alysson.cirilo.resume.serialization.models.SerializableProjectOrPublication
+import alysson.cirilo.resume.serialization.models.SerializableResume
+import alysson.cirilo.resume.serialization.models.SerializableRole
 import kotlinx.serialization.json.Json
 import java.net.URI
 import java.time.YearMonth
@@ -129,7 +129,10 @@ private fun validateFlatSkills(bulletPoint: BulletPoint) {
     if (containsBracketInsideBracket) throw ParsingException("Cannot have a skill inside another skill")
 }
 
-private tailrec fun mapBulletContent(bulletPoint: String, content: List<BulletPointContent>): List<BulletPointContent> {
+private tailrec fun mapBulletContent(
+    bulletPoint: String,
+    content: List<BulletPointContent>
+): List<BulletPointContent> {
     if (bulletPoint.isEmpty()) return content
 
     val (element, subStr) = if (bulletPoint.first() != '{') {
@@ -157,7 +160,10 @@ private fun validateMatchingBrackets(bulletPoint: String) {
         .getOrThrow()
 }
 
-private tailrec fun validateMatchingBrackets(bulletPoint: String, insideBracket: Boolean): Result<Unit> {
+private tailrec fun validateMatchingBrackets(
+    bulletPoint: String,
+    insideBracket: Boolean
+): Result<Unit> {
     if (bulletPoint.isEmpty()) {
         return if (insideBracket)
             Result.failure(ParsingException("Missing closing bracket"))

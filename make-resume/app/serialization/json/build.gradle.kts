@@ -8,6 +8,7 @@ plugins {
 dependencies {
     api(projects.domain.entities)
 
+    implementation(projects.app.serialization.kotlinxModel)
     implementation(libs.kotlin.serialization.json)
 
     testImplementation(resumeFixtures(projects.domain.entities))
