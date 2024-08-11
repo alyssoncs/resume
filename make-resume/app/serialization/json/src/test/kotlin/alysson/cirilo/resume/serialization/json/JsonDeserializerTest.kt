@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
 import java.time.YearMonth
 
-class ResumeDeserializerTest {
+class JsonDeserializerTest {
     @Nested
     inner class ValidJson {
         private val resume by lazy { resume("test-resume.json") }
