@@ -1,7 +1,9 @@
 package alysson.cirilo.resume.serialization.models
 
 interface SerializableJobExperienceBuilder {
-    fun with(role: SerializableRoleBuilder): SerializableJobExperienceBuilder
+    fun with(role: SerializableRoleBuilder): SerializableJobExperienceBuilder = with(listOf(role))
+    fun with(vararg roles: SerializableRoleBuilder): SerializableJobExperienceBuilder = with(roles.toList())
+    fun with(roles: List<SerializableRoleBuilder>): SerializableJobExperienceBuilder
     fun build(): SerializableJobExperience
 }
 
@@ -11,11 +13,9 @@ private data class SerializableJobExperienceBuilderImpl(
     private val roles: List<SerializableRoleBuilder> = listOf(aRoleDto())
 ) : SerializableJobExperienceBuilder {
 
-    override fun with(
-        role: SerializableRoleBuilder,
-    ): SerializableJobExperienceBuilder {
-        return copy(roles = listOf(role))
-    }
+    override fun with(roles: List<SerializableRoleBuilder>): SerializableJobExperienceBuilder = copy(
+        roles = roles,
+    )
 
     override fun build(): SerializableJobExperience {
         return SerializableJobExperience(
@@ -26,7 +26,7 @@ private data class SerializableJobExperienceBuilderImpl(
     }
 }
 
-fun aJobExperience(): SerializableJobExperienceBuilder {
+fun aJobExperienceDto(): SerializableJobExperienceBuilder {
     return SerializableJobExperienceBuilderImpl()
 }
 

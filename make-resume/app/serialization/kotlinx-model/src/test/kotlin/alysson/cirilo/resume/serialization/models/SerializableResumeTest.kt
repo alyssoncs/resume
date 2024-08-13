@@ -24,7 +24,7 @@ class SerializableResumeTest {
         matchesPattern: Boolean,
     ) {
         val builder = aResumeDto()
-            .with(aJobExperience().with(aRoleDto().from(start)))
+            .with(aJobExperienceDto().with(aRoleDto().from(start)))
 
         assertMatchesPattern(matchesPattern, builder)
     }
@@ -47,7 +47,7 @@ class SerializableResumeTest {
         matchesPattern: Boolean,
     ) {
         val builder = aResumeDto()
-            .with(aJobExperience().with(aRoleDto().upTo(end)))
+            .with(aJobExperienceDto().with(aRoleDto().upTo(end)))
 
         assertMatchesPattern(matchesPattern, builder)
     }

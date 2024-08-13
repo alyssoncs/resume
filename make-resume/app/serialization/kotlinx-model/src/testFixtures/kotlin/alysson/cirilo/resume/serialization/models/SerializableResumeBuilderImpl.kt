@@ -1,6 +1,10 @@
 package alysson.cirilo.resume.serialization.models
 
 interface SerializableResumeBuilder {
+    fun withHeadline(vararg headline: String): SerializableResumeBuilder =
+        withHeadline(headline.toList())
+
+    fun withHeadline(headline: List<String>): SerializableResumeBuilder
     fun with(experience: SerializableJobExperienceBuilder): SerializableResumeBuilder
     fun build(): SerializableResume
 }
@@ -30,10 +34,14 @@ private data class SerializableResumeBuilderImpl(
             .linkingTo("https://www.example.com")
             .build(),
     ),
-    private val experiences: List<SerializableJobExperienceBuilder> = emptyList(),
-    private val projectsAndPublications: List<SerializableProjectOrPublication> = emptyList(),
-    private val education: List<SerializableDegree> = emptyList(),
+    private val experiences: List<SerializableJobExperienceBuilder> = listOf(aJobExperienceDto()),
+    private val projectsAndPublications: List<SerializableProjectOrPublicationBuilder> = listOf(aProjectDto()),
+    private val education: List<SerializableDegreeBuilder> = listOf(aDegreeDto())
 ) : SerializableResumeBuilder {
+
+    override fun withHeadline(headline: List<String>): SerializableResumeBuilder = copy(
+        headline = headline,
+    )
 
     override fun with(experience: SerializableJobExperienceBuilder) = copy(
         experiences = listOf(experience),
@@ -45,8 +53,8 @@ private data class SerializableResumeBuilderImpl(
             headline = headline,
             contactInfo = contactInfo,
             experiences = experiences.map(SerializableJobExperienceBuilder::build),
-            projectsAndPublications = projectsAndPublications,
-            education = education,
+            projectsAndPublications = projectsAndPublications.map(SerializableProjectOrPublicationBuilder::build),
+            education = education.map(SerializableDegreeBuilder::build),
         )
     }
 }
