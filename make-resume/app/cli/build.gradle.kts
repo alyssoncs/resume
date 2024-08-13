@@ -4,8 +4,8 @@ plugins {
 
 dependencies {
     implementation(libs.kotlinx.cli)
-    implementation(projects.app.serialization.json)
-    implementation(projects.app.serialization.yaml)
+    implementation(projects.app.serialization.format.json)
+    implementation(projects.app.serialization.format.yaml)
     implementation(projects.drivers.latexAwesome)
     implementation(projects.drivers.latexSober)
     implementation(projects.drivers.markdown)
