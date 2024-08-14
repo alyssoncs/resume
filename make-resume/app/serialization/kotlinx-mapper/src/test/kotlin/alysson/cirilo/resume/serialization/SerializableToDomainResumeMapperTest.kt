@@ -23,7 +23,7 @@ import java.time.YearMonth
 
 class SerializableToDomainResumeMapperTest {
     @Nested
-    inner class ValidJson {
+    inner class ValidDto {
         private val validResumeDto = Fixtures.Valid.resume
         private val missingBracketResumeDto = Fixtures.Valid.missingOpenBracketResume
 
@@ -202,7 +202,7 @@ class SerializableToDomainResumeMapperTest {
     }
 
     @Nested
-    inner class MalformedJson {
+    inner class MalformedDto {
         @Test
         fun `missing closing bracket fails`() {
             shouldThrow<ParsingException> {
