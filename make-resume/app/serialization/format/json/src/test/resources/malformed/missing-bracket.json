@@ -31,14 +31,13 @@
             "location": "Remote",
             "roles": [
                 {
-                    "title": "SWE 2",
+                    "title": "SWE 1",
                     "period": {
-                        "from": "12-2022",
-                        "to": "now"
+                        "from": "02-2022",
+                        "to": "12-2022"
                     },
                     "bulletPoints": [
-                        "delivered value } with {kotlin}.",
-                        "another cool thing"
+                        "cool thing"
                     ]
                 }
             ]
@@ -53,7 +52,7 @@
             "description": "This is a kotlin project"
         }
     ],
-    "education": [
+    "education":
         {
             "institution": {
                 "displayName": "Top institution",

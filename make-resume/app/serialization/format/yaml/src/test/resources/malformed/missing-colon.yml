@@ -1,5 +1,5 @@
 name: First Last
-headline:
+headline
   - Software Engineer
   - Android Developer
 contactInfo:
@@ -21,12 +21,18 @@ experiences:
       url: https://www.company.com
     location: Remote
     roles:
+      - title: SWE 1
+        period:
+          from: 02-2022
+          to: 12-2022
+        bulletPoints:
+          - delivered value.
       - title: SWE 2
         period:
           from: 12-2022
           to: now
         bulletPoints:
-          - delivered value } with {kotlin}.
+          - delivered value with {kotlin}.
           - another cool thing
 projectsAndPublications:
   - title:
