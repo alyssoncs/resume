@@ -1,7 +1,7 @@
 package alysson.cirilo.resume.serialization.models
 
-import org.junit.jupiter.api.assertDoesNotThrow
-import org.junit.jupiter.api.assertThrows
+import io.kotest.assertions.throwables.shouldNotThrow
+import io.kotest.assertions.throwables.shouldThrow
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
 
@@ -56,14 +56,14 @@ class SerializableResumeTest {
         matchesPattern: Boolean,
         builder: SerializableResumeBuilder,
     ) {
-        if (matchesPattern) {
-            assertDoesNotThrow {
-                builder.build()
-            }
-        } else {
-            assertThrows<IllegalArgumentException> {
-                builder.build()
-            }
+        fun assertThrows(block: () -> Any?) = shouldThrow<IllegalArgumentException>(block)
+
+        fun assertDoesNotThrow(block: () -> Any?) = shouldNotThrow<IllegalArgumentException>(block)
+
+        val assert = if (matchesPattern) ::assertDoesNotThrow else ::assertThrows
+
+        assert {
+            builder.build()
         }
     }
 }
