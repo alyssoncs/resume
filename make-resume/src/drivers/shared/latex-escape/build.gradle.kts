@@ -6,9 +6,9 @@ plugins {
 }
 
 dependencies {
-    api(projects.domain.entities)
+    api(projects.src.domain.entities)
 
-    testFixturesImplementation(resumeFixtures(projects.domain.entities))
+    testFixturesImplementation(resumeFixtures(projects.src.domain.entities))
     testFixturesImplementation(libs.bundles.unitTest)
-    testFixturesImplementation(projects.domain.infra)
+    testFixturesImplementation(projects.src.domain.infra)
 }

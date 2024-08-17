@@ -6,10 +6,10 @@ plugins {
 }
 
 dependencies {
-    api(projects.domain.entities)
+    api(projects.src.domain.entities)
 
-    implementation(projects.app.serialization.kotlinxMapper)
+    implementation(projects.src.app.serialization.kotlinxMapper)
     implementation(libs.kotlin.serialization.yaml)
 
-    testImplementation(resumeFixtures(projects.domain.entities))
+    testImplementation(resumeFixtures(projects.src.domain.entities))
 }
