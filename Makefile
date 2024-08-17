@@ -2,7 +2,7 @@ OUTPUT_DIR=output
 PREVIEW_DIR=previews
 RESUME_NAME=alysson-cirilo-resume
 YAML_RESUME=data/resume.yml
-MAKE_RESUME=make-resume/app/cli/build/libs/cli-uber.jar
+MAKE_RESUME=make-resume/src/app/cli/build/libs/cli-uber.jar
 
 .PHONY: all
 all: $(OUTPUT_DIR)/awesome/$(RESUME_NAME).pdf $(OUTPUT_DIR)/sober/$(RESUME_NAME).pdf $(OUTPUT_DIR)/markdown/$(RESUME_NAME).md
