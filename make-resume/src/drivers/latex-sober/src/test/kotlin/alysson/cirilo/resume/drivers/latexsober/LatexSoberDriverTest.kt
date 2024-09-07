@@ -7,25 +7,20 @@ import java.time.format.DateTimeFormatter
 
 class LatexSoberDriverTest : LatexDriverTest() {
 
-    override fun makeLatexDriver(
-        workDateFormatter: DateTimeFormatter,
-        educationDateFormatter: DateTimeFormatter,
-    ) = makeLatexSoberDriver(
-        template = """
-            \begin{document}
-            <content>
-            \end{document}
-        """.trimIndent(),
-        contentPlaceholder = "<content>",
-        workDateFormatter = workDateFormatter,
-        educationDateFormatter = educationDateFormatter,
-    )
+    override fun makeLatexDriver(workDateFormatter: DateTimeFormatter, educationDateFormatter: DateTimeFormatter) =
+        makeLatexSoberDriver(
+            template = """
+                \begin{document}
+                <content>
+                \end{document}
+            """.trimIndent(),
+            contentPlaceholder = "<content>",
+            workDateFormatter = workDateFormatter,
+            educationDateFormatter = educationDateFormatter,
+        )
 
     @LatexEscapeParams
-    fun `should escape name`(
-        raw: String,
-        escaped: String,
-    ) {
+    fun `should escape name`(raw: String, escaped: String) {
         val resume = aResume().from(raw)
 
         val output = driver.convert(resume)

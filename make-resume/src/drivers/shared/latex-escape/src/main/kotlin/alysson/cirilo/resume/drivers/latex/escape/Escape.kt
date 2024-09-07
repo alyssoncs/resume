@@ -60,8 +60,7 @@ private fun ContactInformation.escape() = copy(
     location = location.escape(),
 )
 
-private fun LinkedInformation.escape() =
-    copy(displayName = displayName.escape())
+private fun LinkedInformation.escape() = copy(displayName = displayName.escape())
 
 private fun String.escape(): String {
     val reservedCharacters = listOf("&", "%")

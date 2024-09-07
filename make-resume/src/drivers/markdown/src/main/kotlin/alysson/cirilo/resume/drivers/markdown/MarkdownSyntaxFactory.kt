@@ -102,10 +102,7 @@ internal class MarkdownSyntaxFactory(
         }"
     }
 
-    private fun makeEndDate(
-        formatter: DateTimeFormatter,
-        endDate: EnrollmentPeriod.EndDate,
-    ): String {
+    private fun makeEndDate(formatter: DateTimeFormatter, endDate: EnrollmentPeriod.EndDate): String {
         return when (endDate) {
             is EnrollmentPeriod.EndDate.Past -> formatter.format(endDate.date)
             EnrollmentPeriod.EndDate.Present -> "Present"

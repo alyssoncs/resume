@@ -140,10 +140,7 @@ internal class LatexSoberSyntaxFactory(
         }"
     }
 
-    private fun makeEndDate(
-        formatter: DateTimeFormatter,
-        endDate: EnrollmentPeriod.EndDate,
-    ): String {
+    private fun makeEndDate(formatter: DateTimeFormatter, endDate: EnrollmentPeriod.EndDate): String {
         return when (endDate) {
             is EnrollmentPeriod.EndDate.Past -> formatter.format(endDate.date)
             EnrollmentPeriod.EndDate.Present -> "Present"
@@ -164,10 +161,12 @@ internal class LatexSoberSyntaxFactory(
     }
 
     private fun itemize(items: List<String>, itemsSeparator: String = "\n"): String? {
-        return if (items.isEmpty()) null
-        else "\\begin{itemize}\n${
-            items.joinToString(itemsSeparator) { "\\item $it" }.reindent(1)
-        }\n\\end{itemize}"
+        return if (items.isEmpty())
+            null
+        else
+            "\\begin{itemize}\n${
+                items.joinToString(itemsSeparator) { "\\item $it" }.reindent(1)
+            }\n\\end{itemize}"
     }
 
     private fun makeProjectOrPublication(projectOrPublication: ProjectOrPublication): String {

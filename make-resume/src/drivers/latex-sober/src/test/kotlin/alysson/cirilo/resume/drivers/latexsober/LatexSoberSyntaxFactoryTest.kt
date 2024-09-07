@@ -27,8 +27,7 @@ class LatexSoberSyntaxFactoryTest : ResumeSyntaxFactoryTest() {
 
     override fun generateEmptyOutput() = wrapAroundDocument("")
 
-    override fun generateSection(sectionName: String) =
-        wrapAroundDocument("\\section{$sectionName}")
+    override fun generateSection(sectionName: String) = wrapAroundDocument("\\section{$sectionName}")
 
     override fun generateHeader(
         name: String,

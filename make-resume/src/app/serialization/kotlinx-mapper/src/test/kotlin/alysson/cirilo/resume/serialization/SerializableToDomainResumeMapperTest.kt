@@ -172,16 +172,12 @@ class SerializableToDomainResumeMapperTest {
             return resumeDto.toDomain()
         }
 
-        private infix fun LinkedInformation.shouldMatch(
-            linkedInfoDto: SerializableLinkedInformation,
-        ) {
+        private infix fun LinkedInformation.shouldMatch(linkedInfoDto: SerializableLinkedInformation) {
             displayName shouldBe linkedInfoDto.displayName
             url.toString() shouldBe linkedInfoDto.url
         }
 
-        private infix fun EnrollmentPeriod.shouldMatch(
-            periodDto: SerializableEnrollmentPeriod,
-        ) {
+        private infix fun EnrollmentPeriod.shouldMatch(periodDto: SerializableEnrollmentPeriod) {
             fun parse(date: String): List<Int> {
                 return date.split("-").map(String::toInt)
             }

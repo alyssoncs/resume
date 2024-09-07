@@ -40,11 +40,7 @@ internal class LatexAwesomeSyntaxFactory(
         }
     }
 
-    override fun addHeader(
-        name: String,
-        headline: List<String>,
-        contactInformation: ContactInformation,
-    ) {
+    override fun addHeader(name: String, headline: List<String>, contactInformation: ContactInformation) {
         val space = ' '
         header = Header(
             firstName = name.substringBefore(space),
@@ -99,7 +95,8 @@ internal class LatexAwesomeSyntaxFactory(
 
     override fun makeEducation(education: List<Degree>) {
         updateOutput(
-            if (education.isEmpty()) ""
+            if (education.isEmpty())
+                ""
             else
                 (
                     "\\begin{cventries}\n" +
@@ -190,10 +187,7 @@ internal class LatexAwesomeSyntaxFactory(
         }"
     }
 
-    private fun makeEndDate(
-        formatter: DateTimeFormatter,
-        endDate: EnrollmentPeriod.EndDate,
-    ): String {
+    private fun makeEndDate(formatter: DateTimeFormatter, endDate: EnrollmentPeriod.EndDate): String {
         return when (endDate) {
             is EnrollmentPeriod.EndDate.Past -> formatter.format(endDate.date)
             EnrollmentPeriod.EndDate.Present -> "Present"

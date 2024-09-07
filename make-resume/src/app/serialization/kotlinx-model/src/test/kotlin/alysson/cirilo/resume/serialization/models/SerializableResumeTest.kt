@@ -19,10 +19,7 @@ class SerializableResumeTest {
             "01-2024, true",
         ],
     )
-    fun `enrollment period start date should match required pattern`(
-        start: String,
-        matchesPattern: Boolean,
-    ) {
+    fun `enrollment period start date should match required pattern`(start: String, matchesPattern: Boolean) {
         val builder = aResumeDto()
             .with(aJobExperienceDto().with(aRoleDto().from(start)))
 
@@ -42,20 +39,14 @@ class SerializableResumeTest {
             "01-2024, true",
         ],
     )
-    fun `enrollment period end date should match required pattern`(
-        end: String,
-        matchesPattern: Boolean,
-    ) {
+    fun `enrollment period end date should match required pattern`(end: String, matchesPattern: Boolean) {
         val builder = aResumeDto()
             .with(aJobExperienceDto().with(aRoleDto().upTo(end)))
 
         assertMatchesPattern(matchesPattern, builder)
     }
 
-    private fun assertMatchesPattern(
-        matchesPattern: Boolean,
-        builder: SerializableResumeBuilder,
-    ) {
+    private fun assertMatchesPattern(matchesPattern: Boolean, builder: SerializableResumeBuilder) {
         fun assertThrows(block: () -> Any?) = shouldThrow<IllegalArgumentException>(block)
 
         fun assertDoesNotThrow(block: () -> Any?) = shouldNotThrow<IllegalArgumentException>(block)

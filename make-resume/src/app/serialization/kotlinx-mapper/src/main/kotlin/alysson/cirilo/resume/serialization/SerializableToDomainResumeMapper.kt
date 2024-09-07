@@ -54,9 +54,7 @@ private fun mapExperience(experience: SerializableJobExperience): JobExperience 
     )
 }
 
-private fun mapProjectOrPublication(
-    projectOrPub: SerializableProjectOrPublication,
-): ProjectOrPublication {
+private fun mapProjectOrPublication(projectOrPub: SerializableProjectOrPublication): ProjectOrPublication {
     return ProjectOrPublication(
         title = mapLinkedInfo(projectOrPub.title),
         description = projectOrPub.description,
