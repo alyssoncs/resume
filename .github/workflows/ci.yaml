@@ -27,9 +27,6 @@ jobs:
       - name: Build
         working-directory: make-resume
         run: ./gradlew build
-      - name: Lint
-        working-directory: make-resume
-        run: ./gradlew build
   make-resumes:
     runs-on: ubuntu-latest
     container: texlive/texlive:latest
