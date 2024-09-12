@@ -8,7 +8,7 @@ data class LinkedInformation(
 ) {
     init {
         require(displayName.isNotBlank()) {
-            "displayName cannot be blank"
+            "${::displayName.name} cannot be blank"
         }
     }
 }

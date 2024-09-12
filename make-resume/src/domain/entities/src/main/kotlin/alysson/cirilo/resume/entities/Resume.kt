@@ -17,8 +17,8 @@ data class Resume(
     }
 
     init {
-        require(name.isNotBlank()) { "Resume name cannot be blank" }
-        require(headline.isNotEmpty()) { "Resume headline cannot be empty" }
+        require(name.isNotBlank()) { "Resume ${::name.name} cannot be blank" }
+        require(headline.isNotEmpty()) { "Resume ${::headline.name} cannot be empty" }
     }
 
     val skills: Set<ProfessionalSkill> by lazy {
