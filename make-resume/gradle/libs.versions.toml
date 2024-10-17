@@ -1,5 +1,5 @@
 [versions]
-dependencies-sorter = "0.7"
+dependencies-sorter = "0.9"
 detekt = "main-SNAPSHOT"
 java = "21"
 junit = "5.11.0-RC1"
