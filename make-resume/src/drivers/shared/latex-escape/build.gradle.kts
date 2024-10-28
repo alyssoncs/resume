@@ -8,7 +8,10 @@ plugins {
 dependencies {
     api(projects.src.domain.entities)
 
-    testFixturesImplementation(libs.bundles.unitTest)
-    testFixturesImplementation(resumeFixtures(projects.src.domain.entities))
-    testFixturesImplementation(projects.src.domain.infra)
+    testFixturesApi(libs.test.junit.api)
+    testFixturesApi(libs.test.junit.params)
+    testFixturesApi(resumeFixtures(projects.src.domain.entities))
+    testFixturesApi(projects.src.domain.infra)
+
+    testFixturesImplementation(libs.test.kotest.assertions)
 }

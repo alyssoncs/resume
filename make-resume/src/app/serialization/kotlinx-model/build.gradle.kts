@@ -4,6 +4,10 @@ plugins {
     `java-test-fixtures`
 }
 
+features {
+    unitTests = true
+}
+
 dependencies {
     implementation(libs.kotlin.serialization.json)
 }

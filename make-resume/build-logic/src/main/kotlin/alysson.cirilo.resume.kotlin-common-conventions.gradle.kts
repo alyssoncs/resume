@@ -1,5 +1,5 @@
 import alysson.cirilo.resume.utils.RESUME_GROUP
-import alysson.cirilo.resume.utils.getBundle
+import alysson.cirilo.resume.utils.getLibrary
 import alysson.cirilo.resume.utils.getVersion
 import alysson.cirilo.resume.utils.versionCatalog
 import org.gradle.api.tasks.testing.logging.TestExceptionFormat
@@ -13,33 +13,55 @@ plugins {
 
 project.group = RESUME_GROUP
 
-testing {
-    suites {
-        val test by getting(JvmTestSuite::class) {
-            useJUnitJupiter(versionCatalog.getVersion("junit"))
+val javaVersion = versionCatalog.getVersion("java").toInt()
+kotlin.jvmToolchain(javaVersion)
 
-            dependencies {
-                implementation.bundle(versionCatalog.getBundle("unitTest"))
+open class FeaturesExtension(
+    private val objects: ObjectFactory,
+    private val enableTests: () -> Unit,
+) {
+    private val unitTestsProperty = objects.property<Boolean>().convention(false)
+
+    var unitTests: Boolean
+        get() = unitTestsProperty.get()
+        set(value) {
+            unitTestsProperty = value
+            unitTestsProperty.disallowChanges()
+            if (unitTestsProperty.get()) {
+                enableTests()
             }
+        }
+}
 
-            targets.all {
-                testTask.configure {
-                    testLogging {
-                        exceptionFormat = TestExceptionFormat.FULL
-                        events = setOf(
-                            TestLogEvent.SKIPPED,
-                            TestLogEvent.PASSED,
-                            TestLogEvent.FAILED,
-                            TestLogEvent.STANDARD_OUT,
-                            TestLogEvent.STANDARD_ERROR,
-                        )
-                        showStandardStreams = true
+extensions.create<FeaturesExtension>("features", objects, ::enableTests)
+
+fun enableTests() {
+    @Suppress("UnstableApiUsage")
+    configure<TestingExtension> {
+        suites {
+            val test by getting(JvmTestSuite::class) {
+                useJUnitJupiter(versionCatalog.getVersion("junit"))
+
+                dependencies {
+                    implementation(versionCatalog.getLibrary("test.kotest.assertions"))
+                }
+
+                targets.all {
+                    testTask.configure {
+                        testLogging {
+                            exceptionFormat = TestExceptionFormat.FULL
+                            events = setOf(
+                                TestLogEvent.SKIPPED,
+                                TestLogEvent.PASSED,
+                                TestLogEvent.FAILED,
+                                TestLogEvent.STANDARD_OUT,
+                                TestLogEvent.STANDARD_ERROR,
+                            )
+                            showStandardStreams = true
+                        }
                     }
                 }
             }
         }
     }
 }
-
-val javaVersion = versionCatalog.getVersion("java").toInt()
-kotlin.jvmToolchain(javaVersion)

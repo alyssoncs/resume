@@ -5,11 +5,13 @@ plugins {
     alias(libs.plugins.resume.serialization)
 }
 
+features {
+    unitTests = true
+}
+
 dependencies {
     api(projects.src.domain.entities)
 
     implementation(libs.kotlin.serialization.yaml)
     implementation(projects.src.app.serialization.kotlinxMapper)
-
-    testImplementation(resumeFixtures(projects.src.domain.entities))
 }

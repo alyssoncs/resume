@@ -32,6 +32,7 @@ dagp = { module = "com.autonomousapps:dependency-analysis-gradle-plugin", versio
 unitTest = ["test-junit-api", "test-junit-params", "test-kotest-assertions"]
 
 [plugins]
+dagp = { id = "com.autonomousapps.dependency-analysis", version.ref = "dagp" }
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
