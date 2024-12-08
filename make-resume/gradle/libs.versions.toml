@@ -2,7 +2,7 @@
 dagp = "2.6.0"
 dependencies-sorter = "0.13"
 detekt = "main-SNAPSHOT"
-java = "21"
+java = "23"
 junit = "5.11.3"
 kotest = "6.0.0.M1"
 kotlin = "2.1.0"
