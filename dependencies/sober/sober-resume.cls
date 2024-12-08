@@ -18,7 +18,7 @@
 \RequirePackage{fancyhdr}
 \RequirePackage[
     a4paper,
-    top=1.6cm,
+    top=1.4cm,
     bottom=1.2cm,
     left=1.2cm,
     right=1.2cm,
@@ -92,6 +92,9 @@
 \newcommand*{\email}[2]{
     \newcommand{\@email}{\iconhref{#1}{{\scriptsize\faEnvelope{}} #2}}
 }
+\newcommand*{\homepage}[2]{
+    \newcommand{\@homepage}{\hspace{-1pt}\iconhref{#1}{{\footnotesize\faHome{}}\,#2}}
+}
 \newcommand*{\linkedin}[2]{
     \newcommand{\@linkedin}{\iconhref{#1}{\faLinkedin{} #2}}
 }
@@ -111,10 +114,13 @@
     \begin{minipage}[t]{0.277\linewidth}
         {\flushleft\small
             \@email\\
+            \@homepage\\
             \@linkedin\\
             \@github\\
             \@address
         }
     \end{minipage}
+
+    \vskip -14pt \,
 }
 

@@ -3,6 +3,9 @@ headline:
   - Software Engineer
   - Android Developer
 contactInfo:
+  homepage:
+    displayName: alyssoncirilo.com
+    url: https://www.linkedin.com/in/alysson-cirilo
   email:
     displayName: alysson.cirilo@gmail.com
     url: mailto:alysson.cirilo@gmail.com
