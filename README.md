@@ -24,7 +24,7 @@ This is a program that generates my resume in different formats based on the dat
 
 In the `make-resume` directory you'll find a Kotlin cli program that can consume a YAML file and convert it to the other formats that can be represented as a String that is outputted to the stdout. It can produce markdown, fancy and sober resumes. Fancy and sober are just [LaTeX](https://www.latex-project.org) documents.
 
-That is a Makefile that will take the JSON file in the `data` directory, input it in the `make-resume` program, save them as files and convert the LaTeX ones into pdf.
+That is a Makefile that will take the YAML file in the `data` directory, input it in the `make-resume` program, save them as files and convert the LaTeX ones into pdf.
 
 ## Acknowledgements
 
