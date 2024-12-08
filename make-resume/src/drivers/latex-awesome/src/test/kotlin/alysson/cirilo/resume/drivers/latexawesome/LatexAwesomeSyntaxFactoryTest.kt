@@ -52,6 +52,7 @@ class LatexAwesomeSyntaxFactoryTest : ResumeSyntaxFactoryTest() {
             \position{$firstHeadlineElement{\enskip\starredbullet\enskip}$secondHeadlineElement}
             \address{${contactInfo.location.displayName}}
             \email{${contactInfo.email.displayName}}
+            \homepage{${contactInfo.homepage.displayName}}
             \github{${contactInfo.github.displayName}}
             \linkedin{${contactInfo.linkedin.displayName}}
         """.trimIndent(),
@@ -232,6 +233,7 @@ class LatexAwesomeSyntaxFactoryTest : ResumeSyntaxFactoryTest() {
             \position{$firstHeadlineElement{\enskip\starredbullet\enskip}$secondHeadlineElement}
             \address{${contactInfo.location.displayName}}
             \email{${contactInfo.email.displayName}}
+            \homepage{${contactInfo.homepage.displayName}}
             \github{${contactInfo.github.displayName}}
             \linkedin{${contactInfo.linkedin.displayName}}
         """.trimIndent(),

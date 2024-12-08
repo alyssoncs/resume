@@ -122,6 +122,7 @@ internal class LatexAwesomeSyntaxFactory(
             \position{${safeHeader.headline.joinToString("{\\enskip\\starredbullet\\enskip}")}}
             \address{${safeHeader.contactInformation.location.displayName}}
             \email{${safeHeader.contactInformation.email.displayName}}
+            \homepage{${safeHeader.contactInformation.homepage.displayName}}
             \github{${safeHeader.contactInformation.github.displayName}}
             \linkedin{${safeHeader.contactInformation.linkedin.displayName}}
             """.trimIndent()
