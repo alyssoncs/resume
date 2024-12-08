@@ -31,6 +31,7 @@ internal class MarkdownSyntaxFactory(
                 
                 ## Contact Information
                 - [${contactInformation.email.displayName}](${contactInformation.email.url})
+                - [${contactInformation.homepage.displayName}](${contactInformation.homepage.url})
                 - [${contactInformation.linkedin.displayName}](${contactInformation.linkedin.url})
                 - [${contactInformation.github.displayName}](${contactInformation.github.url})
                 - [${contactInformation.location.displayName}](${contactInformation.location.url})

@@ -37,6 +37,7 @@ class MarkdownSyntaxFactoryTest : ResumeSyntaxFactoryTest() {
             
             ## Contact Information
             - [${contactInfo.email.displayName}](${contactInfo.email.url})
+            - [${contactInfo.homepage.displayName}](${contactInfo.homepage.url})
             - [${contactInfo.linkedin.displayName}](${contactInfo.linkedin.url})
             - [${contactInfo.github.displayName}](${contactInfo.github.url})
             - [${contactInfo.location.displayName}](${contactInfo.location.url})
@@ -172,6 +173,7 @@ class MarkdownSyntaxFactoryTest : ResumeSyntaxFactoryTest() {
             
             ## Contact Information
             - [${contactInfo.email.displayName}](${contactInfo.email.url})
+            - [${contactInfo.homepage.displayName}](${contactInfo.homepage.url})
             - [${contactInfo.linkedin.displayName}](${contactInfo.linkedin.url})
             - [${contactInfo.github.displayName}](${contactInfo.github.url})
             - [${contactInfo.location.displayName}](${contactInfo.location.url})
