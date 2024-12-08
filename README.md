@@ -18,11 +18,11 @@ Here is a preview on how they look like:
 
 ### What it does?
 
-This is a program that generates my resume in different formats based on the data in a [JSON file](data/resume.json). So I can write my resume data in a single place (the JSON file) and the program will convert it to a given format.
+This is a program that generates my resume in different formats based on the data in a [YAML file](data/resume.yml). So I can write my resume data in a single place (the YAML file) and the program will convert it to a given format.
 
 ### I'm still not bored, how does it work?
 
-In the `make-resume` directory you'll find a Kotlin cli program that can consume a JSON file and convert it to the other formats that can be represented as a String that is outputted to the stdout. It can produce markdown, fancy and sober resumes. Fancy and sober are just [LaTeX](https://www.latex-project.org) documents.
+In the `make-resume` directory you'll find a Kotlin cli program that can consume a YAML file and convert it to the other formats that can be represented as a String that is outputted to the stdout. It can produce markdown, fancy and sober resumes. Fancy and sober are just [LaTeX](https://www.latex-project.org) documents.
 
 That is a Makefile that will take the JSON file in the `data` directory, input it in the `make-resume` program, save them as files and convert the LaTeX ones into pdf.
 
