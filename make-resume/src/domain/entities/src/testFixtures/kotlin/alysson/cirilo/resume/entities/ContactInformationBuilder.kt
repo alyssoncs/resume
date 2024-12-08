@@ -1,6 +1,7 @@
 package alysson.cirilo.resume.entities
 
 class ContactInformationBuilder private constructor(
+    private val homepageBuilder: LinkedInformationBuilder,
     private val emailBuilder: LinkedInformationBuilder,
     private val linkedinBuilder: LinkedInformationBuilder,
     private val githubBuilder: LinkedInformationBuilder,
@@ -8,6 +9,9 @@ class ContactInformationBuilder private constructor(
 ) {
 
     constructor() : this(
+        homepageBuilder = aLinkedInfo()
+            .displaying("alyssoncirilo.com")
+            .linkingTo("alyssoncirilo.com"),
         emailBuilder = aLinkedInfo()
             .displaying("alysson.cirilo@gmail.com")
             .linkingTo("mailto:alysson.cirilo@gmail.com"),
@@ -23,31 +27,32 @@ class ContactInformationBuilder private constructor(
     )
 
     fun email(emailBuilder: LinkedInformationBuilder) =
-        ContactInformationBuilder(emailBuilder, linkedinBuilder, githubBuilder, locationBuilder)
+        ContactInformationBuilder(homepageBuilder, emailBuilder, linkedinBuilder, githubBuilder, locationBuilder)
 
     fun email(config: LinkedInformationBuilder.() -> LinkedInformationBuilder) =
         email(aLinkedInfo().config())
 
     fun linkedin(linkedinBuilder: LinkedInformationBuilder) =
-        ContactInformationBuilder(emailBuilder, linkedinBuilder, githubBuilder, locationBuilder)
+        ContactInformationBuilder(homepageBuilder, emailBuilder, linkedinBuilder, githubBuilder, locationBuilder)
 
     fun linkedin(config: LinkedInformationBuilder.() -> LinkedInformationBuilder) =
         linkedin(aLinkedInfo().config())
 
     fun github(githubBuilder: LinkedInformationBuilder) =
-        ContactInformationBuilder(emailBuilder, linkedinBuilder, githubBuilder, locationBuilder)
+        ContactInformationBuilder(homepageBuilder, emailBuilder, linkedinBuilder, githubBuilder, locationBuilder)
 
     fun github(config: LinkedInformationBuilder.() -> LinkedInformationBuilder) =
         github(aLinkedInfo().config())
 
     fun location(locationBuilder: LinkedInformationBuilder) =
-        ContactInformationBuilder(emailBuilder, linkedinBuilder, githubBuilder, locationBuilder)
+        ContactInformationBuilder(homepageBuilder, emailBuilder, linkedinBuilder, githubBuilder, locationBuilder)
 
     fun location(config: LinkedInformationBuilder.() -> LinkedInformationBuilder) =
         location(aLinkedInfo().config())
 
     fun build(): ContactInformation {
         return ContactInformation(
+            homepage = homepageBuilder.build(),
             email = emailBuilder.build(),
             linkedin = linkedinBuilder.build(),
             github = githubBuilder.build(),

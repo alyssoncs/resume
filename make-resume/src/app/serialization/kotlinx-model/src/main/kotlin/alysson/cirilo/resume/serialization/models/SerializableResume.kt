@@ -14,6 +14,7 @@ data class SerializableResume(
 
 @Serializable
 data class SerializableContactInformation(
+    val homepage: SerializableLinkedInformation,
     val email: SerializableLinkedInformation,
     val linkedin: SerializableLinkedInformation,
     val github: SerializableLinkedInformation,

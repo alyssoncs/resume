@@ -5,6 +5,10 @@
         "Android Developer"
     ],
     "contactInfo": {
+        "homepage": {
+            "displayName": "homepage",
+            "url": "https://www.homepage.com"
+        },
         "email": {
             "displayName": "email",
             "url": "https://www.email.com"

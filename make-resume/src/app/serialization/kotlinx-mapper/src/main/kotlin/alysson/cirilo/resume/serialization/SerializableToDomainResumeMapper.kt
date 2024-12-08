@@ -39,6 +39,7 @@ fun SerializableResume.toDomain(): Resume {
 
 private fun mapContactInfo(contactInfo: SerializableContactInformation): ContactInformation {
     return ContactInformation(
+        homepage = mapLinkedInfo(contactInfo.homepage),
         email = mapLinkedInfo(contactInfo.email),
         linkedin = mapLinkedInfo(contactInfo.linkedin),
         github = mapLinkedInfo(contactInfo.github),

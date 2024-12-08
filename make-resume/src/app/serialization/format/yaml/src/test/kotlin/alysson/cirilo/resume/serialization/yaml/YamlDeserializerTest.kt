@@ -8,14 +8,14 @@ import org.junit.jupiter.api.Test
 class YamlDeserializerTest {
 
     @Test
-    fun `valid json should not throw`() {
+    fun `valid yaml should not throw`() {
         shouldNotThrow<Throwable> {
             resume("test-resume.yml")
         }
     }
 
     @Test
-    fun `missing json bracket fails`() {
+    fun `missing yaml bracket fails`() {
         shouldThrow<Throwable> {
             malformedResume("missing-colon.yml")
         }

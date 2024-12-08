@@ -40,6 +40,11 @@ class SerializableToDomainResumeMapperTest {
         }
 
         @Test
+        fun `should contain homepage`() {
+            resume.contactInformation.homepage shouldMatch validResumeDto.contactInfo.homepage
+        }
+
+        @Test
         fun `should contain email`() {
             resume.contactInformation.email shouldMatch validResumeDto.contactInfo.email
         }

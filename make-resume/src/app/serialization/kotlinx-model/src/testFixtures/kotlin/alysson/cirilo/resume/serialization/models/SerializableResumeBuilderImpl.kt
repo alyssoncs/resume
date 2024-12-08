@@ -17,6 +17,10 @@ private data class SerializableResumeBuilderImpl(
     private val name: String = "alysson",
     private val headline: List<String> = listOf("software engineer"),
     private val contactInfo: SerializableContactInformation = SerializableContactInformation(
+        homepage = linkedInfoDto()
+            .displaying("alyssoncirilo.com")
+            .linkingTo("alyssoncirilo.com")
+            .build(),
         email = linkedInfoDto()
             .displaying("alysson.cirilo@gmail.com")
             .linkingTo("mailto:alysson.cirilo@gmail.com")
@@ -35,7 +39,9 @@ private data class SerializableResumeBuilderImpl(
             .build(),
     ),
     private val experiences: List<SerializableJobExperienceBuilder> = listOf(aJobExperienceDto()),
-    private val projectsAndPublications: List<SerializableProjectOrPublicationBuilder> = listOf(aProjectDto()),
+    private val projectsAndPublications: List<SerializableProjectOrPublicationBuilder> = listOf(
+        aProjectDto()
+    ),
     private val education: List<SerializableDegreeBuilder> = listOf(aDegreeDto())
 ) : SerializableResumeBuilder {
 
@@ -53,7 +59,9 @@ private data class SerializableResumeBuilderImpl(
             headline = headline,
             contactInfo = contactInfo,
             experiences = experiences.map(SerializableJobExperienceBuilder::build),
-            projectsAndPublications = projectsAndPublications.map(SerializableProjectOrPublicationBuilder::build),
+            projectsAndPublications = projectsAndPublications.map(
+                SerializableProjectOrPublicationBuilder::build
+            ),
             education = education.map(SerializableDegreeBuilder::build),
         )
     }
