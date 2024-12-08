@@ -40,6 +40,7 @@ class LatexSoberSyntaxFactoryTest : ResumeSyntaxFactoryTest() {
             \name{$name}
             \headline{$firstHeadlineElement{\enskip\starredbullet\enskip}$secondHeadlineElement}
             \email{${contactInfo.email.url}}{${contactInfo.email.displayName}}
+            \homepage{${contactInfo.homepage.url}}{${contactInfo.homepage.displayName}}
             \linkedin{${contactInfo.linkedin.url}}{${contactInfo.linkedin.displayName}}
             \github{${contactInfo.github.url}}{${contactInfo.github.displayName}}
             \address{${contactInfo.location.url}}{${contactInfo.location.displayName}}
@@ -201,6 +202,7 @@ class LatexSoberSyntaxFactoryTest : ResumeSyntaxFactoryTest() {
             \name{$name}
             \headline{$firstHeadlineElement{\enskip\starredbullet\enskip}$secondHeadlineElement}
             \email{${contactInfo.email.url}}{${contactInfo.email.displayName}}
+            \homepage{${contactInfo.homepage.url}}{${contactInfo.homepage.displayName}}
             \linkedin{${contactInfo.linkedin.url}}{${contactInfo.linkedin.displayName}}
             \github{${contactInfo.github.url}}{${contactInfo.github.displayName}}
             \address{${contactInfo.location.url}}{${contactInfo.location.displayName}}

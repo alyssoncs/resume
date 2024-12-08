@@ -35,6 +35,7 @@ internal class LatexSoberSyntaxFactory(
             \name{$name}
             \headline{${headline.joinToString(separator = "{\\enskip\\starredbullet\\enskip}") { it }}}
             \email{${contactInformation.email.url}}{${contactInformation.email.displayName}}
+            \homepage{${contactInformation.homepage.url}}{${contactInformation.homepage.displayName}}
             \linkedin{${contactInformation.linkedin.url}}{${contactInformation.linkedin.displayName}}
             \github{${contactInformation.github.url}}{${contactInformation.github.displayName}}
             \address{${contactInformation.location.url}}{${contactInformation.location.displayName}}
