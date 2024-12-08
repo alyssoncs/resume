@@ -25,7 +25,7 @@ internal class LatexAwesomeSyntaxFactory(
     private var currentIndent = 0
     private var sectionIndent: Int? = null
 
-    data class Header(
+    private data class Header(
         val firstName: String,
         val lastName: String,
         val headline: List<String>,
