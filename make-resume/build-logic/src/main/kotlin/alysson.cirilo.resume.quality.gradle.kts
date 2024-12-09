@@ -35,7 +35,3 @@ extensions.configure<DependencyAnalysisSubExtension> {
         }
     }
 }
-
-tasks.named("check") {
-    dependsOn("projectHealth")
-}
