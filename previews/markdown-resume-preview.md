@@ -3,7 +3,7 @@
 
 ## Contact Information
 - [alysson.cirilo@gmail.com](mailto:alysson.cirilo@gmail.com)
-- [alyssoncirilo.com](https://www.linkedin.com/in/alysson-cirilo)
+- [alyssoncirilo.com](https://www.alyssoncirilo.com)
 - [linkedin.com/in/alysson-cirilo](https://www.linkedin.com/in/alysson-cirilo)
 - [github.com/alyssoncs](https://www.github.com/alyssoncs)
 - [Remote (UTC-3), Brazil](https://www.google.com/maps?q=+Maranhão,+Brazil)
