@@ -10,9 +10,9 @@ Currently, there is a *fancy* resume, this has a modern feel, with colors and sa
 
 Here is a preview on how they look like:
 
-| Fancy                                                               | Sober                                                             |
-|---------------------------------------------------------------------|-------------------------------------------------------------------|
-| ![fancy resume flavor preview](previews/awesome-resume-preview.png) | ![sober resume flavor preview](previews/sober-resume-preview.png) |
+| Fancy                                                               | Sober                                                             | Markdown                                          |
+|---------------------------------------------------------------------|-------------------------------------------------------------------|---------------------------------------------------|
+| ![fancy resume flavor preview](previews/awesome-resume-preview.png) | ![sober resume flavor preview](previews/sober-resume-preview.png) | [check here](previews/markdown-resume-preview.md) |
 
 ## About this project
 
