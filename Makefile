@@ -17,7 +17,7 @@ sober: $(OUTPUT_DIR)/sober/$(RESUME_NAME).pdf
 markdown: $(OUTPUT_DIR)/markdown/$(RESUME_NAME).md
 
 .PHONY: previews
-previews: $(PREVIEW_DIR)/sober-resume-preview.png $(PREVIEW_DIR)/awesome-resume-preview.png
+previews: $(PREVIEW_DIR)/sober-resume-preview.png $(PREVIEW_DIR)/awesome-resume-preview.png $(PREVIEW_DIR)/markdown-resume-preview.md
 
 $(OUTPUT_DIR)/awesome/$(RESUME_NAME).tex: $(MAKE_RESUME) | $(OUTPUT_DIR)/awesome
 	java -jar $(MAKE_RESUME) -f awesome -i $(YAML_RESUME) > $@
@@ -41,6 +41,9 @@ $(PREVIEW_DIR)/sober-resume-preview.png: $(OUTPUT_DIR)/sober/$(RESUME_NAME).pdf 
 
 $(PREVIEW_DIR)/awesome-resume-preview.png: $(OUTPUT_DIR)/awesome/$(RESUME_NAME).pdf | $(PREVIEW_DIR)/
 	pdftoppm -r 300 -png $< > $@
+
+$(PREVIEW_DIR)/markdown-resume-preview.md: $(OUTPUT_DIR)/markdown/$(RESUME_NAME).md | $(PREVIEW_DIR)/
+	cp $< $@
 
 .PHONY: $(MAKE_RESUME)
 $(MAKE_RESUME):
