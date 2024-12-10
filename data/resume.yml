@@ -21,7 +21,7 @@ contactInfo:
 experiences:
   - company:
       displayName: Laboratory of Intelligent Distributed Systems (LSDi)
-      url: http://www.lsdi.ufma.br
+      url: https://www.lsdi.ufma.br
     location: São Luís - MA, Brazil
     roles:
       - title: Intern
@@ -32,7 +32,7 @@ experiences:
           - Designed and implemented an IoT solution for building occupancy detection, using Android devices and {Arduino}-powered BLE beacons to identify interactions. Events were processed and published to a backend system built with {Spring Boot}, leveraging {Retrofit}.
   - company:
       displayName: State Secretariat for Penitentiary Administration of Maranhão (SEAP-MA)
-      url: http://seap.ma.gov.br/
+      url: https://seap.ma.gov.br/
     location: São Luís - MA, Brazil
     roles:
       - title: Entry-level Developer
@@ -102,14 +102,14 @@ projectsAndPublications:
     description: The tool that built the resumé that you are reading right now.
   - title:
       displayName: Cirilo's Algorithm
-      url: https://github.com/alyssoncs/cirilo-algorithm/
+      url: https://alyssoncirilo.com/blog/cirilo-algorithm/
     description:
       An algorithm for finding the smallest pair of values between two
       unsorted arrays.
   - title:
       displayName: Jetpack Compose – Don't throw your presenters off
-      url: https://dev.to/alyssoncs/jetpack-compose-don-t-throw-your-presenters-off-43fk
-    description: Blog post about using model-view-presenter (MVP) on Jetpack Compose.
+      url: https://alyssoncirilo.com/blog/dont-throw-your-presenters-off/
+    description: Article about using model-view-presenter (MVP) on Jetpack Compose.
   - title:
       displayName:
         Internet of Things Applied to Presence and Meeting Management of
