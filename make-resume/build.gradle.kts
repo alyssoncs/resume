@@ -18,3 +18,7 @@ dependencyAnalysis {
         }
     }
 }
+
+tasks.register<DependencyReportTask>("") {
+
+}
