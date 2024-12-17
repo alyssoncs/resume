@@ -33,9 +33,7 @@ sealed interface BulletPointContent {
         }
     }
 
-    data class Skill(val skill: ProfessionalSkill) : BulletPointContent {
-        override val displayName: String = skill.value
-
+    data class Skill(override val displayName: String) : BulletPointContent {
         init {
             validate()
         }

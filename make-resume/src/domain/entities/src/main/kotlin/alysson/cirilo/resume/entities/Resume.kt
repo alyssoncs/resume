@@ -21,12 +21,12 @@ data class Resume(
         require(headline.isNotEmpty()) { "Resume ${::headline.name} cannot be empty" }
     }
 
-    val skills: Set<ProfessionalSkill> by lazy {
+    val skills: Set<String> by lazy {
         jobExperiences.flatMap { jobExperience ->
             jobExperience.roles.flatMap { role ->
                 role.bulletPoints.flatMap { bulletPoint ->
                     bulletPoint.content.filterIsInstance<BulletPointContent.Skill>()
-                        .map(BulletPointContent.Skill::skill)
+                        .map(BulletPointContent::displayName)
                 }
             }
         }.toSet()

@@ -9,7 +9,6 @@ import alysson.cirilo.resume.entities.Degree
 import alysson.cirilo.resume.entities.EnrollmentPeriod
 import alysson.cirilo.resume.entities.JobExperience
 import alysson.cirilo.resume.entities.LinkedInformation
-import alysson.cirilo.resume.entities.ProfessionalSkill
 import alysson.cirilo.resume.entities.ProjectOrPublication
 import alysson.cirilo.resume.entities.Resume
 import alysson.cirilo.resume.entities.Role
@@ -144,7 +143,7 @@ private fun extractPlainText(str: String): BulletPointContent.PlainText {
 
 private fun extractSkill(str: String): BulletPointContent.Skill {
     val subStr = str.substring(1).substringBefore('}')
-    return BulletPointContent.Skill(ProfessionalSkill(subStr))
+    return BulletPointContent.Skill(subStr)
 }
 
 private fun validateMatchingBrackets(bulletPoint: String) {

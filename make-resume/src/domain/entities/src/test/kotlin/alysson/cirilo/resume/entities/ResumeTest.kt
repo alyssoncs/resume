@@ -94,7 +94,7 @@ class ResumeTest {
         val resume = aResume().with(aBulletPoint().withSkill("kotlin")).build()
 
         resume.skills shouldHaveSize 1
-        resume.skills.shouldContainExactly(ProfessionalSkill("kotlin"))
+        resume.skills.shouldContainExactly("kotlin")
     }
 
     @Test
@@ -134,10 +134,10 @@ class ResumeTest {
 
         resume.skills shouldHaveSize 4
         resume.skills.shouldContainExactly(
-            ProfessionalSkill("kotlin"),
-            ProfessionalSkill("jetpack compose"),
-            ProfessionalSkill("retrofit"),
-            ProfessionalSkill("android"),
+            "kotlin",
+            "jetpack compose",
+            "retrofit",
+            "android",
         )
     }
 
@@ -175,9 +175,9 @@ class ResumeTest {
 
         resume.skills shouldHaveSize 3
         resume.skills.shouldContainExactly(
-            ProfessionalSkill("kotlin"),
-            ProfessionalSkill("jetpack compose"),
-            ProfessionalSkill("retrofit"),
+            "kotlin",
+            "jetpack compose",
+            "retrofit",
         )
     }
 

@@ -6,7 +6,6 @@ import alysson.cirilo.resume.entities.ContactInformation
 import alysson.cirilo.resume.entities.Degree
 import alysson.cirilo.resume.entities.JobExperience
 import alysson.cirilo.resume.entities.LinkedInformation
-import alysson.cirilo.resume.entities.ProfessionalSkill
 import alysson.cirilo.resume.entities.ProjectOrPublication
 import alysson.cirilo.resume.entities.Resume
 import alysson.cirilo.resume.entities.Role
@@ -50,7 +49,7 @@ private fun BulletPoint.escape() = copy(
 
 private fun BulletPointContent.escape() = when (this) {
     is BulletPointContent.PlainText -> copy(displayName = displayName.escape())
-    is BulletPointContent.Skill -> copy(skill = ProfessionalSkill(displayName.escape()))
+    is BulletPointContent.Skill -> copy(displayName = displayName.escape())
 }
 
 private fun ContactInformation.escape() = copy(

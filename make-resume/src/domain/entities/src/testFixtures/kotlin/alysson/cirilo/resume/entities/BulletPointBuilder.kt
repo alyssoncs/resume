@@ -6,7 +6,7 @@ class BulletPointBuilder private constructor(
     constructor() : this(
         content = listOf(
             BulletPointContent.PlainText("Worked with "),
-            BulletPointContent.Skill(ProfessionalSkill("kotlin")),
+            BulletPointContent.Skill("kotlin"),
         ),
     )
 
@@ -17,7 +17,7 @@ class BulletPointBuilder private constructor(
     fun containing(vararg bullets: String) : BulletPointBuilder {
         val content = bullets.mapIndexed { idx, bullet ->
             if (idx % 2 != 0)
-                BulletPointContent.Skill(ProfessionalSkill(bullet))
+                BulletPointContent.Skill(bullet)
             else
                 BulletPointContent.PlainText(bullet)
         }
@@ -26,7 +26,7 @@ class BulletPointBuilder private constructor(
 
     fun thatReads(content: String) = with(BulletPointContent.PlainText(content))
 
-    fun withSkill(skill: String) = with(BulletPointContent.Skill(ProfessionalSkill(skill)))
+    fun withSkill(skill: String) = with(BulletPointContent.Skill(skill))
 
     fun withNoContent() = with(emptyList())
 
@@ -34,7 +34,7 @@ class BulletPointBuilder private constructor(
         BulletPointBuilder(content + BulletPointContent.PlainText(plainText))
 
     fun appendSkill(skill: String) =
-        BulletPointBuilder(content + BulletPointContent.Skill(ProfessionalSkill(skill)))
+        BulletPointBuilder(content + BulletPointContent.Skill(skill))
 
     fun build(): BulletPoint {
         return BulletPoint(content)
