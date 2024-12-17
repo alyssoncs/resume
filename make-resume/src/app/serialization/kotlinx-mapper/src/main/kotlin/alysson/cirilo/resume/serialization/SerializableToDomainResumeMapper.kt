@@ -108,6 +108,22 @@ private fun mapBulletPoints(it: SerializableRole): List<BulletPoint> {
     return it.bulletPoints.map(::mapBulletPoint)
 }
 
+fun parseBulletPoint(input: String): BulletPoint {
+    val regex = Regex("\\{([^}]+)}|([^{}]+)")
+    val content = regex.findAll(input).map { matchResult ->
+        val (skill, plainText) = matchResult.destructured
+        when {
+            skill.isNotEmpty() -> BulletPointContent.Skill(skill.trim())
+            plainText.isNotEmpty() -> BulletPointContent.PlainText(plainText.trim())
+            else -> throw ParsingException("Invalid input format")
+        }
+    }.toList()
+
+    return BulletPoint(content).also {
+        validateFlatSkills(it)
+    }
+}
+
 private fun mapBulletPoint(bulletPoint: String): BulletPoint {
     validateMatchingBrackets(bulletPoint)
 
@@ -147,25 +163,25 @@ private fun extractSkill(str: String): BulletPointContent.Skill {
 }
 
 private fun validateMatchingBrackets(bulletPoint: String) {
-    validateMatchingBrackets(bulletPoint = bulletPoint, insideBracket = bulletPoint.first() == '{')
+    validateMatchingBrackets(bulletPoint = bulletPoint, cursor = 0, insideBracket = bulletPoint.first() == '{')
         .getOrThrow()
 }
 
-private tailrec fun validateMatchingBrackets(bulletPoint: String, insideBracket: Boolean): Result<Unit> {
-    if (bulletPoint.isEmpty()) {
+private tailrec fun validateMatchingBrackets(bulletPoint: String, cursor: Int, insideBracket: Boolean): Result<Unit> {
+    if (cursor == bulletPoint.length) {
         return if (insideBracket)
             Result.failure(ParsingException("Missing closing bracket"))
         else
             Result.success(Unit)
     }
 
-    val updatedInsideBracket = if (insideBracket && bulletPoint.first() == '}') {
+    val updatedInsideBracket = if (insideBracket && bulletPoint[cursor] == '}') {
         false
     } else {
-        bulletPoint.first() == '{' || insideBracket
+        bulletPoint[cursor] == '{' || insideBracket
     }
 
-    return validateMatchingBrackets(bulletPoint.substring(1), updatedInsideBracket)
+    return validateMatchingBrackets(bulletPoint, cursor.inc(), updatedInsideBracket)
 }
 
 class ParsingException(message: String) : RuntimeException(message)
