@@ -1,3 +1,4 @@
+import alysson.cirilo.resume.utils.FeaturesExtension
 import alysson.cirilo.resume.utils.RESUME_GROUP
 import alysson.cirilo.resume.utils.getLibrary
 import alysson.cirilo.resume.utils.getVersion
@@ -15,23 +16,6 @@ project.group = RESUME_GROUP
 
 val javaVersion = versionCatalog.getVersion("java").toInt()
 kotlin.jvmToolchain(javaVersion)
-
-open class FeaturesExtension(
-    private val objects: ObjectFactory,
-    private val enableTests: () -> Unit,
-) {
-    private val unitTestsProperty = objects.property<Boolean>().convention(false)
-
-    var unitTests: Boolean
-        get() = unitTestsProperty.get()
-        set(value) {
-            unitTestsProperty = value
-            unitTestsProperty.disallowChanges()
-            if (unitTestsProperty.get()) {
-                enableTests()
-            }
-        }
-}
 
 extensions.create<FeaturesExtension>("features", objects, ::enableTests)
 
