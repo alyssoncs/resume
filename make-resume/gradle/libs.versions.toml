@@ -1,6 +1,6 @@
 [versions]
 dagp = "2.8.0"
-dependencies-sorter = "0.13"
+dependencies-sorter = "0.14"
 detekt = "main-SNAPSHOT"
 java = "23"
 junit = "5.12.0-M1"
