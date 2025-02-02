@@ -7,8 +7,10 @@ import alysson.cirilo.resume.entities.Degree
 import alysson.cirilo.resume.entities.JobExperience
 import alysson.cirilo.resume.entities.LinkedInformation
 import alysson.cirilo.resume.entities.ProjectOrPublication
+import org.junit.jupiter.api.DisplayName
 import java.time.format.DateTimeFormatter
 
+@DisplayName("MarkdownSyntaxFactoryTest")
 class MarkdownSyntaxFactoryTest : ResumeSyntaxFactoryTest() {
     override fun createSyntaxFactory(
         workDateFormatter: DateTimeFormatter,

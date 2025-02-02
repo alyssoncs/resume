@@ -18,7 +18,3 @@ dependencyAnalysis {
         }
     }
 }
-
-tasks.register<DependencyReportTask>("") {
-
-}
