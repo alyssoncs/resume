@@ -14,6 +14,7 @@ jobs:
   build:
     name: build 🛠️ 
     runs-on: ubuntu-latest
+    container: texlive/texlive:latest
     steps:
       - name: 🛎️ Checkout
         uses: actions/checkout@v4
