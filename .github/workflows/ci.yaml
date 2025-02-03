@@ -14,7 +14,6 @@ jobs:
   build:
     name: build 🛠️ 
     runs-on: ubuntu-latest
-    container: texlive/texlive:latest
     steps:
       - name: 🛎️ Checkout
         uses: actions/checkout@v4
@@ -48,12 +47,8 @@ jobs:
     container: texlive/texlive:latest
     needs: [build]
     steps:
-      - run: ls
-
       - name: 🛎️ Checkout
         uses: actions/checkout@v4
-
-      - run: ls
 
       - name: 📥 Download resumes markup
         uses: actions/download-artifact@v4
@@ -61,50 +56,46 @@ jobs:
           name: resumes-markup
           path: output
 
-      - run: ls
+      - name: 📝 Make resumes
+        run: make pdfs
 
-      - run: ls output
+      - name: 📤 Upload resumes
+        uses: actions/upload-artifact@v4
+        with:
+          name: resumes
+          path: |
+          output/awesome/alysson-cirilo-resume.pdf
+          output/sober/alysson-cirilo-resume.pdf
+          output/markdown/alysson-cirilo-resume.md
+          retention-days: 1
 
-          #- name: 📝 Make resumes
-          #run: make pdfs
+  deploy:
+    name: deploy 🚀
+    needs: [compile-resumes]
+    runs-on: ubuntu-latest
+    steps:
+      - name: 📥 Download resumes
+        uses: actions/download-artifact@v4
+        with:
+          name: resumes
 
-          #- name: 📤 Upload resumes
-          #uses: actions/upload-artifact@v4
-          #with:
-          #name: resumes
-          #path: |
-          #output/awesome/alysson-cirilo-resume.pdf
-          #output/sober/alysson-cirilo-resume.pdf
-          #output/markdown/alysson-cirilo-resume.md
-          #retention-days: 1
+      - name: ✏️ Rename resumes
+        run: |
+          mv awesome/alysson-cirilo-resume.pdf alysson-cirilo-fancy-resume.pdf
+          mv sober/alysson-cirilo-resume.pdf alysson-cirilo-sober-resume.pdf
+          mv markdown/alysson-cirilo-resume.md alysson-cirilo-markdown-resume.md
 
-          #  deploy:
-          #    name: deploy 🚀
-          #    needs: [build]
-          #    runs-on: ubuntu-latest
-          #    steps:
-          #      - name: 📥 Download resumes
-          #        uses: actions/download-artifact@v4
-          #        with:
-          #          name: resumes
-          #
-          #      - name: ✏️ Rename resumes
-          #        run: |
-          #          mv awesome/alysson-cirilo-resume.pdf alysson-cirilo-fancy-resume.pdf
-          #          mv sober/alysson-cirilo-resume.pdf alysson-cirilo-sober-resume.pdf
-          #          mv markdown/alysson-cirilo-resume.md alysson-cirilo-markdown-resume.md
-          #
-          #      - name: 🚀 Deploy release
-          #        uses: softprops/action-gh-release@v1
-          #        if: startsWith(github.ref, 'refs/tags/')
-          #        with:
-          #          files: |
-          #            alysson-cirilo-fancy-resume.pdf
-          #            alysson-cirilo-sober-resume.pdf
-          #            alysson-cirilo-markdown-resume.md
-          #          body: |
-          #            You can choose between the following resume flavors:
-          #            * `alysson-cirilo-fancy-resume.pdf` if you want a modern and colored resume.
-          #            * `alysson-cirilo-sober-resume.pdf` if you want a classic sober resume.
-          #            * `alysson-cirilo-markdown-resume.md` if you want a resume in markdown format.
-          #
+      - name: 🚀 Deploy release
+        uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          files: |
+            alysson-cirilo-fancy-resume.pdf
+            alysson-cirilo-sober-resume.pdf
+            alysson-cirilo-markdown-resume.md
+          body: |
+            You can choose between the following resume flavors:
+            * `alysson-cirilo-fancy-resume.pdf` if you want a modern and colored resume.
+            * `alysson-cirilo-sober-resume.pdf` if you want a classic sober resume.
+            * `alysson-cirilo-markdown-resume.md` if you want a resume in markdown format.
+          
