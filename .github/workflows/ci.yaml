@@ -45,7 +45,6 @@ jobs:
     name: compile resumes 🛠️ 
     runs-on: ubuntu-latest
     container: texlive/texlive:latest
-    needs: [build]
     steps:
       - name: 🛎️ Checkout
         uses: actions/checkout@v4
