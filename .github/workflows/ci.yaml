@@ -59,8 +59,11 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: resumes-markup
+          path: output
 
       - run: ls
+
+      - run: ls output
 
           #- name: 📝 Make resumes
           #run: make pdfs
