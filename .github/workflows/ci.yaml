@@ -45,6 +45,14 @@ jobs:
             output/markdown/alysson-cirilo-resume.md
           retention-days: 1
 
+  tmp:
+    name: tmp
+    runs-on: ubuntu-latest
+    container: texlive/texlive:latest
+    needs: [build]
+    steps:
+      - run: echo "hello"
+
   deploy:
     name: deploy 🚀
     needs: [build]
