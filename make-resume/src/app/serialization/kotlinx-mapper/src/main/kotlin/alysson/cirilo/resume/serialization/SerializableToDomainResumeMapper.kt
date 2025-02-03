@@ -25,7 +25,6 @@ import java.time.YearMonth
 import java.time.format.DateTimeFormatter
 import java.util.Locale
 
-// temp
 fun SerializableResume.toDomain(): Resume {
     return Resume(
         name = name,
