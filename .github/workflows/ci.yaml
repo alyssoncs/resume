@@ -42,14 +42,14 @@ jobs:
           retention-days: 1
 
   compile-resumes:
-    name: compile resumes 🛠️ 
+    name: compile resumes 📜
     runs-on: ubuntu-latest
     container: texlive/texlive:latest
     steps:
       - name: 🛎️ Checkout
         uses: actions/checkout@v4
 
-      - name: Wait for markup files
+      - name: ⏳ Wait for markup files
         uses: yogeshlonkar/wait-for-jobs@v0
         with:
           jobs: 'build 🛠️'
