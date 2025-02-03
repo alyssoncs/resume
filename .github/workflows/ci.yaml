@@ -64,9 +64,9 @@ jobs:
         with:
           name: resumes
           path: |
-          output/awesome/alysson-cirilo-resume.pdf
-          output/sober/alysson-cirilo-resume.pdf
-          output/markdown/alysson-cirilo-resume.md
+            output/awesome/alysson-cirilo-resume.pdf
+            output/sober/alysson-cirilo-resume.pdf
+            output/markdown/alysson-cirilo-resume.md
           retention-days: 1
 
   deploy:
