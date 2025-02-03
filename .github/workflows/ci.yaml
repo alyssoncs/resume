@@ -48,19 +48,19 @@ jobs:
     container: texlive/texlive:latest
     needs: [build]
     steps:
+      - run: ls
+
       - name: 🛎️ Checkout
         uses: actions/checkout@v4
+
+      - run: ls
 
       - name: 📥 Download resumes markup
         uses: actions/download-artifact@v4
         with:
           name: resumes-markup
 
-      - name: pwd
-        run: pwd
-
-      - name: tree
-        run: tree .
+      - run: ls
 
           #- name: 📝 Make resumes
           #run: make pdfs
