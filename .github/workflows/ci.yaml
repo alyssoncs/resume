@@ -50,6 +50,13 @@ jobs:
       - name: 🛎️ Checkout
         uses: actions/checkout@v4
 
+      - name: Wait for markup files
+        uses: yogeshlonkar/wait-for-jobs@v0
+        with:
+          jobs: 'build 🛠️'
+          interval: '2500'
+          ttl: '5'
+
       - name: 📥 Download resumes markup
         uses: actions/download-artifact@v4
         with:
