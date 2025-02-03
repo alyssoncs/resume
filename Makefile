@@ -19,6 +19,17 @@ markdown: $(OUTPUT_DIR)/markdown/$(RESUME_NAME).md
 .PHONY: previews
 previews: $(PREVIEW_DIR)/sober-resume-preview.png $(PREVIEW_DIR)/awesome-resume-preview.png $(PREVIEW_DIR)/markdown-resume-preview.md
 
+.PHONY: markupfiles
+markupfiles: $(OUTPUT_DIR)/awesome/$(RESUME_NAME).tex $(OUTPUT_DIR)/sober/$(RESUME_NAME).tex $(OUTPUT_DIR)/markdown/$(RESUME_NAME).md
+	cp -r dependencies/awesome/Awesome-CV $(OUTPUT_DIR)/awesome
+	cp dependencies/sober/* $(OUTPUT_DIR)/sober
+
+.PHONY: pdfs
+pdfs: 
+	cd output/awesome && xelatex $(RESUME_NAME).tex
+	cd ../..
+	cd output/sober && xelatex $(RESUME_NAME).tex
+
 $(OUTPUT_DIR)/awesome/$(RESUME_NAME).tex: $(MAKE_RESUME) | $(OUTPUT_DIR)/awesome
 	java -jar $(MAKE_RESUME) -f awesome -i $(YAML_RESUME) > $@
 
