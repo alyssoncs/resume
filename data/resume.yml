@@ -88,13 +88,18 @@ experiences:
       - title: Software Engineer II
         period:
           from: 07-2022
-          to: now
+          to: 03-2025
         bulletPoints:
           - Worked on a geographically distributed team delivering features on the voice assistant in Outlook Android app.
           - Enabled consistent Microsoft Copilot experience across multiple mobile apps by developing an SDK using {Jetpack Compose},
           - Improved code maintainability by adapting a callback-based SDK to {Kotlin Flow}, simplifying the codebase.
           - Optimized code review workflow by integrating a common set of static analysis and lint rules across all libraries on the project, enabling reviews to focus on architecturally significant decisions rather than small details.
           - Achieved a 57% improvement in CI pipeline performance by identifying and decomposing independent work into parallel jobs and properly configuring {Gradle} builds.
+      - title: Senior Software Engineer
+        period:
+          from: 03-2025
+          to: now
+        bulletPoints: []
 projectsAndPublications:
   - title:
       displayName: Resume
