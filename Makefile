@@ -1,13 +1,12 @@
 BUILD_DIR=build
 OUT_DIR=$(BUILD_DIR)/output
-PREVIEW_DIR=previews
-PREVIEW_DIR_zz=$(OUT_DIR)/previews
+PREVIEW_DIR=$(OUT_DIR)/previews
 RESUME_NAME=alysson-cirilo-resume
 YAML_RESUME=data/resume.yml
 MAKE_RESUME=make-resume/src/app/cli/build/libs/cli-uber.jar
 
 .PHONY: all
-all: fancy sober markdown
+all: fancy sober markdown previews
 
 .PHONY: fancy
 fancy: $(OUT_DIR)/alysson-cirilo-fancy-resume.pdf
@@ -35,9 +34,9 @@ pdfs: | $(OUT_DIR)
 	cp $(BUILD_DIR)/markdown/$(RESUME_NAME).md $(OUT_DIR)/alysson-cirilo-markdown-resume.md
 
 .PHONY: fastoutput
-fastoutput: pdfs | $(PREVIEW_DIR_zz)/
-	pdftoppm -r 300 -png $(OUT_DIR)/alysson-cirilo-fancy-resume.pdf > $(PREVIEW_DIR_zz)/fancy-resume-preview.png
-	pdftoppm -r 300 -png $(OUT_DIR)/alysson-cirilo-sober-resume.pdf > $(PREVIEW_DIR_zz)/sober-resume-preview.png
+fastoutput: pdfs | $(PREVIEW_DIR)/
+	pdftoppm -r 300 -png $(OUT_DIR)/alysson-cirilo-fancy-resume.pdf > $(PREVIEW_DIR)/fancy-resume-preview.png
+	pdftoppm -r 300 -png $(OUT_DIR)/alysson-cirilo-sober-resume.pdf > $(PREVIEW_DIR)/sober-resume-preview.png
 
 $(BUILD_DIR)/fancy/$(RESUME_NAME).tex: $(MAKE_RESUME) | $(BUILD_DIR)/fancy
 	java -jar $(MAKE_RESUME) -f awesome -i $(YAML_RESUME) > $@
@@ -85,13 +84,10 @@ $(BUILD_DIR)/sober:
 $(BUILD_DIR)/markdown:
 	mkdir -p $@
 
-$(OUT_DIR):
+$(OUT_DIR)/:
 	mkdir -p $@
 
 $(PREVIEW_DIR)/:
-	mkdir -p $@
-
-$(PREVIEW_DIR_zz)/:
 	mkdir -p $@
 
 .PHONY: clean
