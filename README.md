@@ -14,6 +14,8 @@ Here is a preview on how they look like:
 |---------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------|
 | [![fancy resume flavor preview](../resumes/previews/fancy-resume-preview.png)](../../tree/resumes/alysson-cirilo-fancy-resume.pdf) | [![sober resume flavor preview](../resumes/previews/sober-resume-preview.png)](../../tree/resumes/alysson-cirilo-sober-resume.pdf) | [check here](../../tree/resumes/alysson-cirilo-markdown-resume.md) |
 
+> You can also click on them to see and download.
+
 ## About this project
 
 ### What it does?
