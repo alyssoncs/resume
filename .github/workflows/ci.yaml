@@ -63,7 +63,7 @@ jobs:
           path: build
 
       - name: 📝 Make resumes & previews
-        run: make fastouput
+        run: make fastoutput
 
       - name: 📤 Upload resumes & previews
         uses: actions/upload-artifact@v4
