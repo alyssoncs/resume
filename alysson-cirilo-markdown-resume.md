@@ -1,5 +1,5 @@
 # Alysson Cirilo Silva
-> Software Engineerr • Android Developer
+> Software Engineer • Android Developer
 
 ## Contact Information
 - [alysson.cirilo@gmail.com](mailto:alysson.cirilo@gmail.com)
