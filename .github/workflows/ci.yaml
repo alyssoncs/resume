@@ -91,6 +91,12 @@ jobs:
           mv sober/alysson-cirilo-resume.pdf alysson-cirilo-sober-resume.pdf
           mv markdown/alysson-cirilo-resume.md alysson-cirilo-markdown-resume.md
 
+      - name: 🚀 Upload resumes to orphan branch
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: .
+          branch: resumes
+
       - name: 🚀 Deploy release
         uses: softprops/action-gh-release@v1
         if: startsWith(github.ref, 'refs/tags/')
