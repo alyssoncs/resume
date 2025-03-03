@@ -12,7 +12,7 @@ Here is a preview on how they look like:
 
 | Fancy                                                                                                                     | Sober                                                                                                                   | Markdown                                                           |
 |---------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------|
-| [![fancy resume flavor preview](../../tree/resumes/previews/fancy-resume-preview.png)](../../tree/resumes/alysson-cirilo-fancy-resume.pdf) | [![sober resume flavor preview](../../tree/resumes/previews/sober-resume-preview.png)](../../tree/resumes/alysson-cirilo-sober-resume.pdf) | [check here](../../tree/resumes/alysson-cirilo-markdown-resume.md) |
+| [![fancy resume flavor preview](../tree/resumes/previews/fancy-resume-preview.png)](../../tree/resumes/alysson-cirilo-fancy-resume.pdf) | [![sober resume flavor preview](../../tree/resumes/previews/sober-resume-preview.png)](../../tree/resumes/alysson-cirilo-sober-resume.pdf) | [check here](../../tree/resumes/alysson-cirilo-markdown-resume.md) |
 
 ## About this project
 
