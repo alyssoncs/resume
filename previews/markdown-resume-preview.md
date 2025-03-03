@@ -12,8 +12,11 @@
 ### [Microsoft](https://www.microsoft.com/)
 - Remote, Brazil
 
+#### Senior Software Engineer
+> Mar. 2025 – Present
+
 #### Software Engineer II
-> Jul. 2022 – Present
+> Jul. 2022 – Mar. 2025
 - Worked on a geographically distributed team delivering features on the voice assistant in Outlook Android app.
 - Enabled consistent Microsoft Copilot experience across multiple mobile apps by developing an SDK using **Jetpack Compose**,
 - Improved code maintainability by adapting a callback-based SDK to **Kotlin Flow**, simplifying the codebase.
