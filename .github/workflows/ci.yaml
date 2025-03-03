@@ -80,21 +80,26 @@ jobs:
     needs: [compile-resumes]
     runs-on: ubuntu-latest
     steps:
+      - name: 🛎️ Checkout
+        uses: actions/checkout@v4
+
       - name: 📥 Download resumes
         uses: actions/download-artifact@v4
         with:
           name: resumes
+          path: output
 
       - name: ✏️ Rename resumes
         run: |
-          mv awesome/alysson-cirilo-resume.pdf alysson-cirilo-fancy-resume.pdf
-          mv sober/alysson-cirilo-resume.pdf alysson-cirilo-sober-resume.pdf
-          mv markdown/alysson-cirilo-resume.md alysson-cirilo-markdown-resume.md
+          mkdir compiled
+          mv output/awesome/alysson-cirilo-resume.pdf compiled/alysson-cirilo-fancy-resume.pdf
+          mv output/sober/alysson-cirilo-resume.pdf compiled/alysson-cirilo-sober-resume.pdf
+          mv output/markdown/alysson-cirilo-resume.md compiled/alysson-cirilo-markdown-resume.md
 
       - name: 🚀 Upload resumes to orphan branch
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          folder: .
+          folder: compiled
           branch: resumes
 
       - name: 🚀 Deploy release
@@ -102,9 +107,9 @@ jobs:
         if: startsWith(github.ref, 'refs/tags/')
         with:
           files: |
-            alysson-cirilo-fancy-resume.pdf
-            alysson-cirilo-sober-resume.pdf
-            alysson-cirilo-markdown-resume.md
+            compiled/alysson-cirilo-fancy-resume.pdf
+            compiled/alysson-cirilo-sober-resume.pdf
+            compiled/alysson-cirilo-markdown-resume.md
           body: |
             You can choose between the following resume flavors:
             * `alysson-cirilo-fancy-resume.pdf` if you want a modern and colored resume.
