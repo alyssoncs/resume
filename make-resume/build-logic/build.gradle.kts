@@ -9,3 +9,5 @@ dependencies {
     implementation(libs.dependencies.sorter.gradle)
     implementation(libs.dagp)
 }
+
+kotlin.jvmToolchain(libs.versions.java.get().toInt())

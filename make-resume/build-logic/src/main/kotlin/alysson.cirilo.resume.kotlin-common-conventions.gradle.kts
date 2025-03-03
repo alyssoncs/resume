@@ -1,5 +1,6 @@
 import alysson.cirilo.resume.utils.FeaturesExtension
 import alysson.cirilo.resume.utils.RESUME_GROUP
+import alysson.cirilo.resume.utils.getIntVersion
 import alysson.cirilo.resume.utils.getLibrary
 import alysson.cirilo.resume.utils.getVersion
 import alysson.cirilo.resume.utils.versionCatalog
@@ -14,8 +15,7 @@ plugins {
 
 project.group = RESUME_GROUP
 
-val javaVersion = versionCatalog.getVersion("java").toInt()
-kotlin.jvmToolchain(javaVersion)
+kotlin.jvmToolchain(versionCatalog.getIntVersion("java"))
 
 extensions.create<FeaturesExtension>("features", objects, ::enableTests)
 

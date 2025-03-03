@@ -13,6 +13,10 @@ fun VersionCatalog.getBundle(catalogAlias: String): Provider<ExternalModuleDepen
     return this.findBundle(catalogAlias).get()
 }
 
+internal fun VersionCatalog.getIntVersion(catalogAlias: String): Int {
+    return getVersion(catalogAlias).toInt()
+}
+
 fun VersionCatalog.getVersion(catalogAlias: String): String {
     return this.findVersion(catalogAlias).get().requiredVersion
 }
