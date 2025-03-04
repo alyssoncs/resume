@@ -25,7 +25,7 @@ previews: $(PREVIEW_DIR)/sober-resume-preview.png $(PREVIEW_DIR)/fancy-resume-pr
 markupfiles: $(BUILD_DIR)/fancy/$(RESUME_NAME).tex $(BUILD_DIR)/sober/$(RESUME_NAME).tex $(BUILD_DIR)/markdown/$(RESUME_NAME).md
 
 .PHONY: pdfs
-pdfs: markupfiles $(OUT_DIR)/alysson-cirilo-fancy-resume.pdf $(OUT_DIR)/alysson-cirilo-sober-resume.pdf $(OUT_DIR)/alysson-cirilo-markdown-resume.md
+pdfs: markupfiles fancy sober markdown
 
 .PHONY: fastoutput
 fastoutput: pdfs previews
