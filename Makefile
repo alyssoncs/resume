@@ -25,7 +25,7 @@ previews: $(PREVIEW_DIR)/sober-resume-preview.png $(PREVIEW_DIR)/fancy-resume-pr
 markupfiles: $(BUILD_DIR)/fancy/$(RESUME_NAME).tex $(BUILD_DIR)/sober/$(RESUME_NAME).tex $(BUILD_DIR)/markdown/$(RESUME_NAME).md
 
 .PHONY: pdfs
-pdfs: | $(OUT_DIR)/
+pdfs: $(BUILD_DIR)/fancy/$(RESUME_NAME).tex $(BUILD_DIR)/sober/$(RESUME_NAME).tex $(BUILD_DIR)/markdown/$(RESUME_NAME).md | $(OUT_DIR)/
 	cp -r dependencies/fancy/Awesome-CV $(BUILD_DIR)/fancy
 	cd $(BUILD_DIR)/fancy && xelatex $(RESUME_NAME).tex && cp $(RESUME_NAME).pdf ../../$(OUT_DIR)/alysson-cirilo-fancy-resume.pdf
 	cd ../..
