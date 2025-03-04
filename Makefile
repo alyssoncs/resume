@@ -1,10 +1,10 @@
-BUILD_DIR=build
-OUT_DIR=$(BUILD_DIR)/output
-PREVIEW_DIR=$(OUT_DIR)/previews
-RESUME_NAME=alysson-cirilo-resume
-YAML_RESUME=data/resume.yml
-MAKE_RESUME=make-resume/src/app/cli/build/libs/cli-uber.jar
-IS_CI=false
+BUILD_DIR := build
+OUT_DIR := $(BUILD_DIR)/output
+PREVIEW_DIR := $(OUT_DIR)/previews
+RESUME_NAME := alysson-cirilo-resume
+YAML_RESUME := data/resume.yml
+MAKE_RESUME := make-resume/src/app/cli/build/libs/cli-uber.jar
+IS_CI ?= false
 
 .PHONY: all
 all: fancy sober markdown previews
