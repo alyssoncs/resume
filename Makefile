@@ -4,6 +4,7 @@ PREVIEW_DIR=$(OUT_DIR)/previews
 RESUME_NAME=alysson-cirilo-resume
 YAML_RESUME=data/resume.yml
 MAKE_RESUME=make-resume/src/app/cli/build/libs/cli-uber.jar
+IS_CI=false
 
 .PHONY: all
 all: fancy sober markdown previews
@@ -22,13 +23,13 @@ previews: $(PREVIEW_DIR)/sober-resume-preview.png $(PREVIEW_DIR)/fancy-resume-pr
 
 .PHONY: markupfiles
 markupfiles: $(BUILD_DIR)/fancy/$(RESUME_NAME).tex $(BUILD_DIR)/sober/$(RESUME_NAME).tex $(BUILD_DIR)/markdown/$(RESUME_NAME).md
-	cp -r dependencies/fancy/Awesome-CV $(BUILD_DIR)/fancy
-	cp dependencies/sober/* $(BUILD_DIR)/sober
 
 .PHONY: pdfs
-pdfs: | $(OUT_DIR)
+pdfs: | $(OUT_DIR)/
+	cp -r dependencies/fancy/Awesome-CV $(BUILD_DIR)/fancy
 	cd $(BUILD_DIR)/fancy && xelatex $(RESUME_NAME).tex && cp $(RESUME_NAME).pdf ../../$(OUT_DIR)/alysson-cirilo-fancy-resume.pdf
 	cd ../..
+	cp dependencies/sober/* $(BUILD_DIR)/sober
 	cd $(BUILD_DIR)/sober && xelatex $(RESUME_NAME).tex && cp $(RESUME_NAME).pdf ../../$(OUT_DIR)/alysson-cirilo-sober-resume.pdf
 	cd ../..
 	cp $(BUILD_DIR)/markdown/$(RESUME_NAME).md $(OUT_DIR)/alysson-cirilo-markdown-resume.md
@@ -38,6 +39,7 @@ fastoutput: pdfs | $(PREVIEW_DIR)/
 	pdftoppm -r 300 -png $(OUT_DIR)/alysson-cirilo-fancy-resume.pdf > $(PREVIEW_DIR)/fancy-resume-preview.png
 	pdftoppm -r 300 -png $(OUT_DIR)/alysson-cirilo-sober-resume.pdf > $(PREVIEW_DIR)/sober-resume-preview.png
 
+ifeq ($(IS_CI), false)
 $(BUILD_DIR)/fancy/$(RESUME_NAME).tex: $(MAKE_RESUME) | $(BUILD_DIR)/fancy
 	java -jar $(MAKE_RESUME) -f awesome -i $(YAML_RESUME) > $@
 
@@ -46,6 +48,7 @@ $(BUILD_DIR)/sober/$(RESUME_NAME).tex: $(MAKE_RESUME) | $(BUILD_DIR)/sober
 
 $(BUILD_DIR)/markdown/$(RESUME_NAME).md: $(MAKE_RESUME) | $(BUILD_DIR)/markdown
 	java -jar $(MAKE_RESUME) -f markdown -i $(YAML_RESUME) > $@
+endif
 
 $(BUILD_DIR)/fancy/$(RESUME_NAME).pdf: $(BUILD_DIR)/fancy/$(RESUME_NAME).tex
 	cp -r dependencies/fancy/Awesome-CV $(BUILD_DIR)/fancy
@@ -75,7 +78,7 @@ $(PREVIEW_DIR)/markdown-resume-preview.md: $(BUILD_DIR)/markdown/$(RESUME_NAME).
 
 .PHONY: $(MAKE_RESUME)
 $(MAKE_RESUME):
-	cd make-resume && ./gradlew uberJar
+	cd make-resume && ./gradlew uberJar; \
 
 $(BUILD_DIR)/fancy:
 	mkdir -p $@
