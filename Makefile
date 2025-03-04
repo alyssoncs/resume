@@ -41,17 +41,15 @@ $(BUILD_DIR)/markdown/$(RESUME_NAME).md: $(MAKE_RESUME) | $(BUILD_DIR)/markdown
 	java -jar $(MAKE_RESUME) -f markdown -i $(YAML_RESUME) > $@
 endif
 
-$(BUILD_DIR)/sober/$(RESUME_NAME).pdf: $(BUILD_DIR)/sober/$(RESUME_NAME).tex
-	cp dependencies/sober/* $(BUILD_DIR)/sober
-	cd $(BUILD_DIR)/sober && xelatex $(RESUME_NAME).tex
-
 $(OUT_DIR)/alysson-cirilo-fancy-resume.pdf: $(BUILD_DIR)/fancy/$(RESUME_NAME).tex | $(OUT_DIR)/
 	cp -r dependencies/fancy/Awesome-CV $(BUILD_DIR)/fancy
 	cd $(BUILD_DIR)/fancy && xelatex $(RESUME_NAME).tex
 	mv $(patsubst %.tex,%.pdf,$<) $@
 
-$(OUT_DIR)/alysson-cirilo-sober-resume.pdf: $(BUILD_DIR)/sober/$(RESUME_NAME).pdf | $(OUT_DIR)/
-	cp $< $@
+$(OUT_DIR)/alysson-cirilo-sober-resume.pdf: $(BUILD_DIR)/sober/$(RESUME_NAME).tex | $(OUT_DIR)/
+	cp dependencies/sober/* $(BUILD_DIR)/sober
+	cd $(BUILD_DIR)/sober && xelatex $(RESUME_NAME).tex
+	mv $(patsubst %.tex,%.pdf,$<) $@
 
 $(OUT_DIR)/alysson-cirilo-markdown-resume.md: $(BUILD_DIR)/markdown/$(RESUME_NAME).md | $(OUT_DIR)/
 	cp $< $@
