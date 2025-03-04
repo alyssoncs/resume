@@ -41,16 +41,14 @@ $(BUILD_DIR)/markdown/$(RESUME_NAME).md: $(MAKE_RESUME) | $(BUILD_DIR)/markdown
 	java -jar $(MAKE_RESUME) -f markdown -i $(YAML_RESUME) > $@
 endif
 
-$(BUILD_DIR)/fancy/$(RESUME_NAME).pdf: $(BUILD_DIR)/fancy/$(RESUME_NAME).tex
-	cp -r dependencies/fancy/Awesome-CV $(BUILD_DIR)/fancy
-	cd $(BUILD_DIR)/fancy && xelatex $(RESUME_NAME).tex
-
 $(BUILD_DIR)/sober/$(RESUME_NAME).pdf: $(BUILD_DIR)/sober/$(RESUME_NAME).tex
 	cp dependencies/sober/* $(BUILD_DIR)/sober
 	cd $(BUILD_DIR)/sober && xelatex $(RESUME_NAME).tex
 
-$(OUT_DIR)/alysson-cirilo-fancy-resume.pdf: $(BUILD_DIR)/fancy/$(RESUME_NAME).pdf | $(OUT_DIR)/
-	cp $< $@
+$(OUT_DIR)/alysson-cirilo-fancy-resume.pdf: $(BUILD_DIR)/fancy/$(RESUME_NAME).tex | $(OUT_DIR)/
+	cp -r dependencies/fancy/Awesome-CV $(BUILD_DIR)/fancy
+	cd $(BUILD_DIR)/fancy && xelatex $(RESUME_NAME).tex
+	mv $(patsubst %.tex,%.pdf,$<) $@
 
 $(OUT_DIR)/alysson-cirilo-sober-resume.pdf: $(BUILD_DIR)/sober/$(RESUME_NAME).pdf | $(OUT_DIR)/
 	cp $< $@
@@ -63,7 +61,6 @@ $(PREVIEW_DIR)/fancy-resume-preview.png: $(OUT_DIR)/alysson-cirilo-sober-resume.
 
 $(PREVIEW_DIR)/sober-resume-preview.png: $(OUT_DIR)/alysson-cirilo-sober-resume.pdf | $(PREVIEW_DIR)/
 	pdftoppm -r 300 -png $< > $@
-
 
 .PHONY: $(MAKE_RESUME)
 $(MAKE_RESUME):
