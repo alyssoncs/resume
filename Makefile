@@ -6,7 +6,7 @@ YAML_RESUME := data/resume.yml
 MAKE_RESUME := make-resume/src/app/cli/build/libs/cli-uber.jar
 IS_CI ?= false
 
-# Top-level Target
+# Top-level target
 .PHONY: all
 all: fancy sober markdown previews
 
@@ -39,7 +39,7 @@ $(OUT_DIR)/alysson-cirilo-sober-resume.pdf: $(BUILD_DIR)/sober/$(RESUME_NAME).te
 $(OUT_DIR)/alysson-cirilo-markdown-resume.md: $(BUILD_DIR)/markdown/$(RESUME_NAME).md | $(OUT_DIR)/
 	cp $< $@
 
-# Resume Markup Files
+# Resume markup files
 ifeq ($(IS_CI), false)
 $(BUILD_DIR)/fancy/$(RESUME_NAME).tex: $(MAKE_RESUME) | $(BUILD_DIR)/fancy
 	java -jar $(MAKE_RESUME) -f awesome -i $(YAML_RESUME) > $@
@@ -74,3 +74,4 @@ $(PREVIEW_DIR)/:
 .PHONY: clean
 clean:
 	rm -rf $(BUILD_DIR)/
+
