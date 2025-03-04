@@ -48,7 +48,7 @@ $(OUT_DIR)/alysson-cirilo-sober-resume.pdf: $(BUILD_DIR)/sober/$(RESUME_NAME).te
 $(OUT_DIR)/alysson-cirilo-markdown-resume.md: $(BUILD_DIR)/markdown/$(RESUME_NAME).md | $(OUT_DIR)/
 	cp $< $@
 
-$(PREVIEW_DIR)/fancy-resume-preview.png: $(OUT_DIR)/alysson-cirilo-sober-resume.pdf | $(PREVIEW_DIR)/
+$(PREVIEW_DIR)/fancy-resume-preview.png: $(OUT_DIR)/alysson-cirilo-fancy-resume.pdf | $(PREVIEW_DIR)/
 	pdftoppm -r 300 -png $< > $@
 
 $(PREVIEW_DIR)/sober-resume-preview.png: $(OUT_DIR)/alysson-cirilo-sober-resume.pdf | $(PREVIEW_DIR)/
