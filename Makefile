@@ -58,11 +58,12 @@ $(OUT_DIR)/alysson-cirilo-sober-resume.pdf: $(BUILD_DIR)/sober/$(RESUME_NAME).pd
 $(OUT_DIR)/alysson-cirilo-markdown-resume.md: $(BUILD_DIR)/markdown/$(RESUME_NAME).md | $(OUT_DIR)/
 	cp $< $@
 
-$(PREVIEW_DIR)/sober-resume-preview.png: $(BUILD_DIR)/sober/$(RESUME_NAME).pdf | $(PREVIEW_DIR)/
+$(PREVIEW_DIR)/fancy-resume-preview.png: $(OUT_DIR)/alysson-cirilo-sober-resume.pdf | $(PREVIEW_DIR)/
 	pdftoppm -r 300 -png $< > $@
 
-$(PREVIEW_DIR)/fancy-resume-preview.png: $(BUILD_DIR)/fancy/$(RESUME_NAME).pdf | $(PREVIEW_DIR)/
+$(PREVIEW_DIR)/sober-resume-preview.png: $(OUT_DIR)/alysson-cirilo-sober-resume.pdf | $(PREVIEW_DIR)/
 	pdftoppm -r 300 -png $< > $@
+
 
 .PHONY: $(MAKE_RESUME)
 $(MAKE_RESUME):
