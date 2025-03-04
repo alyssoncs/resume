@@ -19,7 +19,7 @@ sober: $(OUT_DIR)/alysson-cirilo-sober-resume.pdf
 markdown: $(OUT_DIR)/alysson-cirilo-markdown-resume.md
 
 .PHONY: previews
-previews: $(PREVIEW_DIR)/sober-resume-preview.png $(PREVIEW_DIR)/fancy-resume-preview.png $(PREVIEW_DIR)/markdown-resume-preview.md
+previews: $(PREVIEW_DIR)/sober-resume-preview.png $(PREVIEW_DIR)/fancy-resume-preview.png
 
 .PHONY: markupfiles
 markupfiles: $(BUILD_DIR)/fancy/$(RESUME_NAME).tex $(BUILD_DIR)/sober/$(RESUME_NAME).tex $(BUILD_DIR)/markdown/$(RESUME_NAME).md
@@ -28,9 +28,7 @@ markupfiles: $(BUILD_DIR)/fancy/$(RESUME_NAME).tex $(BUILD_DIR)/sober/$(RESUME_N
 pdfs: markupfiles $(OUT_DIR)/alysson-cirilo-fancy-resume.pdf $(OUT_DIR)/alysson-cirilo-sober-resume.pdf $(OUT_DIR)/alysson-cirilo-markdown-resume.md
 
 .PHONY: fastoutput
-fastoutput: pdfs | $(PREVIEW_DIR)/
-	pdftoppm -r 300 -png $(OUT_DIR)/alysson-cirilo-fancy-resume.pdf > $(PREVIEW_DIR)/fancy-resume-preview.png
-	pdftoppm -r 300 -png $(OUT_DIR)/alysson-cirilo-sober-resume.pdf > $(PREVIEW_DIR)/sober-resume-preview.png
+fastoutput: pdfs previews
 
 ifeq ($(IS_CI), false)
 $(BUILD_DIR)/fancy/$(RESUME_NAME).tex: $(MAKE_RESUME) | $(BUILD_DIR)/fancy
@@ -65,9 +63,6 @@ $(PREVIEW_DIR)/sober-resume-preview.png: $(BUILD_DIR)/sober/$(RESUME_NAME).pdf |
 
 $(PREVIEW_DIR)/fancy-resume-preview.png: $(BUILD_DIR)/fancy/$(RESUME_NAME).pdf | $(PREVIEW_DIR)/
 	pdftoppm -r 300 -png $< > $@
-
-$(PREVIEW_DIR)/markdown-resume-preview.md: $(BUILD_DIR)/markdown/$(RESUME_NAME).md | $(PREVIEW_DIR)/
-	cp $< $@
 
 .PHONY: $(MAKE_RESUME)
 $(MAKE_RESUME):
