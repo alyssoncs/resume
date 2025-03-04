@@ -24,12 +24,6 @@ previews: $(PREVIEW_DIR)/sober-resume-preview.png $(PREVIEW_DIR)/fancy-resume-pr
 .PHONY: markupfiles
 markupfiles: $(BUILD_DIR)/fancy/$(RESUME_NAME).tex $(BUILD_DIR)/sober/$(RESUME_NAME).tex $(BUILD_DIR)/markdown/$(RESUME_NAME).md
 
-.PHONY: pdfs
-pdfs: markupfiles fancy sober markdown
-
-.PHONY: fastoutput
-fastoutput: pdfs previews
-
 ifeq ($(IS_CI), false)
 $(BUILD_DIR)/fancy/$(RESUME_NAME).tex: $(MAKE_RESUME) | $(BUILD_DIR)/fancy
 	java -jar $(MAKE_RESUME) -f awesome -i $(YAML_RESUME) > $@
