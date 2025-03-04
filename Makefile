@@ -25,10 +25,7 @@ previews: $(PREVIEW_DIR)/sober-resume-preview.png $(PREVIEW_DIR)/fancy-resume-pr
 markupfiles: $(BUILD_DIR)/fancy/$(RESUME_NAME).tex $(BUILD_DIR)/sober/$(RESUME_NAME).tex $(BUILD_DIR)/markdown/$(RESUME_NAME).md
 
 .PHONY: pdfs
-pdfs: markupfiles $(OUT_DIR)/alysson-cirilo-fancy-resume.pdf | $(OUT_DIR)/
-	cp dependencies/sober/* $(BUILD_DIR)/sober
-	cd $(BUILD_DIR)/sober && xelatex $(RESUME_NAME).tex && cp $(RESUME_NAME).pdf ../../$(OUT_DIR)/alysson-cirilo-sober-resume.pdf
-	cd ../..
+pdfs: markupfiles $(OUT_DIR)/alysson-cirilo-fancy-resume.pdf $(OUT_DIR)/alysson-cirilo-sober-resume.pdf | $(OUT_DIR)/
 	cp $(BUILD_DIR)/markdown/$(RESUME_NAME).md $(OUT_DIR)/alysson-cirilo-markdown-resume.md
 
 .PHONY: fastoutput
