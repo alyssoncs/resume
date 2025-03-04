@@ -56,7 +56,7 @@ $(PREVIEW_DIR)/sober-resume-preview.png: $(OUT_DIR)/alysson-cirilo-sober-resume.
 
 .PHONY: $(MAKE_RESUME)
 $(MAKE_RESUME):
-	cd make-resume && ./gradlew uberJar; \
+	cd make-resume && ./gradlew uberJar
 
 $(BUILD_DIR)/fancy:
 	mkdir -p $@
