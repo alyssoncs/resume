@@ -108,22 +108,6 @@ private fun mapBulletPoints(it: SerializableRole): List<BulletPoint> {
     return it.bulletPoints.map(::mapBulletPoint)
 }
 
-fun parseBulletPoint(input: String): BulletPoint {
-    val regex = Regex("\\{([^}]+)}|([^{}]+)")
-    val content = regex.findAll(input).map { matchResult ->
-        val (skill, plainText) = matchResult.destructured
-        when {
-            skill.isNotEmpty() -> BulletPointContent.Skill(skill.trim())
-            plainText.isNotEmpty() -> BulletPointContent.PlainText(plainText.trim())
-            else -> throw ParsingException("Invalid input format")
-        }
-    }.toList()
-
-    return BulletPoint(content).also {
-        validateFlatSkills(it)
-    }
-}
-
 private fun mapBulletPoint(bulletPoint: String): BulletPoint {
     validateMatchingBrackets(bulletPoint)
 
