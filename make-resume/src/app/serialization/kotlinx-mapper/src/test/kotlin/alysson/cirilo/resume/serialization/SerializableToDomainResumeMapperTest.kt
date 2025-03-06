@@ -13,6 +13,7 @@ import alysson.cirilo.resume.serialization.models.aJobExperienceDto
 import alysson.cirilo.resume.serialization.models.aResumeDto
 import alysson.cirilo.resume.serialization.models.aRoleDto
 import io.kotest.assertions.throwables.shouldThrow
+import io.kotest.matchers.collections.beEmpty
 import io.kotest.matchers.collections.containExactly
 import io.kotest.matchers.collections.shouldHaveSize
 import io.kotest.matchers.should
@@ -26,6 +27,7 @@ class SerializableToDomainResumeMapperTest {
     inner class ValidDto {
         private val validResumeDto = Fixtures.Valid.resume
         private val missingBracketResumeDto = Fixtures.Valid.missingOpenBracketResume
+        private val emptyBulletsResumeDto = Fixtures.Valid.emptyBulletsResume
 
         private val resume by lazy { resume(validResumeDto) }
 
@@ -127,6 +129,13 @@ class SerializableToDomainResumeMapperTest {
                 .containing("delivered value with ", "kotlin", ".")
                 .build()
             roles[1].bulletPoints[1] shouldBe aBulletPoint().thatReads("another cool thing").build()
+        }
+
+        @Test
+        fun `should keep empty bullet points`() {
+            val bullets = resume(emptyBulletsResumeDto).jobExperiences.first().roles.first().bulletPoints
+
+            bullets should beEmpty()
         }
 
         @Test
@@ -242,6 +251,13 @@ object Fixtures {
             .with(
                 aJobExperienceDto()
                     .with(aRoleDto().bullet("delivered value } with {kotlin}.")),
+            )
+            .build()
+
+        val emptyBulletsResume = aResumeDto()
+            .with(
+                aJobExperienceDto()
+                    .with(aRoleDto().withEmptyBullets()),
             )
             .build()
     }

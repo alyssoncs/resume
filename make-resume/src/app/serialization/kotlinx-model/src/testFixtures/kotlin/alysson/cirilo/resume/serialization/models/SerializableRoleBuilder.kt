@@ -5,6 +5,7 @@ interface SerializableRoleBuilder {
     fun from(from: String): SerializableRoleBuilder
     fun upTo(to: String): SerializableRoleBuilder
     fun upToNow(to: String): SerializableRoleBuilder
+    fun withEmptyBullets(): SerializableRoleBuilder = bullets(emptyList())
     fun bullet(bullet: String): SerializableRoleBuilder = bullets(listOf(bullet))
     fun bullets(vararg bullets: String): SerializableRoleBuilder = bullets(bullets.toList())
     fun bullets(bullets: List<String>): SerializableRoleBuilder

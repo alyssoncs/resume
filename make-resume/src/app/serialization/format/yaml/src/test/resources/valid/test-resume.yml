@@ -33,10 +33,14 @@ experiences:
       - title: SWE 2
         period:
           from: 12-2022
-          to: now
+          to: 06-2023
         bulletPoints:
           - delivered value with {kotlin}.
           - another cool thing
+      - title: SWE 3
+        period:
+          from: 06-2023
+          to: now
 projectsAndPublications:
   - title:
       displayName: Project

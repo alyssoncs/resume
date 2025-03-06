@@ -32,7 +32,7 @@ data class SerializableJobExperience(
 data class SerializableRole(
     val title: String,
     val period: SerializableEnrollmentPeriod,
-    val bulletPoints: List<String>,
+    val bulletPoints: List<String> = emptyList(),
 )
 
 @Serializable
