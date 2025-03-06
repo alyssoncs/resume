@@ -99,7 +99,6 @@ experiences:
         period:
           from: 03-2025
           to: now
-        bulletPoints: []
 projectsAndPublications:
   - title:
       displayName: Resume
