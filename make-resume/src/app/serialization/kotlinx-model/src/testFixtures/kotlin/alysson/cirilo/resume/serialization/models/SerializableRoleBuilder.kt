@@ -42,4 +42,3 @@ private data class SerializableRoleBuilderImpl(
 fun aRoleDto(): SerializableRoleBuilder {
     return SerializableRoleBuilderImpl()
 }
-

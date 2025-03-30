@@ -4,9 +4,9 @@ import alysson.cirilo.resume.entities.ContactInformation
 import alysson.cirilo.resume.entities.Degree
 import alysson.cirilo.resume.entities.EnrollmentPeriod
 import alysson.cirilo.resume.entities.JobExperience
+import alysson.cirilo.resume.entities.JobExperienceBuilder
 import alysson.cirilo.resume.entities.LinkedInformation
 import alysson.cirilo.resume.entities.ProjectOrPublication
-import alysson.cirilo.resume.entities.JobExperienceBuilder
 import alysson.cirilo.resume.entities.aBulletPoint
 import alysson.cirilo.resume.entities.aCompany
 import alysson.cirilo.resume.entities.aDegree
@@ -338,7 +338,7 @@ abstract class ResumeSyntaxFactoryTest {
                             aRole()
                                 .`as`("SWE 2")
                                 .withNoBulletPoints()
-                                .between(period().from(12, 2019).upToNow())
+                                .between(period().from(month = 12, year = 2019).upToNow())
                         )
                 )
             }.map(JobExperienceBuilder::build)
@@ -368,7 +368,7 @@ abstract class ResumeSyntaxFactoryTest {
                     .and(
                         aRole()
                             .`as`("SWE 2")
-                            .between(period().from(12, 2019).upToNow())
+                            .between(period().from(month = 12, year = 2019).upToNow())
                             .with(aBulletPoint().thatReads("been promoted"))
                     )
                     .build()
@@ -392,7 +392,7 @@ abstract class ResumeSyntaxFactoryTest {
                 aDegree()
                     .at(institution("Top institution", "https://www.topinstitution.edu"))
                     .on("Brazil")
-                    .during(period().from(2, 2022).upToNow())
+                    .during(period().from(month = 2, year = 2022).upToNow())
                     .tile("BSc. in Computer Science")
                     .build()
             )
@@ -401,7 +401,7 @@ abstract class ResumeSyntaxFactoryTest {
         private object Builders {
             val role = aRole()
                 .`as`("SWE 1")
-                .between(period().from(10, 2019).to(12, 2019))
+                .between(period().from(month = 10, year = 2019).to(month = 12, year = 2019))
                 .with(aBulletPoint().thatReads("worked with kotlin"))
 
             val jobExperienceBuilder = aJobExperience()

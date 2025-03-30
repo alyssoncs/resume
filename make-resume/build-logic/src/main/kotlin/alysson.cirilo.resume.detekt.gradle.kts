@@ -9,6 +9,10 @@ detekt {
     parallel = true
     buildUponDefaultConfig = true
     config.setFrom("${rootDir}/config/detekt/detekt.yml")
+    source.from(
+        "src/testFixtures/java",
+        "src/testFixtures/kotlin",
+    )
 }
 
 dependencies {

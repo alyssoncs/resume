@@ -14,7 +14,7 @@ class BulletPointBuilder private constructor(
 
     fun with(content: BulletPointContent) = with(listOf(content))
 
-    fun containing(vararg bullets: String) : BulletPointBuilder {
+    fun containing(vararg bullets: String): BulletPointBuilder {
         val content = bullets.mapIndexed { idx, bullet ->
             if (idx % 2 != 0)
                 BulletPointContent.Skill(bullet)

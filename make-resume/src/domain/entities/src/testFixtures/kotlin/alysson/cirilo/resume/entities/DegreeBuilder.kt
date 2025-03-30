@@ -12,7 +12,7 @@ class DegreeBuilder private constructor(
             .linkingTo("https://www.example.com"),
         location = "Brazil",
         degree = "BSc. in Computer Science",
-        periodBuilder = period().from(5, 2020).upToNow(),
+        periodBuilder = period().from(month = 5, year = 2020).upToNow(),
     )
 
     fun at(institutionBuilder: LinkedInformationBuilder) =

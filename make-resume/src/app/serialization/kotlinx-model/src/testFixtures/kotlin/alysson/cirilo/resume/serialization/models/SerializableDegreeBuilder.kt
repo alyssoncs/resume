@@ -16,7 +16,7 @@ private data class SerializableDegreeBuilderImpl(
     private val location: String = "Brazil",
     private val degree: String = "BSc. in Computer Science",
     private val periodBuilder: SerializableEnrollmentPeriodBuilder = periodDto()
-        .from(5, 2020)
+        .from(month = 5, year = 2020)
         .upToNow(),
 ) : SerializableDegreeBuilder {
 
@@ -27,7 +27,7 @@ private data class SerializableDegreeBuilderImpl(
 
     override fun on(location: String) = copy(location = location)
 
-    override fun tile(degree: String) = copy(degree =  degree)
+    override fun tile(degree: String) = copy(degree = degree)
 
     override fun during(periodBuilder: SerializableEnrollmentPeriodBuilder) =
         copy(periodBuilder = periodBuilder)

@@ -29,4 +29,3 @@ private data class SerializableJobExperienceBuilderImpl(
 fun aJobExperienceDto(): SerializableJobExperienceBuilder {
     return SerializableJobExperienceBuilderImpl()
 }
-
