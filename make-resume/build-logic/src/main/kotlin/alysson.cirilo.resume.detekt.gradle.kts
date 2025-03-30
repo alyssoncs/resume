@@ -19,3 +19,14 @@ dependencies {
     val catalog = project.versionCatalog
     detektPlugins(catalog.getLibrary("detekt.formatting"))
 }
+
+tasks.named("check") {
+    dependsOn("detektMain")
+    dependsOn("detektTest")
+}
+
+pluginManager.withPlugin("org.gradle.java-test-fixtures") {
+    tasks.named("check") {
+        dependsOn("detektTestFixtures")
+    }
+}
