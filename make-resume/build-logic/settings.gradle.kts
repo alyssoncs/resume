@@ -1,12 +1,4 @@
 dependencyResolutionManagement {
-    repositories {
-        gradlePluginPortal()
-        // for detekt snapshot
-        maven {
-            url = uri("https://oss.sonatype.org/content/repositories/snapshots/")
-        }
-    }
-
     versionCatalogs {
         create("libs") {
             from(files("../gradle/libs.versions.toml"))
@@ -15,3 +7,7 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "build-logic"
+
+plugins {
+    id("org.gradle.toolchains.foojay-resolver-convention") version "0.9.0"
+}

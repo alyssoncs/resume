@@ -13,6 +13,10 @@ plugins {
     id("alysson.cirilo.resume.quality")
 }
 
+repositories {
+    mavenCentral()
+}
+
 project.group = RESUME_GROUP
 
 kotlin.jvmToolchain(versionCatalog.getIntVersion("java"))
