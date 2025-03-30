@@ -10,7 +10,7 @@ interface SerializableJobExperienceBuilder {
 private data class SerializableJobExperienceBuilderImpl(
     private val company: SerializableLinkedInformationBuilder = linkedInfoDto(),
     private val location: String = "Brazil",
-    private val roles: List<SerializableRoleBuilder> = listOf(aRoleDto())
+    private val roles: List<SerializableRoleBuilder> = listOf(aRoleDto()),
 ) : SerializableJobExperienceBuilder {
 
     override fun with(roles: List<SerializableRoleBuilder>): SerializableJobExperienceBuilder = copy(
@@ -21,7 +21,7 @@ private data class SerializableJobExperienceBuilderImpl(
         return SerializableJobExperience(
             company = company.build(),
             location = location,
-            roles = roles.map(SerializableRoleBuilder::build)
+            roles = roles.map(SerializableRoleBuilder::build),
         )
     }
 }

@@ -307,22 +307,22 @@ abstract class ResumeSyntaxFactoryTest {
                 .email(
                     aLinkedInfo()
                         .displaying("email")
-                        .linkingTo("https://www.email.com")
+                        .linkingTo("https://www.email.com"),
                 )
                 .linkedin(
                     aLinkedInfo()
                         .displaying("linkedin")
-                        .linkingTo("https://www.linkedin.com")
+                        .linkingTo("https://www.linkedin.com"),
                 )
                 .github(
                     aLinkedInfo()
                         .displaying("github")
-                        .linkingTo("https://www.github.com")
+                        .linkingTo("https://www.github.com"),
                 )
                 .location(
                     aLinkedInfo()
                         .displaying("location")
-                        .linkingTo("https://www.gps.com")
+                        .linkingTo("https://www.gps.com"),
                 )
                 .build()
 
@@ -338,13 +338,13 @@ abstract class ResumeSyntaxFactoryTest {
                             aRole()
                                 .`as`("SWE 2")
                                 .withNoBulletPoints()
-                                .between(period().from(month = 12, year = 2019).upToNow())
-                        )
+                                .between(period().from(month = 12, year = 2019).upToNow()),
+                        ),
                 )
             }.map(JobExperienceBuilder::build)
 
             val singleRoleExperienceWithNoBullets: List<JobExperience> = listOf(
-                Builders.jobExperienceBuilder.with(Builders.role.withNoBulletPoints()).build()
+                Builders.jobExperienceBuilder.with(Builders.role.withNoBulletPoints()).build(),
             )
 
             val singleRoleExperienceWithSkillBullets: List<JobExperience> = listOf(
@@ -357,10 +357,10 @@ abstract class ResumeSyntaxFactoryTest {
                                 anEmptyBulletPoint()
                                     .appendText("delivered value with ")
                                     .appendSkill("kotlin")
-                                    .appendText(" but at what cost?")
-                            )
+                                    .appendText(" but at what cost?"),
+                            ),
                     )
-                    .build()
+                    .build(),
             )
 
             val twoRoleExperienceWithBullets: List<JobExperience> = listOf(
@@ -369,9 +369,9 @@ abstract class ResumeSyntaxFactoryTest {
                         aRole()
                             .`as`("SWE 2")
                             .between(period().from(month = 12, year = 2019).upToNow())
-                            .with(aBulletPoint().thatReads("been promoted"))
+                            .with(aBulletPoint().thatReads("been promoted")),
                     )
-                    .build()
+                    .build(),
             )
 
             val singleRoleExperienceWithTextBullet = listOf(Builders.jobExperienceBuilder.build())
@@ -383,7 +383,7 @@ abstract class ResumeSyntaxFactoryTest {
                     .named("Project X")
                     .hostedOn("https://www.projectx.com")
                     .description("Project X description")
-                    .build()
+                    .build(),
             )
 
             val noEducation: List<Degree> = emptyList()
@@ -394,7 +394,7 @@ abstract class ResumeSyntaxFactoryTest {
                     .on("Brazil")
                     .during(period().from(month = 2, year = 2022).upToNow())
                     .tile("BSc. in Computer Science")
-                    .build()
+                    .build(),
             )
         }
 

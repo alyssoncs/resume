@@ -40,9 +40,9 @@ private data class SerializableResumeBuilderImpl(
     ),
     private val experiences: List<SerializableJobExperienceBuilder> = listOf(aJobExperienceDto()),
     private val projectsAndPublications: List<SerializableProjectOrPublicationBuilder> = listOf(
-        aProjectDto()
+        aProjectDto(),
     ),
-    private val education: List<SerializableDegreeBuilder> = listOf(aDegreeDto())
+    private val education: List<SerializableDegreeBuilder> = listOf(aDegreeDto()),
 ) : SerializableResumeBuilder {
 
     override fun withHeadline(headline: List<String>): SerializableResumeBuilder = copy(
@@ -60,7 +60,7 @@ private data class SerializableResumeBuilderImpl(
             contactInfo = contactInfo,
             experiences = experiences.map(SerializableJobExperienceBuilder::build),
             projectsAndPublications = projectsAndPublications.map(
-                SerializableProjectOrPublicationBuilder::build
+                SerializableProjectOrPublicationBuilder::build,
             ),
             education = education.map(SerializableDegreeBuilder::build),
         )
