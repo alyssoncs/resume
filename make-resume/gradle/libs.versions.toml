@@ -1,5 +1,5 @@
 [versions]
-dagp = "2.10.1"
+dagp = "2.13.3"
 dependencies-sorter = "0.14"
 detekt = "1.23.8"
 java = "22"
