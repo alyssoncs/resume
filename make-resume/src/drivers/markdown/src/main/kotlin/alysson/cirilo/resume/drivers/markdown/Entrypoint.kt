@@ -6,5 +6,5 @@ import alysson.cirilo.resume.drivers.utils.makeDriver
 import alysson.cirilo.resume.infra.ResumeDriver
 
 fun makeMarkdownDriver(): ResumeDriver {
-    return makeDriver(MarkdownSyntaxFactory(workDateFormatter, educationDateFormatter))
+    return makeDriver(MarkdownResumeBuilder(workDateFormatter, educationDateFormatter))
 }

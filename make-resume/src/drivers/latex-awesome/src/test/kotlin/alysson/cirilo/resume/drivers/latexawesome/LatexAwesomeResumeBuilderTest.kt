@@ -1,7 +1,7 @@
 package alysson.cirilo.resume.drivers.latexawesome
 
-import alysson.cirilo.resume.drivers.utils.syntaxfactory.ResumeSyntaxFactory
-import alysson.cirilo.resume.drivers.utils.syntaxfactory.ResumeSyntaxFactoryTest
+import alysson.cirilo.resume.drivers.utils.ResumeBuilder
+import alysson.cirilo.resume.drivers.utils.ResumeBuilderTest
 import alysson.cirilo.resume.entities.ContactInformation
 import alysson.cirilo.resume.entities.Degree
 import alysson.cirilo.resume.entities.JobExperience
@@ -11,7 +11,7 @@ import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
 import java.time.format.DateTimeFormatter
 
-class LatexAwesomeSyntaxFactoryTest : ResumeSyntaxFactoryTest() {
+class LatexAwesomeResumeBuilderTest : ResumeBuilderTest() {
     private val template = """
         <header>
         \begin{document}
@@ -19,11 +19,11 @@ class LatexAwesomeSyntaxFactoryTest : ResumeSyntaxFactoryTest() {
         \end{document}
     """.trimIndent()
 
-    override fun createSyntaxFactory(
+    override fun createResumeBuilder(
         workDateFormatter: DateTimeFormatter,
         educationDateFormatter: DateTimeFormatter,
-    ): ResumeSyntaxFactory {
-        return LatexAwesomeSyntaxFactory(
+    ): ResumeBuilder {
+        return LatexAwesomeResumeBuilder(
             template = template,
             headerPlaceholder = "<header>",
             contentPlaceholder = "<content>",
@@ -283,9 +283,9 @@ class LatexAwesomeSyntaxFactoryTest : ResumeSyntaxFactoryTest() {
 
     @Test
     fun `ampersand in the section should be escaped`() {
-        syntaxFactory.startSection("this & that")
+        resumeBuilder.startSection("this & that")
 
-        wrapAroundDocument("", "\\cvsection{this \\& that}") shouldBe syntaxFactory.create()
+        wrapAroundDocument("", "\\cvsection{this \\& that}") shouldBe resumeBuilder.build()
     }
 
     private fun wrapAroundDocument(header: String, content: String): String {

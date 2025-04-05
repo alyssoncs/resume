@@ -1,4 +1,4 @@
-package alysson.cirilo.resume.drivers.utils.syntaxfactory
+package alysson.cirilo.resume.drivers.utils
 
 import alysson.cirilo.resume.entities.ContactInformation
 import alysson.cirilo.resume.entities.Degree
@@ -25,9 +25,9 @@ import java.time.YearMonth
 import java.time.format.DateTimeFormatter
 import java.util.Locale
 
-abstract class ResumeSyntaxFactoryTest {
+abstract class ResumeBuilderTest {
 
-    lateinit var syntaxFactory: ResumeSyntaxFactory
+    lateinit var resumeBuilder: ResumeBuilder
 
     private val locale = Locale.US
     private val workDateFormatter = DateTimeFormatter.ofPattern("MMM. yyyy").withLocale(locale)
@@ -35,16 +35,16 @@ abstract class ResumeSyntaxFactoryTest {
 
     @BeforeEach
     fun setup() {
-        syntaxFactory = createSyntaxFactory(
+        resumeBuilder = createResumeBuilder(
             workDateFormatter,
             educationDateFormatter,
         )
     }
 
-    abstract fun createSyntaxFactory(
+    abstract fun createResumeBuilder(
         workDateFormatter: DateTimeFormatter,
         educationDateFormatter: DateTimeFormatter,
-    ): ResumeSyntaxFactory
+    ): ResumeBuilder
 
     abstract fun generateEmptyOutput(): String
 
@@ -122,19 +122,19 @@ abstract class ResumeSyntaxFactoryTest {
 
     @Test
     fun `no content generates nothing`() {
-        syntaxFactory.create() shouldBe generateEmptyOutput()
+        resumeBuilder.build() shouldBe generateEmptyOutput()
     }
 
     @Test
     fun `can generate a section`() {
-        syntaxFactory.startSection("Section Name")
+        resumeBuilder.startSection("Section Name")
 
-        syntaxFactory.create() shouldBe generateSection("Section Name")
+        resumeBuilder.build() shouldBe generateSection("Section Name")
     }
 
     @Test
     fun `can generate a header`() {
-        syntaxFactory.addHeader(Dataset.name, Dataset.headline, Dataset.contactInfo)
+        resumeBuilder.addHeader(Dataset.name, Dataset.headline, Dataset.contactInfo)
 
         val header = generateHeader(
             Dataset.name,
@@ -142,19 +142,19 @@ abstract class ResumeSyntaxFactoryTest {
             Dataset.headline.last(),
             Dataset.contactInfo,
         )
-        syntaxFactory.create() shouldBe header
+        resumeBuilder.build() shouldBe header
     }
 
     @Test
     fun `no job experiences generates nothing`() {
-        syntaxFactory.makeExperiences(Dataset.noExperience)
+        resumeBuilder.makeExperiences(Dataset.noExperience)
 
-        syntaxFactory.create() shouldBe generateEmptyOutput()
+        resumeBuilder.build() shouldBe generateEmptyOutput()
     }
 
     @Test
     fun `can generate job experiences`() {
-        syntaxFactory.makeExperiences(Dataset.twoExperiencesWithNoBullets)
+        resumeBuilder.makeExperiences(Dataset.twoExperiencesWithNoBullets)
 
         val firstExperienceRole = Dataset.twoExperiencesWithNoBullets.first().roles.first()
         val secondExperienceRole = Dataset.twoExperiencesWithNoBullets.last().roles.first()
@@ -167,12 +167,12 @@ abstract class ResumeSyntaxFactoryTest {
             secondExperienceRole = secondExperienceRole.title,
             secondExperienceRoleStartDate = workDateFormatter.format(secondExperienceRole.period.start),
         )
-        syntaxFactory.create() shouldBe output
+        resumeBuilder.build() shouldBe output
     }
 
     @Test
     fun `can generate single role`() {
-        syntaxFactory.makeExperiences(Dataset.singleRoleExperienceWithNoBullets)
+        resumeBuilder.makeExperiences(Dataset.singleRoleExperienceWithNoBullets)
 
         val role = Dataset.singleRoleExperienceWithNoBullets.first().roles.first()
         val output = generateSingleRoleExperienceWithNoBullets(
@@ -181,12 +181,12 @@ abstract class ResumeSyntaxFactoryTest {
             roleStartDate = workDateFormatter.format(role.period.start),
             roleEndDate = workDateFormatter.format(role.period.end.toDate()),
         )
-        syntaxFactory.create() shouldBe output
+        resumeBuilder.build() shouldBe output
     }
 
     @Test
     fun `can generate role with bullets`() {
-        syntaxFactory.makeExperiences(Dataset.singleRoleExperienceWithSkillBullets)
+        resumeBuilder.makeExperiences(Dataset.singleRoleExperienceWithSkillBullets)
 
         val experience = Dataset.singleRoleExperienceWithSkillBullets.first()
         val role = experience.roles.first()
@@ -201,12 +201,12 @@ abstract class ResumeSyntaxFactoryTest {
             thirdBulletSecondPart = role.bulletPoints[2].content[1].displayName,
             thirdBulletThirdPart = role.bulletPoints[2].content[2].displayName,
         )
-        syntaxFactory.create() shouldBe output
+        resumeBuilder.build() shouldBe output
     }
 
     @Test
     fun `can generate multiple roles`() {
-        syntaxFactory.makeExperiences(Dataset.twoRoleExperienceWithBullets)
+        resumeBuilder.makeExperiences(Dataset.twoRoleExperienceWithBullets)
 
         val experience = Dataset.twoRoleExperienceWithBullets.first()
         val firstRole = experience.roles.first()
@@ -222,37 +222,37 @@ abstract class ResumeSyntaxFactoryTest {
             secondRoleStartDate = workDateFormatter.format(secondRole.period.start),
             secondRoleBullet = secondRole.bulletPoints.first().content.first().displayName,
         )
-        syntaxFactory.create() shouldBe output
+        resumeBuilder.build() shouldBe output
     }
 
     @Test
     fun `no projects and publications generates nothing`() {
-        syntaxFactory.makeProjectsAndPublications(Dataset.noProjectsOrPublications)
+        resumeBuilder.makeProjectsAndPublications(Dataset.noProjectsOrPublications)
 
-        syntaxFactory.create() shouldBe generateEmptyOutput()
+        resumeBuilder.build() shouldBe generateEmptyOutput()
     }
 
     @Test
     fun `can generate project and publications`() {
-        syntaxFactory.makeProjectsAndPublications(Dataset.singleProject)
+        resumeBuilder.makeProjectsAndPublications(Dataset.singleProject)
 
         val output = generateSingleProject(Dataset.singleProject.first())
-        syntaxFactory.create() shouldBe output
+        resumeBuilder.build() shouldBe output
     }
 
     @Test
     fun `no education generates nothing`() {
-        syntaxFactory.makeEducation(Dataset.noEducation)
+        resumeBuilder.makeEducation(Dataset.noEducation)
 
-        syntaxFactory.create() shouldBe generateEmptyOutput()
+        resumeBuilder.build() shouldBe generateEmptyOutput()
     }
 
     @Test
     fun `can generate education`() {
-        syntaxFactory.makeEducation(Dataset.singleDegree)
+        resumeBuilder.makeEducation(Dataset.singleDegree)
 
         val degree = Dataset.singleDegree.first()
-        syntaxFactory.create() shouldBe generateSingleDegree(
+        resumeBuilder.build() shouldBe generateSingleDegree(
             degree,
             educationDateFormatter.format(degree.period.start),
         )
@@ -260,7 +260,7 @@ abstract class ResumeSyntaxFactoryTest {
 
     @Test
     fun integration() {
-        with(syntaxFactory) {
+        with(resumeBuilder) {
             addHeader(Dataset.name, Dataset.headline, Dataset.contactInfo)
             startSection("Section 1")
             makeExperiences(Dataset.singleRoleExperienceWithTextBullet)
@@ -289,7 +289,7 @@ abstract class ResumeSyntaxFactoryTest {
             degree = Dataset.singleDegree.first(),
             degreeStartDate = educationDateFormatter.format(Dataset.singleDegree.first().period.start),
         )
-        syntaxFactory.create() shouldBe output
+        resumeBuilder.build() shouldBe output
     }
 
     private fun EnrollmentPeriod.EndDate.toDate(): YearMonth {

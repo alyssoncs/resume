@@ -23,13 +23,13 @@ internal fun makeLatexSoberDriver(
     workDateFormatter: DateTimeFormatter,
     educationDateFormatter: DateTimeFormatter,
 ): ResumeDriver {
-    val syntaxFactory = LatexSoberSyntaxFactory(
+    val resumeBuilder = LatexSoberResumeBuilder(
         template,
         contentPlaceholder,
         workDateFormatter,
         educationDateFormatter,
     )
-    return makeDriver(syntaxFactory) { resume ->
+    return makeDriver(resumeBuilder) { resume ->
         resume.escapeLatex()
     }
 }

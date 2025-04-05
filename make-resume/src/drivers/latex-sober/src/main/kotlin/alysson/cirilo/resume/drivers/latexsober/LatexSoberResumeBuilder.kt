@@ -1,19 +1,19 @@
 package alysson.cirilo.resume.drivers.latexsober
 
+import alysson.cirilo.resume.drivers.utils.ResumeBuilder
 import alysson.cirilo.resume.drivers.utils.indent.reindent
-import alysson.cirilo.resume.drivers.utils.syntaxfactory.ResumeSyntaxFactory
 import alysson.cirilo.resume.entities.ContactInformation
 import alysson.cirilo.resume.entities.Degree
 import alysson.cirilo.resume.entities.JobExperience
 import alysson.cirilo.resume.entities.ProjectOrPublication
 import java.time.format.DateTimeFormatter
 
-internal class LatexSoberSyntaxFactory(
+internal class LatexSoberResumeBuilder(
     private val template: String,
     private val contentPlaceholder: String,
     workDateFormatter: DateTimeFormatter,
     educationDateFormatter: DateTimeFormatter,
-) : ResumeSyntaxFactory {
+) : ResumeBuilder {
 
     private val functionalSyntaxFactory = LatexSoberFunctionalSyntaxFactory(
         workDateFormatter,
@@ -28,13 +28,18 @@ internal class LatexSoberSyntaxFactory(
         output += separator + newContent
     }
 
-    override fun addHeader(name: String, headline: List<String>, contactInformation: ContactInformation) {
+    override fun addHeader(
+        name: String,
+        headline: List<String>,
+        contactInformation: ContactInformation,
+    ): ResumeBuilder {
         updateOutput(
             functionalSyntaxFactory.makeHeader(name, headline, contactInformation).reindent(currentIndent),
         )
+        return this
     }
 
-    override fun startSection(name: String) {
+    override fun startSection(name: String): ResumeBuilder {
         if (sectionIndent == null) {
             sectionIndent = currentIndent
         }
@@ -44,27 +49,31 @@ internal class LatexSoberSyntaxFactory(
             )
             currentIndent = theSectionIndent.inc()
         }
+        return this
     }
 
-    override fun makeExperiences(jobExperiences: List<JobExperience>) {
+    override fun makeExperiences(jobExperiences: List<JobExperience>): ResumeBuilder {
         functionalSyntaxFactory.makeExperiences(jobExperiences)?.let {
             updateOutput(it.reindent(currentIndent))
         }
+        return this
     }
 
-    override fun makeProjectsAndPublications(projectsAndPublications: List<ProjectOrPublication>) {
+    override fun makeProjectsAndPublications(projectsAndPublications: List<ProjectOrPublication>): ResumeBuilder {
         functionalSyntaxFactory.makeProjectsAndPublications(projectsAndPublications)?.let { itemizedProjectAnPubs ->
             updateOutput(itemizedProjectAnPubs.reindent(currentIndent))
         }
+        return this
     }
 
-    override fun makeEducation(education: List<Degree>) {
+    override fun makeEducation(education: List<Degree>): ResumeBuilder {
         functionalSyntaxFactory.makeEducation(education)?.let { itemizedDegrees ->
             updateOutput(itemizedDegrees.reindent(currentIndent))
         }
+        return this
     }
 
-    override fun create(): String {
+    override fun build(): String {
         return template.replace(contentPlaceholder, output.reindent(1)) + "\n"
     }
 }

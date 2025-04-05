@@ -26,14 +26,14 @@ internal fun makeLatexAwesomeDriver(
     workDateFormatter: DateTimeFormatter,
     educationDateFormatter: DateTimeFormatter,
 ): ResumeDriver {
-    val syntaxFactory = LatexAwesomeSyntaxFactory(
+    val resumeBuilder = LatexAwesomeResumeBuilder(
         template = template,
         headerPlaceholder = headerPlaceholder,
         contentPlaceholder = contentPlaceholder,
         workDateFormatter = workDateFormatter,
         educationDateFormatter = educationDateFormatter,
     )
-    return makeDriver(syntaxFactory) { resume ->
+    return makeDriver(resumeBuilder) { resume ->
         resume.escapeLatex()
     }
 }

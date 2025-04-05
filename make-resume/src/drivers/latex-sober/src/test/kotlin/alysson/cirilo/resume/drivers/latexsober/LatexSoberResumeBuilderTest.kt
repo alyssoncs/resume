@@ -1,7 +1,7 @@
 package alysson.cirilo.resume.drivers.latexsober
 
-import alysson.cirilo.resume.drivers.utils.syntaxfactory.ResumeSyntaxFactory
-import alysson.cirilo.resume.drivers.utils.syntaxfactory.ResumeSyntaxFactoryTest
+import alysson.cirilo.resume.drivers.utils.ResumeBuilder
+import alysson.cirilo.resume.drivers.utils.ResumeBuilderTest
 import alysson.cirilo.resume.entities.ContactInformation
 import alysson.cirilo.resume.entities.Degree
 import alysson.cirilo.resume.entities.JobExperience
@@ -11,13 +11,13 @@ import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
 import java.time.format.DateTimeFormatter
 
-class LatexSoberSyntaxFactoryTest : ResumeSyntaxFactoryTest() {
+class LatexSoberResumeBuilderTest : ResumeBuilderTest() {
 
-    override fun createSyntaxFactory(
+    override fun createResumeBuilder(
         workDateFormatter: DateTimeFormatter,
         educationDateFormatter: DateTimeFormatter,
-    ): ResumeSyntaxFactory {
-        return LatexSoberSyntaxFactory(
+    ): ResumeBuilder {
+        return LatexSoberResumeBuilder(
             template = "\\begin{document}\n<content>\n\\end{document}",
             contentPlaceholder = "<content>",
             workDateFormatter = workDateFormatter,
@@ -244,9 +244,9 @@ class LatexSoberSyntaxFactoryTest : ResumeSyntaxFactoryTest() {
 
     @Test
     fun `ampersand in the section should be italic`() {
-        syntaxFactory.startSection("this & that")
+        resumeBuilder.startSection("this & that")
 
-        wrapAroundDocument("\\section{this \\textit{\\&} that}") shouldBe syntaxFactory.create()
+        wrapAroundDocument("\\section{this \\textit{\\&} that}") shouldBe resumeBuilder.build()
     }
 
     private fun wrapAroundDocument(content: String): String {

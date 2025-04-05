@@ -1,7 +1,7 @@
 package alysson.cirilo.resume.drivers.markdown
 
-import alysson.cirilo.resume.drivers.utils.syntaxfactory.ResumeSyntaxFactory
-import alysson.cirilo.resume.drivers.utils.syntaxfactory.ResumeSyntaxFactoryTest
+import alysson.cirilo.resume.drivers.utils.ResumeBuilder
+import alysson.cirilo.resume.drivers.utils.ResumeBuilderTest
 import alysson.cirilo.resume.entities.ContactInformation
 import alysson.cirilo.resume.entities.Degree
 import alysson.cirilo.resume.entities.JobExperience
@@ -10,13 +10,13 @@ import alysson.cirilo.resume.entities.ProjectOrPublication
 import org.junit.jupiter.api.DisplayName
 import java.time.format.DateTimeFormatter
 
-@DisplayName("MarkdownSyntaxFactoryTest")
-class MarkdownSyntaxFactoryTest : ResumeSyntaxFactoryTest() {
-    override fun createSyntaxFactory(
+@DisplayName("MarkdownResumeBuilderTest")
+class MarkdownResumeBuilderTest : ResumeBuilderTest() {
+    override fun createResumeBuilder(
         workDateFormatter: DateTimeFormatter,
         educationDateFormatter: DateTimeFormatter,
-    ): ResumeSyntaxFactory {
-        return MarkdownSyntaxFactory(workDateFormatter, educationDateFormatter)
+    ): ResumeBuilder {
+        return MarkdownResumeBuilder(workDateFormatter, educationDateFormatter)
     }
 
     override fun generateEmptyOutput(): String {
