@@ -16,7 +16,7 @@ internal class LatexAwesomeResumeBuilder(
     educationDateFormatter: DateTimeFormatter,
 ) : ResumeBuilder {
 
-    private val functionalSyntaxFactory = LatexAwesomeFunctionalSyntaxFactory(
+    private val syntaxFactory = LatexAwesomeSyntaxFactory(
         workDateFormatter,
         educationDateFormatter,
     )
@@ -38,7 +38,7 @@ internal class LatexAwesomeResumeBuilder(
         headline: List<String>,
         contactInformation: ContactInformation,
     ): ResumeBuilder {
-        header = functionalSyntaxFactory.makeHeader(name, headline, contactInformation)
+        header = syntaxFactory.makeHeader(name, headline, contactInformation)
         return this
     }
 
@@ -48,21 +48,21 @@ internal class LatexAwesomeResumeBuilder(
         }
         sectionIndent?.let { theSectionIndent ->
             val separator = if (output.isEmpty()) "" else "\n"
-            updateOutput(separator + functionalSyntaxFactory.makeSection(name).reindent(theSectionIndent))
+            updateOutput(separator + syntaxFactory.makeSection(name).reindent(theSectionIndent))
             currentIndent = theSectionIndent.inc()
         }
         return this
     }
 
     override fun makeExperiences(jobExperiences: List<JobExperience>): ResumeBuilder {
-        functionalSyntaxFactory.makeExperiences(jobExperiences)?.let {
+        syntaxFactory.makeExperiences(jobExperiences)?.let {
             updateOutput(it.reindent(currentIndent))
         }
         return this
     }
 
     override fun makeProjectsAndPublications(projectsAndPublications: List<ProjectOrPublication>): ResumeBuilder {
-        val projectsAndPublicationsStr = functionalSyntaxFactory.makeProjectsAndPublications(projectsAndPublications)
+        val projectsAndPublicationsStr = syntaxFactory.makeProjectsAndPublications(projectsAndPublications)
         updateOutput(
             projectsAndPublicationsStr.reindent(currentIndent),
         )
@@ -70,12 +70,12 @@ internal class LatexAwesomeResumeBuilder(
     }
 
     override fun makeEducation(education: List<Degree>): ResumeBuilder {
-        updateOutput(functionalSyntaxFactory.makeEducation(education).reindent(currentIndent))
+        updateOutput(syntaxFactory.makeEducation(education).reindent(currentIndent))
         return this
     }
 
     override fun build(): String {
-        val makeHeader = if (header != null) functionalSyntaxFactory.makeMakeHeaderCmd() else null
+        val makeHeader = if (header != null) syntaxFactory.makeMakeHeaderCmd() else null
         val actualOutput = listOfNotNull(makeHeader, output).joinToString("\n\n")
         return template
             .replace(headerPlaceholder, header.orEmpty())

@@ -12,7 +12,7 @@ internal class MarkdownResumeBuilder(
     educationDateFormatter: DateTimeFormatter,
 ) : ResumeBuilder {
 
-    private val functionalSyntaxFactory = MarkdownFunctionalSyntaxFactory(
+    private val syntaxFactory = MarkdownSyntaxFactory(
         workDateFormatter,
         educationDateFormatter,
     )
@@ -29,34 +29,34 @@ internal class MarkdownResumeBuilder(
         contactInformation: ContactInformation,
     ): ResumeBuilder {
         updateOutput(
-            functionalSyntaxFactory.makeHeader(name, headline, contactInformation),
+            syntaxFactory.makeHeader(name, headline, contactInformation),
         )
         return this
     }
 
     override fun startSection(name: String): ResumeBuilder {
         val extraLine = if (output.isEmpty()) "" else "\n"
-        updateOutput("$extraLine${functionalSyntaxFactory.makeSection(name)}")
+        updateOutput("$extraLine${syntaxFactory.makeSection(name)}")
         return this
     }
 
     override fun makeExperiences(jobExperiences: List<JobExperience>): ResumeBuilder {
         updateOutput(
-            functionalSyntaxFactory.makeExperiences(jobExperiences),
+            syntaxFactory.makeExperiences(jobExperiences),
         )
         return this
     }
 
     override fun makeProjectsAndPublications(projectsAndPublications: List<ProjectOrPublication>): ResumeBuilder {
         updateOutput(
-            functionalSyntaxFactory.makeProjectsAndPublications(projectsAndPublications),
+            syntaxFactory.makeProjectsAndPublications(projectsAndPublications),
         )
         return this
     }
 
     override fun makeEducation(education: List<Degree>): ResumeBuilder {
         updateOutput(
-            functionalSyntaxFactory.makeEducation(education),
+            syntaxFactory.makeEducation(education),
         )
         return this
     }

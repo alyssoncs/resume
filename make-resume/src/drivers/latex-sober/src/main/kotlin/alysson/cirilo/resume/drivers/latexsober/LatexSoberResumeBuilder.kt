@@ -15,7 +15,7 @@ internal class LatexSoberResumeBuilder(
     educationDateFormatter: DateTimeFormatter,
 ) : ResumeBuilder {
 
-    private val functionalSyntaxFactory = LatexSoberFunctionalSyntaxFactory(
+    private val syntaxFactory = LatexSoberSyntaxFactory(
         workDateFormatter,
         educationDateFormatter,
     )
@@ -34,7 +34,7 @@ internal class LatexSoberResumeBuilder(
         contactInformation: ContactInformation,
     ): ResumeBuilder {
         updateOutput(
-            functionalSyntaxFactory.makeHeader(name, headline, contactInformation).reindent(currentIndent),
+            syntaxFactory.makeHeader(name, headline, contactInformation).reindent(currentIndent),
         )
         return this
     }
@@ -45,7 +45,7 @@ internal class LatexSoberResumeBuilder(
         }
         sectionIndent?.let { theSectionIndent ->
             updateOutput(
-                "\n" + functionalSyntaxFactory.makeSection(name).reindent(theSectionIndent),
+                "\n" + syntaxFactory.makeSection(name).reindent(theSectionIndent),
             )
             currentIndent = theSectionIndent.inc()
         }
@@ -53,21 +53,21 @@ internal class LatexSoberResumeBuilder(
     }
 
     override fun makeExperiences(jobExperiences: List<JobExperience>): ResumeBuilder {
-        functionalSyntaxFactory.makeExperiences(jobExperiences)?.let {
+        syntaxFactory.makeExperiences(jobExperiences)?.let {
             updateOutput(it.reindent(currentIndent))
         }
         return this
     }
 
     override fun makeProjectsAndPublications(projectsAndPublications: List<ProjectOrPublication>): ResumeBuilder {
-        functionalSyntaxFactory.makeProjectsAndPublications(projectsAndPublications)?.let { itemizedProjectAnPubs ->
+        syntaxFactory.makeProjectsAndPublications(projectsAndPublications)?.let { itemizedProjectAnPubs ->
             updateOutput(itemizedProjectAnPubs.reindent(currentIndent))
         }
         return this
     }
 
     override fun makeEducation(education: List<Degree>): ResumeBuilder {
-        functionalSyntaxFactory.makeEducation(education)?.let { itemizedDegrees ->
+        syntaxFactory.makeEducation(education)?.let { itemizedDegrees ->
             updateOutput(itemizedDegrees.reindent(currentIndent))
         }
         return this
