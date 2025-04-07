@@ -1,5 +1,7 @@
 package alysson.cirilo.resume.drivers.utils
 
+import alysson.cirilo.resume.drivers.utils.date.testEducationDateFormatter
+import alysson.cirilo.resume.drivers.utils.date.testWorkDateFormatter
 import alysson.cirilo.resume.entities.ContactInformation
 import alysson.cirilo.resume.entities.Degree
 import alysson.cirilo.resume.entities.EnrollmentPeriod
@@ -23,21 +25,16 @@ import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import java.time.YearMonth
 import java.time.format.DateTimeFormatter
-import java.util.Locale
 
 abstract class ResumeBuilderTest {
 
     lateinit var resumeBuilder: ResumeBuilder
 
-    private val locale = Locale.US
-    private val workDateFormatter = DateTimeFormatter.ofPattern("MMM. yyyy").withLocale(locale)
-    private val educationDateFormatter = DateTimeFormatter.ofPattern("MM. yyyy").withLocale(locale)
-
     @BeforeEach
     fun setup() {
         resumeBuilder = createResumeBuilder(
-            workDateFormatter,
-            educationDateFormatter,
+            testWorkDateFormatter,
+            testEducationDateFormatter,
         )
     }
 
@@ -161,11 +158,11 @@ abstract class ResumeBuilderTest {
         val output = generateTwoExperiencesWithNoBullets(
             firstExperience = Dataset.twoExperiencesWithNoBullets.first(),
             firstExperienceRole = firstExperienceRole.title,
-            firstExperienceRoleStartDate = workDateFormatter.format(firstExperienceRole.period.start),
-            firstExperienceRoleEndDate = workDateFormatter.format(firstExperienceRole.period.end.toDate()),
+            firstExperienceRoleStartDate = testWorkDateFormatter.format(firstExperienceRole.period.start),
+            firstExperienceRoleEndDate = testWorkDateFormatter.format(firstExperienceRole.period.end.toDate()),
             secondExperience = Dataset.twoExperiencesWithNoBullets.last(),
             secondExperienceRole = secondExperienceRole.title,
-            secondExperienceRoleStartDate = workDateFormatter.format(secondExperienceRole.period.start),
+            secondExperienceRoleStartDate = testWorkDateFormatter.format(secondExperienceRole.period.start),
         )
         resumeBuilder.build() shouldBe output
     }
@@ -178,8 +175,8 @@ abstract class ResumeBuilderTest {
         val output = generateSingleRoleExperienceWithNoBullets(
             experience = Dataset.singleRoleExperienceWithNoBullets.first(),
             role = role.title,
-            roleStartDate = workDateFormatter.format(role.period.start),
-            roleEndDate = workDateFormatter.format(role.period.end.toDate()),
+            roleStartDate = testWorkDateFormatter.format(role.period.start),
+            roleEndDate = testWorkDateFormatter.format(role.period.end.toDate()),
         )
         resumeBuilder.build() shouldBe output
     }
@@ -193,8 +190,8 @@ abstract class ResumeBuilderTest {
         val output = generateSingleRoleExperienceWithSkillBullets(
             experience = experience,
             role = role.title,
-            roleStartDate = workDateFormatter.format(role.period.start),
-            roleEndDate = workDateFormatter.format(role.period.end.toDate()),
+            roleStartDate = testWorkDateFormatter.format(role.period.start),
+            roleEndDate = testWorkDateFormatter.format(role.period.end.toDate()),
             firstBullet = role.bulletPoints[0].content[0].displayName,
             secondBullet = role.bulletPoints[1].content[0].displayName,
             thirdBulletFirstPart = role.bulletPoints[2].content[0].displayName,
@@ -215,11 +212,11 @@ abstract class ResumeBuilderTest {
             company = experience.company,
             location = experience.location,
             firstRole = firstRole.title,
-            firstExperienceRoleStartDate = workDateFormatter.format(firstRole.period.start),
-            firstExperienceRoleEndDate = workDateFormatter.format(firstRole.period.end.toDate()),
+            firstExperienceRoleStartDate = testWorkDateFormatter.format(firstRole.period.start),
+            firstExperienceRoleEndDate = testWorkDateFormatter.format(firstRole.period.end.toDate()),
             firstRoleBullet = firstRole.bulletPoints.first().content.first().displayName,
             secondRole = secondRole.title,
-            secondRoleStartDate = workDateFormatter.format(secondRole.period.start),
+            secondRoleStartDate = testWorkDateFormatter.format(secondRole.period.start),
             secondRoleBullet = secondRole.bulletPoints.first().content.first().displayName,
         )
         resumeBuilder.build() shouldBe output
@@ -254,7 +251,7 @@ abstract class ResumeBuilderTest {
         val degree = Dataset.singleDegree.first()
         resumeBuilder.build() shouldBe generateSingleDegree(
             degree,
-            educationDateFormatter.format(degree.period.start),
+            testEducationDateFormatter.format(degree.period.start),
         )
     }
 
@@ -280,14 +277,14 @@ abstract class ResumeBuilderTest {
             firstSectionName = "Section 1",
             experience = experience,
             role = role.title,
-            roleStartDate = workDateFormatter.format(role.period.start),
-            roleEndDate = workDateFormatter.format(role.period.end.toDate()),
+            roleStartDate = testWorkDateFormatter.format(role.period.start),
+            roleEndDate = testWorkDateFormatter.format(role.period.end.toDate()),
             bullet = role.bulletPoints.first().content.first().displayName,
             secondSectionName = "Section 2",
             project = Dataset.singleProject.first(),
             thirdSectionName = "Section 3",
             degree = Dataset.singleDegree.first(),
-            degreeStartDate = educationDateFormatter.format(Dataset.singleDegree.first().period.start),
+            degreeStartDate = testEducationDateFormatter.format(Dataset.singleDegree.first().period.start),
         )
         resumeBuilder.build() shouldBe output
     }
