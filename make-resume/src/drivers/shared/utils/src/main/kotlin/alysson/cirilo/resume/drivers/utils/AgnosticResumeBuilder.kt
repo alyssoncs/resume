@@ -8,29 +8,35 @@ internal class AgnosticResumeBuilder(
 ) {
 
     fun makeHeader(): AgnosticResumeBuilder {
-        this.resumeBuilder.addHeader(theResume.name, theResume.headline, theResume.contactInformation)
-        return this
+        return new(resumeBuilder.addHeader(theResume.name, theResume.headline, theResume.contactInformation))
     }
 
     fun makeExperiences(): AgnosticResumeBuilder {
-        this.resumeBuilder.startSection("Experience")
-        this.resumeBuilder.makeExperiences(theResume.jobExperiences)
-        return this
+        return new(
+            resumeBuilder.startSection("Experience")
+                .makeExperiences(theResume.jobExperiences),
+        )
     }
 
     fun makeProjectsAndPublications(): AgnosticResumeBuilder {
-        this.resumeBuilder.startSection("Projects & Publications")
-        this.resumeBuilder.makeProjectsAndPublications(theResume.projectsAndPublications)
-        return this
+        return new(
+            resumeBuilder.startSection("Projects & Publications")
+                .makeProjectsAndPublications(theResume.projectsAndPublications),
+        )
     }
 
     fun makeEducation(): AgnosticResumeBuilder {
-        this.resumeBuilder.startSection("Education")
-        this.resumeBuilder.makeEducation(theResume.education)
-        return this
+        return new(
+            resumeBuilder.startSection("Education")
+                .makeEducation(theResume.education),
+        )
     }
 
     fun build(): String {
-        return this.resumeBuilder.build()
+        return resumeBuilder.build()
+    }
+
+    private fun new(builder: ResumeBuilder): AgnosticResumeBuilder {
+        return AgnosticResumeBuilder(theResume, builder)
     }
 }
