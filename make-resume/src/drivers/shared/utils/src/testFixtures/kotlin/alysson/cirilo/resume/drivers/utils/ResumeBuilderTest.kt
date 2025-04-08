@@ -124,35 +124,34 @@ abstract class ResumeBuilderTest {
 
     @Test
     fun `can generate a section`() {
-        resumeBuilder.startSection("Section Name")
-
-        resumeBuilder.build() shouldBe generateSection("Section Name")
+        resumeBuilder
+            .startSection("Section Name")
+            .build() shouldBe generateSection("Section Name")
     }
 
     @Test
     fun `can generate a header`() {
-        resumeBuilder.addHeader(Dataset.name, Dataset.headline, Dataset.contactInfo)
-
         val header = generateHeader(
             Dataset.name,
             Dataset.headline.first(),
             Dataset.headline.last(),
             Dataset.contactInfo,
         )
-        resumeBuilder.build() shouldBe header
+
+        resumeBuilder
+            .addHeader(Dataset.name, Dataset.headline, Dataset.contactInfo)
+            .build() shouldBe header
     }
 
     @Test
     fun `no job experiences generates nothing`() {
-        resumeBuilder.makeExperiences(Dataset.noExperience)
-
-        resumeBuilder.build() shouldBe generateEmptyOutput()
+        resumeBuilder
+            .makeExperiences(Dataset.noExperience)
+            .build() shouldBe generateEmptyOutput()
     }
 
     @Test
     fun `can generate job experiences`() {
-        resumeBuilder.makeExperiences(Dataset.twoExperiencesWithNoBullets)
-
         val firstExperienceRole = Dataset.twoExperiencesWithNoBullets.first().roles.first()
         val secondExperienceRole = Dataset.twoExperiencesWithNoBullets.last().roles.first()
         val output = generateTwoExperiencesWithNoBullets(
@@ -164,13 +163,14 @@ abstract class ResumeBuilderTest {
             secondExperienceRole = secondExperienceRole.title,
             secondExperienceRoleStartDate = testWorkDateFormatter.format(secondExperienceRole.period.start),
         )
-        resumeBuilder.build() shouldBe output
+
+        resumeBuilder
+            .makeExperiences(Dataset.twoExperiencesWithNoBullets)
+            .build() shouldBe output
     }
 
     @Test
     fun `can generate single role`() {
-        resumeBuilder.makeExperiences(Dataset.singleRoleExperienceWithNoBullets)
-
         val role = Dataset.singleRoleExperienceWithNoBullets.first().roles.first()
         val output = generateSingleRoleExperienceWithNoBullets(
             experience = Dataset.singleRoleExperienceWithNoBullets.first(),
@@ -178,13 +178,14 @@ abstract class ResumeBuilderTest {
             roleStartDate = testWorkDateFormatter.format(role.period.start),
             roleEndDate = testWorkDateFormatter.format(role.period.end.toDate()),
         )
-        resumeBuilder.build() shouldBe output
+
+        resumeBuilder
+            .makeExperiences(Dataset.singleRoleExperienceWithNoBullets)
+            .build() shouldBe output
     }
 
     @Test
     fun `can generate role with bullets`() {
-        resumeBuilder.makeExperiences(Dataset.singleRoleExperienceWithSkillBullets)
-
         val experience = Dataset.singleRoleExperienceWithSkillBullets.first()
         val role = experience.roles.first()
         val output = generateSingleRoleExperienceWithSkillBullets(
@@ -198,13 +199,14 @@ abstract class ResumeBuilderTest {
             thirdBulletSecondPart = role.bulletPoints[2].content[1].displayName,
             thirdBulletThirdPart = role.bulletPoints[2].content[2].displayName,
         )
-        resumeBuilder.build() shouldBe output
+
+        resumeBuilder
+            .makeExperiences(Dataset.singleRoleExperienceWithSkillBullets)
+            .build() shouldBe output
     }
 
     @Test
     fun `can generate multiple roles`() {
-        resumeBuilder.makeExperiences(Dataset.twoRoleExperienceWithBullets)
-
         val experience = Dataset.twoRoleExperienceWithBullets.first()
         val firstRole = experience.roles.first()
         val secondRole = experience.roles.last()
@@ -219,54 +221,46 @@ abstract class ResumeBuilderTest {
             secondRoleStartDate = testWorkDateFormatter.format(secondRole.period.start),
             secondRoleBullet = secondRole.bulletPoints.first().content.first().displayName,
         )
-        resumeBuilder.build() shouldBe output
+
+        resumeBuilder
+            .makeExperiences(Dataset.twoRoleExperienceWithBullets)
+            .build() shouldBe output
     }
 
     @Test
     fun `no projects and publications generates nothing`() {
-        resumeBuilder.makeProjectsAndPublications(Dataset.noProjectsOrPublications)
-
-        resumeBuilder.build() shouldBe generateEmptyOutput()
+        resumeBuilder
+            .makeProjectsAndPublications(Dataset.noProjectsOrPublications)
+            .build() shouldBe generateEmptyOutput()
     }
 
     @Test
     fun `can generate project and publications`() {
-        resumeBuilder.makeProjectsAndPublications(Dataset.singleProject)
-
         val output = generateSingleProject(Dataset.singleProject.first())
-        resumeBuilder.build() shouldBe output
+
+        resumeBuilder
+            .makeProjectsAndPublications(Dataset.singleProject)
+            .build() shouldBe output
     }
 
     @Test
     fun `no education generates nothing`() {
-        resumeBuilder.makeEducation(Dataset.noEducation)
-
-        resumeBuilder.build() shouldBe generateEmptyOutput()
+        resumeBuilder
+            .makeEducation(Dataset.noEducation)
+            .build() shouldBe generateEmptyOutput()
     }
 
     @Test
     fun `can generate education`() {
-        resumeBuilder.makeEducation(Dataset.singleDegree)
-
         val degree = Dataset.singleDegree.first()
-        resumeBuilder.build() shouldBe generateSingleDegree(
-            degree,
-            testEducationDateFormatter.format(degree.period.start),
-        )
+
+        resumeBuilder
+            .makeEducation(Dataset.singleDegree)
+            .build() shouldBe generateSingleDegree(degree, testEducationDateFormatter.format(degree.period.start))
     }
 
     @Test
     fun integration() {
-        with(resumeBuilder) {
-            addHeader(Dataset.name, Dataset.headline, Dataset.contactInfo)
-            startSection("Section 1")
-            makeExperiences(Dataset.singleRoleExperienceWithTextBullet)
-            startSection("Section 2")
-            makeProjectsAndPublications(Dataset.singleProject)
-            startSection("Section 3")
-            makeEducation(Dataset.singleDegree)
-        }
-
         val experience = Dataset.singleRoleExperienceWithTextBullet.first()
         val role = experience.roles.first()
         val output = generateIntegration(
@@ -286,7 +280,16 @@ abstract class ResumeBuilderTest {
             degree = Dataset.singleDegree.first(),
             degreeStartDate = testEducationDateFormatter.format(Dataset.singleDegree.first().period.start),
         )
-        resumeBuilder.build() shouldBe output
+
+        resumeBuilder
+            .addHeader(Dataset.name, Dataset.headline, Dataset.contactInfo)
+            .startSection("Section 1")
+            .makeExperiences(Dataset.singleRoleExperienceWithTextBullet)
+            .startSection("Section 2")
+            .makeProjectsAndPublications(Dataset.singleProject)
+            .startSection("Section 3")
+            .makeEducation(Dataset.singleDegree)
+            .build() shouldBe output
     }
 
     private fun EnrollmentPeriod.EndDate.toDate(): YearMonth {
