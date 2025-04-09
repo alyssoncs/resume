@@ -283,9 +283,9 @@ class LatexAwesomeResumeBuilderTest : ResumeBuilderTest() {
 
     @Test
     fun `ampersand in the section should be escaped`() {
-        resumeBuilder.startSection("this & that")
-
-        wrapAroundDocument("", "\\cvsection{this \\& that}") shouldBe resumeBuilder.build()
+        resumeBuilder
+            .startSection("this & that")
+            .build() shouldBe wrapAroundDocument("", "\\cvsection{this \\& that}")
     }
 
     private fun wrapAroundDocument(header: String, content: String): String {
