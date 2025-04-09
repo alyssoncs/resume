@@ -4,6 +4,11 @@ plugins {
 }
 
 dependencyAnalysis {
+    usage {
+        analysis {
+            checkSuperClasses(true)
+        }
+    }
     structure {
         bundle("junit") {
             includeGroup("org.junit.jupiter")
