@@ -8,24 +8,38 @@ import alysson.cirilo.resume.entities.JobExperience
 import alysson.cirilo.resume.entities.ProjectOrPublication
 import java.time.format.DateTimeFormatter
 
-internal class LatexSoberResumeBuilder(
+internal class LatexSoberResumeBuilder private constructor(
+    private val state: State = State(),
     private val template: String,
     private val contentPlaceholder: String,
-    workDateFormatter: DateTimeFormatter,
-    educationDateFormatter: DateTimeFormatter,
+    private val workDateFormatter: DateTimeFormatter,
+    private val educationDateFormatter: DateTimeFormatter,
 ) : ResumeBuilder {
+
+    constructor(
+        template: String,
+        contentPlaceholder: String,
+        workDateFormatter: DateTimeFormatter,
+        educationDateFormatter: DateTimeFormatter,
+    ) : this(
+        state = State(),
+        template = template,
+        contentPlaceholder = contentPlaceholder,
+        workDateFormatter = workDateFormatter,
+        educationDateFormatter = educationDateFormatter,
+    )
 
     private val syntaxFactory = LatexSoberSyntaxFactory(
         workDateFormatter,
         educationDateFormatter,
     )
-    private var output = ""
-    private var currentIndent = 0
-    private var sectionIndent: Int? = null
 
-    private fun updateOutput(newContent: String) {
-        val separator = if (output.isEmpty()) "" else "\n"
-        output += separator + newContent
+    private data class State(
+        val output: String = "",
+        val sectionStarted: Boolean = false,
+    ) {
+        val sectionIndent: Int = 0
+        val currentIndent: Int = if (sectionStarted) 1 else 0
     }
 
     override fun addHeader(
@@ -33,47 +47,56 @@ internal class LatexSoberResumeBuilder(
         headline: List<String>,
         contactInformation: ContactInformation,
     ): ResumeBuilder {
-        updateOutput(
-            syntaxFactory.makeHeader(name, headline, contactInformation).reindent(currentIndent),
+        return new(
+            syntaxFactory.makeHeader(name, headline, contactInformation).reindent(state.currentIndent),
         )
-        return this
     }
 
     override fun startSection(name: String): ResumeBuilder {
-        if (sectionIndent == null) {
-            sectionIndent = currentIndent
-        }
-        sectionIndent?.let { theSectionIndent ->
-            updateOutput(
-                "\n" + syntaxFactory.makeSection(name).reindent(theSectionIndent),
-            )
-            currentIndent = theSectionIndent.inc()
-        }
-        return this
+        return new(
+            newContent = "\n" + syntaxFactory.makeSection(name).reindent(state.sectionIndent),
+            isSection = true,
+        )
     }
 
     override fun makeExperiences(jobExperiences: List<JobExperience>): ResumeBuilder {
         syntaxFactory.makeExperiences(jobExperiences)?.let {
-            updateOutput(it.reindent(currentIndent))
+            return new(it.reindent(state.currentIndent))
         }
         return this
     }
 
     override fun makeProjectsAndPublications(projectsAndPublications: List<ProjectOrPublication>): ResumeBuilder {
         syntaxFactory.makeProjectsAndPublications(projectsAndPublications)?.let { itemizedProjectAnPubs ->
-            updateOutput(itemizedProjectAnPubs.reindent(currentIndent))
+            return new(itemizedProjectAnPubs.reindent(state.currentIndent))
         }
         return this
     }
 
     override fun makeEducation(education: List<Degree>): ResumeBuilder {
         syntaxFactory.makeEducation(education)?.let { itemizedDegrees ->
-            updateOutput(itemizedDegrees.reindent(currentIndent))
+            return new(itemizedDegrees.reindent(state.currentIndent))
         }
         return this
     }
 
     override fun build(): String {
-        return template.replace(contentPlaceholder, output.reindent(1)) + "\n"
+        return template.replace(contentPlaceholder, state.output.reindent(1)) + "\n"
+    }
+
+    private fun new(newContent: String, isSection: Boolean = false): LatexSoberResumeBuilder {
+        return LatexSoberResumeBuilder(
+            state = updateState(newContent, isSection),
+            template = template,
+            contentPlaceholder = contentPlaceholder,
+            workDateFormatter = workDateFormatter,
+            educationDateFormatter = educationDateFormatter,
+        )
+    }
+
+    private fun updateState(newContent: String, isSection: Boolean): State {
+        val separator = if (state.output.isEmpty()) "" else "\n"
+        val newState = state.copy(output = state.output + separator + newContent, sectionStarted = isSection)
+        return newState
     }
 }

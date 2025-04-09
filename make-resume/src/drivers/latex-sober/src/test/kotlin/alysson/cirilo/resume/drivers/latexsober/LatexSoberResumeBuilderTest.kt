@@ -244,9 +244,9 @@ class LatexSoberResumeBuilderTest : ResumeBuilderTest() {
 
     @Test
     fun `ampersand in the section should be italic`() {
-        resumeBuilder.startSection("this & that")
-
-        wrapAroundDocument("\\section{this \\textit{\\&} that}") shouldBe resumeBuilder.build()
+        resumeBuilder
+            .startSection("this & that")
+            .build() shouldBe wrapAroundDocument("\\section{this \\textit{\\&} that}")
     }
 
     private fun wrapAroundDocument(content: String): String {
