@@ -123,6 +123,15 @@ abstract class ResumeBuilderTest {
     }
 
     @Test
+    fun `is immutable`() {
+        resumeBuilder
+            .startSection("Section Name")
+            .makeExperiences(Dataset.twoExperiencesWithNoBullets)
+
+        resumeBuilder.build() shouldBe generateEmptyOutput()
+    }
+
+    @Test
     fun `can generate a section`() {
         resumeBuilder
             .startSection("Section Name")
