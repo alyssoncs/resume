@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.resume.application)
+    alias(libs.plugins.jacoco.aggregation)
 }
 
 dependencies {

@@ -2,6 +2,7 @@
 dagp = "2.15.0"
 dependencies-sorter = "0.14"
 detekt = "1.23.8"
+jacoco = "0.8.13"
 java = "22"
 junit = "5.13.0-M2"
 kotest = "6.0.0.M3"
@@ -34,6 +35,7 @@ unitTest = ["test-junit-api", "test-junit-params", "test-kotest-assertions"]
 [plugins]
 dagp = { id = "com.autonomousapps.dependency-analysis", version.ref = "dagp" }
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
+jacoco-aggregation = { id = "jacoco-report-aggregation" }
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 

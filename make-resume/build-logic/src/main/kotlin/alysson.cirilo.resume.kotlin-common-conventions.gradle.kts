@@ -11,6 +11,7 @@ plugins {
     // Apply the org.jetbrains.kotlin.jvm Plugin to add support for Kotlin.
     id("org.jetbrains.kotlin.jvm")
     id("alysson.cirilo.resume.quality")
+    jacoco
 }
 
 repositories {
@@ -20,6 +21,10 @@ repositories {
 project.group = RESUME_GROUP
 
 kotlin.jvmToolchain(versionCatalog.getIntVersion("java"))
+
+jacoco {
+    toolVersion = versionCatalog.getVersion("jacoco")
+}
 
 extensions.create<FeaturesExtension>("features", objects, ::enableTests)
 
