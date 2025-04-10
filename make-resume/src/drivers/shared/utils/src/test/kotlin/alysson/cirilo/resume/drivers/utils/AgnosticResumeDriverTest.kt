@@ -1,20 +1,19 @@
 package alysson.cirilo.resume.drivers.utils
 
-import alysson.cirilo.resume.drivers.utils.date.testEducationDateFormatter
-import alysson.cirilo.resume.drivers.utils.date.testWorkDateFormatter
+import alysson.cirilo.resume.drivers.utils.date.educationDateFormatter
+import alysson.cirilo.resume.drivers.utils.date.workDateFormatter
 import alysson.cirilo.resume.entities.aResume
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
 
 class AgnosticResumeDriverTest {
-    private val resumeDriver = makeDriver(FakeResumeBuilder(testWorkDateFormatter, testEducationDateFormatter))
+    private val resumeDriver = makeDriver(FakeResumeBuilder(workDateFormatter, educationDateFormatter))
 
     @Test
     fun `should build resume correctly`() {
         val resume = aResume().build()
 
         val resumeStr = resumeDriver.convert(resume)
-        println(resumeStr)
 
         resumeStr shouldBe """
             Alysson Cirilo
@@ -36,7 +35,7 @@ class AgnosticResumeDriverTest {
                 * cool project (https://www.github.com/alyssoncs/coolproject): a very cool project
 
             > Education
-                * BSc. in Computer Science @ Top institution (https://www.example.com), Brazil 05. 2020 - Present
+                * BSc. in Computer Science @ Top institution (https://www.example.com), Brazil 2020 - Present
         """.trimIndent()
     }
 }
