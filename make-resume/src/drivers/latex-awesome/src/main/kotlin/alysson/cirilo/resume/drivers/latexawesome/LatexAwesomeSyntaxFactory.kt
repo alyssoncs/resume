@@ -155,8 +155,6 @@ internal class LatexAwesomeSyntaxFactory(
     }
 
     private fun makeBulletPoints(bulletPoints: List<BulletPoint>): String {
-        if (bulletPoints.isEmpty()) return ""
-
         return itemize(bulletPoints.map(::makeBulletPoint))
     }
 
