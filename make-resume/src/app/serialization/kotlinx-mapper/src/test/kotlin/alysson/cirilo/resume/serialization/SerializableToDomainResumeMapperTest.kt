@@ -6,6 +6,7 @@ import alysson.cirilo.resume.entities.EnrollmentPeriod.EndDate.Present
 import alysson.cirilo.resume.entities.LinkedInformation
 import alysson.cirilo.resume.entities.Resume
 import alysson.cirilo.resume.entities.aBulletPoint
+import alysson.cirilo.resume.entities.anEmptyBulletPoint
 import alysson.cirilo.resume.serialization.models.SerializableEnrollmentPeriod
 import alysson.cirilo.resume.serialization.models.SerializableLinkedInformation
 import alysson.cirilo.resume.serialization.models.SerializableResume
@@ -123,12 +124,18 @@ class SerializableToDomainResumeMapperTest {
         fun `should contain the bullet points`() {
             val roles = resume.jobExperiences.first().roles
 
+            roles[0].bulletPoints shouldHaveSize 1
             roles[0].bulletPoints[0] shouldBe aBulletPoint().thatReads("delivered value.").build()
 
+            roles[1].bulletPoints shouldHaveSize 3
             roles[1].bulletPoints[0] shouldBe aBulletPoint()
                 .containing("delivered value with ", "kotlin", ".")
                 .build()
             roles[1].bulletPoints[1] shouldBe aBulletPoint().thatReads("another cool thing").build()
+            roles[1].bulletPoints[2] shouldBe anEmptyBulletPoint()
+                .appendSkill("compose")
+                .appendText(" is awesome")
+                .build()
         }
 
         @Test
@@ -242,6 +249,7 @@ object Fixtures {
                             .bullets(
                                 "delivered value with {kotlin}.",
                                 "another cool thing",
+                                "{compose} is awesome",
                             ),
                     ),
             )
