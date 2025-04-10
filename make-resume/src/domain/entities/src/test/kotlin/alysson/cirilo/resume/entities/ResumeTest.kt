@@ -9,6 +9,8 @@ import org.junit.jupiter.api.DynamicTest
 import org.junit.jupiter.api.DynamicTest.dynamicTest
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestFactory
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.ValueSource
 
 class ResumeTest {
 
@@ -211,6 +213,14 @@ class ResumeTest {
 
         val titles = reversedResume.jobExperiences.flatMap { it.roles }.map { it.title }
         titles.shouldContainExactly("SWE 3", "SWE 2", "SWE 1")
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = ["", " ", "\t", "\n"])
+    fun `linked information should have display name`(blank: String) {
+        shouldThrow<IllegalArgumentException> {
+            aLinkedInfo().displaying(blank).build()
+        }
     }
 
     private fun ResumeBuilder.with(aBulletPoint: BulletPointBuilder) =
