@@ -21,7 +21,7 @@ jobs:
       - name: ☕ Set up JDK
         uses: actions/setup-java@v4
         with:
-          java-version: '22'
+          java-version: '24'
           distribution: 'adopt'
 
       - name: 🐘 Setup Gradle
