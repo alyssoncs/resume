@@ -7,7 +7,7 @@ class EnrollmentPeriodBuilder private constructor(
     private val end: EnrollmentPeriod.EndDate,
 ) {
     constructor() : this(
-        start = YearMonth.now(),
+        start = YearMonth.of(2025, 4),
         end = EnrollmentPeriod.EndDate.Present,
     )
 
