@@ -6,6 +6,7 @@ class EnrollmentPeriodBuilder private constructor(
     private val start: YearMonth,
     private val end: EnrollmentPeriod.EndDate,
 ) {
+    @Suppress("MagicNumber")
     constructor() : this(
         start = YearMonth.of(2025, 4),
         end = EnrollmentPeriod.EndDate.Present,
