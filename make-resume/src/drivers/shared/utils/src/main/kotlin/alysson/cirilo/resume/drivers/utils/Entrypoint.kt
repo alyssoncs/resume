@@ -7,7 +7,5 @@ fun makeDriver(
     resumeBuilder: ResumeBuilder,
     preProcess: (resume: Resume) -> Resume = { resume -> resume },
 ): ResumeDriver {
-    return AgnosticResumeDriver(preProcess) { resume ->
-        AgnosticResumeBuilder(resume, resumeBuilder)
-    }
+    return AgnosticResumeDriver(preProcess, resumeBuilder)
 }
