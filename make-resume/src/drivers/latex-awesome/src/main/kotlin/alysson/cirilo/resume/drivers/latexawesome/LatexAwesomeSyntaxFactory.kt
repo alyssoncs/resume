@@ -71,9 +71,10 @@ internal class LatexAwesomeSyntaxFactory(
         return if (education.isEmpty())
             ""
         else
-            "\\begin{cventries}\n" +
-                education.joinToString("\n") { makeDegree(it) }.reindent(1) +
-                "\n\\end{cventries}"
+            "" +
+                "\\begin{cventries}" +
+                education.joinToString("\n") { makeDegree(it) }.reindent(1).betweenEmptyLines() +
+                "\\end{cventries}"
     }
 
     private fun awesomeHeader(header: Header): String {
@@ -92,9 +93,10 @@ internal class LatexAwesomeSyntaxFactory(
         return if (jobExperiences.isEmpty())
             null
         else
-            "\\begin{cventries}" + "\n" +
-                jobExperiences.joinToString("\n\n") { makeJobExperience(it) }.reindent(1) +
-                "\n\\end{cventries}"
+            "" +
+                "\\begin{cventries}" +
+                jobExperiences.joinToString("\n\n") { makeJobExperience(it) }.reindent(1).betweenEmptyLines() +
+                "\\end{cventries}"
     }
 
     private fun makeJobExperience(jobExperience: JobExperience): String {
@@ -130,10 +132,9 @@ internal class LatexAwesomeSyntaxFactory(
             if (role.bulletPoints.isEmpty()) {
                 "{}".reindent(1)
             } else {
-                "{".reindent(1) +
-                    "\n" +
-                    makeBulletPoints(role.bulletPoints).reindent(2) +
-                    "\n" +
+                "" +
+                    "{".reindent(1) +
+                    makeBulletPoints(role.bulletPoints).reindent(2).betweenEmptyLines() +
                     "}".reindent(1)
             }
     }
@@ -168,9 +169,10 @@ internal class LatexAwesomeSyntaxFactory(
     }
 
     private fun itemize(items: List<String>): String {
-        return "\\begin{cvitems}\n${
-            items.joinToString("\n") { "\\item $it" }.reindent(1)
-        }\n\\end{cvitems}"
+        return "" +
+            "\\begin{cvitems}" +
+            items.joinToString("\n") { "\\item $it" }.reindent(1).betweenEmptyLines() +
+            "\\end{cvitems}"
     }
 
     private fun makeProjectOrPublication(projectOrPublication: ProjectOrPublication): String {
@@ -197,4 +199,6 @@ internal class LatexAwesomeSyntaxFactory(
             )
         }"
     }
+
+    private fun String.betweenEmptyLines(): String = "\n$this\n"
 }
