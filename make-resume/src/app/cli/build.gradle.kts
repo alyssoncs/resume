@@ -3,6 +3,10 @@ plugins {
     alias(libs.plugins.jacoco.aggregation)
 }
 
+features {
+    unitTests = true
+}
+
 dependencies {
     implementation(libs.kotlinx.cli)
     implementation(projects.src.app.serialization.format.json)
