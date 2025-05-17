@@ -26,9 +26,7 @@ internal fun parse(args: Array<String>): Result<Args> {
 
     val file = File(parser.inputFile)
     val inputType = getInputType(file, parser.inputType)
-    inputType.onFailure {
-        return Result.failure(it)
-    }
+        .onFailure { return Result.failure(it) }
     return Result.success(Args(parser.flavor, file, inputType.getOrThrow()))
 }
 
