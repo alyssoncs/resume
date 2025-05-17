@@ -1,47 +1,42 @@
 package alysson.cirilo.resume.cli
 
-import com.github.ajalt.clikt.core.context
-import com.github.ajalt.clikt.core.main
 import io.kotest.assertions.throwables.shouldNotThrow
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.matchers.shouldBe
-import org.junit.jupiter.api.BeforeEach
+import io.kotest.matchers.string.shouldContain
+import io.kotest.matchers.string.shouldContainIgnoringCase
+import io.kotest.matchers.string.shouldNotContain
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.EnumSource
 import org.junit.jupiter.params.provider.ValueSource
 
 internal class ArgParsingTest {
-    private val pair = makeArgParser()
-    private val parser = pair.first
-    private val getArgs = pair.second
-
-    @BeforeEach
-    fun setUp() {
-        parser.context {
-            exitProcess = { s -> error("mocked error > $s") }
-        }
-    }
-
     @Test
     fun `should throw an error when no args are provided`() {
-        shouldThrow<Throwable> {
+        val error = shouldThrow<Throwable> {
             doParse()
         }
+
+        assertErrorMessage(error, ErrorReason.MissingOption(Option.Flavor, Option.InputFile))
     }
 
     @Test
     fun `should throw an error when no flavor is provided`() {
-        shouldThrow<Throwable> {
+        val error = shouldThrow<Throwable> {
             doParse("-i", "input.json")
         }
+
+        assertErrorMessage(error, ErrorReason.MissingOption(Option.Flavor))
     }
 
     @Test
     fun `should throw an error when no input file is provided`() {
-        shouldThrow<Throwable> {
-            doParse("-i", "input.json")
+        val error = shouldThrow<Throwable> {
+            doParse("-f", "sober")
         }
+
+        assertErrorMessage(error, ErrorReason.MissingOption(Option.InputFile))
     }
 
     @Test
@@ -61,9 +56,11 @@ internal class ArgParsingTest {
 
     @Test
     fun `fails on unknown flavors`() {
-        shouldThrow<Throwable> {
+        val error = shouldThrow<Throwable> {
             doParse("-i", "input.json", "-f", "unknown")
         }
+
+        assertErrorMessage(error, ErrorReason.InvalidOption(Option.Flavor, "unknown"))
     }
 
     @ParameterizedTest
@@ -78,9 +75,11 @@ internal class ArgParsingTest {
 
     @Test
     fun `fails on unknown input file extension`() {
-        shouldThrow<Throwable> {
+        val error = shouldThrow<Throwable> {
             doParse("-i", "input.xml", "-f", "sober")
         }
+
+        error.message shouldBe "Unknown extension: xml"
     }
 
     @Test
@@ -92,9 +91,11 @@ internal class ArgParsingTest {
 
     @Test
     fun `fails on unknown input-type`() {
-        shouldThrow<Throwable> {
+        val error = shouldThrow<Throwable> {
             doParse("-i", "input.json", "-f", "sober", "--input-type", "xml")
         }
+
+        assertErrorMessage(error, ErrorReason.InvalidOption(Option.InputType, "xml"))
     }
 
     @Test
@@ -126,7 +127,50 @@ internal class ArgParsingTest {
     }
 
     private fun doParse(vararg args: String): Args {
-        parser.main(args)
-        return getArgs()
+        return parse(args.toList().toTypedArray()).getOrThrow()
+    }
+
+    private fun assertErrorMessage(error: Throwable, reason: ErrorReason) {
+        error.message shouldContainIgnoringCase "usage"
+        error.message shouldContain "cli-uber"
+        when (reason) {
+            is ErrorReason.MissingOption -> {
+                error.message shouldContain "missing"
+                reason.options.forEach { option ->
+                    error.message shouldContain option.regex
+                }
+                reason.options.others().forEach { option ->
+                    error.message shouldNotContain option.regex
+                }
+            }
+
+            is ErrorReason.InvalidOption -> {
+                error.message shouldContain "invalid"
+                error.message shouldContain reason.option.regex
+                error.message shouldContain reason.invalidValue
+            }
+        }
+    }
+
+    sealed interface ErrorReason {
+        data class MissingOption(val options: List<Option>) : ErrorReason {
+            constructor(option: Option) : this(listOf(option))
+            constructor(vararg options: Option) : this(options.toList())
+        }
+
+        data class InvalidOption(val option: Option, val invalidValue: String) : ErrorReason
+    }
+
+    enum class Option(long: String, short: String? = null) {
+        Flavor("--flavor", "-f"),
+        InputFile("--input", "-i"),
+        InputType("--input-type"),
+        ;
+
+        val regex = Regex("(${listOfNotNull(long, short).joinToString("|")})")
+    }
+
+    private fun List<Option>.others(): List<Option> {
+        return Option.entries.filter { it !in this }
     }
 }

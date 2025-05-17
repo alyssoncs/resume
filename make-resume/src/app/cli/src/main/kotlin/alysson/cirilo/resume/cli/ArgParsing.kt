@@ -7,45 +7,32 @@ import alysson.cirilo.resume.entities.Resume
 import alysson.cirilo.resume.infra.ResumeDriver
 import alysson.cirilo.resume.serialization.json.deserializeJson
 import alysson.cirilo.resume.serialization.yaml.deserializeYaml
-import com.github.ajalt.clikt.core.CliktCommand
-import com.github.ajalt.clikt.core.main
+import com.github.ajalt.clikt.core.CliktError
+import com.github.ajalt.clikt.core.NoOpCliktCommand
+import com.github.ajalt.clikt.core.parse
 import com.github.ajalt.clikt.parameters.options.option
 import com.github.ajalt.clikt.parameters.options.required
 import com.github.ajalt.clikt.parameters.types.enum
 import java.io.File
 
-internal fun parse(args: Array<String>): Args {
-    val (parser, getArgs) = makeArgParser()
-    parser.main(args)
-    return getArgs()
-}
-
-/**
- * Creates an argument parser and a function to retrieve the parsed arguments.
- *
- * This function is necessary for testing purposes because previously the `kotlinx-cli` library
- * used by this project was not designed with testability in mind.
- * By separating the parser creation and argument retrieval logic, it was easier
- * to mock or manipulate the parser during tests.
- *
- * Now that we are using `clikt`, we probably can get rid of this function.
- *
- * @return A pair containing the [CliktCommand] and a lambda function to retrieve [Args].
- */
-internal fun makeArgParser(): Pair<CliktCommand, () -> Args> {
-    val cliktParser = CliktParser()
-    val parser = cliktParser
-
-    val getArgs = {
-        val file = File(parser.inputFile)
-        val inputType = getInputType(file, parser.inputType)
-        Args(parser.flavor, file, inputType)
+@Suppress("ReturnCount")
+internal fun parse(args: Array<String>): Result<Args> {
+    val parser = CliktParser()
+    try {
+        parser.parse(args)
+    } catch (e: CliktError) {
+        return Result.failure(Throwable(parser.getFormattedHelp(e)))
     }
 
-    return Pair(parser, getArgs)
+    val file = File(parser.inputFile)
+    val inputType = getInputType(file, parser.inputType)
+    inputType.onFailure {
+        return Result.failure(it)
+    }
+    return Result.success(Args(parser.flavor, file, inputType.getOrThrow()))
 }
 
-internal class CliktParser : CliktCommand("cli-uber") {
+private class CliktParser : NoOpCliktCommand("cli-uber") {
     val flavor: Flavor by option("-f", "--flavor")
         .enum<Flavor>()
         .required()
@@ -53,18 +40,15 @@ internal class CliktParser : CliktCommand("cli-uber") {
         .required()
     val inputType: InputType? by option("--input-type")
         .enum<InputType>()
-
-    override fun run() {
-        // no-op
-    }
 }
 
-private fun getInputType(inputFile: File, inputTypeArg: InputType?): InputType {
+private fun getInputType(inputFile: File, inputTypeArg: InputType?): Result<InputType> {
     return if (inputTypeArg == null) {
         val extension = inputFile.extension
-        InputType.fromExtension(extension) ?: error("Unknown extension: $extension")
+        InputType.fromExtension(extension)?.let { Result.success(it) }
+            ?: Result.failure(Throwable("Unknown extension: $extension"))
     } else {
-        inputTypeArg
+        Result.success(inputTypeArg)
     }
 }
 

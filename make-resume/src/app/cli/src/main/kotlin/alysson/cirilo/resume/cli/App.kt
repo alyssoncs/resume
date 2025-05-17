@@ -1,14 +1,24 @@
 package alysson.cirilo.resume.cli
 
-import java.io.File
+import kotlin.system.exitProcess
 
 fun main(args: Array<String>) {
-    val (resumeFlavor, file, inputType) = parse(args)
-    print(formatResume(file, inputType, resumeFlavor))
+    app(args)
 }
 
-private fun formatResume(inputFile: File, inputType: InputType, resumeFlavor: Flavor): String {
-    val serializedResume = inputFile.readText()
-    val resume = inputType.deserialize(serializedResume)
-    return resumeFlavor.convert(resume)
+internal fun app(args: Array<String>, exitProcess: (Int) -> Unit = ::exitProcess) {
+    parse(args)
+        .onSuccess {
+            print(formatResume(it))
+        }
+        .onFailure {
+            System.err.println(it.message)
+            exitProcess(1)
+        }
+}
+
+private fun formatResume(args: Args): String {
+    val serializedResume = args.file.readText()
+    val resume = args.inputType.deserialize(serializedResume)
+    return args.flavor.convert(resume)
 }
