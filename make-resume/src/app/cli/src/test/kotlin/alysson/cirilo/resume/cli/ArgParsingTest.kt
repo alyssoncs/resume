@@ -1,16 +1,15 @@
 package alysson.cirilo.resume.cli
 
+import com.github.ajalt.clikt.core.context
+import com.github.ajalt.clikt.core.main
 import io.kotest.assertions.throwables.shouldNotThrow
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.matchers.shouldBe
-import kotlinx.cli.ArgParser
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.EnumSource
 import org.junit.jupiter.params.provider.ValueSource
-import java.lang.reflect.Field
-import kotlin.Nothing
 
 internal class ArgParsingTest {
     private val pair = makeArgParser()
@@ -19,10 +18,9 @@ internal class ArgParsingTest {
 
     @BeforeEach
     fun setUp() {
-        val field: Field = ArgParser::class.java.getDeclaredField("outputAndTerminate")
-        field.isAccessible = true
-        val mock: (String, Int) -> Nothing = { s, _ -> error("mocked error > $s") }
-        field.set(parser, mock)
+        parser.context {
+            exitProcess = { s -> error("mocked error > $s") }
+        }
     }
 
     @Test
@@ -128,7 +126,7 @@ internal class ArgParsingTest {
     }
 
     private fun doParse(vararg args: String): Args {
-        parser.parse(args)
+        parser.main(args)
         return getArgs()
     }
 }

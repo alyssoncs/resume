@@ -8,7 +8,7 @@ features {
 }
 
 dependencies {
-    implementation(libs.kotlinx.cli)
+    implementation(libs.clikt)
     implementation(projects.src.app.serialization.format.json)
     implementation(projects.src.app.serialization.format.yaml)
     implementation(projects.src.drivers.latexAwesome)

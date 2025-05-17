@@ -7,57 +7,56 @@ import alysson.cirilo.resume.entities.Resume
 import alysson.cirilo.resume.infra.ResumeDriver
 import alysson.cirilo.resume.serialization.json.deserializeJson
 import alysson.cirilo.resume.serialization.yaml.deserializeYaml
-import kotlinx.cli.ArgParser
-import kotlinx.cli.ArgType
-import kotlinx.cli.required
+import com.github.ajalt.clikt.core.CliktCommand
+import com.github.ajalt.clikt.core.main
+import com.github.ajalt.clikt.parameters.options.option
+import com.github.ajalt.clikt.parameters.options.required
+import com.github.ajalt.clikt.parameters.types.enum
 import java.io.File
 
 internal fun parse(args: Array<String>): Args {
     val (parser, getArgs) = makeArgParser()
-    parser.parse(args)
+    parser.main(args)
     return getArgs()
 }
 
 /**
  * Creates an argument parser and a function to retrieve the parsed arguments.
  *
- * This function is necessary for testing purposes because the `kotlinx-cli` library
- * does not provide a straightforward way to test argument parsing directly. By
- * separating the parser creation and argument retrieval logic, it becomes easier
+ * This function is necessary for testing purposes because previously the `kotlinx-cli` library
+ * used by this project was not designed with testability in mind.
+ * By separating the parser creation and argument retrieval logic, it was easier
  * to mock or manipulate the parser during tests.
  *
- * @return A pair containing the [ArgParser] and a lambda function to retrieve [Args].
+ * Now that we are using `clikt`, we probably can get rid of this function.
+ *
+ * @return A pair containing the [CliktCommand] and a lambda function to retrieve [Args].
  */
-internal fun makeArgParser(): Pair<ArgParser, () -> Args> {
-    val argParser = ArgParser(programName = "cli-uber")
-
-    val resumeFlavor by argParser.option(
-        ArgType.Choice<Flavor>(),
-        shortName = "f",
-        fullName = "flavor",
-        description = "The flavor of the generated resume",
-    ).required()
-
-    val inputFile by argParser.option(
-        ArgType.String,
-        shortName = "i",
-        fullName = "input",
-        description = "Path to a file with the resume data",
-    ).required()
-
-    val inputTypeArg by argParser.option(
-        ArgType.Choice<InputType>(),
-        fullName = "input-type",
-        description = "The input type of [input] file",
-    )
+internal fun makeArgParser(): Pair<CliktCommand, () -> Args> {
+    val cliktParser = CliktParser()
+    val parser = cliktParser
 
     val getArgs = {
-        val file = File(inputFile)
-        val inputType = getInputType(file, inputTypeArg)
-        Args(resumeFlavor, file, inputType)
+        val file = File(parser.inputFile)
+        val inputType = getInputType(file, parser.inputType)
+        Args(parser.flavor, file, inputType)
     }
 
-    return Pair(argParser, getArgs)
+    return Pair(parser, getArgs)
+}
+
+internal class CliktParser : CliktCommand("cli-uber") {
+    val flavor: Flavor by option("-f", "--flavor")
+        .enum<Flavor>()
+        .required()
+    val inputFile: String by option("-i", "--input")
+        .required()
+    val inputType: InputType? by option("--input-type")
+        .enum<InputType>()
+
+    override fun run() {
+        // no-op
+    }
 }
 
 private fun getInputType(inputFile: File, inputTypeArg: InputType?): InputType {
