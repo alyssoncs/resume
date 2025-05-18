@@ -6,6 +6,9 @@ on:
       - master
     tags:
       - "v*"
+  pull_request:
+    branches:
+      - master
 
 permissions:
   contents: write
@@ -79,6 +82,7 @@ jobs:
     name: deploy 🚀
     needs: [compile-resumes]
     runs-on: ubuntu-latest
+    if: github.event_name == 'push'
     steps:
       - name: 🛎️ Checkout
         uses: actions/checkout@v4
