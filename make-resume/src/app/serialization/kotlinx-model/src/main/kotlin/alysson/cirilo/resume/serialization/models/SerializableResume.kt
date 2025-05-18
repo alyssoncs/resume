@@ -61,7 +61,8 @@ data class SerializableEnrollmentPeriod(
     val to: String = CURRENT,
 ) {
     init {
-        require(dateRegex.matches(from)) {
+        val b = dateRegex.matches(from)
+        require(b) {
             "\"${::from.name}\" should be in the \"MM-yyyy\" format, but was $from"
         }
 
