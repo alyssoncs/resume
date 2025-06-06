@@ -5,13 +5,13 @@ import alysson.cirilo.resume.drivers.utils.date.educationDateFormatter
 import alysson.cirilo.resume.drivers.utils.date.workDateFormatter
 import alysson.cirilo.resume.drivers.utils.makeDriver
 import alysson.cirilo.resume.infra.ResumeDriver
-import alysson.cirilo.resume.utils.resource.asResource
+import alysson.cirilo.resume.utils.resource.read
 import java.time.format.DateTimeFormatter
 
 fun makeLatexAwesomeDriver(): ResumeDriver {
     fun String.asPlaceholder() = "%%$this%%"
     return makeLatexAwesomeDriver(
-        "/latex-awesome-resume-template.tex".asResource(),
+        "/latex-awesome-resume-template.tex".read(),
         "header".asPlaceholder(),
         "content-goes-here".asPlaceholder(),
         workDateFormatter = workDateFormatter,
