@@ -14,6 +14,8 @@ dependencies {
     implementation(projects.src.drivers.latexAwesome)
     implementation(projects.src.drivers.latexSober)
     implementation(projects.src.drivers.markdown)
+
+    testImplementation(projects.src.utils.resource)
 }
 
 private val applicationClass = "alysson.cirilo.resume.cli.AppKt"

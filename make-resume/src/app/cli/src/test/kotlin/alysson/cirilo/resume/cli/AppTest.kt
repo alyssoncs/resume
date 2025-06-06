@@ -1,12 +1,12 @@
 package alysson.cirilo.resume.cli
 
+import alysson.cirilo.resume.utils.resource.asResource
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.shouldNot
 import io.kotest.matchers.string.beEmpty
 import org.junit.jupiter.api.Test
 import java.io.ByteArrayOutputStream
 import java.io.PrintStream
-import java.net.URL
 
 class AppTest {
     @Test
@@ -42,10 +42,6 @@ class AppTest {
         val outputStream = ByteArrayOutputStream()
         val printStream = PrintStream(outputStream)
         return printStream
-    }
-
-    private fun String.asResource(): URL {
-        return Unit.javaClass.getResource(this)!!
     }
 
     class ExitProcessSpy : (Int) -> Unit {
