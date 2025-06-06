@@ -13,6 +13,7 @@ dependencies {
 
     implementation(projects.src.drivers.shared.latexEscape)
     implementation(projects.src.drivers.shared.utils)
+    implementation(projects.src.utils.resource)
 
     testImplementation(resumeFixtures(projects.src.domain.entities))
     testImplementation(resumeFixtures(projects.src.drivers.shared.latexEscape))
