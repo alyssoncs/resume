@@ -1,6 +1,7 @@
 package alysson.cirilo.resume.serialization.yaml
 
 import alysson.cirilo.resume.entities.Resume
+import alysson.cirilo.resume.utils.resource.read
 import io.kotest.assertions.throwables.shouldNotThrow
 import io.kotest.assertions.throwables.shouldThrow
 import org.junit.jupiter.api.Test
@@ -29,9 +30,5 @@ class YamlDeserializerTest {
     private fun malformedResume(path: String): Resume {
         val malformedYaml = "/malformed/$path".read()
         return deserializeYaml(malformedYaml)
-    }
-
-    private fun String.read(): String {
-        return Unit.javaClass.getResource(this)!!.readText()
     }
 }

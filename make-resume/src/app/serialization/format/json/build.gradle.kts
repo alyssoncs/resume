@@ -12,4 +12,6 @@ dependencies {
 
     implementation(libs.kotlin.serialization.json)
     implementation(projects.src.app.serialization.kotlinxMapper)
+
+    testImplementation(projects.src.utils.resource)
 }

@@ -1,6 +1,7 @@
 package alysson.cirilo.resume.serialization.json
 
 import alysson.cirilo.resume.entities.Resume
+import alysson.cirilo.resume.utils.resource.read
 import io.kotest.assertions.throwables.shouldNotThrow
 import io.kotest.assertions.throwables.shouldThrow
 import org.junit.jupiter.api.Test
@@ -29,9 +30,5 @@ class JsonDeserializerTest {
     private fun malformedResume(path: String): Resume {
         val malformedJson = "/malformed/$path".read()
         return deserializeJson(malformedJson)
-    }
-
-    private fun String.read(): String {
-        return Unit.javaClass.getResource(this)!!.readText()
     }
 }
