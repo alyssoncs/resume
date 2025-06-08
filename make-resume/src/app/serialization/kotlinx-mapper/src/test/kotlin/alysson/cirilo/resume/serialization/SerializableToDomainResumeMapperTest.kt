@@ -206,7 +206,7 @@ class SerializableToDomainResumeMapperTest {
             val (startMonth, startYear) = parse(periodDto.from)
             val start = YearMonth.of(startYear, startMonth)
 
-            val end = if (periodDto.isCurrent) {
+            val end = if (periodDto.to == "now") {
                 Present
             } else {
                 val (endMonth, endYear) = parse(periodDto.to)
@@ -245,7 +245,7 @@ object Fixtures {
                     .with(
                         aRoleDto().`as`("SWE 1").from("02-2022").upTo("12-2022")
                             .bullet("delivered value."),
-                        aRoleDto().`as`("SWE 2").from("12-2022").upTo("now")
+                        aRoleDto().`as`("SWE 2").from("12-2022").upToNow()
                             .bullets(
                                 "delivered value with {kotlin}.",
                                 "another cool thing",
