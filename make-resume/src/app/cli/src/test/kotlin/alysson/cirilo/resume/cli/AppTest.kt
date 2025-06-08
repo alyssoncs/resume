@@ -33,19 +33,20 @@ class AppTest {
     }
 
     private fun capture(stream: PrintStream, block: () -> Unit): String {
-        val testStream = testStream()
-
-        System.setOut(testStream)
-        block()
-        System.setOut(stream)
-
-        return testStream.toString().trim()
-    }
-
-    private fun testStream(): PrintStream {
         val outputStream = ByteArrayOutputStream()
-        val printStream = PrintStream(outputStream)
-        return printStream
+        val testStream = PrintStream(outputStream)
+
+        val setStream = when (stream) {
+            System.out -> System::setOut
+            System.err -> System::setErr
+            else -> throw IllegalArgumentException("Unsupported stream: $stream")
+        }
+
+        setStream(testStream)
+        block()
+        setStream(stream)
+
+        return outputStream.toString().trim()
     }
 
     class ExitProcessSpy : (Int) -> Unit {
