@@ -4,7 +4,7 @@ interface SerializableRoleBuilder {
     fun `as`(title: String): SerializableRoleBuilder
     fun from(from: String): SerializableRoleBuilder
     fun upTo(to: String): SerializableRoleBuilder
-    fun upToNow(to: String): SerializableRoleBuilder
+    fun upToNow(): SerializableRoleBuilder
     fun withEmptyBullets(): SerializableRoleBuilder = bullets(emptyList())
     fun bullet(bullet: String): SerializableRoleBuilder = bullets(listOf(bullet))
     fun bullets(vararg bullets: String): SerializableRoleBuilder = bullets(bullets.toList())
@@ -23,7 +23,7 @@ private data class SerializableRoleBuilderImpl(
 
     override fun upTo(to: String) = copy(enrollment = enrollment.to(to))
 
-    override fun upToNow(to: String): SerializableRoleBuilder =
+    override fun upToNow(): SerializableRoleBuilder =
         copy(enrollment = enrollment.upToNow())
 
     override fun bullets(bullets: List<String>): SerializableRoleBuilder = copy(
