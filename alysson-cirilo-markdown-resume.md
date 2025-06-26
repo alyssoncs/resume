@@ -14,6 +14,10 @@
 
 #### Senior Software Engineer
 > Mar. 2025 – Present
+- Transitioned from Android to web, working on Microsoft Copilot with **React** and **TypeScript**.
+- Built a performance dashboard using **KQL** and **Azure Data Explorer**, improving visibility into latency across system layers.
+- Reduced perceived loading time by preloading home content earlier in the app lifecycle.
+- Enabled shadow traffic for a critical service, allowing backend teams to validate infrastructure and catch a production-blocking bug pre-launch.
 
 #### Software Engineer II
 > Jul. 2022 – Mar. 2025
@@ -45,7 +49,7 @@
 - Enhanced app security by implementing a digital signature subsystem for all HTTP requests using **OkHttp interceptors**.
 - Designed a testable biometric authentication abstraction adapting the original callback syntax to coroutines.
 
-### [State Secretariat for Penitentiary Administration of Maranhão (SEAP-MA)](https://seap.ma.gov.br/)
+### [State Department of Penitentiary Administration (SEAP-MA)](https://seap.ma.gov.br/)
 - São Luís - MA, Brazil
 
 #### Mid-level Developer
@@ -56,13 +60,6 @@
 > Sep. 2019 – Jul. 2020
 - Enhanced system maintainability by developing a **Spring Boot** backend with **MongoDB**, creating a unified and flexible API for history tracking across multiple systems, simplifying feature development and eliminating numerous legacy history tables.
 - Ensured compliance with legal requirements and avoided significant fines during the COVID-19 pandemic by enabling families to schedule virtual visits with incarcerated relatives through a **Clean Architecture** Android app using **Kotlin** and **Coroutines**.
-
-### [Laboratory of Intelligent Distributed Systems (LSDi)](https://www.lsdi.ufma.br)
-- São Luís - MA, Brazil
-
-#### Intern
-> Apr. 2017 – Jul. 2019
-- Designed and implemented an IoT solution for building occupancy detection, using Android devices and **Arduino**-powered BLE beacons to identify interactions. Events were processed and published to a backend system built with **Spring Boot**, leveraging **Retrofit**.
 
 ## Projects & Publications
 - **[Resume](https://github.com/alyssoncs/resume/)**: The tool that built the resumé that you are reading right now.
