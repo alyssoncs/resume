@@ -20,18 +20,7 @@ contactInfo:
     url: https://www.google.com/maps?q=+Maranhão,+Brazil
 experiences:
   - company:
-      displayName: Laboratory of Intelligent Distributed Systems (LSDi)
-      url: https://www.lsdi.ufma.br
-    location: São Luís - MA, Brazil
-    roles:
-      - title: Intern
-        period:
-          from: 04-2017
-          to: 07-2019
-        bulletPoints:
-          - Designed and implemented an IoT solution for building occupancy detection, using Android devices and {Arduino}-powered BLE beacons to identify interactions. Events were processed and published to a backend system built with {Spring Boot}, leveraging {Retrofit}.
-  - company:
-      displayName: State Secretariat for Penitentiary Administration of Maranhão (SEAP-MA)
+      displayName: State Department of Penitentiary Administration (SEAP-MA)
       url: https://seap.ma.gov.br/
     location: São Luís - MA, Brazil
     roles:
@@ -99,6 +88,11 @@ experiences:
         period:
           from: 03-2025
           to: now
+        bulletPoints:
+          - Transitioned from Android to web, working on Microsoft Copilot with {React} and {TypeScript}.
+          - Built a performance dashboard using {KQL} and {Azure Data Explorer}, improving visibility into latency across system layers.
+          - Reduced perceived loading time by preloading home content earlier in the app lifecycle.
+          - Enabled shadow traffic for a critical service, allowing backend teams to validate infrastructure and catch a production-blocking bug pre-launch.
 projectsAndPublications:
   - title:
       displayName: Resume
