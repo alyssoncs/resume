@@ -1,4 +1,5 @@
 import alysson.cirilo.resume.utils.FeaturesExtension
+import alysson.cirilo.resume.utils.FixtureExtension
 import alysson.cirilo.resume.utils.RESUME_GROUP
 import alysson.cirilo.resume.utils.getIntVersion
 import alysson.cirilo.resume.utils.getLibrary
@@ -27,6 +28,7 @@ jacoco {
 }
 
 extensions.create<FeaturesExtension>("features", objects, ::enableTests)
+dependencies.extensions.create<FixtureExtension>("resumeFixtures", project)
 
 fun enableTests() {
     @Suppress("UnstableApiUsage")
