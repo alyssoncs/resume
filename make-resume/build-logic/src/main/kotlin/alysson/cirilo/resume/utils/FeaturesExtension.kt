@@ -5,7 +5,7 @@ import org.gradle.kotlin.dsl.assign
 import org.gradle.kotlin.dsl.property
 
 open class FeaturesExtension(
-    private val objects: ObjectFactory,
+    objects: ObjectFactory,
     private val enableTests: () -> Unit,
 ) {
     private val unitTestsProperty = objects.property<Boolean>().convention(false)
