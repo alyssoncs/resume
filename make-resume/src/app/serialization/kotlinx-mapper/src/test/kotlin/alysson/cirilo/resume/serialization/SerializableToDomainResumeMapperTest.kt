@@ -193,11 +193,15 @@ class SerializableToDomainResumeMapperTest {
             return resumeDto.toDomain()
         }
 
+        // detekt issue with kotlin 2.2.0
+        @Suppress("detekt:UnusedPrivateMember")
         private infix fun LinkedInformation.shouldMatch(linkedInfoDto: SerializableLinkedInformation) {
             displayName shouldBe linkedInfoDto.displayName
             url.toString() shouldBe linkedInfoDto.url
         }
 
+        // detekt issue with kotlin 2.2.0
+        @Suppress("detekt:UnusedPrivateMember")
         private infix fun EnrollmentPeriod.shouldMatch(periodDto: SerializableEnrollmentPeriod) {
             fun parse(date: String): List<Int> {
                 return date.split("-").map(String::toInt)
