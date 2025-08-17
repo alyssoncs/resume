@@ -9,7 +9,7 @@ clikt = "5.0.3"
 kotest = "6.0.0.M17"
 kotlin = "2.2.20-Beta2"
 kotlin-serialization-json = "1.9.0"
-kotlin-serialization-yaml = "0.91.0"
+kotlin-serialization-yaml = "0.92.0"
 
 [libraries]
 clikt = { module = "com.github.ajalt.clikt:clikt", version.ref = "clikt" }
