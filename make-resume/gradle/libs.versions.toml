@@ -1,6 +1,6 @@
 [versions]
 dagp = "3.0.1"
-dependencies-sorter = "0.14"
+dependencies-sorter = "0.15"
 detekt = "1.23.8"
 jacoco = "0.8.13"
 java = "22"
