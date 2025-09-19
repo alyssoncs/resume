@@ -5,7 +5,7 @@ RESUME_NAME := alysson-cirilo-resume
 YAML_RESUME := data/resume.yml
 MAKE_RESUME := make-resume/src/app/cli/build/libs/cli-uber.jar
 IS_CI ?= false
-
+GRADLE_CONSOLE_FLAG := $(if $(filter true,$(IS_CI)),--console=colored,)
 # Top-level target
 .PHONY: all
 all: fancy sober markdown previews
@@ -54,8 +54,7 @@ endif
 # `make-resume` tool
 .PHONY: $(MAKE_RESUME)
 $(MAKE_RESUME):
-	cd make-resume && ./gradlew uberJar
-
+	cd make-resume && ./gradlew uberJar $(GRADLE_CONSOLE_FLAG)
 # Directories
 $(BUILD_DIR)/fancy:
 	mkdir -p $@
