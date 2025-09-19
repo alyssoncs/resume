@@ -32,7 +32,7 @@ jobs:
 
       - name: 🔨 Build Project
         working-directory: make-resume
-        run: ./gradlew build
+        run: ./gradlew build --console=colored
 
       - name: 📝 Make resumes
         run: make markupfiles
