@@ -57,9 +57,7 @@ $(BUILD_DIR)/markdown/$(RESUME_NAME).md: $(MAKE_RESUME) | $(BUILD_DIR)/markdown
 endif
 
 # `make-resume` tool
-ifeq ($(IS_CI), false)
 .PHONY: $(MAKE_RESUME)
-endif
 $(MAKE_RESUME):
 	cd make-resume && ./gradlew uberJar $(GRADLE_CONSOLE_FLAG)
 # Directories
