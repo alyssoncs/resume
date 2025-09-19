@@ -69,7 +69,7 @@ jobs:
           path: build
 
       - name: 📝 Make resumes & previews
-        run: make all IS_CI=true
+        run: make all IS_CI=true SHORT_CIRCUIT=true
 
       - name: 📤 Upload resumes & previews
         uses: actions/upload-artifact@v4

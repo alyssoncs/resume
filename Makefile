@@ -5,6 +5,7 @@ RESUME_NAME := alysson-cirilo-resume
 YAML_RESUME := data/resume.yml
 MAKE_RESUME := make-resume/src/app/cli/build/libs/cli-uber.jar
 IS_CI ?= false
+SHORT_CIRCUIT ?= false
 ifeq ($(IS_CI),true)
   GRADLE_CONSOLE_FLAG := --console=colored
 else
@@ -44,6 +45,7 @@ $(OUT_DIR)/alysson-cirilo-markdown-resume.md: $(BUILD_DIR)/markdown/$(RESUME_NAM
 	cp $< $@
 
 # Resume markup files
+ifeq ($(SHORT_CIRCUIT), false)
 $(BUILD_DIR)/fancy/$(RESUME_NAME).tex: $(MAKE_RESUME) | $(BUILD_DIR)/fancy
 	java -jar $(MAKE_RESUME) -f awesome -i $(YAML_RESUME) > $@
 
@@ -52,6 +54,7 @@ $(BUILD_DIR)/sober/$(RESUME_NAME).tex: $(MAKE_RESUME) | $(BUILD_DIR)/sober
 
 $(BUILD_DIR)/markdown/$(RESUME_NAME).md: $(MAKE_RESUME) | $(BUILD_DIR)/markdown
 	java -jar $(MAKE_RESUME) -f markdown -i $(YAML_RESUME) > $@
+endif
 
 # `make-resume` tool
 ifeq ($(IS_CI), false)
