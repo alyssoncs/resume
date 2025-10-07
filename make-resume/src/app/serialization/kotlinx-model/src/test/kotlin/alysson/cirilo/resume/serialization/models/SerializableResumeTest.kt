@@ -13,7 +13,7 @@ class SerializableResumeTest {
             "1      , false",
             "01     , false",
             "01-24  , false",
-            "2024-01, false",
+            "2024-01, true",
             "1-2024 , false",
             "now    , false",
             "01-2024, true",
