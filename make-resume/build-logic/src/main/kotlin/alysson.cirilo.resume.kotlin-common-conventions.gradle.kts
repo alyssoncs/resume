@@ -15,10 +15,6 @@ plugins {
     jacoco
 }
 
-repositories {
-    mavenCentral()
-}
-
 project.group = RESUME_GROUP
 
 kotlin.jvmToolchain(versionCatalog.getIntVersion("java"))
