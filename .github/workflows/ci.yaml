@@ -19,7 +19,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: 🛎️ Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
 
       - name: ☕ Set up JDK
         uses: actions/setup-java@v5
@@ -50,7 +50,7 @@ jobs:
     container: texlive/texlive:latest
     steps:
       - name: 🛎️ Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
 
       - name: 📦 Install poppler-utils
         run: apt update && apt install -y poppler-utils
@@ -85,7 +85,7 @@ jobs:
     if: github.event_name == 'push'
     steps:
       - name: 🛎️ Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
 
       - name: 📥 Download resumes
         uses: actions/download-artifact@v6
