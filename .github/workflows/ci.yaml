@@ -82,7 +82,7 @@ jobs:
     name: deploy 🚀
     needs: [compile-resumes]
     runs-on: ubuntu-latest
-    if: github.event_name == 'push'
+    if: github.ref == 'refs/heads/master'
     steps:
       - name: 🛎️ Checkout
         uses: actions/checkout@v6
