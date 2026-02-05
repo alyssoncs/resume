@@ -7,7 +7,7 @@ java = "22"
 junit = "6.0.2"
 clikt = "5.1.0"
 kotest = "6.1.2"
-kotlin = "2.3.0"
+kotlin = "2.3.10"
 kotlin-serialization-json = "1.10.0"
 kotlin-serialization-yaml = "0.104.0"
 
