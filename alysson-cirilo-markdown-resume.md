@@ -15,9 +15,10 @@
 #### Senior Software Engineer
 > Mar. 2025 – Present
 - Transitioned from Android to web, working on Microsoft Copilot with **React** and **TypeScript**.
-- Built a performance dashboard using **KQL** and **Azure Data Explorer**, improving visibility into latency across system layers.
 - Reduced perceived loading time by preloading home content earlier in the app lifecycle.
-- Enabled shadow traffic for a critical service, allowing backend teams to validate infrastructure and catch a production-blocking bug pre-launch.
+- Enabled shadow traffic for a critical service, allowing backend team to validate infrastructure and catch a blocking bug pre-launch.
+- Developed a refresh mechanism for AI prompts based on app context changes.
+- Identified a bug in an experimental memory measurement API and collaborated with Edge engineers to validate it, leading to a fix via an upstream PR to Chromium.
 
 #### Software Engineer II
 > Jul. 2022 – Mar. 2025
@@ -65,7 +66,7 @@
 - **[Resume](https://github.com/alyssoncs/resume/)**: The tool that built the resumé that you are reading right now.
 - **[Cirilo's Algorithm](https://alyssoncirilo.com/blog/cirilo-algorithm/)**: An algorithm for finding the smallest pair of values between two unsorted arrays.
 - **[Jetpack Compose – Don't throw your presenters off](https://alyssoncirilo.com/blog/dont-throw-your-presenters-off/)**: Article about using model-view-presenter (MVP) on Jetpack Compose.
-- **[Internet of Things Applied to Presence and Meeting Management of People in Smart Buildings](https://revistas.unifacs.br/index.php/rsc/article/view/6890)**: Paper on mobile computing and IoT.
+- **[Versioning your Android app like a leetcode problem](https://alyssoncirilo.com/blog/versioning-your-android-app-like-a-leetcode-problem/)**: Having some fun with bit manipulation :)
 
 ## Education
 - **[Federal University of Maranhão (UFMA)](https://portalpadrao.ufma.br/site/)**: BSc. in Computer Science (São Luís - MA, Brazil 2013 – 2019)
