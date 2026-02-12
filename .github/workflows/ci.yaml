@@ -82,7 +82,7 @@ jobs:
     name: deploy 🚀
     needs: [compile-resumes]
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/master'
+    if: github.ref == 'refs/heads/master' || startsWith(github.ref, 'refs/tags/v')
     steps:
       - name: 🛎️ Checkout
         uses: actions/checkout@v6
