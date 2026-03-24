@@ -24,3 +24,7 @@ dependencyAnalysis {
         }
     }
 }
+ tasks.named<UpdateDaemonJvm>("updateDaemonJvm") {
+    languageVersion = JavaLanguageVersion.of(libs.versions.gradleDaemonJvmToolchain.get().toInt())
+}
+
