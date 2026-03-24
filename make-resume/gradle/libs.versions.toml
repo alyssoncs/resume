@@ -27,7 +27,6 @@ dependencies-sorter-gradle = { module = "com.squareup:sort-dependencies-gradle-p
 kotlin-gradle = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 kotlin-serialization-gradle = { module = "org.jetbrains.kotlin:kotlin-serialization", version.ref = "kotlin" }
 detekt-gradle = { module = "dev.detekt:dev.detekt.gradle.plugin", version.ref = "detekt" }
-detekt-formatting = { module = "dev.detekt:detekt-rules-ktlint-wrapper", version.ref = "detekt" }
 detekt-ktlint-wrapper-plugin = { module = "dev.detekt:detekt-rules-ktlint-wrapper", version.ref = "detekt" }
 dagp = { module = "com.autonomousapps:dependency-analysis-gradle-plugin", version.ref = "dagp" }
 

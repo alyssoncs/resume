@@ -17,7 +17,7 @@ detekt {
 
 dependencies {
     val catalog = project.versionCatalog
-    detektPlugins(catalog.getLibrary("detekt.formatting"))
+    detektPlugins(catalog.getLibrary("detekt.ktlint.wrapper.plugin"))
 }
 
 tasks.named("check") {
