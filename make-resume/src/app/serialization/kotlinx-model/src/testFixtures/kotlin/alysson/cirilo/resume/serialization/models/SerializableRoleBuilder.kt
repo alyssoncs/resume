@@ -23,8 +23,7 @@ private data class SerializableRoleBuilderImpl(
 
     override fun upTo(to: String) = copy(enrollment = enrollment.to(to))
 
-    override fun upToNow(): SerializableRoleBuilder =
-        copy(enrollment = enrollment.upToNow())
+    override fun upToNow(): SerializableRoleBuilder = copy(enrollment = enrollment.upToNow())
 
     override fun bullets(bullets: List<String>): SerializableRoleBuilder = copy(
         bullets = bullets,

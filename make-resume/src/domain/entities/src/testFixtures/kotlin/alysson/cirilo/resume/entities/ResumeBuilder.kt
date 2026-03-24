@@ -53,8 +53,7 @@ class ResumeBuilder private constructor(
         degreeBuilders,
     )
 
-    fun with(config: ContactInformationBuilder.() -> ContactInformationBuilder) =
-        with(contactInfo().config())
+    fun with(config: ContactInformationBuilder.() -> ContactInformationBuilder) = with(contactInfo().config())
 
     fun withEmptyHeadline() = withHeadline(emptyList())
 
@@ -71,8 +70,7 @@ class ResumeBuilder private constructor(
 
     fun withNoExperiences() = with(emptyList<JobExperienceBuilder>())
 
-    fun and(jobExperienceBuilder: JobExperienceBuilder) =
-        with(jobExperienceBuilders + jobExperienceBuilder)
+    fun and(jobExperienceBuilder: JobExperienceBuilder) = with(jobExperienceBuilders + jobExperienceBuilder)
 
     @JvmName("withProjectsAndPublications")
     fun with(projectAndPublicationBuilders: List<ProjectOrPublicationBuilder>) = ResumeBuilder(
@@ -84,8 +82,7 @@ class ResumeBuilder private constructor(
         degreeBuilders,
     )
 
-    fun with(projectsAndPublicationsBuilder: ProjectOrPublicationBuilder) =
-        with(listOf(projectsAndPublicationsBuilder))
+    fun with(projectsAndPublicationsBuilder: ProjectOrPublicationBuilder) = with(listOf(projectsAndPublicationsBuilder))
 
     fun withNoProjectsOrPublications() = with(emptyList<ProjectOrPublicationBuilder>())
 

@@ -18,11 +18,9 @@ class RoleBuilder private constructor(
 
     fun withNoBulletPoints() = with(emptyList())
 
-    fun and(bulletPointBuilder: BulletPointBuilder) =
-        with(bulletPointBuilders + bulletPointBuilder)
+    fun and(bulletPointBuilder: BulletPointBuilder) = with(bulletPointBuilders + bulletPointBuilder)
 
-    fun `as`(title: String) =
-        RoleBuilder(title, bulletPointBuilders, enrollmentPeriodBuilder)
+    fun `as`(title: String) = RoleBuilder(title, bulletPointBuilders, enrollmentPeriodBuilder)
 
     fun between(enrollmentPeriodBuilder: EnrollmentPeriodBuilder) =
         RoleBuilder(title, bulletPointBuilders, enrollmentPeriodBuilder)

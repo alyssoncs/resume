@@ -124,19 +124,13 @@ internal class FakeResumeBuilder private constructor(
         """.trimIndent()
     }
 
-    private fun makeEnrollmentPeriod(
-        formatter: DateTimeFormatter,
-        enrollmentPeriod: EnrollmentPeriod,
-    ): String {
+    private fun makeEnrollmentPeriod(formatter: DateTimeFormatter, enrollmentPeriod: EnrollmentPeriod): String {
         val start = formatter.format(enrollmentPeriod.start)
         val end = makeEndDate(formatter, enrollmentPeriod.end)
         return "$start - $end"
     }
 
-    private fun makeEndDate(
-        formatter: DateTimeFormatter,
-        endDate: EnrollmentPeriod.EndDate,
-    ): String {
+    private fun makeEndDate(formatter: DateTimeFormatter, endDate: EnrollmentPeriod.EndDate): String {
         return when (endDate) {
             is EnrollmentPeriod.EndDate.Past -> formatter.format(endDate.date)
             EnrollmentPeriod.EndDate.Present -> "Present"

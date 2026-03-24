@@ -29,8 +29,7 @@ private data class SerializableDegreeBuilderImpl(
 
     override fun tile(degree: String) = copy(degree = degree)
 
-    override fun during(periodBuilder: SerializableEnrollmentPeriodBuilder) =
-        copy(periodBuilder = periodBuilder)
+    override fun during(periodBuilder: SerializableEnrollmentPeriodBuilder) = copy(periodBuilder = periodBuilder)
 
     override fun build(): SerializableDegree {
         return SerializableDegree(

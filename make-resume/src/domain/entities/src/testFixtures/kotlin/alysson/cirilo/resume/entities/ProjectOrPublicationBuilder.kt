@@ -13,8 +13,7 @@ class ProjectOrPublicationBuilder private constructor(
 
     fun named(name: String) = ProjectOrPublicationBuilder(title.displaying(name), description)
 
-    fun hostedOn(urlSpec: String) =
-        ProjectOrPublicationBuilder(title.linkingTo(urlSpec), description)
+    fun hostedOn(urlSpec: String) = ProjectOrPublicationBuilder(title.linkingTo(urlSpec), description)
 
     fun description(description: String) = ProjectOrPublicationBuilder(title, description)
 

@@ -308,6 +308,7 @@ abstract class ResumeBuilderTest {
     companion object {
 
         object Dataset {
+            @Suppress("detekt:PropertyName")
             const val name: String = "First Last"
 
             val headline: List<String> = listOf("Software Engineer", "Android Developer")

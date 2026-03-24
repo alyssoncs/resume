@@ -1,8 +1,7 @@
 package alysson.cirilo.resume.serialization.models
 
 interface SerializableResumeBuilder {
-    fun withHeadline(vararg headline: String): SerializableResumeBuilder =
-        withHeadline(headline.toList())
+    fun withHeadline(vararg headline: String): SerializableResumeBuilder = withHeadline(headline.toList())
 
     fun withHeadline(headline: List<String>): SerializableResumeBuilder
     fun with(experience: SerializableJobExperienceBuilder): SerializableResumeBuilder

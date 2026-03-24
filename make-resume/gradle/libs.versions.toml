@@ -1,7 +1,7 @@
 [versions]
 dagp = "3.6.1"
 dependencies-sorter = "0.16"
-detekt = "1.23.8"
+detekt = "2.0.0-alpha.2"
 jacoco = "0.8.13"
 java = "22"
 junit = "6.0.3"
@@ -26,8 +26,9 @@ test-kotest-assertions = { module = "io.kotest:kotest-assertions-core", version.
 dependencies-sorter-gradle = { module = "com.squareup:sort-dependencies-gradle-plugin", version.ref = "dependencies-sorter" }
 kotlin-gradle = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 kotlin-serialization-gradle = { module = "org.jetbrains.kotlin:kotlin-serialization", version.ref = "kotlin" }
-detekt-gradle = { module = "io.gitlab.arturbosch.detekt:detekt-gradle-plugin", version.ref = "detekt" }
-detekt-formatting = { module = "io.gitlab.arturbosch.detekt:detekt-formatting", version.ref = "detekt" }
+detekt-gradle = { module = "dev.detekt:dev.detekt.gradle.plugin", version.ref = "detekt" }
+detekt-formatting = { module = "dev.detekt:detekt-rules-ktlint-wrapper", version.ref = "detekt" }
+detekt-ktlint-wrapper-plugin = { module = "dev.detekt:detekt-rules-ktlint-wrapper", version.ref = "detekt" }
 dagp = { module = "com.autonomousapps:dependency-analysis-gradle-plugin", version.ref = "dagp" }
 
 [bundles]

@@ -2,7 +2,7 @@ import alysson.cirilo.resume.utils.getLibrary
 import alysson.cirilo.resume.utils.versionCatalog
 
 plugins {
-    id("io.gitlab.arturbosch.detekt")
+    id("dev.detekt")
 }
 
 detekt {

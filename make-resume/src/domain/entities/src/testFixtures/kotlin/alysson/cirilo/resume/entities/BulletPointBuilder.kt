@@ -30,11 +30,9 @@ class BulletPointBuilder private constructor(
 
     fun withNoContent() = with(emptyList())
 
-    fun appendText(plainText: String) =
-        BulletPointBuilder(content + BulletPointContent.PlainText(plainText))
+    fun appendText(plainText: String) = BulletPointBuilder(content + BulletPointContent.PlainText(plainText))
 
-    fun appendSkill(skill: String) =
-        BulletPointBuilder(content + BulletPointContent.Skill(skill))
+    fun appendSkill(skill: String) = BulletPointBuilder(content + BulletPointContent.Skill(skill))
 
     fun build(): BulletPoint {
         return BulletPoint(content)

@@ -33,10 +33,7 @@ abstract class LatexDriverTest {
     ): ResumeDriver
 
     @LatexEscapeParams
-    fun `should escape headline`(
-        raw: String,
-        escaped: String,
-    ) {
+    fun `should escape headline`(raw: String, escaped: String) {
         val resume = aResume().withHeadline(raw)
 
         val output = driver.convert(resume)
@@ -45,10 +42,7 @@ abstract class LatexDriverTest {
     }
 
     @LatexEscapeParams
-    fun `should escape email`(
-        raw: String,
-        escaped: String,
-    ) {
+    fun `should escape email`(raw: String, escaped: String) {
         val resume = aResume().with {
             email {
                 displaying(raw)
@@ -61,10 +55,7 @@ abstract class LatexDriverTest {
     }
 
     @LatexEscapeParams
-    fun `should escape linkedin`(
-        raw: String,
-        escaped: String,
-    ) {
+    fun `should escape linkedin`(raw: String, escaped: String) {
         val resume = aResume().with {
             linkedin {
                 displaying(raw)
@@ -77,10 +68,7 @@ abstract class LatexDriverTest {
     }
 
     @LatexEscapeParams
-    fun `should escape github`(
-        raw: String,
-        escaped: String,
-    ) {
+    fun `should escape github`(raw: String, escaped: String) {
         val resume = aResume().with {
             github {
                 displaying(raw)
@@ -93,10 +81,7 @@ abstract class LatexDriverTest {
     }
 
     @LatexEscapeParams
-    fun `should escape location`(
-        raw: String,
-        escaped: String,
-    ) {
+    fun `should escape location`(raw: String, escaped: String) {
         val resume = aResume().with {
             location {
                 displaying(raw)
@@ -109,10 +94,7 @@ abstract class LatexDriverTest {
     }
 
     @LatexEscapeParams
-    fun `should escape company`(
-        raw: String,
-        escaped: String,
-    ) {
+    fun `should escape company`(raw: String, escaped: String) {
         val resume = aResume().with(
             aJobExperience().on(raw),
         )
@@ -123,10 +105,7 @@ abstract class LatexDriverTest {
     }
 
     @LatexEscapeParams
-    fun `should escape experience location`(
-        raw: String,
-        escaped: String,
-    ) {
+    fun `should escape experience location`(raw: String, escaped: String) {
         val resume = aResume().with(
             aJobExperience().basedOn(raw),
         )
@@ -137,10 +116,7 @@ abstract class LatexDriverTest {
     }
 
     @LatexEscapeParams
-    fun `should escape role title`(
-        raw: String,
-        escaped: String,
-    ) {
+    fun `should escape role title`(raw: String, escaped: String) {
         val resume = aResume().with(
             aJobExperience().with(
                 aRole().`as`(raw),
@@ -153,10 +129,7 @@ abstract class LatexDriverTest {
     }
 
     @LatexEscapeParams
-    fun `should escape plain bullet point`(
-        raw: String,
-        escaped: String,
-    ) {
+    fun `should escape plain bullet point`(raw: String, escaped: String) {
         val resume = aResume().with(
             aJobExperience().with(
                 aRole().with(
@@ -171,10 +144,7 @@ abstract class LatexDriverTest {
     }
 
     @LatexEscapeParams
-    fun `should escape skill bullet point`(
-        raw: String,
-        escaped: String,
-    ) {
+    fun `should escape skill bullet point`(raw: String, escaped: String) {
         val resume = aResume().with(
             aJobExperience().with(
                 aRole().with(
@@ -189,10 +159,7 @@ abstract class LatexDriverTest {
     }
 
     @LatexEscapeParams
-    fun `should escape project title`(
-        raw: String,
-        escaped: String,
-    ) {
+    fun `should escape project title`(raw: String, escaped: String) {
         val resume = aResume().with(
             aProject().named(raw),
         )
@@ -203,10 +170,7 @@ abstract class LatexDriverTest {
     }
 
     @LatexEscapeParams
-    fun `should escape project description`(
-        raw: String,
-        escaped: String,
-    ) {
+    fun `should escape project description`(raw: String, escaped: String) {
         val resume = aResume().with(
             aProject().description(raw),
         )
@@ -217,10 +181,7 @@ abstract class LatexDriverTest {
     }
 
     @LatexEscapeParams
-    fun `should escape degree institution`(
-        raw: String,
-        escaped: String,
-    ) {
+    fun `should escape degree institution`(raw: String, escaped: String) {
         val resume = aResume().with(
             aDegree().at(raw),
         )
@@ -231,10 +192,7 @@ abstract class LatexDriverTest {
     }
 
     @LatexEscapeParams
-    fun `should escape degree location`(
-        raw: String,
-        escaped: String,
-    ) {
+    fun `should escape degree location`(raw: String, escaped: String) {
         val resume = aResume().with(
             aDegree().on(raw),
         )
@@ -245,10 +203,7 @@ abstract class LatexDriverTest {
     }
 
     @LatexEscapeParams
-    fun `should escape degree title`(
-        raw: String,
-        escaped: String,
-    ) {
+    fun `should escape degree title`(raw: String, escaped: String) {
         val resume = aResume().with(
             aDegree().tile(raw),
         )

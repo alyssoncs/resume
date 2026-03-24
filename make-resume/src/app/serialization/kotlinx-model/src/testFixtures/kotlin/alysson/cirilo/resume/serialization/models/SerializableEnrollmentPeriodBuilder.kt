@@ -22,8 +22,7 @@ private data class SerializableEnrollmentPeriodBuilderImpl(
 
     override fun from(start: String) = copy(start = start)
 
-    override fun upToNow(): SerializableEnrollmentPeriodBuilder =
-        to(SerializableEnrollmentPeriod.CURRENT)
+    override fun upToNow(): SerializableEnrollmentPeriodBuilder = to(SerializableEnrollmentPeriod.CURRENT)
 
     override fun to(month: Int, year: Int) = to(dateFormatter.format(year, month))
 

@@ -16,8 +16,7 @@ class JobExperienceBuilder private constructor(
         location = "Remote",
     )
 
-    fun with(roleBuilders: List<RoleBuilder>) =
-        JobExperienceBuilder(roleBuilders, companyBuilder, location)
+    fun with(roleBuilders: List<RoleBuilder>) = JobExperienceBuilder(roleBuilders, companyBuilder, location)
 
     fun with(roleBuilder: RoleBuilder) = with(listOf(roleBuilder))
 
@@ -27,8 +26,7 @@ class JobExperienceBuilder private constructor(
 
     fun on(company: String) = on(companyBuilder.displaying(company))
 
-    fun on(companyBuilder: LinkedInformationBuilder) =
-        JobExperienceBuilder(roleBuilders, companyBuilder, location)
+    fun on(companyBuilder: LinkedInformationBuilder) = JobExperienceBuilder(roleBuilders, companyBuilder, location)
 
     fun basedOn(location: String) = JobExperienceBuilder(roleBuilders, companyBuilder, location)
 

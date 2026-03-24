@@ -18,14 +18,11 @@ class DegreeBuilder private constructor(
     fun at(institutionBuilder: LinkedInformationBuilder) =
         DegreeBuilder(institutionBuilder, location, degree, periodBuilder)
 
-    fun at(institution: String) =
-        at(aLinkedInfo().displaying(institution))
+    fun at(institution: String) = at(aLinkedInfo().displaying(institution))
 
-    fun on(location: String) =
-        DegreeBuilder(institutionBuilder, location, degree, periodBuilder)
+    fun on(location: String) = DegreeBuilder(institutionBuilder, location, degree, periodBuilder)
 
-    fun tile(degree: String) =
-        DegreeBuilder(institutionBuilder, location, degree, periodBuilder)
+    fun tile(degree: String) = DegreeBuilder(institutionBuilder, location, degree, periodBuilder)
 
     fun during(periodBuilder: EnrollmentPeriodBuilder) =
         DegreeBuilder(institutionBuilder, location, degree, periodBuilder)

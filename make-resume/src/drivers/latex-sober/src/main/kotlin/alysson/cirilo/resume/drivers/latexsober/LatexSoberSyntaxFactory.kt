@@ -15,11 +15,7 @@ internal class LatexSoberSyntaxFactory(
     private val workDateFormatter: DateTimeFormatter,
     private val educationDateFormatter: DateTimeFormatter,
 ) {
-    fun makeHeader(
-        name: String,
-        headline: List<String>,
-        contactInformation: ContactInformation,
-    ): String {
+    fun makeHeader(name: String, headline: List<String>, contactInformation: ContactInformation): String {
         return """
             % constants
             \name{$name}
@@ -112,10 +108,7 @@ internal class LatexSoberSyntaxFactory(
         }"
     }
 
-    private fun makeEndDate(
-        formatter: DateTimeFormatter,
-        endDate: EnrollmentPeriod.EndDate,
-    ): String {
+    private fun makeEndDate(formatter: DateTimeFormatter, endDate: EnrollmentPeriod.EndDate): String {
         return when (endDate) {
             is EnrollmentPeriod.EndDate.Past -> formatter.format(endDate.date)
             EnrollmentPeriod.EndDate.Present -> "Present"
