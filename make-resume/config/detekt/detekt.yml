@@ -747,8 +747,8 @@ style:
     active: true
   SerialVersionUIDInSerializableClass:
     active: true
-  SpacingAfterPackageDeclaration:
-    active: false
+  SpacingAfterPackageAndImports:
+    active: true
   StringShouldBeRawString:
     active: false
     maxEscapedCharacterCount: 2
