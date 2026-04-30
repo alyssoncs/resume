@@ -56,7 +56,7 @@ jobs:
         run: apt update && apt install -y poppler-utils
 
       - name: ⏳ Wait for markup files
-        uses: yogeshlonkar/wait-for-jobs@v0
+        uses: yogeshlonkar/wait-for-jobs@v1
         with:
           jobs: 'build 🛠️'
           interval: '2500'
