@@ -1,5 +1,5 @@
 [versions]
-dagp = "3.13.0"
+dagp = "3.14.0"
 dependencies-sorter = "0.18.0"
 detekt = "2.0.0-alpha.3"
 jacoco = "0.8.13"
