@@ -1,7 +1,7 @@
 [versions]
 dagp = "3.15.0"
 dependencies-sorter = "0.19.0"
-detekt = "2.0.0-alpha.3"
+detekt = "2.0.0-alpha.5"
 jacoco = "0.8.13"
 java = "22"
 junit = "6.1.0"
