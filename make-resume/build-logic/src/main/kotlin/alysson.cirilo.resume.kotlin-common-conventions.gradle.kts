@@ -30,7 +30,7 @@ fun enableTests() {
     @Suppress("UnstableApiUsage")
     configure<TestingExtension> {
         suites {
-            val test by getting(JvmTestSuite::class) {
+            getByName<JvmTestSuite>("test") {
                 useJUnitJupiter(versionCatalog.getVersion("junit"))
 
                 dependencies {
