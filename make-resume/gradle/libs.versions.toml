@@ -8,7 +8,7 @@ junit = "6.1.1"
 clikt = "5.1.0"
 gradleDaemonJvmToolchain = "25"
 kotest = "6.2.2"
-kotlin = "2.4.0"
+kotlin = "2.4.10"
 kotlin-serialization-json = "1.11.0"
 kotlin-serialization-yaml = "0.104.0"
 
