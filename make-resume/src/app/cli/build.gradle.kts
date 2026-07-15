@@ -8,12 +8,12 @@ features {
 }
 
 dependencies {
-    implementation(libs.clikt)
     implementation(projects.src.app.serialization.format.json)
     implementation(projects.src.app.serialization.format.yaml)
     implementation(projects.src.drivers.latexAwesome)
     implementation(projects.src.drivers.latexSober)
     implementation(projects.src.drivers.markdown)
+    implementation(libs.clikt)
 
     testImplementation(projects.src.utils.resource)
 }

@@ -10,8 +10,8 @@ features {
 dependencies {
     api(projects.src.domain.entities)
 
-    implementation(libs.kotlin.serialization.yaml)
     implementation(projects.src.app.serialization.kotlinxMapper)
+    implementation(libs.kotlin.serialization.yaml)
 
     testImplementation(projects.src.utils.resource)
 }
