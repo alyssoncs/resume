@@ -9,7 +9,7 @@ clikt = "5.1.0"
 gradleDaemonJvmToolchain = "25"
 kotest = "6.2.6"
 kotlin = "2.4.21"
-kotlin-serialization-json = "1.11.0"
+kotlin-serialization-json = "1.12.0"
 kotlin-serialization-yaml = "0.104.0"
 
 [libraries]
